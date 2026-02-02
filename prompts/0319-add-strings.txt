@@ -1,0 +1,31 @@
+Solve this problem in Python:
+Given two non-negative integers, `num^1` and `num^2` represented as string, return the sum of `num^1` and `num^2` as a string.
+You must solve the problem without using any built-in library for handling large integers (such as `BigInteger`). You must also not convert the inputs to integers directly.
+Example 1:
+```
+Input: num^1 = "11", num^2 = "123"
+Output: "134"
+```
+Example 2:
+```
+Input: num^1 = "456", num^2 = "77"
+Output: "533"
+```
+Example 3:
+```
+Input: num^1 = "0", num^2 = "0"
+Output: "0"
+```
+Constraints:
+ `1 <= num^1.length, num^2.length <= 104`
+ `num^1` and `num^2` consist of only digits.
+ `num^1` and `num^2` don't have any leading zeros except for the zero itself.
+
+Complete the following template:
+```
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        
+```
+
+Provide the code only, no explanation.

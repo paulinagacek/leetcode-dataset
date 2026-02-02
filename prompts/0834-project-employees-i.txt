@@ -1,0 +1,66 @@
+Solve this problem in Python:
+Table: `Project`
+```
++-------------+---------+
+| Column Name | Type |
++-------------+---------+
+| project\_id | int |
+| employee\_id | int |
++-------------+---------+
+(project\_id, employee\_id) is the primary key of this table.
+employee\_id is a foreign key to Employee table.
+Each row of this table indicates that the employee with employee\_id is working on the project with project\_id.
+```
+Table: `Employee`
+```
++------------------+---------+
+| Column Name | Type |
++------------------+---------+
+| employee\_id | int |
+| name | varchar |
+| experience\_years | int |
++------------------+---------+
+employee\_id is the primary key of this table. It's guaranteed that experience\_years is not NULL.
+Each row of this table contains information about one employee.
+```
+Write an SQL query that reports the average experience years of all the employees for each project, rounded to 2 digits.
+Return the result table in any order.
+The query result format is in the following example.
+Example 1:
+```
+Input:
+Project table:
++-------------+-------------+
+| project\_id | employee\_id |
++-------------+-------------+
+| 1 | 1 |
+| 1 | 2 |
+| 1 | 3 |
+| 2 | 1 |
+| 2 | 4 |
++-------------+-------------+
+Employee table:
++-------------+--------+------------------+
+| employee\_id | name | experience\_years |
++-------------+--------+------------------+
+| 1 | Khaled | 3 |
+| 2 | Ali | 2 |
+| 3 | John | 1 |
+| 4 | Doe | 2 |
++-------------+--------+------------------+
+Output:
++-------------+---------------+
+| project\_id | average\_years |
++-------------+---------------+
+| 1 | 2.00 |
+| 2 | 2.50 |
++-------------+---------------+
+Explanation: The average experience years for the first project is (3 + 2 + 1) / 3 = 2.00 and for the second project is (3 + 2) / 2 = 2.50
+```
+
+Complete the following template:
+```
+
+```
+
+Provide the code only, no explanation.
