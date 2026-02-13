@@ -185,30 +185,30 @@ if __name__ == "__main__":
         if "hasSolution" in df.columns:
             df = df[df["hasSolution"].astype(str).str.lower() == "true"]
             
-        print(f"Załadowano {len(df)} zadań do przetworzenia (Darmowe + Oficjalne Rozwiązanie).")
+        print(f"Załadowano {len(df)} zadań do przetworzenia.")
         
         tasks_to_process = df
-    #     scraper = LeetCodeVoteScraper()
+        scraper = LeetCodeVoteScraper()
 
-    #     for index, row in tasks_to_process.iterrows():
-    #         try:
-    #             title_slug = row.get("titleSlug")
+        for index, row in tasks_to_process.iterrows():
+            try:
+                title_slug = row.get("titleSlug")
                 
-    #             q_id = row.get("frontendQuestionId")
-    #             if pd.isna(q_id): q_id = row.get("questionId", "0")
-    #             question_id = str(int(q_id)) if isinstance(q_id, (int, float)) else str(q_id)
+                q_id = row.get("frontendQuestionId")
+                if pd.isna(q_id): q_id = row.get("questionId", "0")
+                question_id = str(int(q_id)) if isinstance(q_id, (int, float)) else str(q_id)
                 
-    #             if title_slug:
-    #                 scraper.run(title_slug, question_id, target_count=10)
+                if title_slug:
+                    scraper.run(title_slug, question_id, target_count=10)
                 
-    #             time.sleep(1) 
+                time.sleep(1) 
 
-    #         except Exception as e:
-    #             print(f"!!! Błąd krytyczny przy przetwarzaniu wiersza {index}: {e}")
-    #             scraper.failed_tasks.append(f"WIERSZ CSV {index} -> CRITICAL ERROR: {e}")
-    #             continue
+            except Exception as e:
+                print(f"!!! Błąd krytyczny przy przetwarzaniu wiersza {index}: {e}")
+                scraper.failed_tasks.append(f"WIERSZ CSV {index} -> CRITICAL ERROR: {e}")
+                continue
         
-    #     scraper.save_failed_report()
+        scraper.save_failed_report()
                 
     except Exception as e:
         print(f"Krytyczny błąd programu: {e}")
