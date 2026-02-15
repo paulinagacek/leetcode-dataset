@@ -1,0 +1,27 @@
+class Solution:
+    def smallestSubarrays(self, nums: List[int]) -> List[int]:
+        bits = defaultdict(deque)
+        for j, x in enumerate(nums):
+            i = 0
+            while x:
+                if x % 2:
+                    bits[i].append(j)
+                x //= 2
+                i += 1
+                    
+        ans = []
+        for i in range(len(nums)):
+            m = i
+            clear = []
+            for bp, bl in bits.items():
+                if bl[0] < i:
+                    bl.popleft()
+                if bl:
+                    m = max(m, bl[0])
+                else:
+                    clear.append(bp)
+            for bp in clear:
+                del bits[bp]
+            ans.append(m-i+1)
+            
+        return ans

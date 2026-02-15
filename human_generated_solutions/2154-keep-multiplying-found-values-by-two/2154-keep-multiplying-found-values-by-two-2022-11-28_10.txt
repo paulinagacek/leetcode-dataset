@@ -1,0 +1,11 @@
+class Solution:
+    def findFinalValue(self, nums: List[int], original: int) -> int:
+        
+        isFound = True
+        while isFound is True:
+            isFound = False
+            for num in nums:
+                if num == original:
+                    original *= 2
+                    isFound = True
+        return original

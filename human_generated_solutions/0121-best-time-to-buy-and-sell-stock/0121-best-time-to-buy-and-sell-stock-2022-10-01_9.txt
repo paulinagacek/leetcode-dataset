@@ -1,0 +1,8 @@
+def maxProfit(self, prices: List[int]) -> int:
+        profit = 0 #best profit possible
+        for i in range(len(prices)-1):
+            buy = prices[i] #assume we buy today
+            sell = max(prices[i+1:]) #we sell on the future day with the highest price
+            if sell-buy > profit: #if this combination improves our profit
+                profit = sell-buy #update the profit
+        return profit

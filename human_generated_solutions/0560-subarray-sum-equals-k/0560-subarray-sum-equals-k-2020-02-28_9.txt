@@ -1,0 +1,17 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        
+		# key is the prefix sum, the prefixSum[i] is 0 + nums[0] + ... + nums[i-1]
+        prefixSum = {0: 1}
+        total = 0
+        count = 0
+        for i in range(len(nums)):
+            total += nums[i]
+			# we can check whther the total-k is a key of the dictionary, if it is, we just need to add it to count.
+            if total - k in prefixSum:
+                count += prefixSum[total-k]
+            if total in prefixSum:
+                prefixSum[total] += 1
+            else:
+                prefixSum[total] = 1
+        return count

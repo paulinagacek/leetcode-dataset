@@ -1,0 +1,6 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        
+        lookup = Counter(nums).most_common()
+        
+        return [lookup[-2][0],lookup[-1][0]]

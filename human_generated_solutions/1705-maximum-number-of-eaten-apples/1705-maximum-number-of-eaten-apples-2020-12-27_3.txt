@@ -1,18 +1,20 @@
-from heapq import heappush as push
-from heapq import heappop as pop
 class Solution:
     def eatenApples(self, apples: List[int], days: List[int]) -> int:
+        eat = 0
+        n = len(apples)
+        i = 0
         heap = []
-        res = 0
-        i=0
-        N = len(apples)
-        while i<N or heap:
-            if i<N and apples[i]>0:
-                push(heap, [days[i]+i, apples[i]])
-            while heap and (heap[0][0]<=i or heap[0][1]<=0):
-                pop(heap)
+        while True:
+            if i < n:
+                heapq.heappush(heap, (i + days[i], apples[i]))
+            while heap and heap[0][0] <= i:
+                heapq.heappop(heap)
             if heap:
-                heap[0][1]-=1
-                res+=1
-            i+=1
-        return res
+                rot, apple = heapq.heappop(heap)
+                eat += 1
+                if apple > 1:
+                    heapq.heappush(heap, (rot, apple-1))
+            if not heap and i >= n:
+                break
+            i += 1
+        return eat

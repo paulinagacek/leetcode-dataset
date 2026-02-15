@@ -1,3 +1,0 @@
-def fullBloomFlowers(self, flowers: List[List[int]], persons: List[int]) -> List[int]:
-    fl1, fl0 = sorted(flowers, key= lambda x: x[1]), sorted(flowers, key= lambda x: x[0])
-    return [bisect_right(fl0, x, key= lambda x: x[0]) - bisect_left(fl1, x, key= lambda x: x[1]) for x in persons]

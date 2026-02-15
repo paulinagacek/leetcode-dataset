@@ -1,0 +1,12 @@
+class Solution:
+    def invertTree(self, root):
+        stack = [root]
+        # each node must swap its children
+        # swap pairs from top to bottom until dfs ends
+        while stack:
+            node = stack.pop()
+            # children may be null, swap anyway
+            if node:
+                node.right, node.left = node.left, node.right
+                stack.extend([node.right, node.left])
+        return root

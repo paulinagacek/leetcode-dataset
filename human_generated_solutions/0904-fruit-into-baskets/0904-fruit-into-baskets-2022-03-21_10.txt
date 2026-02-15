@@ -1,0 +1,39 @@
+from collections import defaultdict
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        
+        # find the longest subarray that has at most 2 different numbers
+            
+        
+        left = 0        
+        res = 0
+        
+        mapp = defaultdict(int)
+        
+        for i in range(len(fruits)):
+            
+            # in
+            cur = fruits[i]
+            
+            mapp[cur] += 1
+            
+            
+            # out
+            while len(mapp) > 2:
+                
+                mapp[fruits[left]] -= 1
+                
+                if mapp[fruits[left]] == 0:
+                    del mapp[fruits[left]]
+                
+                left += 1
+            
+            
+            # compute
+            res = max(res, i - left + 1)
+        
+        
+        return res
+                
+# Time: O(n); 
+# Space: O(1). Since the dictionary will only exist at most 3 keys in it. After it has 3 keys, while loop will delete one key.

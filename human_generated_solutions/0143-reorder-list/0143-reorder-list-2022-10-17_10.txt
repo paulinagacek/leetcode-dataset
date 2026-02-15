@@ -1,0 +1,42 @@
+# below function reverse the linklist
+def reverse(head):
+    p=head
+    if(p.next==None):
+        return head
+    else:
+        th=p.next
+    p.next=None
+    while(th.next):
+        k=th.next
+        th.next=p
+        p=th
+        th=k
+    th.next=p
+    return th
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        n=0
+        th=head
+        while(th):
+            n+=1
+            th=th.next
+        if(n<3):
+            return head
+        n-=1
+        n//=2   
+        # holds the position of the element just after the middle element
+        th=head
+        hh=None
+        for i in range(n):
+            th=th.next
+        hh=th.next
+        th.next=None
+        h2=reverse(hh)
+        h1=head
+        while(h2):
+            k1=h1.next
+            h1.next=h2
+            k2=h2.next
+            h2.next=k1
+            h1=k1
+            h2=k2

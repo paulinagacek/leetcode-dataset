@@ -1,0 +1,30 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        
+        #writing the function to flatten the binary tree
+        
+        def helper(root):
+            """
+            param type root: TreeNode
+                  rtype root
+            """
+            if not root:
+                return
+            
+            left_end = helper(root.left)
+            right_end = helper(root.right)
+            
+            if left_end:
+                
+                left_end.right = root.right
+                root.right = root.left
+                root.left = None
+                
+            end_pointer = right_end or left_end or root
+            
+            return end_pointer
+        
+        helper(root)

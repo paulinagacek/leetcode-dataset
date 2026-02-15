@@ -1,0 +1,15 @@
+def numSub(self, s: str) -> int:
+        return self.slidingwindow(s)
+    
+    def slidingwindow(self,s):
+        res=i=0
+        ans=[]
+        for j in range(len(s)):
+            if int(s[j])==0:
+                res=j-i
+                i=j+1
+                ans.append(res*(res+1)//2)
+                res=0
+        res=j+1-i
+        ans.append(res*(res+1)//2)
+        return sum(ans)%(10**9 + 7)

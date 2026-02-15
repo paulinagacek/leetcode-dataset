@@ -1,0 +1,20 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:  # Time: O(2^len(Tree)) and Space: O(n)
+        res = []
+
+        def dfs(i, cur, total):
+            if total == target:  # when the conditions are met we will copy a copy of current list into the result list
+                res.append(cur.copy())
+                return
+            
+            if i >= len(candidates) or total > target: 
+                return
+            
+            cur.append(candidates[i])  # x=1 we choose to include the current index
+            dfs(i, cur, total + candidates[i])
+            cur.pop()  # x=0 we choose to ignore the current index
+            dfs(i + 1, cur, total)
+
+        dfs(0, [], 0)
+		
+        return res

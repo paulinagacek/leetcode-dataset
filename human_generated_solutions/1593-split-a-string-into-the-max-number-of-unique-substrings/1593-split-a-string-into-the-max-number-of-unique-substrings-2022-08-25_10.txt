@@ -1,0 +1,28 @@
+class Solution:
+    
+    def recursive(self,s,idx,hashset,ans):
+        
+        if idx ==len(s):
+            count = len(hashset)
+            
+            if ans[0]<count:
+                ans[0] = count
+            return
+        
+        for i in range(idx+1,len(s)+1):
+            
+            if s[idx:i] in hashset:
+                continue
+                
+            hashset.add(s[idx:i])
+            
+            self.recursive(s,i,hashset,ans)
+            hashset.remove(s[idx:i])
+                
+    
+    
+    def maxUniqueSplit(self, s: str) -> int:
+        hashset = set()
+        ans = [-1]
+        self.recursive(s,0,hashset,ans)
+        return ans[0]

@@ -1,0 +1,14 @@
+def sortedSquares(self, nums: List[int]) -> List[int]:
+        lowIndex=0
+        highIndex=len(nums)-1
+        Index=len(nums)-1
+        a=[0]*len(nums)
+        while(lowIndex<=highIndex):
+            if(abs(nums[lowIndex])>=abs(nums[highIndex])):
+                a[Index]=nums[lowIndex]*nums[lowIndex]
+                lowIndex+=1
+            else:
+                a[Index]=nums[highIndex]*nums[highIndex]
+                highIndex-=1
+            Index-=1
+        return a

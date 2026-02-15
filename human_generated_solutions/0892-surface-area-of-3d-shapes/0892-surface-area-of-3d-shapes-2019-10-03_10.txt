@@ -1,0 +1,10 @@
+class Solution:
+    def surfaceArea(self, grid: List[List[int]]) -> int:
+        
+        func = lambda v: v[0] + sum(abs(v[i]-v[i-1]) for i in range(1, len(v))) + v[-1]
+        
+        xy = sum(map(bool, sum(grid, []))) * 2
+        yz = sum(func(row) for row in grid)
+        zx = sum(func(col) for col in zip(*grid))
+        
+        return xy + yz + zx

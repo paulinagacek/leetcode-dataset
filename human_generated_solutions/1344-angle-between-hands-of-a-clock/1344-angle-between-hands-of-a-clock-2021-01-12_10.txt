@@ -1,0 +1,12 @@
+\'\'\'
+simulation + math
+h: 1 hour: hour hand: 360/12 + 30/60*minutes
+           minute hand 360/60
+\'\'\'
+
+class Solution:
+    def angleClock(self, hour: int, minutes: int) -> float:
+        mDegree = 360/60 * minutes
+        hDegree = 360/12 * hour + 360/(60*12)*minutes
+
+        return min(abs(mDegree-hDegree), 360-abs(mDegree-hDegree))

@@ -1,7 +1,0 @@
-int maxScore(vector<int>& cp, int k) {
-	return solve(cp, k, 0, size(cp) - 1);
-}
-int solve(vector<int>& cp, int k, int l, int r) {
-	if(k == 0) return 0;
-	return max(cp[l] + solve(cp, k - 1, l + 1, r), cp[r] + solve(cp, k - 1, l, r - 1));
-}

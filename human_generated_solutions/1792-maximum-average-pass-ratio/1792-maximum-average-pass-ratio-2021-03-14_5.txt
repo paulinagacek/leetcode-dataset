@@ -1,0 +1,27 @@
+class Solution:
+def maxAverageRatio(self, classes: List[List[int]], extraStudents: int) -> float:
+        heap = []
+        heapq.heapify(heap)
+        while classes:
+            c = classes.pop()
+            passing,total = c[0],c[1]
+			# cuz python implement heap as minHeap, so we store the negative value
+            potential = passing/total - (passing+1)/(total+1)
+            heapq.heappush(heap,(potential,c))
+        while extraStudents >0:
+			# diff has the maximum value, so we add one extraStudent to this class
+            diff, c = heapq.heappop(heap)
+			# increment pass&total before recalculate cuz we are tracking the **next** value !!
+            c[0]+=1
+            c[1]+=1
+            passing,total = c[0],c[1]
+			# recalculate the potential value and push it back to heap
+            potential = passing/total - (passing+1)/(total+1)
+            heapq.heappush(heap,(potential,c))
+            extraStudents -= 1
+        n = len(heap)
+        ratio = 0
+        while heap:
+            diff,c = heapq.heappop(heap)
+            ratio += c[0]/c[1]
+        return ratio/n

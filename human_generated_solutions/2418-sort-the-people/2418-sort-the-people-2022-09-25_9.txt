@@ -1,6 +1,0 @@
-indices = []
-sorted_heights = sorted(heights)[::-1]
-for i in sorted_heights:
-	indices.append(heights.index(i))
-result = [names[i] for i in indices]
-return result

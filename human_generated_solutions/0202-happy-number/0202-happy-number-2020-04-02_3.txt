@@ -1,8 +1,14 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        while n != 1:
-            n = sum([int(i) ** 2 for i in str(n)])
-            if n == 4:
+        total = 0
+        for digit_str in str(n):
+            digit = int(digit_str)
+            total += digit * digit
+
+        if total == 1 or total == 7:
+            return True
+        else:
+            if total < 10 or total == 0:
                 return False
-        
-        return True
+            else:
+                return self.isHappy(total)

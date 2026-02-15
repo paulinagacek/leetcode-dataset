@@ -1,0 +1,9 @@
+class Solution:
+    def winnerOfGame(self, colors: str) -> bool:
+        cA,cB=0,0           #To count the Alice and Bob\'s turn
+        for c in range(1,len(colors)-1):
+            if colors[c]==\'A\' and colors[c-1]==colors[c+1] and colors[c-1]==\'A\':
+                cA+=1     #If 3 consecutive A\'s
+            elif colors[c]==\'B\' and colors[c-1]==colors[c+1] and colors[c-1]==\'B\':
+                cB+=1   #If 3 consecutive B\'s
+        return cA>cB

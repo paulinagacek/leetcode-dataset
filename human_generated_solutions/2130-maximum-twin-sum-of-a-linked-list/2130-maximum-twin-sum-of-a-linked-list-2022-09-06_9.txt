@@ -1,0 +1,31 @@
+class Solution:
+    def reverse_list(self, head: Optional[ListNode]) -> int:
+        prev = None
+        curr = head
+        while curr is not None:
+            next_ = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_
+        
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        # reverse second half of the linked list
+        # formally, use a fast pointer that travels 2x the speed of
+        # a slow pointer; then, reverse the list from the slow pointer.
+        s, f = head, head
+        while f.next is not None:
+            s = s.next
+            f = f.next
+            if f.next is not None:
+                f = f.next
+        self.reverse_list(s)
+        tail = f
+        
+        max_twin_sum = -math.inf
+        curr1, curr2 = head, tail
+        while curr1 is not None and curr2 is not None:
+            twin_sum = curr1.val + curr2.val
+            max_twin_sum = max(max_twin_sum, twin_sum)
+            curr1 = curr1.next
+            curr2 = curr2.next
+        return max_twin_sum

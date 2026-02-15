@@ -1,0 +1,27 @@
+class Solution:
+    def winnerSquareGame(self, n: int) -> bool:
+        if n == 1:
+            return True
+        
+        # Initialize dp list
+        dp = [0, 1]
+        for i in range(2, n + 1):
+            
+            # Calculate max root integer of i
+            root = int(i ** 0.5)
+            
+            # If i is square number then dp[i] is True
+            if root ** 2 == i:
+                dp.append(1)
+            else:
+                # Iterate all square numbers smaller than i, if find one is False, then dp[i] is True
+                for j in range(1, root + 1):
+                    if not dp[i - j ** 2]: 
+                        dp.append(1)
+                        break
+            
+            # If there\'s nothing find, dp[i] is False
+            if len(dp) == i:
+                dp.append(0)
+            
+        return dp[n]

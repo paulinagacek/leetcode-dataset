@@ -1,2 +1,0 @@
-def findDifference(self, a: List[int], b: List[int]) -> List[List[int]]:
-        return [set(a)-set(b), set(b)-set(a)]

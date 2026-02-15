@@ -1,1 +1,0 @@
-return sorted(set((first*100 ) + (second*10) + third for first, second, third in itertools.permutations(digits, 3) if first and not third & 1))

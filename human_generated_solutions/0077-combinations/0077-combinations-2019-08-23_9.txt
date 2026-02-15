@@ -1,0 +1,8 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        if n == k: return [[i for i in range(1, n + 1)]]
+        elif n < k or k <= 0: return [[]]
+        exclude_n = self.combine(n - 1, k)
+        combs_incl = self.combine(n - 1, k - 1)
+        include_n = [lst + [n] for lst in combs_incl]
+        return exclude_n + include_n

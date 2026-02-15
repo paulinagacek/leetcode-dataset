@@ -1,8 +1,0 @@
-nums.sort()
-        n = len(nums)
-        count = 0
-        i = 0
-        while i <n:
-            i = bisect_right(nums,nums[i] +k)
-            count+=1
-        return count

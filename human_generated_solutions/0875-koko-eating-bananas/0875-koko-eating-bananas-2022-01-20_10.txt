@@ -1,26 +1,11 @@
-class Solution(object):
-
-            
-    def minEatingSpeed(self, piles, h):
-        """
-        :type piles: List[int]
-        :type h: int
-        :rtype: int
-        """
-        def requiredHoursIfMid(piles,h,mid):
-            reqdHours=0
-            for i in range(0,len(piles)):
-                reqdHours+=(piles[i]/mid)
-                if (piles[i]%mid)!=0:
-                    reqdHours+=1
-            return reqdHours
-        start=1
-        end=10**9
-        while start<end:
-            mid=start+((end-start)/2)
-            reqd=requiredHoursIfMid(piles,h,mid)
-            if reqd<=h: #already reached
-                end=mid
-            else: # mid itself not satisfying. so move start to numbers after mid
-                start=mid+1
-        return end
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        l,r = 1,max(piles)                            # declare boundaries
+        while l<r:                                    # loop performing BS
+            m = l+(r-l)//2                            # calculate medium
+            hours = sum([ceil(p/m) for p in piles])   # calculate hours take
+            if hours > h:                             # if eat too slow -> improve speed
+                l = m + 1
+            else:                                     # if eat too fast -> narrow r and converge to result
+                r = m
+        return l

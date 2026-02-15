@@ -1,0 +1,14 @@
+class Solution:
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+
+        def sum_leafs(node, path=[]):
+            if node is None:
+                return 0
+            if node.left is None and node.right is None:
+                path.append(node.val)
+                return int(\'\'.join(map(str, path)), 2) 
+            return (
+                sum_leafs(node.right, path + [node.val]) +
+                sum_leafs(node.left, path + [node.val]))
+
+        return sum_leafs(root)

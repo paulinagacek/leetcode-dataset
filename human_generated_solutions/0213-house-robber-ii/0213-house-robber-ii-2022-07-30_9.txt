@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        ln = len(nums)
+        if ln < 4:
+            return max(nums)
+        elif ln == 4:
+            return max(nums[0] + nums[2], nums[1] + nums[3])
+        
+        return max(self.counter(nums[:-1]), self.counter(nums[1:]))
+    
+    
+    def counter(self, nums):
+        nums[2] += nums[0]
+        for x in range(3, len(nums)):
+            nums[x] += max(nums[x - 2], nums[x - 3])
+        return max(nums[-1], nums[-2])

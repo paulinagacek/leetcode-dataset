@@ -1,0 +1,18 @@
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        G = {}  # int -> [left, right]
+        res = 0
+        for k in nums:
+            if k in G: continue
+            G[k] = [k, k]
+            if k - 1 in G:  # left neighbor
+                lst = G[k - 1]
+                lst[1] = G[k][1]  # expand right
+                G[k] = G[lst[1]] = lst  # update reference
+            if k + 1 in G:  # right neighbor
+                lst = G[k + 1]
+                lst[0] = G[k][0]  # expand left
+                G[k] = G[lst[0]] = lst  # update reference
+            left, right = G[k]
+            res = max(res, right - left + 1)
+        return res

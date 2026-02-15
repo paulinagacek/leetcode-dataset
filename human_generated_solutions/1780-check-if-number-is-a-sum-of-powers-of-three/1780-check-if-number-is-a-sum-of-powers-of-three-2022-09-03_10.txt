@@ -1,0 +1,17 @@
+class Solution:
+    def convertToTernary(self, n):
+        if n == 0:
+            return \'0\'
+        nums = []
+        while n:
+            n, r = divmod(n, 3)
+            nums.append(str(r))
+        return \'\'.join(reversed(nums))
+        
+    def checkPowersOfThree(self, n: int) -> bool:
+        if n == 0 : 
+            return False 
+        else : 
+            if \'2\' in self.convertToTernary(n) : 
+                return False 
+            return True

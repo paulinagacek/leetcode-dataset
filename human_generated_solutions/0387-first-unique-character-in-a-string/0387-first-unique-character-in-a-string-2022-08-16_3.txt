@@ -1,0 +1,6 @@
+def firstUniqChar(self, s: str) -> int:
+	chr_count = Counter(s)
+	for x in chr_count:
+		if chr_count[x] == 1:
+			return s.index(chr_count[x])
+	return -1

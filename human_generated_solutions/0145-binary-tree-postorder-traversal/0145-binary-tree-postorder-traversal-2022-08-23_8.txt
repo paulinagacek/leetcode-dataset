@@ -1,0 +1,11 @@
+class Solution:
+    def __init__(self):
+        self.postOrder = []
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None:
+            return []
+        if root:
+            self.postorderTraversal(root.left)
+            self.postorderTraversal(root.right)
+            self.postOrder.append(root.val)
+        return self.postOrder

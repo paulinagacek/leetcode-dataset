@@ -1,0 +1,11 @@
+class Solution:
+    def leastBricks(self, wall: List[List[int]]) -> int:
+        heap = [(w[0], i, 0) for i, w in enumerate(wall) if len(w) > 1] 
+        heapify(heap); count = mx = 0; prev = heap and heap[0][0]
+        while heap:
+            x, i, j = heappop(heap)
+            if j+2 < len(wall[i]): heappush(heap, (x + wall[i][j+1], i, j+1))
+            if x != prev: mx = max(mx, count); count = 0; prev = x
+            count += 1 
+            
+        return len(wall) - max(mx, count)

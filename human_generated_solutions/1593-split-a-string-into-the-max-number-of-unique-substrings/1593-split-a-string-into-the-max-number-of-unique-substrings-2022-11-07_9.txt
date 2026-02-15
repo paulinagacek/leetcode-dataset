@@ -1,0 +1,24 @@
+class Solution:
+    def maxUniqueSplit_fun(self, s: str, cur_list, sub_set, res) -> int:
+        if len(cur_list) > 0:
+            sub = s[cur_list[-1]:] 
+            if len(sub) > 0 and sub not in sub_set:
+                res[0] = max(res[0], len(cur_list) + 1)
+            if len(cur_list) + len(s) - cur_list[-1] - 1 < res[0]:
+                return
+        start = 1
+        if len(cur_list) > 0:
+            start = cur_list[-1] + 1
+        for i in range(start, len(s)):
+            sub = s[start-1:i]
+            if sub not in sub_set:
+                cur_list.append(i)
+                sub_set.add(sub)
+                self.maxUniqueSplit_fun(s, cur_list, sub_set, res)
+                sub_set.remove(sub)
+                del cur_list[-1]
+        
+    def maxUniqueSplit(self, s: str) -> int:
+        res = [1]
+        self.maxUniqueSplit_fun(s, [], set(), res)
+        return res[0]

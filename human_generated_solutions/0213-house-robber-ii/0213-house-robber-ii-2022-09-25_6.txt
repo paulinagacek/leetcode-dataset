@@ -1,1 +1,0 @@
-return max(self.robInLine(nums[1:]), self.robInLine(nums[:-1]))

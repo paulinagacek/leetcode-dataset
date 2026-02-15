@@ -1,2 +1,0 @@
-translation = {0:1, 1:0}
-return [list(map(lambda x: translation[x], row[::-1])) for row in A]

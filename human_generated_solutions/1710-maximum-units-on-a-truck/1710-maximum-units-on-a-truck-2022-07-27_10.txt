@@ -1,0 +1,15 @@
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+        sum_ = 0
+		#sorting boxTypes by the second element
+        boxTypes.sort(key=lambda x:x[1])
+		#reverse because going from max units per box to min units per box
+        boxTypes.reverse()
+        for box, units in boxTypes:
+            if truckSize > box:
+                truckSize -= box
+                sum_ += box * units
+            else:
+                sum_ += truckSize * units
+                break
+        return sum_

@@ -1,0 +1,29 @@
+def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
+        prev = None
+        lowest = root
+        while lowest is not None:
+            if lowest.val < low:
+                lowest.left = None
+                if prev is None:
+                    root = lowest.right
+                else:
+                    prev.left = lowest.right
+                lowest = lowest.right
+            elif lowest.val >= low:
+                prev = lowest
+                lowest = lowest.left
+                
+        prev = None
+        highest = root
+        while highest is not None:
+            if highest.val > high:
+                highest.right = None
+                if prev is None:
+                    root = highest.left
+                else:
+                    prev.right = highest.left
+                highest = highest.left
+            else:
+                prev = highest
+                highest = highest.right
+        return root

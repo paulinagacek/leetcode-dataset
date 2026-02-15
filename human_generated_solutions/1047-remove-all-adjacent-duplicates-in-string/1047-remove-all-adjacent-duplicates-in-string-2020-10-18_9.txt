@@ -1,0 +1,13 @@
+class Solution:
+    def removeDuplicates(self, S: str) -> str:
+        _stack=[]                                     #initilized a new stack
+        for s in S:                                   #looping over the characters in S
+            if len(_stack)==0:                        #checking if the stack is empty 
+                _stack.append(s)                      #if its empty it will append the character in string S
+            else:
+                char=_stack[len(_stack)-1]            #top element of stack is copied to char
+                if s==char:                           #checking if the top char is same as the current char
+                    _stack.pop()                      # both are same the char is poped form the stack
+                else:
+                    _stack.append(s)                  #else will append the char to the top of the stack
+        return "".join(_stack)                        #this will return the list as a string

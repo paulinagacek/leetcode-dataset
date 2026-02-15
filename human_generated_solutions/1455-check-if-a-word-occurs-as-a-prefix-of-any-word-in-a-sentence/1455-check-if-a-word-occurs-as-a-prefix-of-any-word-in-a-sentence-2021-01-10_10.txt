@@ -1,0 +1,13 @@
+def isprefix(word,searchWord):
+    if word[:len(searchWord)]==searchWord:
+        return True
+    else:
+        return False
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        sentence_list=sentence.split(\' \')
+        prefix_exists=-1
+        for i,word in enumerate(sentence_list):
+            if isprefix(word,searchWord):
+                return i+1
+        return prefix_exists

@@ -1,0 +1,7 @@
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        ans = 0
+        for i in range(31,-1,-1):
+            if (1<<i)&left == (1<<i)&right: ans |= (1<<i)&left 
+            else : break
+        return ans

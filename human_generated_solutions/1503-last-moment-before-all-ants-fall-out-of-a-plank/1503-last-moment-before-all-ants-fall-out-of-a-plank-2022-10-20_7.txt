@@ -1,5 +1,0 @@
-if left == []:
-            return n - min(right)
-        if right == []:
-            return max(left)
-        return max(max(left), n - min(right))

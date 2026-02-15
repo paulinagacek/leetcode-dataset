@@ -1,0 +1,26 @@
+class Solution(object):
+
+            
+    def minEatingSpeed(self, piles, h):
+        """
+        :type piles: List[int]
+        :type h: int
+        :rtype: int
+        """
+        def requiredHoursIfMid(piles,h,mid):
+            reqdHours=0
+            for i in range(0,len(piles)):
+                reqdHours+=(piles[i]/mid)
+                if (piles[i]%mid)!=0:
+                    reqdHours+=1
+            return reqdHours
+        start=1
+        end=10**9
+        while start<end:
+            mid=start+((end-start)/2)
+            reqd=requiredHoursIfMid(piles,h,mid)
+            if reqd<=h: #already reached
+                end=mid
+            else: # mid itself not satisfying. so move start to numbers after mid
+                start=mid+1
+        return end

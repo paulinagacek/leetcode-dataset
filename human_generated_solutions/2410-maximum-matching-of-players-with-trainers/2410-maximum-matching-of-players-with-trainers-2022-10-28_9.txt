@@ -1,0 +1,19 @@
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:     
+        """
+        p = len(players)
+        t = len(trainers)
+        
+        plog(p)
+        tlog(t)
+        p + t 
+        
+        plog(p) + tlog(t) + p + t
+        """
+        
+        res, _, _ = 0, players.sort(reverse=True), trainers.sort(reverse=True)
+        while players and trainers:
+            player, trainer = players.pop(), trainers.pop()
+            while trainers and trainer < player: trainer = trainers.pop()
+            res += trainer >= player
+        return res

@@ -1,0 +1,45 @@
+class Solution:
+    def countVowelStrings(self, n: int) -> int:
+        """
+        Given a parameter n and assuming 5 vowels, this program
+        uses dynamic programming to determine the number of
+        possible sorted vowel strings of length n.
+        
+        The theory behind the dynamic programming is based on:
+        at length k, the number of times a vowel can be prefixed
+        to a sorted vowel string of length k - 1. For example,
+        to create the sorted vowel strings of length 2, we start
+        with the sorted strings of length 1, which are:
+        
+            \'a\', \'e\', \'i\', \'o\', \'u\'
+        
+        To create the sorted strings of length 2, the vowels
+        are prefixed to the strings of length 1 as follows:
+        
+            \'u\':    \'uu\'
+            \'o\':    \'ou\', \'oo\'
+            \'i\':    \'iu\', \'io\', \'ii\'
+            \'e\':    \'eu\', \'eo\', \'ei\', \'ee\'
+            \'a\':    \'au\', \'ao\', \'ai\', \'ae\', \'aa\'
+        
+        The dynamic programming has a column for each vowel in
+        reverse order and a row for each length starting with 1.
+        The dp can be optimized by overwriting the same row for
+        length k - 1 to create the dp for length k. For example,
+        the dp for lengths 1 and 2 will look like:
+        
+            \'u\' \'o\' \'i\' \'e\' \'a\'
+        1     1   2   3   4   5
+        2     1   3   6  10  15
+
+        :param n: length of vowel string
+        :type n: int
+        :return: number of possible sorted vowel strings of
+                 length n
+        :rtype: int
+        """
+        dp = [1] * 5
+        for k in range(n):
+            for m in range(1, 5):
+                dp[m] += dp[m - 1]
+        return dp[-1]

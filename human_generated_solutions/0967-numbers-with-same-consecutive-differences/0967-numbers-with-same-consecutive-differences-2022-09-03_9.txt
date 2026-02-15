@@ -1,20 +1,25 @@
 class Solution:
     def numsSameConsecDiff(self, n: int, k: int) -> List[int]:
-        def bt(d, num, i):
-            num = num * 10 + d            
-            
-            if i == n:
-                result.append(num)
-                return 
-            
-            if d + k < 10:
-                bt(d + k, num, i + 1)
-                
-            if k > 0 and d - k >= 0:
-                bt(d - k, num, i + 1)
-            
-        result = []
-        for d in range(1, 10):
-            bt(d, 0, 1)
+        res = []
         
-        return result
+        def backtrack(tempRes):
+            nonlocal res
+            if len(tempRes) == n:
+                
+                s = [str(i) for i in tempRes]
+                res.append("".join(s))
+                return
+            
+            for i in range(10):
+                # situation of more than 1 digit and the diff is not k
+                if len(tempRes) != 0 and abs(i - tempRes[-1]) != k: 
+                    continue
+                if i == 0 and len(tempRes) == 0:
+                    continue
+                tempRes.append(i)
+                backtrack(tempRes)
+                tempRes.pop()
+
+        
+        backtrack([])
+        return res

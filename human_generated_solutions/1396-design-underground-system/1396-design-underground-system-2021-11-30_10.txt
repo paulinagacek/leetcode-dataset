@@ -1,0 +1,44 @@
+class UndergroundSystem:
+
+    def __init__(self):
+        # trips dict
+            # key: user id
+            # value: tuple
+                # tup[0]: start station name
+                # tup[1]: time in
+        self.trips = {}
+        
+        # stations dict
+            # key: start station name + \'-\' + end station name
+				# we can do this since the constraints say station names are
+				# uppercase or lowercase english letters
+            # value: tuple
+                # tup[0]: sum of time elapsed from every user that has traveled this route
+                # tup[1]: number of users who have traveled this route
+        self.stations = {}
+        
+    def checkIn(self, id: int, stationName: str, t: int) -> None:
+        self.trips[id] = (stationName, t)
+        
+
+    def checkOut(self, id: int, stationName: str, t: int) -> None:        
+        time_in = self.trips[id][1]
+        time_elapsed = t - time_in
+        
+        start_station = self.trips[id][0]
+        key = start_station + "-" + stationName
+        
+        if key not in self.stations:
+            self.stations[key] = (time_elapsed, 1)
+        else:
+            prev_sum_times = self.stations[key][0]
+            prev_num_users = self.stations[key][1]
+            self.stations[key] = (prev_sum_times + time_elapsed, prev_num_users + 1)
+        
+        del self.trips[id]
+        
+
+    def getAverageTime(self, startStation: str, endStation: str) -> float:
+        key = startStation + "-" + endStation
+        sum_times, num_users = self.stations[key]        
+        return sum_times / num_users

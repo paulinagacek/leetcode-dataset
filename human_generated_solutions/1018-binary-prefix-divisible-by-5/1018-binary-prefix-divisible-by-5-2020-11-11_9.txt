@@ -1,0 +1,8 @@
+class Solution:
+    def prefixesDivBy5(self, A: List[int]) -> List[bool]:        
+        num = 0
+        for i in range(len(A)):
+            num = 2*num + A[i]
+            A[i] = True if num % 5 == 0 else False
+               
+        return A

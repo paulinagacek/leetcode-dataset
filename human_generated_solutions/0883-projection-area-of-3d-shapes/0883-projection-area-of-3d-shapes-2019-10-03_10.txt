@@ -1,0 +1,6 @@
+class Solution:
+    def projectionArea(self, grid: List[List[int]]) -> int:
+        xy = sum(map(bool, sum(grid, [])))
+        yz = sum(map(max, zip(*grid)))
+        zx = sum(map(max, grid))
+        return xy + yz + zx

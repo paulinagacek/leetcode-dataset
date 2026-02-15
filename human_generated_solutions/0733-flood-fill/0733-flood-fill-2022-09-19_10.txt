@@ -1,0 +1,25 @@
+from collections import deque
+class Solution:
+    def bfs(self,sr,sc,color,image,start):
+        image[sr][sc]=color
+        q=deque()
+        q.append([sr,sc])
+        n=len(image)
+        m=len(image[0])
+        while len(q)>0:
+            d,f=q.popleft()
+            movements=[[-1, 0], [1, 0], [0, -1], [0, 1]]
+            for dr,dc in movements:
+                x=d+dr
+                y=f+dc
+                if x<n and x>=0 and y<m and y>=0 and image[x][y]==start:
+                    image[x][y]=color
+                    q.append([x,y])
+        return image
+            
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        start=image[sr][sc]
+        if image[sr][sc]!=color:
+            return self.bfs(sr,sc,color,image,start)
+        else:
+            return image

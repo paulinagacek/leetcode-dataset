@@ -1,0 +1,18 @@
+def getDescentPeriods(self, prices: List[int]) -> int:
+        smooth = []
+        res = 0
+        curr = 1
+        
+        for i in range(1, len(prices)):
+            if prices[i-1] - prices[i] == 1:
+                curr += 1
+            else:
+                smooth.append(curr)
+                curr = 1
+                
+        smooth.append(curr)
+            
+        for s in smooth:
+            res += ((1 + s)*s) // 2
+            
+        return res

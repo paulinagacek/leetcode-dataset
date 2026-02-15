@@ -1,25 +1,21 @@
+import math
 class Solution:
     def maxValue(self, n: int, index: int, maxSum: int) -> int:
-        res_i, crr_sum = 0, n
-        l, r, w_hill = index + 1, index - 1, 1 # left/right indices and width of the hill
-        while crr_sum <= maxSum:
-            l -= 1
-            r += 1
-            if l == index and r == index:
-                crr_sum += w_hill
-            else:
-                l_, r_ = max(l, 0), min(r, n - 1)
-				\'\'\'
-				when the hill has the same width as the ground, 
-				simply just speed up growing by adding the result 
-				of dividing (maxSum - crr_sum) by w_hill
-				\'\'\'
-                if l < l_ and r > r_:
-                    rm = maxSum - crr_sum
-                    res_i += int(rm / w_hill) + 1
-                    break
-                else:
-                    w_hill = r_ - l_ + 1
-                    crr_sum += w_hill
-            res_i += 1
-        return res_i
+        maxSum -= n              # remove the contributions from all the 1 in each element.
+		                         # We will add 1 back to the final height later
+        if index < n // 2:       # make the index closer to the right boundary
+            index = n - index - 1
+        n_left = index           # number of element to the left of the index
+        n_right = n - 1 - index  # number of element to the right of the index
+        tri_left = (n_left * (n_left + 1)) // 2     # the triangle area for the left side if not hitting the boundary
+        tri_right = (n_right * (n_right + 1)) // 2  # the triangle area for the right side if not hitting the boundary
+		# case 1: perfect pyramid
+        if maxSum <= (tri_right * 2 + n_right + 1):
+            return int(math.sqrt(maxSum)) + 1
+		# case 2: right side hits the boundary
+        if maxSum <= (tri_left + tri_right + (n_left - n_right) * n_right + n_left + 1):
+            b = 3 + 2 * n_right
+            return int((-b + math.sqrt(b * b - 8 * (tri_right + 1 - n_right * n_right - maxSum))) / 2) + 1 + 1
+		# case 3: both sides hit boundaries
+        maxSum -= (tri_left + tri_right + (n_left - n_right) * n_right + n_left + 1)
+        return n_left + 1 + 1 + (maxSum // n)

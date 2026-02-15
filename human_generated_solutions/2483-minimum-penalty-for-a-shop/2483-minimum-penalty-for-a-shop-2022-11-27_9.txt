@@ -1,0 +1,21 @@
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        mini_cnt,mini_ind = float(\'inf\'),0
+        
+        # We count Y becuase initally at zeroth hour (i=0) we would have {maximum penalty == "Y count"}
+        yCnt = customers.count("Y")
+        nCnt=0      
+        for i in range(len(customers)):
+            if mini_cnt > yCnt+nCnt:      
+                mini_cnt = yCnt+nCnt
+                mini_ind = i
+                
+            if customers[i] == "Y":   # As we increase ith hour the penalty of "Y" decreases
+                yCnt-=1
+            else:
+                nCnt+=1                # While the penalty of "N" at ith hour will decrease
+        
+        if mini_cnt > nCnt:
+            return len(customers)
+        
+        return mini_ind

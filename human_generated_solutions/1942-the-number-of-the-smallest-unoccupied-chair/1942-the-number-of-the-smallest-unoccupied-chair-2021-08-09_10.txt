@@ -1,0 +1,29 @@
+import heapq
+class Solution(object):
+    def smallestChair(self, times, targetFriend):
+        targetArrival = times[targetFriend][0]
+        friendChairMap = {}   # key is the friend#, value is the chair#
+        
+        arrivals, departs = [], []
+        for i in range(len(times)):
+            heapq.heappush(arrivals, (times[i][0], i))
+            heapq.heappush(departs, (times[i][1], i))
+        
+        curAvailChairs = []
+        for chair_num in range(len(times)):
+            heapq.heappush(curAvailChairs, chair_num)
+		## We always get the smallest arrival time, departure time and chair# when we pop these heaps
+        
+        smallestDepart = heapq.heappop(departs)
+
+        while arrivals:
+            arrival = heapq.heappop(arrivals)
+            while departs and smallestDepart[0] <= arrival[0]:   ## There might be multiple people who leave before this person arrives
+                unoccupiedChair = friendChairMap[smallestDepart[1]]
+                heapq.heappush(curAvailChairs, unoccupiedChair)
+                smallestDepart = heapq.heappop(departs)
+            
+            curChair = heapq.heappop(curAvailChairs)
+            if targetArrival == arrival[0]:
+                return curChair
+            friendChairMap[arrival[1]] = curChair

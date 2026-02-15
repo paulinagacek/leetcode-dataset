@@ -1,15 +1,12 @@
-input=acab. result=0
-i=0:
-\'a\' not exists. b=00000000000000000000000001 \'a\'. result=0
-i=1:
-\'c\' not exists. b=00000000000000000000000101 \'ac\'. result=0
-i=2: 
-\'a\' exists, we found a partition \'ac\'. 
-Then initiate b=00000000000000000000000001 for the next partition \'a\'
-result += 1, result = 1
-i=3:
-\'b\' not exists. b=00000000000000000000000011 \'ab\'. result = 1
------------------------------------------------------------------
-We didint add the last partition, which is \'ab\' into \'result\'.
-It is because we cannot find repeated characters at the end of the string
-So instead we return \'result+1\'
+class Solution:
+    def partitionString(self, s: str) -> int:
+        ans = ""
+        res = []
+        for c in s:
+            if c in ans:
+                res.append(ans)
+                ans = ""
+                ans += c
+            else:
+                ans += c
+        return len(res)+1

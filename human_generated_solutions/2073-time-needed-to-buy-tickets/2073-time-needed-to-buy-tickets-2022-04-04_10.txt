@@ -1,0 +1,18 @@
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        length = len(tickets)
+        count = 0
+        
+        for i in range(k+1):
+            if tickets[i] - tickets[k] < 0:
+                count += tickets[i]
+            else:
+                count += tickets[k]
+        
+        for i in range(k+1, length):
+            if tickets[i] - (tickets[k] - 1) < 0:
+                count += tickets[i]
+            else:
+                count += tickets[k] - 1
+                
+        return count

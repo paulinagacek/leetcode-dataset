@@ -1,0 +1,4 @@
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+      
+        return (lambda curr, vis: (lambda f, a, b: f(f, a, b))(lambda rec, curr, vis: None if curr == None else curr if curr in vis else rec(rec, curr.next, vis + [curr]), curr, vis))(head, [])

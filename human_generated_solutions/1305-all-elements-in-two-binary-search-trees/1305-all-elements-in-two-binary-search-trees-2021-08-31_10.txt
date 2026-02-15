@@ -1,0 +1,30 @@
+def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+        def inorderIter(node):
+            if node is None:
+                return
+            yield from inorderIter(node.left)
+            yield node.val
+            yield from inorderIter(node.right)
+               
+        it1, it2 = inorderIter(root1), inorderIter(root2)
+
+        left = next(it1, None)
+        right = next(it2, None)
+        
+        result = []
+        
+        while True:
+            if left is None and right is None:
+                return result
+            if left is None:
+                result.append(right)
+                right = next(it2, None)
+            elif right is None:
+                result.append(left)
+                left = next(it1, None)
+            elif left <= right:
+                result.append(left)
+                left = next(it1, None)
+            else:
+                result.append(right)
+                right = next(it2, None)

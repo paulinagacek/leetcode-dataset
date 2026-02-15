@@ -1,0 +1,12 @@
+def check(self, nums: List[int]) -> bool:
+        
+        sorted_arr = sorted(nums)
+        
+        for i in range(len(nums)):
+            
+            rotation = sorted_arr[i:] + sorted_arr[:i]
+
+            if nums == rotation:
+                return True
+        else:
+            return False

@@ -1,25 +1,5 @@
-class Solution {
-public:
-    bool is_all_upper(string word) {
-        for (auto letter : word) if (islower(letter)) return false;
-        return true;
-    }
-    
-    bool is_all_lower(string word) {
-        for (auto letter : word) if (isupper(letter)) return false;
-        return true;
-    }
-    
-    bool detectCapitalUse(string word) {
-        if (word.size() < 2) return true;
-        
-        if (isupper(word[0])) {
-            if (is_all_upper(word) || is_all_lower(word.substr(1))) 
-                return true;
-        }
-        
-        else if (is_all_lower(word)) return true;
-        
-        return false;
-    }
-};
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        if word==word.lower() or word==word.upper() or word==(word[0].upper() + word[1:].lower()):
+            return True
+        return False

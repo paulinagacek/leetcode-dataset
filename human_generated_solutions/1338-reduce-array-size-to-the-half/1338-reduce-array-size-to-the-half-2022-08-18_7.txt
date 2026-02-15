@@ -1,19 +1,25 @@
-class Solution {
-public:
-    int minSetSize(vector<int>& arr) {
-        unordered_map<int,int> freq;
-        for(int ele : arr)
-            freq[ele]++;
+class Solution:
+    def minSetSize(self, arr: List[int]) -> int:
+        n = len(arr)
         
-        vector<int> v;
-        for(auto it : freq)
-            v.push_back(it.second);
+        bucket = [0]*(n+1)
+        for c in Counter(arr).values():
+            bucket[c] += 1
         
-        sort(v.begin(),v.end(),greater<int>());
-        int ans = 0,n = 0;
-        while(arr.size()/2>n)
-            n += v[ans++];
+        half = len(arr) // 2
         
-        return ans;
-    }
-};
+        ans = 0
+        count = 0
+
+        for i in range(n, -1, -1):
+            
+            while bucket[i]:
+                ans += 1
+                count += i
+                
+                if count >= half:
+                    return ans
+                
+                bucket[i] -= 1
+        
+        return ans

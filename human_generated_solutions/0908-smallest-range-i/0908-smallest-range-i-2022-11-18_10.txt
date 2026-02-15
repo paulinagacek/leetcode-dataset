@@ -1,0 +1,8 @@
+def smallestRangeI(self, nums: List[int], k: int) -> int:
+        ma = max(nums)
+        mi = min(nums)
+        r = (ma-k)-(mi+k)
+        if r<0:
+            return 0
+        else:
+            return r

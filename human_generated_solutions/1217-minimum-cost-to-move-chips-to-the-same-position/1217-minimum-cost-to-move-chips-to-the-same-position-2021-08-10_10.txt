@@ -1,0 +1,16 @@
+class Solution:
+    def minCostToMoveChips(self, position: List[int]) -> int:
+        
+        # You either move even positions to odd or the opposite based on their count
+        even, odd = 0, 0
+
+        for i in position:
+            if i & 1:
+                odd += 1
+            else:
+                even += 1
+
+        if even > odd:
+            return odd
+        else:
+            return even

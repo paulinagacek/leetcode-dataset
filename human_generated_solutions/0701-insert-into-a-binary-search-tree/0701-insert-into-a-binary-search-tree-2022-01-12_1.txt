@@ -1,5 +1,15 @@
-{
-        if(root == null) return new TreeNode(val); // if root doesn\'t exist, then return new TreeNode value
-        if(root.val > val) root.left = insertIntoBST(root.left, val); // if root value is greater then value, it means our root value exist on left side
-        else root.right = insertIntoBST(root.right, val); // otherwise root value is lesser then value, it means our root value exist on right side
-        return root; // returning original root node
+class Solution:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root: return TreeNode(val)
+            
+        cur, next = None, root
+        while next:
+            cur = next
+            next = cur.left if val < cur.val else cur.right
+        
+        if val < cur.val: 
+            cur.left = TreeNode(val)
+        else: 
+            cur.right = TreeNode(val)
+            
+        return root

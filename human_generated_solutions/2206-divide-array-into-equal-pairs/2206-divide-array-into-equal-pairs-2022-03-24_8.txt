@@ -1,9 +1,0 @@
-class Solution(object):
-    def divideArray(self, nums):
-        st = set()
-        for num in nums:
-            if num in st:
-                st.remove(num)
-            else:
-                st.add(num)
-        return len(st) == 0

@@ -1,14 +1,46 @@
 class Solution:
+    def __init__(self):
+        self.ans=0
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         tokens.sort()
-        n = len(tokens)
-        i, j = 0, n
-        while i < j:
-            if tokens[i] <= power:
-                power -= tokens[i]
-                i += 1
-            elif i - (n - j) and j > i + 1:
-                j -= 1
-                power += tokens[j]
-            else: break
-        return i - (n - j)
+        tt=[]
+        pp=0
+        for x in tokens:
+            if(power-x>=0):
+                power-=x
+                tt.append(x)
+                pp+=1
+            else:
+                break
+        if(pp<=0):
+            return 0
+        for x in tt:
+            tokens.remove(x)
+        
+        def down(tok, po, ss):
+            if(tok==[]):
+                return
+            ts=ss
+            tok.sort()
+            po+=tok[-1]
+            tok.remove(tok[-1])
+            ts-=1
+            if(tok==[]):
+                return
+            while(tok!=[] and po-min(tok)>=0):
+                po-=min(tok)
+                tok.remove(min(tok))
+                ts+=1
+            self.ans=max(ts,self.ans)
+            if(ts>=ss):
+                ss=ts
+                down(tok, po, ts)
+            else:
+                s=ts
+                return
+        
+        s=[pp]
+        self.ans=s[0]
+        down(tokens, power, s[0])
+        
+        return self.ans

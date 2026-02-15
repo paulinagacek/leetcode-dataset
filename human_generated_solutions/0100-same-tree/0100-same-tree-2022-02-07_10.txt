@@ -1,0 +1,11 @@
+def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        dq = deque()
+        dq.append((p,q))
+        while dq:
+            a, b = dq.popleft()
+            if a and b and a.val == b.val:
+                dq.append((a.left, b.left))
+                dq.append((a.right, b.right))
+            elif a or b:
+                return False
+        return True

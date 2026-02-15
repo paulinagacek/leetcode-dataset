@@ -1,0 +1,13 @@
+# Runtime: 65 ms, faster than 17.87% of Python3 online submissions for Happy Number.
+# Memory Usage: 13.8 MB, less than 98.41% of Python3 online submissions for Happy Number.
+class Solution:
+    def isHappy(self, n):
+        seen = set()
+        while True:
+            if n==1:
+                return True
+            elif n in seen:
+                return False
+            else:
+                seen.add(n)
+                n = sum(int(i)**2 for i in str(n))

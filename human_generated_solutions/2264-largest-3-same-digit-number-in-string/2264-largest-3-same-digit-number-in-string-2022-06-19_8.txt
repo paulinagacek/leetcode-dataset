@@ -1,7 +1,0 @@
-lst = []
-for i in range(len(num)-2):
-	# print(int(num[i:i+3]))
-	if int(num[i:i+3]) % 111 == 0:
-		lst.append((num[i:i+3]))
-
-return max(lst) if lst else ""

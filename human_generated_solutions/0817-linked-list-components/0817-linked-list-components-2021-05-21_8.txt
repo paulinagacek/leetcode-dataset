@@ -1,0 +1,9 @@
+class Solution:
+    def numComponents(self, head: ListNode, nums: List[int]) -> int:
+        count = 0
+        num = set(nums)
+        while head:
+            if head.val in num and (head.next==None or head.next.val not in num):
+                count+=1
+            head = head.next
+        return count

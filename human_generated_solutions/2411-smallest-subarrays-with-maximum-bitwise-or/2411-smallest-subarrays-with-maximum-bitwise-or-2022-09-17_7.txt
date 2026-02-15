@@ -1,9 +1,19 @@
+import bisect
+
 class Solution:
     def smallestSubarrays(self, nums: List[int]) -> List[int]:
-        ans = [0]*len(nums)
-        seen = [0]*30 
-        for i in range(len(nums)-1, -1, -1): 
-            for j in range(30): 
-                if nums[i] & 1<<j: seen[j] = i 
-            ans[i] = max(1, max(seen)-i+1)
-        return ans
+        n = len(nums)
+        b = [[] for _ in range(30)]
+        for i in range(n):
+            for j in range(30):
+                if nums[i] & (1 << j):
+                    b[j].append(i)
+        res = []
+        for i in range(n):
+            curr = 1
+            for j in range(30):
+                k = bisect.bisect_left(b[j], i)
+                if k < len(b[j]):
+                    curr = max(curr, b[j][k] - i + 1)
+            res.append(curr)
+        return res

@@ -1,0 +1,33 @@
+class MyCalendarTwo:
+
+    def __init__(self):
+        self.calendar = []
+
+    def book(self, start: int, end: int) -> bool:
+        # sweepline
+        sweepline = [(start, 1), (end, -1)]
+        for s, e in self.calendar:
+            sweepline.append((s, 1))
+            sweepline.append((e, -1))
+
+        sweepline.sort()
+
+        max_book, cur_book = 0, 0
+        for s, t in sweepline:
+            if t == 1:
+                cur_book += 1
+            elif t == -1:
+                cur_book -= 1
+
+            max_book = max(max_book, cur_book)
+
+        if max_book < 3:
+            self.calendar.append((start, end))
+            return True
+
+        return False
+
+
+# Your MyCalendarTwo object will be instantiated and called as such:
+# obj = MyCalendarTwo()
+# param_1 = obj.book(start,end)

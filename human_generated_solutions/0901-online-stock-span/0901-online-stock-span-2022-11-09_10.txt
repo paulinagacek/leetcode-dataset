@@ -1,40 +1,18 @@
-#approach
-#we maintain a stack of stock object(containing price and span on a given day)
-#while span condition is satisfied,
-    #condition is price<=previous_days[price](as per span definition)
-    #current span is previous day\'s span + 1(single day span)
-    #pop the previous day\'s stock object(as we already accounted that in current span)
-    #create a stock object with current price and current span 
-    #add it to stack
-    #return it\'s span
-    #repeat untill condition not satisfied/empty stacks
-    
-class Stock:
-    def __init__(self,price,span):
-        self.price=price
-        self.span=span
-
 class StockSpanner:
-    
     def __init__(self):
-        self.stack=[]        
+        # Create stack to store data in format (price, span)
+        self.stack = []
 
     def next(self, price: int) -> int:
-        #the single day span is always one
-        span=1
-        #checking non empty stack and previous stack price
-        while self.stack and self.stack[-1].price<=price:
-            #adding previous day\'s span to current span
-            span+=self.stack[-1].span
-            #removing the stock object since it\'s span already added to current span
+        span = 1
+        
+        # While price in stack is <= current price increase the span value
+        while self.stack and self.stack[-1][0] <= price:
+            span += self.stack[-1][1]
+            # Remove the tuple from stack
             self.stack.pop()
-        #creating a new stock object
-        s=Stock(price,span)
-        #adding to the stack
-        self.stack.append(s)
-        return s.span
-
-
-# Your StockSpanner object will be instantiated and called as such:
-# obj = StockSpanner()
-# param_1 = obj.next(price)
+        
+        # Update the stack with current price and span
+        self.stack.append((price, span))
+        
+        return span

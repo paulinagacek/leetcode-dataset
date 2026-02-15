@@ -1,0 +1,25 @@
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        
+        ## dictionary (Note: Counter( ... ) is a native specialized dictioanry in Python, made to count frequency)
+        # key: number
+        # value: occurrence of number
+        number_occ_dict = Counter(nums)
+        
+        # maximal harmonoius subsequence length, initialized to 0
+        max_length = 0
+        
+        # scan each distinct number
+        for number in number_occ_dict:
+
+            # if (number - 1) exists
+            if (number - 1) in number_occ_dict:
+
+                # compute current harmonoius subsequence length, made by number and (number-1)
+                cur_harmonious_length = number_occ_dict[ number ] + number_occ_dict[ number-1 ]
+
+                # update maximal harmonoius subsequence length
+                max_length = max(max_length, cur_harmonious_length)
+                
+                
+        return max_length

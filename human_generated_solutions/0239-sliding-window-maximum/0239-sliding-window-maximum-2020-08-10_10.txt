@@ -1,0 +1,10 @@
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        m = max(nums[:k])
+        mArr = [m]
+        for x in range(k,len(nums)):
+            m = max(nums[x],m)
+            if nums[x-k] == m:
+                m = max(nums[x-k+1:x+1])
+            mArr.append(m)
+        return mArr

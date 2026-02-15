@@ -1,0 +1,25 @@
+class UnionFind: 
+    def __init__(self, n): 
+        self.parent = {}
+        self.rank = defaultdict(lambda: 1)
+        
+    def find(self, p):
+        if self.parent.get(p, p) != p: 
+            self.parent[p] = self.find(self.parent[p])
+        return self.parent.get(p, p)
+    
+    def union(self, p, q): 
+        prt, qrt = self.find(p), self.find(q)
+        if prt == qrt: return False 
+        if self.rank[prt] > self.rank[qrt]: prt, qrt = qrt, prt
+        self.parent[prt] = qrt
+        self.rank[qrt] += self.rank[prt]
+        return True 
+    
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        uf = UnionFind(len(stones))
+        for x, y in stones:
+            uf.union(x, ~y)
+        return len(stones) - len({uf.find(p) for p in uf.parent})

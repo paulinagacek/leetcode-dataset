@@ -1,0 +1,22 @@
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+        """
+        KMP algorithm
+        time-space complexity: O(n), O(n)
+        """
+        if s=="": return s #basecase
+
+        pattern = s + s[::-1]
+        
+        prefix = [-1] * len(pattern)
+        j = -1
+        for i in range(1, len(pattern)):
+            while j>-1 and pattern[j+1]!=pattern[i]:
+                j = prefix[j]
+            j += 1
+            prefix[i] = j
+
+        i = prefix[-1]
+        while i >= len(s):
+            i = prefix[i]
+        return s[i+1:][::-1] + s

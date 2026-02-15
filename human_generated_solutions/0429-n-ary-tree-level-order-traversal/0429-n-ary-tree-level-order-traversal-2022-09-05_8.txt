@@ -1,12 +1,15 @@
 class Solution:
     def levelOrder(self, root: \'Node\') -> List[List[int]]:
         if not root: return []
-        
-        queue = deque([root])
-        while queue:
-            level = []
-            for _ in range(len(queue)):
-                node = queue.popleft()
-                level.append(node.val)
-                queue += node.children
-            yield level
+        res = []
+        levels = set()
+        def dfs(node, level):
+            if level not in levels:
+                levels.add(level)
+                res.append([])
+            res[level].append(node.val)
+            for child in node.children:
+                dfs(child, level + 1)
+                    
+        dfs(root, 0)
+        return res

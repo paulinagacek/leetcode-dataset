@@ -1,17 +1,13 @@
 class Solution:
-    def numberOfWeakCharacters(self, P: List[List[int]]) -> int:
-        
-        # 1. prep
-        P.sort(key=lambda x: (x[0], -x[1]))
-        stack = []
-        res = 0
-        
-        # 2. monotonic stack and main work
-        for a, d in P:
-            # monotonic stack
-            while stack and d > stack[-1]:
-                stack.pop()
-                res += 1
-            stack.append(d)
-            
-        return res
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        properties.sort(key=lambda x:(-x[0],x[1]))
+        mxattack=properties[0][0]
+        mxdefense=properties[0][1]
+        count=0
+        for i in range(1,len(properties)):
+            if properties[i][0]<mxattack and properties[i][1]<mxdefense:
+                count+=1
+            else:
+                mxattack=properties[i][0]
+                mxdefense=properties[i][1]
+        return count

@@ -1,7 +1,0 @@
-n = len(nums)
-totalsum = n*(n+1)//2
-
-for num in nums:
-	totalsum -= num
-
-return totalsum

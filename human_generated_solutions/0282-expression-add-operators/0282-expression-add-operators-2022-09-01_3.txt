@@ -1,9 +1,0 @@
-def dfs(i: int, expr: List[str]):
-		if i == n:
-			# evaluate expression
-			return
-
-		for j in range(i, n):
-		    # for every position in between digits
-			# we add a break
-			dfs(j + 1, expr + [num[i:j + 1]])

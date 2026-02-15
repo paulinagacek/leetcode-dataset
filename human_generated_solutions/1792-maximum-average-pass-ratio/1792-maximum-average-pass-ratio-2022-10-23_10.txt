@@ -1,0 +1,28 @@
+import heapq
+class Solution:
+    def maxAverageRatio(self, classes: List[List[int]], extraStudents: int) -> float:
+        
+        ratios = []
+        heapq.heapify(ratios) # taking a priority queue
+        final_av_sum = 0 # store final sum of averages
+        for clas in classes:
+            temp = clas[0] / clas[1] # current ratio
+            rat_change = ( (clas[0]+1) / (clas[1]+1) ) - temp # calculate change in ratio if we add extra student
+            heapq.heappush(ratios, [ (rat_change*-1), temp,clas[0],clas[1]]) # push into max heap
+            final_av_sum += temp # update sum of averages
+
+        
+        while extraStudents > 0:
+            
+            least = heapq.heappop(ratios) # retrieves highest increase in ratio from max heap
+            
+            final_av_sum -= least[1]
+            least[1] += (least[0]*-1) # current ratio
+            least[2] += 1 # adding extra student to passed students
+            least[3] += 1 # adding extra student to total class size
+            least[0] =  ( (least[2]+1) / (least[3]+1) - least[1] ) * -1 # update next increase in ratio if we add one more
+            final_av_sum += least[1] # update sum of averages
+            
+            heapq.heappush(ratios,least)
+            extraStudents -= 1
+        return final_av_sum/len(classes) # return final average of pass ratio

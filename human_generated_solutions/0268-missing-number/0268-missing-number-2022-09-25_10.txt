@@ -1,0 +1,7 @@
+def missingNumber(self, nums: List[int]) -> int:
+        l = len(nums)
+        
+        natural_sum = (l * (l + 1)) // 2
+        list_sum = sum(nums)
+        
+        return natural_sum - list_sum

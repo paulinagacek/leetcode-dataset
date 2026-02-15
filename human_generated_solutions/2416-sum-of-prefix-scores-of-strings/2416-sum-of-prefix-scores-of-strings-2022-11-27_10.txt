@@ -1,0 +1,22 @@
+class Solution:
+    def sumPrefixScores(self, words: List[str]) -> List[int]:
+        import collections
+        cur_level = collections.deque([(-1, set([idx for idx in range(len(words))]))])
+        res = [0 for i in range(len(words))]
+        while cur_level:
+            item = cur_level.popleft()
+            if item[0] != -1:
+                for idx in item[1]:
+                    res[idx] += len(item[1])
+            
+            new_nodes = collections.defaultdict(set)
+            n_idx = item[0] + 1
+            for word_idx in item[1]:
+                w = words[word_idx]
+                if len(w) - 1 < n_idx:
+                    continue
+                new_nodes[w[n_idx]].add(word_idx)
+            for ch, word_idices in new_nodes.items():
+                cur_level.append((n_idx, word_idices))
+
+        return res

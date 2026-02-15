@@ -1,0 +1,14 @@
+class Solution:
+    def countServers(self, grid: List[List[int]]) -> int:
+        communicates = set()
+        for x in range(len(grid)):
+            cur = set()
+            for y in range(len(grid[0])):
+                if grid[x][y] == 1: cur.add((x, y))
+            if len(cur) > 1: communicates |= cur
+        for y in range(len(grid[0])):
+            cur = set()
+            for x in range(len(grid)):
+                if grid[x][y] == 1: cur.add((x, y))
+            if len(cur) > 1: communicates |= cur
+        return len(communicates)

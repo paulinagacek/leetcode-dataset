@@ -1,7 +1,4 @@
-class Solution {
-public:
-    int fib(int n) {
-        if(n <= 1) return n;
-        return fib(n-1)+fib(n-2);
-    }
-};
+class Solution:
+    @cache
+    def fib(self, n: int) -> int:
+        return n if n <= 1 else self.fib(n-1)+self.fib(n-2)

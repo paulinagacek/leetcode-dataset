@@ -1,0 +1,18 @@
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        
+        
+        h=[]
+        for  i in score:
+            heappush(h,-i)
+        f={}
+        
+        
+        g=[\'Gold Medal\', \'Silver Medal\',\'Bronze Medal\']
+        for i in range(len(h)):
+            if i<3:
+                f[-heappop(h)]=g[i]
+            else:
+                f[-heappop(h)]= str(i+1)
+                
+        return [f[i] for i in score]

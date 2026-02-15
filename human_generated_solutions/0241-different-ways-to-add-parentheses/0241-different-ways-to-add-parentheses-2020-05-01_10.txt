@@ -1,0 +1,30 @@
+class Solution:
+    def diffWaysToCompute(self, input: str) -> List[int]:
+        
+        
+        def helper(string):
+            
+            result=[]
+            
+            for i, c in enumerate(string):
+                
+                if c in "+-*":
+                    x=helper(string[:i])
+                    y=helper(string[i+1:])
+                    
+                    for a in x:
+                        for b in y:
+                            
+                            if c==\'+\':
+                                result.append(a+b)
+                            elif c==\'-\':
+                                result.append(a-b)
+                            else:
+                                result.append(a*b)
+                                
+            if not result:
+                return [int(string)]
+            
+            return result
+        
+        return helper(input)

@@ -1,0 +1,24 @@
+def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+	if len(pushed)!=len(popped):
+		return False
+
+	if pushed == popped:
+		return True
+
+	pushIndex = 0
+	popIndex = 0
+	while pushed and pushIndex < len(pushed):
+		pushTop = pushed[pushIndex]
+		popTop = popped[popIndex]
+
+		if pushTop == popTop:
+			pushed.pop(pushIndex)
+			pushIndex -= 1
+			popIndex += 1
+		else:
+			pushIndex += 1
+
+		if pushed and pushIndex < 0:
+			pushIndex += 1
+
+	return len(pushed)==0

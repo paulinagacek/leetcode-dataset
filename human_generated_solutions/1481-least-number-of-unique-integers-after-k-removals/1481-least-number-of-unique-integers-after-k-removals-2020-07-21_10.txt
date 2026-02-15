@@ -1,0 +1,12 @@
+def findLeastNumOfUniqueInts(self, arr, k):
+        freq = collections.Counter(arr)
+        A = freq.most_common()[::-1] # reverse the list
+        
+        for i, (x,t) in enumerate(A):
+            k -= t
+            if k == 0:
+                return len(A) - i - 1
+            elif k < 0:
+                return len(A) - i 
+        
+        return 0

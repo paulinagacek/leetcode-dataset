@@ -1,0 +1,23 @@
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int:
+        tovisit = set([i for i in range(len(edges))]) # Initialized with all nodes
+        visited = set() # Empty
+        longest = -1 # Initialized with -1. If there is no cycle, we return -1
+        while tovisit: # Loop until all nodes are visited, or ***tovisit*** is empty
+            node = tovisit.pop() # Pop out a random node from ***tovisit*** as the starting node for the path to be determined
+            dist = 0 # Distance from a node on path to starting node. Initialized as 0
+            path = {node:dist} # Path is stored as a dictionary with node as key and distance from starting node as value. This will help us compute a cycle\'s length when cycle is detected.
+            visited.add(node) # Add node to ***visited***. Note that node is already removed from ***tovisit*** by pop()
+            while edges[node]>-1: # Loop until there is no outgoing edge
+                if edges[node] in path: # Cycle is detected. Compute cycle\'s length, check if it\'s longest and exit inner loop
+                    longest = max(longest , path[node]-path[edges[node]]+1)
+                    break
+                else: # If no cycle is detected yet, there are 2 cases
+                    if edges[node] in visited: # The next node of this path is already visited, we exit the inner loop
+                        break
+                    else: # We add the next node to the path
+                        node, dist = edges[node], dist+1
+                        path[node] = dist
+                        visited.add(node) # Add it to ***visited***
+                        tovisit.remove(node) # Remove it from ***tovisit***
+        return longest

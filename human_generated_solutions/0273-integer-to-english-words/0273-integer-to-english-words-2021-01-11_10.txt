@@ -1,0 +1,33 @@
+def numberToWords(self, num: int) -> str:
+        if num == 0: return \'Zero\'
+
+        m = { 1000000000: \'Billion\', 1000000: \'Million\', 1000: \'Thousand\'}
+        
+        n = { 100: \'Hundred\', 90: \'Ninety\', 80: \'Eighty\', 70:\'Seventy\', 60: \'Sixty\', 50: \'Fifty\', 40: \'Forty\',
+         30: \'Thirty\', 20: \'Twenty\', 19: \'Nineteen\', 18: \'Eighteen\', 17: \'Seventeen\', 16: \'Sixteen\', 15: \'Fifteen\', 14:\'Fourteen\',
+         13: \'Thirteen\', 12: \'Twelve\', 11: \'Eleven\', 10: \'Ten\', 9:\'Nine\', 8:\'Eight\', 7:\'Seven\', 6:\'Six\', 5:\'Five\', 4:\'Four\', 3:\'Three\', 2:\'Two\',1:\'One\'
+        }
+
+        def n2w(curr):
+            words = []
+            if curr >= 100:
+                words += n[curr//100], n[100]
+                curr = curr % 100
+
+            for j in n:
+                if curr >= j:
+                    words += n[j],
+                    curr -= j
+            return words
+
+        ret = []
+        for i in m:
+            if num >= i:
+                curr = num // i
+                ret += n2w(curr)
+                num = num % i
+                ret += m[i],
+        
+        ret += n2w(num)
+
+        return \' \'.join(ret)

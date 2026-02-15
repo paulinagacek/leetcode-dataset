@@ -1,18 +1,39 @@
-class Solution:
-    def maxArea(self, h: int, w: int, hc: List[int], vc: List[int]) -> int:
+def maxArea(self, h, w, horizontalCuts, verticalCuts):
+        """
+        :type h: int
+        :type w: int
+        :type horizontalCuts: List[int]
+        :type verticalCuts: List[int]
+        :rtype: int
+        """
+        h_mx = 0  
+
+        horizontalCuts.sort()
+        verticalCuts.sort()
+
+        for i in range(len(horizontalCuts)-1):
+            r = horizontalCuts[i+1] - horizontalCuts[i]
+            if h_mx < r:
+                h_mx =  r
+
+        if h_mx < h - horizontalCuts[-1]:
+            h_mx = h - horizontalCuts[-1]
+
+        if h_mx < horizontalCuts[0] - 0:
+            h_mx = horizontalCuts[0] - 0
+
+        v_mx = 0
+
+        for i in range(len(verticalCuts)-1):
+            r = verticalCuts[i+1] - verticalCuts[i]
+            if v_mx < r:
+                v_mx =  r
+
+        if v_mx < w - verticalCuts[-1]:
+            v_mx = w - verticalCuts[-1]
+
+        if v_mx < verticalCuts[0] - 0:
+            v_mx = verticalCuts[0] - 0
         
-        hc.sort()
-        vc.sort()
-        
-        maxh = hc[0]
-        maxv = vc[0]
-        
-        for i in range(1, len(hc)):
-            maxh = max(maxh, hc[i] - hc[i-1])
-        maxh = max(maxh, h - hc[-1])
-        
-        for i in range(1, len(vc)):
-            maxv = max(maxv, vc[i] - vc[i-1])
-        maxv = max(maxv, w - vc[-1])
-        
-        return maxh*maxv % (10**9 + 7)
+
+        return (h_mx * v_mx)

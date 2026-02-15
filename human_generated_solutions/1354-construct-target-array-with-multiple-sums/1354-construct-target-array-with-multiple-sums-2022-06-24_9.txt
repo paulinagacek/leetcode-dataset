@@ -1,25 +1,16 @@
-class Solution(object):
-    def isPossible(self, target):
-        """
-        :type target: List[int]
-        :rtype: bool
-        """
-        x=len(target)
-        if len(target) == 1 and target != [1]:
-            return False
-        while sum(target) >x:
-            target.sort(reverse=True)
-            csum=sum(target[1:])
-           
-            if target[0]<=csum:
+class Solution:
+    def isPossible(self, target: List[int]) -> bool:
+        max_heap = [-n for n in target]
+        heapq.heapify(max_heap)
+        total = sum(target)
+        while max_heap[0] != -1:
+            largest = -heapq.heappop(max_heap)
+            if total >= 2 * largest or total == largest:
                 return False
-            else:
-                a=target[0]%csum
-                if a:
-                    target[0]=a
-                else:
-                    target[0]=csum
+            largest_ele_in_prev_step = largest % (total - largest)
+            if not largest_ele_in_prev_step:
+                largest_ele_in_prev_step = total - largest
             
-            if target[0] < 1:
-                return False
+            total = total - largest + largest_ele_in_prev_step
+            heapq.heappush(max_heap, -largest_ele_in_prev_step)
         return True

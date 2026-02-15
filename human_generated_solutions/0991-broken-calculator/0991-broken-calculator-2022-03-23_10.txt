@@ -1,0 +1,44 @@
+class Solution:
+    def brokenCalc(self, X: int, Y: int) -> int:
+        """
+        We have gotten a "finite" path S: X -> X[1] -> X[2] -> ... X[n] -> Y and assume X < Y.
+
+        Statement: if Y is even then last operation to reach Y must be of multiplication.
+        Proof: Suppose that is not the case.
+               Then X[n] = Y + 1.
+
+               Now X[n] is odd, so the last operation to reach X[n] can not be multiplication
+               by 2, it has to be a subtraction by 1.
+
+               Now X[n-1] is even. Also that X[n-1] = Y + 2. Applying the statement that
+               last operation must be of subtraction if number to reach is even, we find
+               that we are moving away and away from Y.
+
+               Hence the length of path S can not be finite. And this is a contraction.
+
+               Hence we conclude that last operation must be of multiplication by 2 if
+               Y is even.
+        Done
+
+        Also note that if Y is odd then last operation can not be of multiplication by 2,
+        which mean last operation must be of type subtraction.
+
+        In the following implementation, we trace back from Y to X, so operation of multiplication
+        becomes that of division and operation of subtraction becomes that of addition.
+
+        Also @see https://leetcode.com/problems/broken-calculator/discuss/234484/JavaC%2B%2BPython-Change-Y-to-X-in-1-Line
+        :param X:
+        :param Y:
+        :return:
+        """
+        output = 0
+
+        while X < Y:
+            if Y % 2 == 0:
+                Y //= 2
+            else:
+                Y += 1
+
+            output += 1
+
+        return output + (X - Y)

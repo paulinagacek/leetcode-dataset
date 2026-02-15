@@ -1,0 +1,10 @@
+def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        dic = {}
+        
+        for i,n in enumerate(nums):
+            if n in dic and abs(dic.get(n) - i) <= k:
+                return True
+            else:
+                dic[n]=i
+                
+        return False

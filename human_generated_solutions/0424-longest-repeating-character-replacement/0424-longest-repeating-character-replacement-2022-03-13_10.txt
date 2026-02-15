@@ -1,0 +1,21 @@
+def characterReplacement(self, s: str, k: int) -> int:
+        win_start, max_length, max_char_count = 0, 0, 0
+        freq = {}
+        
+        for win_end in range(len(s)):
+            
+            right_char = s[win_end]
+            if right_char not in freq:
+                freq[right_char] = 0
+            freq[right_char] += 1
+            
+            max_char_count = max(max_char_count, freq[right_char])
+            
+            if (win_end - win_start + 1 - max_char_count) > k:
+                left_char = s[win_start]
+                freq[left_char] -= 1
+                win_start += 1
+            
+            max_length = max(max_length, win_end - win_start + 1)
+        
+        return max_length

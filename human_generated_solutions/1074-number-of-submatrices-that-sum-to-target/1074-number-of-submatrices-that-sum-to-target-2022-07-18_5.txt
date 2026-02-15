@@ -1,28 +1,19 @@
-class Solution:
-    def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
-        
-        if len(matrix)>len(matrix[0]):
-            new=[[0]*len(matrix) for i in range(len(matrix[0]))]
-            for i in range(len(matrix)):
-                for j in range(len(matrix[0])):
-                    new[j][i]=matrix[i][j]
-            return self.numSubmatrixSumTarget(new,target)
-
-
-        self.dp=[[0]*(len(matrix[0])+1)for i in range(len(matrix)+1)]
-        for i in range(1,len(matrix)+1):
-            for j in range(1,len(matrix[0])+1):
-                self.dp[i][j]=self.dp[i][j-1]+self.dp[i-1][j]-self.dp[i-1][j-1]+matrix[i-1][j-1]
-        
-        ans=0
-        for row1 in range(len(matrix)):
-            for row2 in range(row1,len(matrix)):
-                pres=0
-                myhash={0:1}
-                for col1 in range(len(matrix[0])):
-                        presum=self.dp[row2+1][col1+1]-self.dp[row1][col1+1]
-                        if presum-target in myhash:
-                            ans+=myhash[pres-target]
-                        myhash[pres]=myhash.get(pres,0)+1
-                        
-        return(ans)
+def numSubmatrixSumTarget(self, mat: List[List[int]], target: int) -> int:
+	m, n = len(mat), len(mat[0])
+	for i in range(m):
+		for j in range(1, n):
+			mat[i][j] += mat[i][j-1]
+		mat[i] = [0] + mat[i]
+	ans = 0
+	d = defaultdict(int)
+	for col1 in range(n):
+		for col2 in range(col1+1, n+1):
+			temp = 0
+			d[0] = 1
+			for r in range(m):
+				temp += mat[r][col2] - mat[r][col1]
+				if(temp - target in d):
+					ans += d[temp - target]
+				d[temp] += 1
+			d.clear()
+	return ans

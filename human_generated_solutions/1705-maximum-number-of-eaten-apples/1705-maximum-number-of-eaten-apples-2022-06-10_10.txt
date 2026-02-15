@@ -1,0 +1,22 @@
+class Solution:
+    def eatenApples(self, apples: List[int], days: List[int]) -> int:
+        heap = []
+        ans = 0
+        for day in count():
+
+            # Add new apples
+            if day < len(apples):
+                heappush(heap, [day + days[day], apples[day]])
+                
+            # Remove rotten or empty groups of apples
+            while heap and (heap[0][0] <= day or heap[0][1] <= 0):
+                heappop(heap)
+
+            # Eat an apple if we have one
+            if heap:
+                heap[0][1] -= 1
+                ans += 1
+
+            # Else no more apples incoming, return
+            elif day >= len(apples):
+                return ans

@@ -1,10 +1,10 @@
-var minStoneSum = function(piles, k) {
-  const maxHeap = new Heap((a, b) => b - a);
-  maxHeap.heapify(piles);
-  while (k) {
-    const cur = maxHeap.pop();
-    maxHeap.add(cur - Math.floor(cur / 2));
-    k--;
-  }
-  return maxHeap.arr.reduce((a, b) => a + b);
-};
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        import heapq
+        q = [-i for i in piles]
+        heapq.heapify(q)
+        for i in range(k):
+            cur = - heapq.heappop(q)
+            cur -= cur//2
+            heapq.heappush(q, -cur)
+        return -sum(q)

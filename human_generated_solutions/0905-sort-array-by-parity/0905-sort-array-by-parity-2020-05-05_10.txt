@@ -1,0 +1,13 @@
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        slow = fast = 0
+        while fast < len(nums):
+            if not (nums[fast] % 2):
+                nums[slow], nums[fast] = nums[fast], nums[slow]
+
+            if not (nums[slow] % 2):
+                slow += 1
+
+            fast += 1
+
+        return nums

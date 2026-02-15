@@ -1,0 +1,25 @@
+class Solution(object):
+    def isPossible(self, target):
+        """
+        :type target: List[int]
+        :rtype: bool
+        """
+        x=len(target)
+        if len(target) == 1 and target != [1]:
+            return False
+        while sum(target) >x:
+            target.sort(reverse=True)
+            csum=sum(target[1:])
+           
+            if target[0]<=csum:
+                return False
+            else:
+                a=target[0]%csum
+                if a:
+                    target[0]=a
+                else:
+                    target[0]=csum
+            
+            if target[0] < 1:
+                return False
+        return True

@@ -1,0 +1,17 @@
+class Solution:
+    def flatten(self, head: \'Node\') -> \'Node\':
+        if head:
+            res = []                                # initialize empty list
+            def traverse(node):                     # define recursive function
+                nonlocal res
+                if node is not None:
+                    res.append(Node(node.val))      # append a new node
+                    traverse(node.child)
+                    traverse(node.next)
+            traverse(head)                          # traverse the doubly-linked list
+            new_head, prev_node = res[0], res[0]    # initialize pointers to the new head
+            for i in range(1, len(res)):            # iterate through the list of nodes
+                res[i].prev = prev_node             # link \'prev\'
+                prev_node.next = res[i]             # link \'next\'
+                prev_node = prev_node.next
+            return new_head

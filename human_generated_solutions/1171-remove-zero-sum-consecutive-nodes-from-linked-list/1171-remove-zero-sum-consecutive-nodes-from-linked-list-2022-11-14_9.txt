@@ -1,0 +1,30 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:  
+        currSum = 0
+        curr= head
+        sums = {}
+        
+        sumOf = {}
+        
+        dummy = ListNode(0, head)
+        sums = { 0: dummy }
+        while curr:
+            currSum += curr.val
+            sumOf[curr] = currSum
+            # print(curr.val, currSum, sums.get(currSum).val if sums.get(currSum) else None)
+            if currSum in sums:
+                aux = sums[currSum].next
+                while aux and aux != curr:
+                    if sums[sumOf[aux]] == aux:
+                        del sums[sumOf[aux]]
+                    aux = aux.next
+                sums[currSum].next = curr.next
+            else:
+                sums[currSum] = curr
+            curr = curr.next
+        return dummy.next

@@ -1,0 +1,27 @@
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+		#Handle empty case
+        if not nums:
+            return None
+		#Initiate track
+        track = [nums[0],1]
+		#Counter
+        num = 1
+		#Iterate through the array
+        while num < len(nums):
+			#If we are still considering the current tracked element, increment frequency and counter
+            if nums[num] == track[0] and track[1]<=1:
+                track[1]+=1
+                num+=1
+            #If the frequency exceeds our bench mark, then pop it from nums. Dont increase counter
+			elif nums[num] == track[0] and track[1]>1:
+                track[1]+=1
+                nums.pop(num)
+			#Otherwise reinitiate tracker with new value and frequency 1
+            elif nums[num]!= track[0]:
+                track = [nums[num], 1]
+                num+=1

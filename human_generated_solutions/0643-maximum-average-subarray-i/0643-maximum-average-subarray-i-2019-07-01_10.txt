@@ -1,0 +1,11 @@
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        current_sum = sum(nums[:k])  # accumulate first k elements
+        max_sum = current_sum
+
+        for i in range(k, len(nums)):  # start from the k + 1 element
+            # "+ nums[i]" is proceeding the right-end pointer of current_sum by one step
+            # "- nums[i - k]" is proceeding the left-end pointer of current_sum by one step
+            current_sum += nums[i] - nums[i - k]
+            max_sum = max(max_sum, current_sum)
+        return 1.0 * max_sum / k

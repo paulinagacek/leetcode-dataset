@@ -1,0 +1,28 @@
+class Solution:
+    def generateTrees(self, n: int) -> List[TreeNode]:
+        # Edge case:
+        if n == 0:
+            return []
+			
+        # helping recursive function which recieves a range (within n) and returns all subtrees in that range:
+        def rec(start, end):
+		
+            # not supposed to happen:
+            if start > end:
+                return [None]
+				
+            # got to a leaf:
+            if start == end:
+                return [TreeNode(start)]
+            ret_list = []
+			
+            # for each option of root, get all possible subtrees and add to result each pair possible of left and right:
+            for i in range(start, end+1):
+                left = rec(start, i-1)
+                right = rec(i+1, end)
+                for pair in product(left, right):
+                    ret_list.append(TreeNode(i, pair[0], pair[1]))
+        
+            return ret_list
+        res = rec(1,n)
+        return res

@@ -1,0 +1,22 @@
+class Solution:
+    def findRedundantConnection(self, b: List[List[int]]) -> List[int]:
+        n = len(b)
+        comp = [i for i in range(n+1)]
+        res = []
+        def root(x):
+            while comp[x] != x:
+                comp[x] = comp[comp[x]]
+                x = comp[x]
+            return x
+        
+        def union(x, y):
+            comp[root(x)] = comp[root(y)]
+        
+        def kruskal():
+            for i in b:
+                if root(i[0]) != root(i[1]):
+                    union(i[0], i[1])
+                else:
+                    res.append(i)
+        kruskal()
+        return res[-1]

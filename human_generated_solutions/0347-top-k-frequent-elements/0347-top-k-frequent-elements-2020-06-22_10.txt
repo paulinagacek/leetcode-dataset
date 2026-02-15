@@ -1,0 +1,19 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        ## RC ##
+        ## APPROACH : HEAP ##
+        # logic : #
+        #   1. we store value = (frequency, key) pair in heap
+        #   2. by default heapq in python is min heap. It is sorted based on value[0].
+        #   3. so we multiply -1 with frequency, so as to get maximum frequent element from value[1] (as heap return minimum and we stored with negative sign)
+        
+		## TIME COMPLEXITY : O(NxK) ##
+		## SPACE COMPLEXITY : O(N) ##
+        
+        import heapq
+        heap = []
+        count = collections.Counter(nums)
+        ans = []
+        for i in set(nums):
+            heapq.heappush(heap,(-1 * count[i], i))
+        return [ heapq.heappop(heap)[1] for _ in range(k) ]

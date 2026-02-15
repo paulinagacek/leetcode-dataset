@@ -1,17 +1,40 @@
 class Solution:
     def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
-        counter = Counter(tops + bottoms)
-        val, count = counter.most_common(1)[0]
-        if count < len(tops):
+        common1 = tops[0]
+        common2 = bottoms[0]
+        length = len(tops)
+        i = 0
+        commonCount = 0
+        break1 = False
+        break2 = False
+        if(common1==common2):
+            commonCount = commonCount+1
+            break2 = True
+        for i in range(1,length):
+            if(not break1):
+                if (tops[i]==common1 or bottoms[i]==common1):
+                    if (tops[i]==common1 and bottoms[i]==common1):
+                        commonCount = commonCount + 1
+                        break2 = True
+                    continue
+                else:
+                    break1 = True
+            if(not break2):
+                if (tops[i]==common2 or bottoms[i]==common2):
+                    if (tops[i]==common2 and bottoms[i]==common2):
+                        commonCount = commonCount + 1
+                        break1 = True
+                    continue
+                else:
+                    break2 = True
+            if(break1 and break2):
+                break
+        if(i==length-1):
+            if(not break1 and not break2):
+                return min(min(tops.count(common1)-commonCount,length-tops.count(common1)),min(bottoms.count(common2)-commonCount,length-bottoms.count(common2)))
+            elif(not break1):
+                return min(tops.count(common1)-commonCount,length-tops.count(common1))
+            else:
+                return min(bottoms.count(common2)-commonCount,length-bottoms.count(common2))
+        else:
             return -1
-        if tops.count(val) < bottoms.count(val):
-            tops, bottoms = bottoms, tops
-        swap_count = 0
-        for i in range(len(tops)):
-            if tops[i] == val:
-                continue
-            if bottoms[i] == val:
-                swap_count += 1
-                continue
-            return -1
-        return min(swap_count, len(tops) - swap_count)

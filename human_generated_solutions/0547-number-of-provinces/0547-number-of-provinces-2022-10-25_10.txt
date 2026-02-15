@@ -1,0 +1,38 @@
+class DisjointSet:
+    def __init__(self,n):
+        self.parent = [i for i in range(n+1)]
+        self.size = [1]*(n+1)
+
+    def unionBySize(self,u,v):
+        ulp_u = self.findParent(u)
+        ulp_v = self.findParent(v)
+
+        if ulp_u == ulp_v: return
+
+        if self.size[ulp_u] < self.size[ulp_v]:
+            self.parent[ulp_u] = ulp_v
+            self.size[ulp_v] += self.size[ulp_u]
+        else:
+            self.parent[ulp_v] = ulp_u
+            self.size[ulp_u] += self.size[ulp_v]
+
+    
+    def findParent(self,n):
+        if n == self.parent[n]:
+            return n
+        self.parent[n] = self.findParent(self.parent[n])
+        return self.parent[n]
+
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        ds = DisjointSet(len(isConnected))
+        for i,row in enumerate(isConnected):
+            for j,el in enumerate(row):
+                if el == 1: ds.unionBySize(i,j)
+
+        count = 0
+        for i in range(len(isConnected)):
+            if i == ds.parent[i]:
+                count += 1
+
+        return len(components)

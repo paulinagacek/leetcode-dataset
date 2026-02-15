@@ -1,0 +1,27 @@
+import base64 as b
+
+class Codec:
+
+    def encode(self, l: str) -> str:
+        """Encodes a URL to a shortened URL.
+        """
+        l_b = l.encode("ascii")
+        b_b = b.b64encode(l_b);
+        b_s = b_b.decode("ascii")
+        return b_s
+        
+
+    def decode(self, s: str) -> str:
+        """Decodes a shortened URL to its original URL.
+        """
+        s_b = s.encode("ascii")
+        b_b = b.b64decode(s_b)
+        b_s = b_b.decode("ascii")
+        return b_s
+        
+        
+        
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.decode(codec.encode(url))

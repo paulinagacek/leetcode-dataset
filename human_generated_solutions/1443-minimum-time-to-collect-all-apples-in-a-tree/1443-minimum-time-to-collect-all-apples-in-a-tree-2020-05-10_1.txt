@@ -1,38 +1,28 @@
-class Solution {
-public:
-    unordered_map<int, vector<int>> g; // to store the graph
-    unordered_map<int, bool> visited; // to stop exploring same nodes again and again.
-	
-    void createGraph(vector<vector<int>>& edges) {
-      for (auto e: edges) {
-        g[e[0]].push_back(e[1]); // adjecency list representation
-		g[e[1]].push_back(e[0]); // adjecency list representation
-      }
-    }
-  
-    int dfs(int node, int myCost, vector<bool>& hasApple) {
-	  if (visited[node]) {
-		  return 0;
-	  }
-	  visited[node] = true;
-	  
-      int childrenCost = 0; // cost of traversing all children. 
-      for (auto x: g[node]) { 
-        childrenCost += dfs(x, 2, hasApple);  // check recursively for all apples.
-      }
+Info = collections.namedtuple(\'Info\', (\'found\', \'dist\'))
 
-      if (childrenCost == 0 && hasApple[node] == false) {
-	  // If no child has apples, then we won\'t traverse the subtree, so cost will be zero.
-	  // similarly, if current node also does not have the apple, we won\'t traverse this branch at all, so cost will be zero.
-        return 0;
-      }
-	  
-	  // Children has at least one apple or the current node has an apple, so add those costs.
-      return (childrenCost + myCost);
-    }
-  
-    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
-      createGraph(edges); // construct the graph first.
-      return dfs(0, 0, hasApple); // cost of reaching the root is 0. For all others, its 2.
-    }
-};
+class Solution:
+    def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
+        
+        # build an adjacency list to represent the tree using `edges`
+        tree = collections.defaultdict(list)
+		
+		# You don\'t need to make it undirected since the structure represents a tree
+        for u, v in edges:
+            tree[u].append(v)
+        
+        # A recursive helper function that find the lowest apple and passes
+        # the information (is apple found, distance from the lowest apple to the current node)
+        # to the upper node
+        
+        def traverse(node):
+            if node not in tree:
+                return Info(hasApple[node], 0)
+            curr_dist, apple_found = 0, hasApple[node]
+            for child in tree[node]:
+                info = traverse(child)
+                curr_dist += 2 + info.dist if info.found else 0
+                apple_found |= info.found
+            return Info(apple_found, curr_dist)
+        
+        # Get the information from the starting vertex 0
+        return traverse(0).dist

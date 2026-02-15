@@ -1,9 +1,0 @@
-For each state i:
-	j = find all the perfect squares less than i.
-	for each j:
-		Assume that the perfectsquare j is taken by alice.
-		Then the game continues as` dp[i-j*j]` for bob as start player.
-		Since we calculated all answers for such states with alice as start player,its the same even if bob becomes the start player because both play optimally.
-		If bob could wins ,alice loses i.e ` dp[i-j*j]` = True
-		else if bob loses alice wins    i.e ` dp[i-j*j]`  = False
-		So,we choose the case where alice wins with alice as start player(In essence we find if atleast one j returns True for dp[i]). or dp[i] |= ! dp[i-j*j]

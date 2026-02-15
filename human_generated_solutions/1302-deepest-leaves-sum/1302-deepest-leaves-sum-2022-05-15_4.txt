@@ -1,9 +1,7 @@
-curLayer = [root]
-while curLayer:
-	lastSum, nextLayer = 0, [] # init sum to zero
-	for node in curLayer:
-		lastSum += node.val # rolling sum
-		if node.left: nextLayer.append(node.left)
-		if node.right: nextLayer.append(node.right)
-	curLayer = nextLayer
-return lastSum
+def dfs(root):
+	if not root:
+		return 
+	print(root.val)
+	dfs(root.left)
+	dfs(root.right)
+	return

@@ -1,8 +1,0 @@
-data = {}
-        from collections import Counter
-        data=dict(Counter(arr))
-        result = list(filter(lambda x: data[x] == 1, data))
-        if len(result) < k:
-            return \'\'
-        return result[k - 1]
-        print(data)

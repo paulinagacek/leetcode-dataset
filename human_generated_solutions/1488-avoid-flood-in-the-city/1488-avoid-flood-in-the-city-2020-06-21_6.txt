@@ -1,34 +1,37 @@
+import collections
+import heapq
+
+
 class Solution:
-    def avoidFlood(self, rains: List[int]) -> List[int]:
-        
-        ans = []
-        # full stores current full lakes
-        full = set()
-        # dry stores dry plan for full lakes, the first is the earliest upcomming rain
-        dry = []
-        # for each lake, stores rain deque for it
-        lakes = collections.defaultdict(collections.deque)       
-        for i, lake in enumerate(rains):
-            lakes[lake].append(i)
-        
-        for lake in rains:
-            if lake:
-                # If lake is already full, then it will be a flood
-                if lake in full: return []
-                else:
-                    full.add(lake)
-                    ans.append(-1)
-                    lakes[lake].popleft()
-                    # If there are more rains for this lake later, store the next rains idx into dry
-                    # dry is Heap so that the first one is always the smallest idx (earlist rain)
-                    if lakes[lake]:
-                        heapq.heappush(dry, lakes[lake][0])
+    def avoidFlood(self, rains: list) -> list:
+        ret = []
+        ele_last_ind = collections.defaultdict(int)
+        res = collections.defaultdict(int)
+        for i, r in enumerate(rains):
+            if not r: continue
+            if r not in ele_last_ind:
+                res[i] = -1
             else:
-                if dry: 
-                    next_dry = rains[heapq.heappop(dry)]
-                    ans.append(next_dry)
-                    full.remove(next_dry)
+                res[ele_last_ind[r]] = i
+            ele_last_ind[r] = i
+        h = []
+        stack = set()
+        for i, r in enumerate(rains):
+            if r:
+                if r in stack: return []
+                ret.append(-1)
+                if r in res and res[r] == -1:
+                    pass
                 else:
-                    ans.append(1)
-                    
-        return ans
+                    if res[i] and res[i] != -1:
+                        heapq.heappush(h, (res[i], {r: res[i]}))
+                stack.add(r)
+            else:
+                if h:
+                    a = heapq.heappop(h)
+                    k = a[1].popitem()[0]
+                    stack.remove(k)
+                    ret.append(k)
+                else:
+                    ret.append(1)
+        return ret

@@ -1,0 +1,8 @@
+class Solution:
+
+    def countOrders(self, n: int) -> int:
+
+        if n == 1:
+            return 1 # Only way to pickup and deliver 1 order
+        
+        return int(((2*n *(2*n-1))/2 * self.countOrders(n-1))%(10**9 + 7))

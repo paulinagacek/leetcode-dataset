@@ -1,0 +1,12 @@
+class Solution:
+    def numberOfLines(self, widths: List[int], s: str) -> List[int]:
+        a_dict = {l:w for l,w in zip("abcdefghijklmnopqrstuvwxyz",widths)}
+        lines = 0
+        pix = 0
+        for i in s:
+            if pix + a_dict[i] > 100:
+                pix = a_dict[i]
+                lines += 1
+            else:
+                pix += a_dict[i]
+        return [lines+1,pix]

@@ -1,9 +1,0 @@
-while head is not None and head.val == val: # head node should not be empty and we are checking if head value is identical to the value given.
-            head = head.next # # updating the head node to the next one. 
-        current = head # if not equal then we are assiging the head to current var.
-        while current is not None: # cheking for head not be a empty one.
-            if current.next is not None and current.next.val == val: # checking for next node value is it equal to the given value.
-                current.next = current.next.next # if yes, then we remove the next one by skipping it & assiging the next as next to next node
-            else:
-                current = current.next # else we`ll just assign the next node to current.
-        return head

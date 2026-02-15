@@ -1,12 +1,14 @@
-class Solution:
-    def chalkReplacer(self, chalk: List[int], k: int) -> int:
-        sumi = sum(chalk)
+class Solution(object):
+    def chalkReplacer(self, chalk, k):
+        # Since we go round and round, we don\'t have to solve for every iteration
+        # To skip to the last iteration where a student needs to replace the chalk
+        # we can use the modulo operator to find the reminder of chalks left for last iteration
+        k = (k % sum(chalk))
         
-        k = k % sumi
+        # Iterate normally until k becomes less than chalk[i], then return the i value
+        for i, chalkRequired in enumerate(chalk):
+            if k < chalkRequired:
+                return i # the ith student needs to replace the chalks
             
-        for i , j in enumerate(chalk):
-            if(k < j): break
-            
-            k -= j
-            
-        return i
+            # Reduce the chalks consumed by ith student from k
+            k -= chalkRequired

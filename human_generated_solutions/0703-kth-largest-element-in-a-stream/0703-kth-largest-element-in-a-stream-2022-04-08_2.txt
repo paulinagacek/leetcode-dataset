@@ -1,2 +1,0 @@
-What the Question asking us to do \uD83E\uDD14 ?
-The Question is asking us to add the value and return the kth largest element in the array.

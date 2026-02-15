@@ -1,0 +1,19 @@
+class Solution(object):
+    def maximumUniqueSubarray(self, nums):
+        if len(nums) < 2:
+            return sum(nums)
+        
+        start, end, n = 0, 0, len(nums)
+        mem, output, temp = set([]), 0, 0
+        while end < n:
+            if nums[end] not in mem:
+                mem.add(nums[end])
+                temp += nums[end]
+                end += 1
+                output = max(output, temp)
+            else:
+                while nums[end] in mem:
+                    temp -= nums[start]
+                    mem.remove(nums[start])
+                    start += 1
+        return output

@@ -1,33 +1,24 @@
 class Solution:
     def minCost(self, nums: List[int], cost: List[int]) -> int:
-
-        @cache
-        def guess(x):
-            
-            return sum([abs(n-x) * c for n, c in zip(nums, cost)])
-        
-        n_min, n_max = min(nums), max(nums)
-
-        if guess(n_min) < guess(n_min+1):
-            return guess(n_min)
-
-        if guess(n_max) < guess(n_max-1):
-            return guess(n_max)
-        
-        left, right  = n_min + 1, n_max -1
-
-        while left <= right:
-            
-            mid = left + (right-left)//2
-                       
-            if guess(mid) <= guess(mid+1) and guess(mid) <= guess(mid-1):
+        def cnt(t): #function for calculating cost for Target "t"
+            cur = cur_prev = cur_nxt = 0 #initialize the cost counting
+            for i, el in enumerate(nums):
+                cur += abs(el-t) * cost[i] #update the cost for target "t"
+                cur_prev += abs(el-(t-1)) * cost[i] #update the cost for target "t-1"
+                cur_nxt += abs(el-(t+1)) * cost[i] #update the cost for target "t+1"
+            return cur, cur_prev, cur_nxt
                 
-                return guess(mid)
-            
-            if guess(mid) <= guess(mid+1) and guess(mid) >= guess(mid-1):
-                
-                right = mid - 1
+        
+        l, r = min(nums), max(nums) #lower and upper bound for searching
+        ans = float(\'inf\')
+        while l <= r:
+            m = (l+r) // 2
+            cur, cur_prev, cur_nxt = cnt(m) #call the counting function for target "m"
+            if cur_prev >= cur <= cur_nxt: #if "m" if efficient than both "m-1" and "m+1" then cost for m is the ans
+                return cur
+			#update to efficient segment
+            if cur_prev > cur_nxt:
+                l = m+1
             else:
-                left = mid +1
-        
-        return 0
+                r = m-1
+        return cur

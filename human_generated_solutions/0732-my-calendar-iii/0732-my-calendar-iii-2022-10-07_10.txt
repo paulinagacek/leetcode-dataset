@@ -1,0 +1,48 @@
+class MyCalendarThree:
+
+    def __init__(self):
+        self.events= [[0, 0]] # store all events (start and end) as [time, k since time] in increasing order
+        self.k = 0
+    
+    def bsearch(self, time):
+        """
+        return smallest index in self.events that is later than time
+        if no itme is later than time, return len(self.events)
+        """
+        l, r = 0, len(self.events)
+        while l < r:
+            m = (l + r) // 2
+            if time < self.events[m][0]:
+                r = m
+            elif time == self.events[m][0]:
+                return m
+            else:
+                l = m + 1
+        return r
+        
+    
+    def book(self, start: int, end: int) -> int:
+        # step 1: insert start
+        start_idx = self.bsearch(start)
+        if start_idx == len(self.events) or start != self.events[start_idx][0]:
+            self.events = self.events[:start_idx] +[[start, self.events[start_idx - 1][1] + 1]] + self.events[start_idx:]
+        else:
+            self.events[start_idx][1] += 1
+            
+        # update max k
+        self.k = max(self.events[start_idx][1], self.k)
+        
+        # step 2: get end idx
+        end_idx = self.bsearch(end)
+        
+        # step 3: update k\'s in events and max k from start_idx + 1 until end_idx - 1 inclusive
+        for i in range(start_idx + 1, end_idx):
+            self.events[i][1] += 1
+            self.k = max(self.k, self.events[i][1])
+        
+        # insert end event
+        if end_idx == len(self.events) or end != self.events[end_idx][0]:
+            self.events = self.events[:end_idx] +[[end, self.events[end_idx - 1][1] - 1]] + self.events[end_idx:]
+        
+        
+        return self.k

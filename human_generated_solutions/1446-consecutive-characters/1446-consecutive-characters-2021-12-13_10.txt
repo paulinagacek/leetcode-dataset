@@ -1,0 +1,26 @@
+class Solution:
+    def maxPower(self, s: str) -> int:
+        
+        # initialise left , right pointer and final ans to zero
+        left, right, ans = 0, 0, 0
+        n = len(s)
+        
+        # initially the prev is set to first character
+        prev = s[right]
+        
+        while right<n:
+            cur = s[right]   # current character 
+            
+            # if the  current character is not equal to the prev character
+            if cur != prev:
+                # start a fresh window 
+                prev = cur  
+                left = right
+                continue
+                
+            # if it matches the prev character, we can now expand our window size    
+            else:
+                ans = max(ans,(right-left)+1)
+                right+=1
+        
+        return ans

@@ -1,6 +1,0 @@
-a,b=list(filter(lambda x: x<0,nums)),list(filter(lambda x: x>0,nums))
-        result=[]
-        for i in range(len(a)):
-          result.append(b[i])
-          result.append(a[i])
-        return (result)

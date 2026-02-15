@@ -1,0 +1,11 @@
+class CombinationIterator:
+
+    def __init__(self, characters: str, combinationLength: int):
+        from itertools import combinations
+        self.combs = ["".join(c) for c in combinations(characters, combinationLength)]
+
+    def next(self) -> str:
+        return self.combs.pop(0)
+
+    def hasNext(self) -> bool:
+        return bool(self.combs)

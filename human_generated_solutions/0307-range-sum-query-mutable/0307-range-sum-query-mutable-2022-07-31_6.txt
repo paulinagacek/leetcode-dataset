@@ -1,0 +1,75 @@
+class SegmentTree:
+    def __init__(self, nums: list[int]):
+        n = len(nums)
+        
+        self.buffered_nums = [*nums]
+        close_2_power = math.ceil(math.log2(n))
+        
+        # Buffer the array to be a power of 2
+        self.buffered_nums += [0] * (2**close_2_power - n)
+        
+        self.close_2_power = close_2_power
+        
+        # The tree will have 2^n+1 - 1 elements.
+        self.tree = [0] * ((2**(close_2_power + 1))-1)
+        self.init_tree(0, 0, len(self.buffered_nums) - 1)
+        
+    def init_tree(self, tree_index: int, left: int, right: int):
+        # If we found the leaf node, update the tree
+        if left == right:
+            self.tree[tree_index] = self.buffered_nums[left]
+            return
+        
+        mid = left + (right - left) // 2
+        left_child_index = tree_index * 2 + 1
+        right_child_index = tree_index * 2 + 2
+        
+        self.init_tree(left_child_index, left, mid)
+        self.init_tree(right_child_index, mid + 1, right)
+        
+        # Update segment tree level
+        self.tree[tree_index] = self.tree[left_child_index] + self.tree[right_child_index]
+    
+    def query(self, query_left: int, query_right: int):
+        return self._query(0, query_left, query_right, 0, len(self.buffered_nums) - 1)
+    
+    def _query(self, tree_index: int, query_left: int, query_right: int, interval_left: int, interval_right: int):
+        # if full contained interval
+        if interval_left >= query_left and interval_right <= query_right:
+            return self.tree[tree_index]
+        
+        # if not contained interval
+        if interval_right < query_left or interval_left > query_right:
+            return 0
+        
+        left_child_index = tree_index * 2 + 1
+        right_child_index = tree_index * 2 + 2
+        
+        # otherwise divide and conquer left and right
+        mid = interval_left + (interval_right - interval_left) // 2
+        return self._query(left_child_index, query_left, query_right, interval_left, mid) \\
+             + self._query(right_child_index, query_left, query_right, mid + 1, interval_right)
+    
+    def update(self, index: int, val: int):
+        # We know that the leaf indexes start at the 2^(k-1) - 1 and up to 2^k - 2 indexes
+        tree_index = ((2 ** self.close_2_power) - 1) + index
+        
+        delta = val - self.tree[tree_index]
+        
+		# Update the leaf node and all levels up
+        while tree_index >= 0:
+            self.tree[tree_index] += delta
+			
+			# Parent index is (tree_index - 1) // 2
+            tree_index = (tree_index - 1) // 2
+
+
+class NumArray:
+    def __init__(self, nums: List[int]):
+        self.segment_tree = SegmentTree(nums)
+
+    def update(self, index: int, val: int) -> None:
+        self.segment_tree.update(index, val)
+        
+    def sumRange(self, left: int, right: int) -> int:
+        return self.segment_tree.query(left, right)

@@ -1,0 +1,65 @@
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        def update(a, x, y, p, v, l, r):
+            """
+            update at position p
+            """
+            if x>=r or l>=y:
+                return             
+            if x<=l and r<=y:
+                tree[v]["full"] += p
+                tree[v]["value"] += p * (r - l)
+                return
+      
+            v1, v2 = (v<<1), (v<<1) +1
+            m = (l + r)//2
+            update(a, x, y, p, v1, l, m)
+            update(a, x, y, p, v2, m, r)
+            tree[v]["value"] = tree[v1]["value"] + tree[v2]["value"]
+            pass # update      
+
+        def query(a, x, y, p, v, l, r):
+            """
+            query on [x, y) in [0,n) of arr
+            """
+            if x>=r or l>=y:  # [x, y) intersection [l,r) = empty
+                return 0
+            if x<=l and r <= y: # // [l,r) is a subset of [x,y)
+                return a[v]["value"] + p * (r - l)
+            
+            v1, v2 = (v<<1), (v<<1) +1
+            p += a[v]["full"]
+            m = (l + r) // 2
+            q1 = query(a, x, y, p, v1, l, m)
+            q2 = query(a, x, y, p, v2, m, r)
+            return q1 + q2
+            pass # query        
+        
+        n = len(s)
+        tree = [{"value": 0, "full": 0} for _ in range(4*n)]  # 
+        shifts = sorted(shifts)
+        s0, e0, d0 = shifts[0]
+        p0 = 1 if d0==1 else -1
+        for si, ei, di in shifts[1:]:
+            pi = 1 if di==1 else -1
+            if s0==si and e0==ei:
+                p0 += pi
+            elif e0+1==si and p0==pi:
+                e0 = ei
+            else:
+                update(tree, s0, e0+1, p0, 1, 0, n)
+                s0, e0, p0 = si, ei, pi
+        update(tree, s0, e0+1, p0, 1, 0, n)
+
+        ans = []
+        for i in range(0, n):
+            di = query(tree, i, i+1, 0, 1, 0, n)
+            pi = (ord(s[i]) - ord(\'a\') + di)%26 # (ord(\'z\') - ord(\'a\') + 1)
+            ans.append(chr(ord(\'a\') + pi))
+        
+        ans = "".join(ans)
+        # print(ans)
+        # print("="*20)
+        return ans
+
+print = lambda *a, **aa: ()

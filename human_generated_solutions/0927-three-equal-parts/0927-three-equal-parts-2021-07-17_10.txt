@@ -1,11 +1,26 @@
 class Solution:
     def threeEqualParts(self, arr: List[int]) -> List[int]:
-        ones = [i for i, x in enumerate(arr) if x]
-        n, r = divmod(len(ones), 3)
-        if r: return -1, -1
-        if not n: return 0, 2
-        a, b, c = ones[0], ones[n], ones[2*n]
-        r = len(arr) - c
-        if r > max(b-a, c-b) or not arr[a+1:a+r] == arr[b+1:b+r] == arr[c+1:]:
-            return -1, -1
-        return a + r - 1, b + r
+        n = len(arr)
+        prefix = []
+        value = 0
+        for bit in arr:
+            value = value * 2 + bit
+            prefix.append(value)
+        for i in range(n):
+            first = prefix[i]
+            decrease = prefix[i] * 2
+            low = i + 1
+            high = n - 1
+            while low <= high:
+                mid = low + (high - low) // 2
+                third = prefix[-1] - (prefix[mid] * pow(2, n - 1 - mid))
+                second = prefix[mid] - (decrease * pow(2, mid - i - 1))
+                if second == third:
+                    if first == second:
+                        return [i, mid + 1]
+                    break
+                elif second < third:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+        return [-1, -1]

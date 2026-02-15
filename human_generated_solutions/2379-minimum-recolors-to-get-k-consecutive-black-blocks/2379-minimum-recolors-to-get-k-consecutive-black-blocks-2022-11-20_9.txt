@@ -1,0 +1,11 @@
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        i = 0
+        chan = 0
+        minChain = inf
+        while i+k <= len(blocks):
+            ss = blocks[i:i+k]
+            chan = ss.count(\'W\')
+            minChain = min(chan,minChain)
+            i += 1
+        return minChain

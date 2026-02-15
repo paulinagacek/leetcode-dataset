@@ -1,0 +1,31 @@
+class Solution:
+    def spiralMatrixIII(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+        ans = []
+        len_row, len_col = 0, 2
+        start_row, start_col= r0, c0
+        direction = 1
+        cnt = 0
+
+        while cnt < R * C:
+            curr_row, curr_col = start_row, start_col
+            for c in range(len_col):
+                curr_col = start_col + c * direction
+                if 0 <= start_row < R and 0 <= curr_col < C:
+                    ans.append([start_row, curr_col])
+                    cnt += 1
+					
+            start_col = curr_col
+            start_row += direction
+
+            for r in range(len_row):
+                curr_row = start_row + r * direction
+                if 0 <= curr_row < R and 0 <= start_col < C:
+                    ans.append([curr_row, start_col])
+                    cnt += 1
+
+            len_row += 1
+            len_col += 1
+            start_row = curr_row
+            start_row += direction
+            direction *= -1
+        return ans

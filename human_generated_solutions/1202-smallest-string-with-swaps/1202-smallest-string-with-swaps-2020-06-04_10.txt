@@ -1,0 +1,67 @@
+class Solution:
+    
+    def __init__(self):
+        self.parent = []  # tracks the current parent node of slot at index i
+        self.size = [] # if index i is a root, tracks the current size of that tree
+    
+    def get_root(self, A):
+        # roots, by definition, are their own parents, 
+        # so we have found a root R if self.parent[R] = R
+        if self.parent[A] == A:
+            return A
+        self.parent[A] = self.get_root(self.parent[A])
+        return self.parent[A]
+        
+    
+    def union(self, A, B):
+        # We only perform a union if nodes A and B aren\'t already connected.
+        # They are connected if they share the same root.
+        root_A, root_B = self.get_root(A), self.get_root(B)
+        if root_A != root_B:
+            # We perform the union by connecting the smaller root to the larger root,
+            # i.e. a \'weighted union operation\'; this ensures a balanced tree which
+            # minimizes our traversals when we\'re looking up the root.
+            total_size = self.size[root_A] + self.size[root_A]
+            if self.size[root_A] <= self.size[root_B]:
+                self.parent[root_A] = root_B
+                self.size[root_A] = total_size
+            else:
+                self.parent[root_B] = root_A
+                self.size[root_B] = total_size
+            
+    
+    def smallestStringWithSwaps(self, s, pairs):
+        # initialize
+        num_nodes = len(s)
+        self.parent = [x for x in range(num_nodes)]
+        self.size = [1 for x in range(num_nodes)]
+        
+        # construct the trees
+        for A, B in pairs:
+            self.union(A, B)
+        
+        # sort each string slot and character by root;
+        # there is one unique root for each subset of 
+        # connected slots (i.e. nodes)
+        slots_by_root = {}
+        chars_by_root = {}
+        for i in range(num_nodes):
+            root = self.get_root(i)
+            if root not in slots_by_root:
+                slots_by_root[root] = [i]
+                chars_by_root[root] = [s[i]]
+            else:
+                slots_by_root[root].append(i)
+                chars_by_root[root].append(s[i])
+                
+        # for each root, sort its characters
+        # lexicographically among its slots; we\'ll
+        # use a dummy result to make this easier
+        result = [\'\' for x in range(num_nodes)]
+        for root in slots_by_root:
+            sorted_characters = sorted(chars_by_root[root])
+            for index, slot in enumerate(slots_by_root[root]):
+                result[slot] = sorted_characters[index]
+        result = \'\'.join(result) # convert from list back to concatentated string
+    
+        return result

@@ -1,27 +1,18 @@
-public int eatenApples(int[] apples, int[] days) {
-        int res = 0;
-        PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
-        int length = apples.length;
-        for(int day = 0; day < 40001; day++){
-            if (day < length){
-                pq.add(new int[]{day + days[day]-1, apples[day]});
-            }
-            while (!pq.isEmpty()){
-                int[] cur = pq.peek();
-                if(cur[0] < day){
-                    pq.poll();
-                }else{
-                    break;
-                }
-            }
-            if (!pq.isEmpty()) {
-                int[] cur = pq.poll();
-                cur[1]--;
-                res += 1;
-                if(cur[1] > 0){
-                    pq.add(cur);
-                }
-            }
-        }
-        return res;
-    }
+from heapq import heappush as push
+from heapq import heappop as pop
+class Solution:
+    def eatenApples(self, apples: List[int], days: List[int]) -> int:
+        heap = []
+        res = 0
+        i=0
+        N = len(apples)
+        while i<N or heap:
+            if i<N and apples[i]>0:
+                push(heap, [days[i]+i, apples[i]])
+            while heap and (heap[0][0]<=i or heap[0][1]<=0):
+                pop(heap)
+            if heap:
+                heap[0][1]-=1
+                res+=1
+            i+=1
+        return res

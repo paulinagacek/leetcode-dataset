@@ -1,0 +1,10 @@
+class Solution(object):
+	def groupThePeople(self, groupSizes):
+		dicts = collections.defaultdict(list)
+		for i in range(len(groupSizes)):
+			dicts[groupSizes[i]].append(i)
+		ans = []
+		for k, v in dicts.items():
+			for i in range(0, len(v), k):
+				ans.append(v[:k])
+		return ans

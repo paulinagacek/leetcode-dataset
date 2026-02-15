@@ -1,0 +1,19 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        start_ind = start = 0
+        end_ind = end = len(s)-1
+        while len(s)>1 and s[0] == s[-1]:
+            for i in range(1,end_ind):
+                if s[i] == s[0]:
+                    start += 1
+                else:
+                    break
+            for j in range(end_ind-1,start,-1):
+                if s[j] == s[-1]:
+                    end -= 1
+                else:
+                    break
+            s = s[start+1:end]
+            start_ind = start = 0
+            end_ind = end = len(s)-1
+        return len(s)

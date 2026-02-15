@@ -1,4 +1,0 @@
-1) subsequence[i]: 
-	- return the number of subsequences that end with i
-2) num_count[i]: 
-	- return the remaining occurrence time of i

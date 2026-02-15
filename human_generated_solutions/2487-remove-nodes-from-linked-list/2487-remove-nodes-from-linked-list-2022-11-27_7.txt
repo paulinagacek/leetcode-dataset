@@ -5,17 +5,13 @@
 #         self.next = next
 class Solution:
     def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        stack = []
-        dummy = headNew = ListNode(None, head)
-        curr = head
-        while curr:
-            while stack and stack[-1].val < curr.val:
+        dummy= ListNode(inf)
+        stack= [dummy]
+        node = head
+        while node: 
+            while stack[-1].val < node.val:
                 stack.pop()
-            stack.append(curr)
-            curr = curr.next
-            
-        for node in stack:
-            headNew.next = node
-            headNew = headNew.next
-            
+            stack[-1].next = node
+            stack.append(node)
+            node = node.next 
         return dummy.next

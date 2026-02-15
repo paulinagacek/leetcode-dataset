@@ -1,9 +1,13 @@
 class Solution:
     def countHomogenous(self, s: str) -> int:
-        MOD = 10**9 + 7
-        groups = [list(g) for k, g in itertools.groupby(s)]
-        res = 0
-        for g in groups:
-            n = len(g)
-            res += (n + 1) * n // 2
-        return res % MOD
+
+	xxx=[]
+	for i in (itertools.groupby(s)):
+		xxx.append(len(list(i[1])))
+
+	c=0
+	for i in xxx:
+		for j in range(i+1):
+			c+=j
+
+	return c%1000000007

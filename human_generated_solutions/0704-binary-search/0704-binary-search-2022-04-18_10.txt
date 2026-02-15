@@ -1,0 +1,31 @@
+class Solution:
+    # Since we know that the input array is sorted, 
+    #   we can use the binary search method to reduce a search time complexity of O(n), down to O(logn)
+    #   We can achieve this by halving the search array with every iteration of the search function (using recursion).
+    def search(self, nums: List[int], target: int) -> int:
+        # Gets the middle index of the array
+        middle = len(nums) // 2
+        
+        # Returns -1 if the target is not in the array, which is not a valid array index.
+        if len(nums) == 1 and nums[0] != target:
+            return -1
+        
+        # Checks if the target value is located at the middle index and returns index if so.
+        elif nums[middle] == target:
+            return middle
+        
+        # Checks if the target is less than the value located at middle index.
+        elif target < nums[middle]:
+            # Calls search function recursively using an aray half the size of the input array.
+            index = self.search(nums[:middle], target)
+            # Returns index of array, or returns -1  if if target was not in array.
+            return  index if -1 < index else -1
+        
+        # Executes when the target is larger, or equal to, the value at the middle index of the array.
+        else:
+            # Calls search function recursively using an aray half the size of the input array.
+            index = self.search(nums[middle:], target)
+            
+            # Returns index of array, or returns -1  if if target was not in array.
+            # Since we are removing the bottom half of the array, we need to add the that length back to the index.
+            return index + middle if index > -1 else -1

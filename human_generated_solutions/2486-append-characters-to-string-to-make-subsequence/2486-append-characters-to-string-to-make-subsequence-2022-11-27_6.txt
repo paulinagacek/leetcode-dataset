@@ -1,13 +1,18 @@
-class Solution:
-    def appendCharacters(self, s: str, t: str) -> int:
-        #Reversed in order to pop the first character each time
-        t = list(t)[::-1]
-        
-        for c in s:
-            #t is already a subsequence
-            if not t: return 0
-            #pop t if c == "first character" of t 
-            if c == t[-1]: t.pop()
-                
-        #Return the left over t length
-        return len(t)
+class Solution(object):
+    def appendCharacters(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: int
+        """
+        i = 0
+        j = 0
+        m, n = len(s), len(t)
+
+        while i < m and j < n:
+            if s[i] == t[j]:
+                i+=1
+                j+=1
+            else:
+                i+=1
+        return n - j

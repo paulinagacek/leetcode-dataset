@@ -1,0 +1,30 @@
+def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        if not k:
+            return 0
+        
+        len_nums = len(nums)
+        
+        digits = 5
+        k = round(math.log(k), digits) # <= Rounding to 5 digits
+        
+        subarr_count = 0
+        subarr_log_product = 0
+        
+        l = r = 0
+        while l < len_nums:
+            
+            while r < len_nums and round(subarr_log_product + math.log(nums[r]), digits) < k:  # <= Rounding to 5 digits
+                subarr_log_product += math.log(nums[r]) # I don\'t round here to let the logarithm be as close as possible to the actual value
+                r += 1
+            
+            if l == r:
+                r += 1
+                subarr_log_product = 0
+            
+            else:
+                subarr_count += r - l
+                subarr_log_product -= math.log(nums[l]) # I don\'t round here to let the logarithm be as close as possible to the actual value
+            
+            l += 1
+            
+        return subarr_count

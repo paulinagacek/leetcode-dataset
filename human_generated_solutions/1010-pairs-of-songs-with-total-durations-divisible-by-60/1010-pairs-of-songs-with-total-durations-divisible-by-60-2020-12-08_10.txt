@@ -1,0 +1,41 @@
+class Solution:
+    def numPairsDivisibleBy60(self, time) -> int:
+        """
+        Given an array of song times, this program determines
+        the number of pairs of songs whose total time is divisible
+        by 60.
+
+        :param time: array of song times
+        :type time: list[int]
+        :return: number of pairs of songs whose total time is
+                 divisible by 60
+        :rtype: int
+        """
+
+        """
+        Create song_times, an array of buckets, one for each
+        song time modulo 60. Each bucket value is equal to the
+        number of songs whose time modulo 60 is the same as the
+        bucket index.  Generate the bucket values from the given
+        array time.
+        """
+        song_times = [0 for _ in range(60)]
+        for song in time:
+            song_times[song % 60] += 1
+
+        """
+        Determine the number of pairs of songs whose total time
+        is divisible by 60.
+        - Buckets 0 and 30 are special cases because the bucket
+          values of both songs in a pair are taken from the same
+          bucket.
+        - Bucket values for songs whose time modulo 60 is in
+          the range of 1 through 29 are taken from different
+          buckets.
+        """
+        answer = 0
+        for k in [0, 30]:
+            answer += song_times[k] * (song_times[k] - 1) // 2
+        for k in range(1, 30):
+            answer += song_times[k] * song_times[60 - k]
+        return answer

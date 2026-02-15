@@ -1,24 +1,27 @@
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution(object):
+import random
 
-    def __init__(self, head):
-        """
-        :type head: Optional[ListNode]
-        """
-        self.range=[]
-        while head:
-            self.range.append(head.val)
-            head=head.next
+class Solution:
+
+	\'\'\'
+	When the class gets intialized, we simply put all the nodes from the linked list 
+	into an array (list), then generate a random index from 0 - length of array - 1 
+	everytime the getRandom function is called, and return the value of the node at 
+	that index.
+	\'\'\'
+
+
+    def __init__(self, head: Optional[ListNode]):
         
-    def getRandom(self):
-        """
-        :rtype: int
-        """
-        return self.range[random.randint(0,len(self.range)-1)]
-# Your Solution object will be instantiated and called as such:
-# obj = Solution(head)
-# param_1 = obj.getRandom()
+        self.arr_list = []
+        self.limit = 0
+        
+        temp = head
+        while temp:
+            self.arr_list.append(temp)
+            temp = temp.next
+            self.limit += 1
+        
+        
+    def getRandom(self) -> int:
+        idx = random.randint(0, self.limit - 1)
+        return self.arr_list[idx].val

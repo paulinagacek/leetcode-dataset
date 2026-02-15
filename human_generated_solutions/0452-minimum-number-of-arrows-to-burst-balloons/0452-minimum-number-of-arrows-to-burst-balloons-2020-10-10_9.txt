@@ -1,0 +1,18 @@
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        points.sort(key=lambda x:x[1])
+		#Edge case
+        if len(points)==0:
+            return 0
+		#Normal case
+        lastArrow = points[0][1]
+        count = 1
+        for i in range(1,len(points)):
+			#The last Arrow\'s cordinate is inside this balloon\'s cordinate so we don\'t need another arrow for this
+            if points[i][0]<=lastArrow<=points[i][1]:   
+                continue
+            else:
+				# As the previous arrow\'s cordinate is not in the range of this balloon\'s cordinate, we need another arrow for this balloon
+                count+=1
+                lastArrow = points[i][1]
+        return count

@@ -1,0 +1,13 @@
+import heapq
+
+class Solution:
+    def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+        pp=nums[:]
+        heapq.heapify(nums)
+        
+        
+        while(len(nums)>k):
+            ll=heapq.heappop(nums)
+            pp.remove(ll)
+            
+        return pp

@@ -1,0 +1,27 @@
+class Solution:
+    def minDeletions(self, s: str) -> int:
+		# you can a counter or even count and add to a dictionary or a map
+        count = Counter(s)
+		# use a set to keep track of counts availale
+        m = set()
+		# keep track of how many deletions with c
+        c = 0
+		# iterate through your counter
+        for k, v in count.items():
+			# check if this frequency already exists
+            if v not in m:
+                m.add(v)
+            else:
+				# if it does, go down 1 character at a time till you either find a new min or delete all occurrences of the character
+                while v > 0:
+                    # print(k, v, c)
+                    v-=1
+                    c+=1
+                    if v not in m:
+                        m.add(v)
+                        break
+        return c
+                
+# Additional test cases:
+# bbcebab
+# bbcceebb

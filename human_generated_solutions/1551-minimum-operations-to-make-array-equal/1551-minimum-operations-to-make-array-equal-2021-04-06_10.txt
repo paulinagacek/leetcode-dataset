@@ -1,3 +1,6 @@
-class Solution:
-    def minOperations(self, n: int) -> int:
-        return (n // 2) * (n // 2 + n % 2)
+def minOperations(self, n: int) -> int:
+	# n is actually the goal value for us
+	num_count = (n + 1) // 2
+	first = n - 1
+	last = n - (2 * num_count - 1)
+	return num_count * (first + last) // 2

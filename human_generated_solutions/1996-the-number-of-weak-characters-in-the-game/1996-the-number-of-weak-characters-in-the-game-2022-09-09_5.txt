@@ -1,11 +1,25 @@
-class Solution {
-    public int numberOfWeakCharacters(int[][] properties) {
-        Arrays.sort(properties, (a,b) -> (a[0] == b[0]) ? (a[1]-b[1]) : (b[0]-a[0]));
-        int count = 0, max = 0;
-        for(int[] arr: properties){
-            if(arr[1] < max)    count++;
-            max = Math.max(max, arr[1]);
-        }
-        return count;
-    }
-}
+class Solution:
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        properties.sort(key=itemgetter(0), reverse=True)
+
+        cur_attack = properties[0][0]
+        prev_best_defense = 0  # best defense among characters with strictly greater attack
+        cur_best_defense = 0  # best defense among all characters observed so far
+
+        res = 0
+        
+        for attack, defense in properties:
+            if attack != cur_attack:
+                # this means that all characters observed so far have attack strictly greater.
+				# so we merge latest best defense update into the value we use for comparison.
+				# best defense can really only go up, so prev_best_defense is guaranteed to be
+				# less or equal than cur_best_defense
+				prev_best_defense = cur_best_defense
+                cur_attack = attack
+            
+            cur_best_defense = max(cur_best_defense, defense)
+			
+			if defense < prev_best_defense:
+                res += 1
+        
+        return res

@@ -1,17 +1,14 @@
 class Solution:
     def maximumBags(self, capacity: List[int], rocks: List[int], additionalRocks: int) -> int:
-        remaining = [0] * len(capacity)
-        res = 0
-        
+        left = [0]*len(capacity)
         for i in range(len(capacity)):
-            remaining[i] = capacity[i] - rocks[i]
-        remaining.sort()
-        
-        for i in range(len(remaining)):
-            if remaining[i] > additionalRocks:
+            left[i] = capacity[i]-rocks[i]
+        left.sort()
+        ans = 0 
+        while ans < len(left) and additionalRocks > 0:
+            if additionalRocks >= left[ans]:
+                additionalRocks -= left[ans]
+                ans += 1
+            else:
                 break
-                
-            additionalRocks -= remaining[i]
-            res += 1
-        
-        return res
+        return ans

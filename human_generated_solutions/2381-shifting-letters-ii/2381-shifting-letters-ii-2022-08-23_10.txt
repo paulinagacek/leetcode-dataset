@@ -1,9 +1,0 @@
-nums = [0] * (len(s)+1)
-        for st, e, d in shifts:
-            if d == 0: d = -1
-            nums[st], nums[e+1] = nums[st]+d, nums[e+1]-d
-        nums.pop()
-        res, chars = [], ascii_lowercase
-        for i, k in enumerate(accumulate(nums)):
-            res.append(chars[(ord(s[i])-ord(\'a\') + k) % 26])
-        return \'\'.join(res)

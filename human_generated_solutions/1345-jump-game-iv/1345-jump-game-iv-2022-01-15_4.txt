@@ -1,0 +1,26 @@
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        d = defaultdict(list)
+        for j, i in enumerate(arr):
+            d[i].append(j)
+        ans = float("inf")
+        visited = set()
+
+        def rec(i, jump):
+            nonlocal ans, visited, d
+            if 0 > i or i >= len(arr) or i in visited:
+                return
+
+            if i == len(arr)-1:
+                ans = min(ans, jump)
+                return
+            visited.add(i)
+            rec(i-1, jump+1)
+            rec(i+1, jump+1)
+            for ele in d[arr[i]]:
+                if ele > i:
+                    rec(ele, jump+1)
+            visited.remove(i)
+
+        rec(0, 0)
+        return ans

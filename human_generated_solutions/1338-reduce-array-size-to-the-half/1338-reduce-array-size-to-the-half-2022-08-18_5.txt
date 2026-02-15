@@ -1,0 +1,34 @@
+class Solution(object):
+    def minSetSize(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: int
+        
+        Heap of counts. Subtract numbers until it is more than half of len(array).
+        Is the array always sorted? If not..
+        
+        1. Make a hashmap of num: count
+        2. Add these mappings to a heap.
+        3. Pop until more than half of len(array)
+        
+        TC: O(N)
+        SC: O(N)
+        """
+        hm = {}
+        n = len(arr)
+        heap = []
+        
+        for num in arr:
+            hm[num] = hm.get(num, 0) + 1
+        
+        for num, count in hm.items():
+            heapq.heappush(heap, [-count, num])
+        
+        res = 0
+        currLen = 0
+        while currLen < n / 2:
+            count, num = heapq.heappop(heap)
+            currLen -= count # because count is negative as we pushed in earlier
+            res += 1
+        
+        return res

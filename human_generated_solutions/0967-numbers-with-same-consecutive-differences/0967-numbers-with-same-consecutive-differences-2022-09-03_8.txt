@@ -1,19 +1,20 @@
 class Solution:
     def numsSameConsecDiff(self, n: int, k: int) -> List[int]:
-        ans = []
-        que = deque([(1, i) for i in range(1, 10)])
-        while que:
-            pos, num = que.popleft()
-            if pos == n:
-                ans.append(num)
-            else:
-                less_digit = num % 10 - k
-                greater_digit = num % 10 + k
-                
-                if less_digit >= 0:
-                    que.append((pos+1, num*10+less_digit))
-                if less_digit != greater_digit and greater_digit < 10:
-                    que.append((pos+1, num*10+greater_digit))
+        def bt(d, num, i):
+            num = num * 10 + d            
             
-                        
-        return ans
+            if i == n:
+                result.append(num)
+                return 
+            
+            if d + k < 10:
+                bt(d + k, num, i + 1)
+                
+            if k > 0 and d - k >= 0:
+                bt(d - k, num, i + 1)
+            
+        result = []
+        for d in range(1, 10):
+            bt(d, 0, 1)
+        
+        return result

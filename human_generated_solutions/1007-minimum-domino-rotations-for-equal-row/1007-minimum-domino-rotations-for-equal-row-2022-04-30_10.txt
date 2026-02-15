@@ -1,0 +1,46 @@
+class Solution:
+    def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
+        match = tops[0]
+        top1 = 0
+        for i in range(1, len(tops)):
+            if tops[i] == match:
+                continue
+            elif bottoms[i] == match:
+                top1 += 1
+            else:
+                top1 = float("inf")
+                break
+        
+        top2 = 1
+        for i in range(1, len(tops)):
+            if bottoms[i] == match:
+                continue
+            elif tops[i] == match:
+                top2 += 1
+            else:
+                top2 = float("inf")
+                break
+
+        match = bottoms[0]
+        bottom1 = 0
+        for i in range(1, len(tops)):
+            if bottoms[i] == match:
+                continue
+            elif tops[i] == match:
+                bottom1 += 1
+            else:
+                bottom1 = float("inf")
+                break
+        
+        bottom2 = 1
+        for i in range(1, len(tops)):
+            if tops[i] == match:
+                continue
+            elif bottoms[i] == match:
+                bottom2 += 1
+            else:
+                bottom2 = float("inf")
+                break
+        
+        ans = min(top1, top2, bottom1, bottom2)
+        return ans if ans != float("inf") else -1

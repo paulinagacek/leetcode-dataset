@@ -1,0 +1,2 @@
+def isPerfectSquare(self, num: int) -> bool:
+        return int(str(float((num**(1/2)))).split(\'.\')[1]) == 0

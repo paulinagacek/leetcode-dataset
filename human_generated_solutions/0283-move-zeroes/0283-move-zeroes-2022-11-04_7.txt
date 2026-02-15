@@ -1,0 +1,12 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        freePos = None
+        for i in range(len(nums)):
+            if freePos == None and nums[i] == 0:
+                freePos = i
+            if freePos != None and nums[i] != 0:
+                nums[freePos], nums[i] = nums[i], 0
+                freePos += 1

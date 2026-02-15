@@ -1,0 +1,9 @@
+python
+from collections import Counter
+
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        C = Counter(arr)  # O(n)
+        occurrences = C.values()  #O(n)
+        
+        return len(occurrences) == len(set(occurrences))  # set() is also O(n)

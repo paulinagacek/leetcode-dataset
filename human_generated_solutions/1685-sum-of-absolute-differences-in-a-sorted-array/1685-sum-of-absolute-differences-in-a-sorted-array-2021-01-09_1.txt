@@ -1,8 +1,0 @@
-vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
-    const int N = nums.size();
-    vector<int> ans(N, 0);
-    ans[0] = accumulate(nums.begin(), nums.end(), 0) - (N * nums[0]);
-    for (int i = 1; i < N; i++)
-        ans[i] = ans[i - 1] + (nums[i] - nums[i - 1]) * i - (nums[i] - nums[i - 1]) * (N - i); 
-    return ans;
-}

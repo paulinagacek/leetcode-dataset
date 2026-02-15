@@ -1,0 +1,37 @@
+class Solution:
+    def onesMinusZeros_v1(self, grid: List[List[int]]) -> List[List[int]]:
+        """
+        v1: verbose one
+        """
+        m, n = len(grid), len(grid[0])
+        transpose = [list(item) for item in zip(*grid)]
+        
+        res = [[0] * n for _ in range(m)]
+        
+        rows = {i: (sum(grid[i]), n - sum(grid[i])) for i in range(m)}
+        cols = {j:(sum(transpose[j]), m - sum(transpose[j])) for j in range(n)}
+        
+        for i in range(m):
+            for j in range(n):
+                res[i][j] = rows[i][0] - rows[i][1] + cols[j][0] - cols[j][1]
+                
+        return res
+    
+    
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+        """
+        v2: simple algebra
+        """
+        m, n = len(grid), len(grid[0])
+        transpose = [list(item) for item in zip(*grid)]
+        
+        res = [[0] * n for _ in range(m)]
+        
+        row_sums = list(map(sum, grid))
+        col_sums = list(map(sum, transpose))
+        
+        for i in range(m):
+            for j in range(n):
+                res[i][j] = 2 * (row_sums[i] + col_sums[j]) - (m + n)
+                
+        return res

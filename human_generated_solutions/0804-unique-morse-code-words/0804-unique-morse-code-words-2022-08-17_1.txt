@@ -1,21 +1,5 @@
-class Solution {
-  public:
-
-
-  int uniqueMorseRepresentations(vector<string>& words) 
-  {
-  	vector<string> a = {".-","-...","-.-.","-..",".","..-.","--.","....",
-                  "..",".---","-.-",".-..","--","-.","---",".--.",
-                  "--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
-
-  	unordered_map<string,int> um;
-
-  	for (int i=0; i< words.size(); i++) {
-  		string st;
-  		for (int j=0; j<words[i].size(); j++) st += a[words[i][j] - \'a\'];
-  		um[st]=1;
-  	 }
-
-  return um.size ();
-  }
-  };
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        ENG_to_MORSE = {\'a\':".-", \'b\':"-...", \'c\':"-.-.", \'d\':"-..", \'e\':".", \'f\':"..-.", \'g\':"--.", \'h\':"....", \'i\':"..", \'j\':".---", \'k\':"-.-", \'l\':".-..", \'m\':"--", \'n\':"-.", \'o\':"---", \'p\':".--.", \'q\':"--.-", \'r\':".-.", \'s\':"...", \'t\':"-", \'u\':"..-", \'v\':"...-", \'w\':".--", \'x\':"-..-", \'y\':"-.--", \'z\':"--.." }
+        transform = lambda c: ENG_to_MORSE[c]   # use lambda function
+        return len(Counter("".join(map(transform, word)) for word in words))

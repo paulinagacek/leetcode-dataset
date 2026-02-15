@@ -1,18 +1,17 @@
-class Solution(object):
-    def appendCharacters(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: int
-        """
-        i = 0
-        j = 0
-        m, n = len(s), len(t)
-
-        while i < m and j < n:
-            if s[i] == t[j]:
-                i+=1
-                j+=1
+class Solution:
+    def appendCharacters(self, s: str, t: str) -> int:
+        N=len(s)
+        M=len(t)
+        count=0
+        si=0
+        for ti in range(M):
+            while si<N and s[si]!=t[ti]:
+                si+=1
+                
+            if si<N and s[si]==t[ti]:
+                si+=1
+                
             else:
-                i+=1
-        return n - j
+                count+=1
+                
+        return count

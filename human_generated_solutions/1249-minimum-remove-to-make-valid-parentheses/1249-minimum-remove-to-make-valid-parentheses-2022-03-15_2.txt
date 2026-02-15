@@ -1,3 +1,0 @@
-What the Question asking us to do \uD83E\uDD14 ?
-Your task is to remove the minimum number of parentheses ( \'(\' or \')\', in any positions )
-so that the resulting parentheses string is valid and return any valid string

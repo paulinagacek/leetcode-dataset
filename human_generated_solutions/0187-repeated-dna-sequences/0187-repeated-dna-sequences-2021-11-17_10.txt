@@ -1,0 +1,21 @@
+from collections import defaultdict
+
+class Solution:
+    
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        
+        # Init
+        counter = defaultdict(int)
+        left = 0
+        
+        # For each element in s
+        for right, _ in enumerate(s):
+            
+            # if the lenght is equal to 10, add to
+            # counter and increment left pointer
+            if right - left + 1 == 10:
+                counter[s[left:right+1]] += 1
+                left += 1
+        
+        # List of all the keys which occurred more than 1 time
+        return [k for k,v in counter.items() if v > 1]

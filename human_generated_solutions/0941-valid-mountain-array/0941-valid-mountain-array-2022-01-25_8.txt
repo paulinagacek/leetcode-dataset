@@ -1,21 +1,11 @@
-class Solution(object):
-    def validMountainArray(self, arr):
-        """
-        :type arr: List[int]
-        :rtype: bool
-        """
-        index=len(arr)
-        i=0
-        for i in range(0,index-1): #index-1 to avoid index out of bounds
-            if arr[i+1]>arr[i]:#strictly increasing
-                continue
-            else:
-                break
-        if i==0 or i==index-1:
+class Solution:
+    def validMountainArray(self, arr: List[int]) -> bool:
+        if len(arr)<=2 or max(arr)==arr[0] or max(arr)==arr[len(arr)-1]:
             return False
-        for j in range(index-1,i,-1):
-            if arr[j-1]>arr[j]: #strictly decreasing
-                continue
-            else:
+        f=True
+        for i in range(len(arr)-1):
+            if f and arr[i]>=arr[i+1]:
+                f=False
+            if not f and arr[i]<=arr[i+1]:
                 return False
-        return True #control comes here only if both the for loops are traversed.
+        return True

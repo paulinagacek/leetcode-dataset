@@ -1,0 +1,18 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        
+        res = [""] * numRows
+        up = 1          # going up or down
+        row = 0         # current row
+        
+        for c in s:
+            
+            # print(c, row)
+            res[row] += c
+            row += up
+            if row >= numRows - 1 or row == 0:
+                up *= -1
+        
+        return "".join(res)

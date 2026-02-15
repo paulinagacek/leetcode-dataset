@@ -1,439 +1,368 @@
+Raport scrapowania: 2026-02-15 23:10:49
 ==================================================
-PODSUMOWANIE
-==================================================
-1. Łączna liczba zadań (Input):            1642
-2. Liczba zadań bezbłędnych (równo 10 rozwiązań):    1216
-----------------------------------------
-RAPORT BŁĘDÓW (łącznie wpisów: 426):
-3. Liczba zadań z błędami (API/Code):      0
-4. Liczba zadań bez żadnych rozwiązań (0 rozwiązań): 335
-5. Liczba zadań niekompletnych (mniej niz 10 rozwiązań):      91
-==================================================
-RAPORT
-==================================================
-[0175] combine-two-tables -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0176] second-highest-salary -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0177] nth-highest-salary -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0178] rank-scores -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0180] consecutive-numbers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0181] employees-earning-more-than-their-managers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0182] duplicate-emails -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0183] customers-who-never-order -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0184] department-highest-salary -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0185] department-top-three-salaries -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0196] delete-duplicate-emails -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0197] rising-temperature -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0262] trips-and-users -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0330] patching-array -> NIEKOMPLETNE (5/10)
-[0440] k-th-smallest-in-lexicographical-order -> NIEKOMPLETNE (5/10)
-[0458] poor-pigs -> NIEKOMPLETNE (5/10)
-[0466] count-the-repetitions -> NIEKOMPLETNE (5/10)
-[0511] game-play-analysis-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0517] super-washing-machines -> NIEKOMPLETNE (2/10)
-[0519] random-flip-matrix -> NIEKOMPLETNE (7/10)
-[0546] remove-boxes -> NIEKOMPLETNE (7/10)
-[0550] game-play-analysis-iv -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0564] find-the-closest-palindrome -> NIEKOMPLETNE (7/10)
-[0570] managers-with-at-least-5-direct-reports -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0577] employee-bonus -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0584] find-customer-referee -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0585] investments-in-2016 -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0586] customer-placing-the-largest-number-of-orders -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0591] tag-validator -> NIEKOMPLETNE (2/10)
-[0595] big-countries -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0596] classes-with-at-least-5-students -> NIEKOMPLETNE (1/10)
-[0601] human-traffic-of-stadium -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0602] friend-requests-ii-who-has-the-most-friends -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0607] sales-person -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0608] tree-node -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0610] triangle-judgement -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0619] biggest-single-number -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0620] not-boring-movies -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0626] exchange-seats -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0627] swap-sex-of-employees -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[0664] strange-printer -> NIEKOMPLETNE (6/10)
-[0672] bulb-switcher-ii -> NIEKOMPLETNE (5/10)
-[0699] falling-squares -> NIEKOMPLETNE (4/10)
-[0715] range-module -> NIEKOMPLETNE (9/10)
-[0736] parse-lisp-expression -> NIEKOMPLETNE (5/10)
-[0749] contain-virus -> NIEKOMPLETNE (4/10)
-[0753] cracking-the-safe -> NIEKOMPLETNE (9/10)
-[0756] pyramid-transition-matrix -> NIEKOMPLETNE (8/10)
-[0757] set-intersection-size-at-least-two -> NIEKOMPLETNE (4/10)
-[0761] special-binary-string -> NIEKOMPLETNE (2/10)
-[0770] basic-calculator-iv -> NIEKOMPLETNE (2/10)
-[0782] transform-to-chessboard -> NIEKOMPLETNE (2/10)
-[0789] escape-the-ghosts -> NIEKOMPLETNE (8/10)
-[0793] preimage-size-of-factorial-zeroes-function -> NIEKOMPLETNE (7/10)
-[0798] smallest-rotation-with-highest-score -> NIEKOMPLETNE (3/10)
-[0803] bricks-falling-when-hit -> NIEKOMPLETNE (3/10)
-[0805] split-array-with-same-average -> NIEKOMPLETNE (7/10)
-[0808] soup-servings -> NIEKOMPLETNE (7/10)
-[0810] chalkboard-xor-game -> NIEKOMPLETNE (5/10)
-[0822] card-flipping-game -> NIEKOMPLETNE (4/10)
-[0834] sum-of-distances-in-tree -> NIEKOMPLETNE (6/10)
-[0837] new-21-game -> NIEKOMPLETNE (8/10)
-[0850] rectangle-area-ii -> NIEKOMPLETNE (2/10)
-[0855] exam-room -> NIEKOMPLETNE (8/10)
-[0866] prime-palindrome -> NIEKOMPLETNE (9/10)
-[0879] profitable-schemes -> NIEKOMPLETNE (3/10)
-[0882] reachable-nodes-in-subdivided-graph -> NIEKOMPLETNE (7/10)
-[0891] sum-of-subsequence-widths -> NIEKOMPLETNE (3/10)
-[0898] bitwise-ors-of-subarrays -> NIEKOMPLETNE (3/10)
-[0903] valid-permutations-for-di-sequence -> NIEKOMPLETNE (7/10)
-[0913] cat-and-mouse -> NIEKOMPLETNE (3/10)
-[0920] number-of-music-playlists -> NIEKOMPLETNE (5/10)
-[0928] minimize-malware-spread-ii -> NIEKOMPLETNE (5/10)
-[0932] beautiful-array -> NIEKOMPLETNE (8/10)
-[0943] find-the-shortest-superstring -> NIEKOMPLETNE (2/10)
-[0955] delete-columns-to-make-sorted-ii -> NIEKOMPLETNE (4/10)
-[0956] tallest-billboard -> NIEKOMPLETNE (4/10)
-[0960] delete-columns-to-make-sorted-iii -> NIEKOMPLETNE (2/10)
-[0963] minimum-area-rectangle-ii -> NIEKOMPLETNE (8/10)
-[0964] least-operators-to-express-number -> NIEKOMPLETNE (5/10)
-[0972] equal-rational-numbers -> NIEKOMPLETNE (7/10)
-[0975] odd-even-jump -> NIEKOMPLETNE (9/10)
-[1045] customers-who-bought-all-products -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1050] actors-and-directors-who-cooperated-at-least-three-times -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1068] product-sales-analysis-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1070] product-sales-analysis-iii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1075] project-employees-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1084] sales-analysis-iii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1125] smallest-sufficient-team -> NIEKOMPLETNE (7/10)
-[1141] user-activity-for-the-past-30-days-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1148] article-views-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1158] market-analysis-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1164] product-price-at-a-given-date -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1178] number-of-valid-words-for-each-puzzle -> NIEKOMPLETNE (7/10)
-[1179] reformat-department-table -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1187] make-array-strictly-increasing -> NIEKOMPLETNE (2/10)
-[1203] sort-items-by-groups-respecting-dependencies -> NIEKOMPLETNE (8/10)
-[1251] average-selling-price -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1280] students-and-examinations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1371] find-the-longest-substring-containing-vowels-in-even-counts -> NIEKOMPLETNE (9/10)
-[1378] replace-employee-id-with-the-unique-identifier -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1393] capital-gainloss -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1407] top-travellers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1420] build-array-where-you-can-find-the-maximum-exactly-k-comparisons -> NIEKOMPLETNE (9/10)
-[1434] number-of-ways-to-wear-different-hats-to-each-other -> NIEKOMPLETNE (9/10)
-[1444] number-of-ways-of-cutting-a-pizza -> NIEKOMPLETNE (7/10)
-[1484] group-sold-products-by-the-date -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1489] find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree -> NIEKOMPLETNE (5/10)
-[1517] find-users-with-valid-e-mails -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1527] patients-with-a-condition -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1568] minimum-number-of-days-to-disconnect-island -> NIEKOMPLETNE (9/10)
-[1569] number-of-ways-to-reorder-array-to-get-same-bst -> NIEKOMPLETNE (6/10)
-[1581] customer-who-visited-but-did-not-make-any-transactions -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1587] bank-account-summary-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1601] maximum-number-of-achievable-transfer-requests -> NIEKOMPLETNE (9/10)
-[1606] find-servers-that-handled-most-number-of-requests -> NIEKOMPLETNE (8/10)
-[1611] minimum-one-bit-operations-to-make-integers-zero -> NIEKOMPLETNE (6/10)
-[1626] best-team-with-no-conflicts -> NIEKOMPLETNE (9/10)
-[1632] rank-transform-of-a-matrix -> NIEKOMPLETNE (5/10)
-[1633] percentage-of-users-attended-a-contest -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1637] widest-vertical-area-between-two-points-containing-no-points -> NIEKOMPLETNE (9/10)
-[1639] number-of-ways-to-form-a-target-string-given-a-dictionary -> NIEKOMPLETNE (7/10)
-[1661] average-time-of-process-per-machine -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1667] fix-names-in-a-table -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1683] invalid-tweets -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1693] daily-leads-and-partners -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1729] find-followers-count -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1731] the-number-of-employees-which-report-to-each-employee -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1741] find-total-time-spent-by-each-employee -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1757] recyclable-and-low-fat-products -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1789] primary-department-for-each-employee -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1795] rearrange-products-table -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1799] maximize-score-after-n-operations -> NIEKOMPLETNE (8/10)
-[1873] calculate-special-bonus -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1890] the-latest-login-in-2020 -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1900] the-earliest-and-latest-rounds-where-players-compete -> NIEKOMPLETNE (5/10)
-[1907] count-salary-categories -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[1912] design-movie-rental-system -> NIEKOMPLETNE (6/10)
-[1915] number-of-wonderful-substrings -> NIEKOMPLETNE (4/10)
-[1931] painting-a-grid-with-three-different-colors -> NIEKOMPLETNE (5/10)
-[1965] employees-with-missing-information -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2009] minimum-number-of-operations-to-make-array-continuous -> NIEKOMPLETNE (8/10)
-[2014] longest-subsequence-repeated-k-times -> NIEKOMPLETNE (4/10)
-[2040] kth-smallest-product-of-two-sorted-arrays -> NIEKOMPLETNE (5/10)
-[2053] kth-distinct-string-in-an-array -> NIEKOMPLETNE (8/10)
-[2071] maximum-number-of-tasks-you-can-assign -> NIEKOMPLETNE (5/10)
-[2081] sum-of-k-mirror-numbers -> NIEKOMPLETNE (8/10)
-[2097] valid-arrangement-of-pairs -> NIEKOMPLETNE (8/10)
-[2106] maximum-fruits-harvested-after-at-most-k-steps -> NIEKOMPLETNE (8/10)
-[2127] maximum-employees-to-be-invited-to-a-meeting -> NIEKOMPLETNE (8/10)
-[2141] maximum-running-time-of-n-computers -> NIEKOMPLETNE (9/10)
-[2163] minimum-difference-in-sums-after-removal-of-elements -> NIEKOMPLETNE (8/10)
-[2215] find-the-difference-of-two-arrays -> NIEKOMPLETNE (8/10)
-[2281] sum-of-total-strength-of-wizards -> NIEKOMPLETNE (9/10)
-[2352] equal-row-and-column-pairs -> NIEKOMPLETNE (7/10)
-[2356] number-of-unique-subjects-taught-by-each-teacher -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2411] smallest-subarrays-with-maximum-bitwise-or -> NIEKOMPLETNE (9/10)
-[2485] find-the-pivot-integer -> NIEKOMPLETNE (9/10)
-[2490] circular-sentence -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2491] divide-players-into-teams-of-equal-skill -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2492] minimum-score-of-a-path-between-two-cities -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2493] divide-nodes-into-the-maximum-number-of-groups -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2501] longest-square-streak-in-an-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2503] maximum-number-of-points-from-grid-queries -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2516] take-k-of-each-character-from-left-and-right -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2523] closest-prime-numbers-in-range -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2528] maximize-the-minimum-powered-city -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2529] maximum-count-of-positive-integer-and-negative-integer -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2530] maximal-score-after-applying-k-operations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2536] increment-submatrices-by-one -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2537] count-the-number-of-good-subarrays -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2540] minimum-common-value -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2542] maximum-subsequence-score -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2551] put-marbles-in-bags -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2554] maximum-number-of-integers-to-choose-from-a-range-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2558] take-gifts-from-the-richest-pile -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2559] count-vowel-strings-in-ranges -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2560] house-robber-iv -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2561] rearranging-fruits -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2563] count-the-number-of-fair-pairs -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2566] maximum-difference-by-remapping-a-digit -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2570] merge-two-2d-arrays-by-summing-values -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2577] minimum-time-to-visit-a-cell-in-a-grid -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2579] count-total-number-of-colored-cells -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2582] pass-the-pillow -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2583] kth-largest-sum-in-a-binary-tree -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2593] find-score-of-an-array-after-marking-all-elements -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2594] minimum-time-to-repair-cars -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2597] the-number-of-beautiful-subsets -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2598] smallest-missing-non-negative-integer-after-operations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2601] prime-subtraction-operation -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2610] convert-an-array-into-a-2d-array-with-conditions -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2616] minimize-the-maximum-difference-of-pairs -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2618] check-if-object-instance-of-class -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2619] array-prototype-last -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2620] counter -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2621] sleep -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2622] cache-with-time-limit -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2623] memoize -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2624] snail-traversal -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2625] flatten-deeply-nested-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2626] array-reduce-transformation -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2627] debounce -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2629] function-composition -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2630] memoize-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2631] group-by -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2634] filter-elements-from-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2635] apply-transform-over-each-element-in-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2637] promise-time-limit -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2641] cousins-in-binary-tree-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2642] design-graph-with-shortest-path-calculator -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2648] generate-fibonacci-sequence -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2649] nested-array-generator -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2654] minimum-number-of-operations-to-make-all-array-elements-equal-to-1 -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2657] find-the-prefix-common-array-of-two-arrays -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2658] maximum-number-of-fish-in-a-grid -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2661] first-completely-painted-row-or-column -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2665] counter-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2666] allow-one-function-call -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2667] create-hello-world-function -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2677] chunk-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2678] number-of-senior-citizens -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2683] neighboring-bitwise-xor -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2684] maximum-number-of-moves-in-a-grid -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2685] count-the-number-of-complete-components -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2693] call-function-with-custom-context -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2694] event-emitter -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2695] array-wrapper -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2696] minimum-string-length-after-removing-substrings -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2698] find-the-punishment-number-of-an-integer -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2699] modify-graph-edge-weights -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2703] return-length-of-arguments-passed -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2704] to-be-or-not-to-be -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2705] compact-object -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2706] buy-two-chocolates -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2707] extra-characters-in-a-string -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2709] greatest-common-divisor-traversal -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2715] timeout-cancellation -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2721] execute-asynchronous-functions-in-parallel -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2722] join-two-arrays-by-id -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2723] add-two-promises -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2724] sort-by -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2725] interval-cancellation -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2726] calculator-with-method-chaining -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2727] is-object-empty -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2742] painting-the-walls -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2749] minimum-operations-to-make-the-integer-zero -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2751] robot-collisions -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2762] continuous-subarrays -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2779] maximum-beauty-of-an-array-after-applying-operation -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2780] minimum-index-of-a-valid-split -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2785] sort-vowels-in-a-string -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2787] ways-to-express-an-integer-as-sum-of-powers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2799] count-complete-subarrays-in-an-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2807] insert-greatest-common-divisors-in-linked-list -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2812] find-the-safest-path-in-a-grid -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2816] double-a-number-represented-as-a-linked-list -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2818] apply-operations-to-maximize-score -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2825] make-string-a-subsequence-using-cyclic-increments -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2843] count-symmetric-integers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2845] count-of-interesting-subarrays -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2849] determine-if-a-cell-is-reachable-at-a-given-time -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2864] maximum-odd-binary-number -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2870] minimum-number-of-operations-to-make-array-empty -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2872] maximum-number-of-k-divisible-components -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2873] maximum-value-of-an-ordered-triplet-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2874] maximum-value-of-an-ordered-triplet-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2877] create-a-dataframe-from-list -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2878] get-the-size-of-a-dataframe -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2879] display-the-first-three-rows -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2880] select-data -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2881] create-a-new-column -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2882] drop-duplicate-rows -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2883] drop-missing-data -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2884] modify-columns -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2885] rename-columns -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2886] change-data-type -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2887] fill-missing-data -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2888] reshape-data-concatenate -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2889] reshape-data-pivot -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2890] reshape-data-melt -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2891] method-chaining -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2894] divisible-and-non-divisible-sums-difference -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2900] longest-unequal-adjacent-groups-subsequence-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2901] longest-unequal-adjacent-groups-subsequence-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2914] minimum-number-of-changes-to-make-binary-string-beautiful -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2918] minimum-equal-sum-of-two-arrays-after-replacing-zeros -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2924] find-champion-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2929] distribute-candies-among-children-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2938] separate-black-and-white-balls -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2940] find-building-where-alice-and-bob-can-meet -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2942] find-words-containing-character -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2943] maximize-area-of-square-hole-in-grid -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2948] make-lexicographically-smallest-array-by-swapping-elements -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2958] length-of-longest-subarray-with-at-most-k-frequency -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2962] count-subarrays-where-max-element-appears-at-least-k-times -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2965] find-missing-and-repeated-values -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2966] divide-array-into-arrays-with-max-difference -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2971] find-polygon-with-the-largest-perimeter -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2975] maximum-square-area-by-removing-fences-from-a-field -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2976] minimum-cost-to-convert-string-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2981] find-longest-special-substring-that-occurs-thrice-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2982] find-longest-special-substring-that-occurs-thrice-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2997] minimum-number-of-operations-to-make-array-xor-equal-to-k -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[2999] count-the-number-of-powerful-integers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3000] maximum-area-of-longest-diagonal-rectangle -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3003] maximize-the-number-of-partitions-after-operations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3005] count-elements-with-maximum-frequency -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3011] find-if-array-can-be-sorted -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3016] minimum-number-of-pushes-to-type-word-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3021] alice-and-bob-playing-flower-game -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3024] type-of-triangle -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3025] find-the-number-of-ways-to-place-people-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3027] find-the-number-of-ways-to-place-people-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3042] count-prefix-and-suffix-pairs-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3043] find-the-length-of-the-longest-common-prefix -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3047] find-the-largest-area-of-square-inside-two-rectangles -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3066] minimum-operations-to-exceed-threshold-value-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3068] find-the-maximum-sum-of-node-values -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3074] apple-redistribution-into-boxes -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3075] maximize-happiness-of-selected-children -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3085] minimum-deletions-to-make-string-k-special -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3097] shortest-subarray-with-or-at-least-k-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3100] water-bottles-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3105] longest-strictly-increasing-or-strictly-decreasing-subarray -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3108] minimum-cost-walk-in-weighted-graph -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3110] score-of-a-string -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3133] minimum-array-end -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3136] valid-word -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3147] taking-maximum-energy-from-the-mystic-dungeon -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3151] special-array-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3152] special-array-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3160] find-the-number-of-distinct-colors-among-the-balls -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3163] string-compression-iii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3169] count-days-without-meetings -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3170] lexicographically-minimum-string-after-removing-stars -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3174] clear-digits -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3186] maximum-total-damage-with-spell-casting -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3190] find-minimum-operations-to-make-all-elements-divisible-by-three -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3191] minimum-operations-to-make-binary-array-elements-equal-to-one-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3195] find-the-minimum-area-to-cover-all-ones-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3197] find-the-minimum-area-to-cover-all-ones-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3201] find-the-maximum-length-of-valid-subsequence-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3202] find-the-maximum-length-of-valid-subsequence-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3203] find-minimum-diameter-after-merging-two-trees -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3208] alternating-groups-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3217] delete-nodes-from-linked-list-present-in-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3223] minimum-length-of-string-after-operations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3227] vowels-game-in-a-string -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3228] maximum-number-of-operations-to-move-ones-to-the-end -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3234] count-the-number-of-substrings-with-dominant-ones -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3243] shortest-distance-after-road-addition-queries-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3254] find-the-power-of-k-size-subarrays-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3264] final-array-state-after-k-multiplication-operations-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3272] find-the-count-of-good-integers -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3289] the-two-sneaky-numbers-of-digitville -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3304] find-the-k-th-character-in-string-game-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3306] count-of-substrings-containing-every-vowel-and-k-consonants-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3307] find-the-k-th-character-in-string-game-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3318] find-x-sum-of-all-k-long-subarrays-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3321] find-x-sum-of-all-k-long-subarrays-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3330] find-the-original-typed-string-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3333] find-the-original-typed-string-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3335] total-characters-in-string-after-transformations-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3337] total-characters-in-string-after-transformations-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3341] find-minimum-time-to-reach-last-room-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3342] find-minimum-time-to-reach-last-room-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3343] count-number-of-balanced-permutations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3346] maximum-frequency-of-an-element-after-performing-operations-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3347] maximum-frequency-of-an-element-after-performing-operations-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3349] adjacent-increasing-subarrays-detection-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3350] adjacent-increasing-subarrays-detection-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3354] make-array-elements-equal-to-zero -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3355] zero-array-transformation-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3356] zero-array-transformation-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3362] zero-array-transformation-iii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3363] find-the-maximum-number-of-fruits-collected -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3370] smallest-number-with-all-set-bits -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3372] maximize-the-number-of-target-nodes-after-connecting-trees-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3373] maximize-the-number-of-target-nodes-after-connecting-trees-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3375] minimum-operations-to-make-array-values-equal-to-k -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3381] maximum-subarray-sum-with-length-divisible-by-k -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3392] count-subarrays-of-length-three-with-a-condition -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3394] check-if-grid-can-be-cut-into-sections -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3396] minimum-number-of-operations-to-make-elements-in-array-distinct -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3397] maximum-number-of-distinct-elements-after-operations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3403] find-the-lexicographically-largest-string-from-the-box-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3405] count-the-number-of-arrays-with-k-matching-adjacent-elements -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3408] design-task-manager -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3423] maximum-difference-between-adjacent-elements-in-a-circular-array -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3432] count-partitions-with-even-sum-difference -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3433] count-mentions-per-user -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3439] reschedule-meetings-for-maximum-free-time-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3440] reschedule-meetings-for-maximum-free-time-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3442] maximum-difference-between-even-and-odd-frequency-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3443] maximum-manhattan-distance-after-k-changes -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3445] maximum-difference-between-even-and-odd-frequency-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3446] sort-matrix-by-diagonals -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3453] separate-squares-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3454] separate-squares-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3459] length-of-longest-v-shaped-diagonal-segment -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3461] check-if-digits-are-equal-in-string-after-operations-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3477] fruits-into-baskets-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3479] fruits-into-baskets-iii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3480] maximize-subarrays-after-removing-one-conflicting-pair -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3484] design-spreadsheet -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3487] maximum-unique-subarray-sum-after-deletion -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3494] find-the-minimum-amount-of-time-to-brew-potions -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3495] minimum-operations-to-make-array-elements-zero -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3508] implement-router -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3512] minimum-operations-to-make-array-sum-divisible-by-k -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3516] find-closest-person -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3531] count-covered-buildings -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3539] find-sum-of-array-product-of-magical-sequences -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3541] find-most-frequent-vowel-and-consonant -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3542] minimum-operations-to-convert-all-elements-to-zero -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3562] maximum-profit-from-trading-stocks-with-discounts -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3573] best-time-to-buy-and-sell-stock-v -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3577] count-the-number-of-computer-unlocking-permutations -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3578] count-partitions-with-max-min-difference-at-most-k -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3583] count-special-triplets -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3606] coupon-code-validator -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3607] power-grid-maintenance -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3623] count-number-of-trapezoids-i -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3625] count-number-of-trapezoids-ii -> BRAK ROZWIĄZAŃ (0 zapisanych)
-[3652] best-time-to-buy-and-sell-stock-using-strategy -> BRAK ROZWIĄZAŃ (0 zapisanych)
+[0175] combine-two-tables -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0176] second-highest-salary -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0177] nth-highest-salary -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0178] rank-scores -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0180] consecutive-numbers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0181] employees-earning-more-than-their-managers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0182] duplicate-emails -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0183] customers-who-never-order -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0184] department-highest-salary -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0185] department-top-three-salaries -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0196] delete-duplicate-emails -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0197] rising-temperature -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0262] trips-and-users -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0511] game-play-analysis-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0550] game-play-analysis-iv -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0570] managers-with-at-least-5-direct-reports -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0577] employee-bonus -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0584] find-customer-referee -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0585] investments-in-2016 -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0586] customer-placing-the-largest-number-of-orders -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0595] big-countries -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0596] classes-with-at-least-5-students -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0601] human-traffic-of-stadium -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0602] friend-requests-ii-who-has-the-most-friends -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0607] sales-person -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0608] tree-node -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0610] triangle-judgement -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0619] biggest-single-number -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0620] not-boring-movies -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0626] exchange-seats -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0627] swap-sex-of-employees -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0920] number-of-music-playlists -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0921] minimum-add-to-make-parentheses-valid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0922] sort-array-by-parity-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0994] rotting-oranges -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0995] minimum-number-of-k-consecutive-bit-flips -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0996] number-of-squareful-arrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[0997] find-the-town-judge -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1002] find-common-characters -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1045] customers-who-bought-all-products -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1050] actors-and-directors-who-cooperated-at-least-three-times -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1068] product-sales-analysis-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1070] product-sales-analysis-iii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1075] project-employees-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1084] sales-analysis-iii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1114] print-in-order -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1141] user-activity-for-the-past-30-days-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1148] article-views-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1158] market-analysis-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1164] product-price-at-a-given-date -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1179] reformat-department-table -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1251] average-selling-price -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1280] students-and-examinations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1378] replace-employee-id-with-the-unique-identifier -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1393] capital-gainloss -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1407] top-travellers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1484] group-sold-products-by-the-date -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1517] find-users-with-valid-e-mails -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1527] patients-with-a-condition -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1581] customer-who-visited-but-did-not-make-any-transactions -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1587] bank-account-summary-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1633] percentage-of-users-attended-a-contest -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1661] average-time-of-process-per-machine -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1667] fix-names-in-a-table -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1683] invalid-tweets -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1693] daily-leads-and-partners -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1729] find-followers-count -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1731] the-number-of-employees-which-report-to-each-employee -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1741] find-total-time-spent-by-each-employee -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1757] recyclable-and-low-fat-products -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1789] primary-department-for-each-employee -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1795] rearrange-products-table -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1873] calculate-special-bonus -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1890] the-latest-login-in-2020 -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1907] count-salary-categories -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[1965] employees-with-missing-information -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2196] create-binary-tree-from-descriptions -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2197] replace-non-coprime-numbers-in-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2200] find-all-k-distant-indices-in-an-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2206] divide-array-into-equal-pairs -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2210] count-hills-and-valleys-in-an-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2211] count-collisions-on-a-road -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2215] find-the-difference-of-two-arrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2218] maximum-value-of-k-coins-from-piles -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2220] minimum-bit-flips-to-convert-number -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2221] find-triangular-sum-of-an-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2225] find-players-with-zero-or-one-losses -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2226] maximum-candies-allocated-to-k-children -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2244] minimum-rounds-to-complete-all-tasks -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2246] longest-path-with-different-adjacent-characters -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2251] number-of-flowers-in-full-bloom -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2256] minimum-average-difference -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2257] count-unguarded-cells-in-the-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2264] largest-3-same-digit-number-in-string -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2265] count-nodes-equal-to-average-of-subtree -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2270] number-of-ways-to-split-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2272] substring-with-largest-variance -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2356] number-of-unique-subjects-taught-by-each-teacher -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2490] circular-sentence -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2491] divide-players-into-teams-of-equal-skill -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2492] minimum-score-of-a-path-between-two-cities -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2493] divide-nodes-into-the-maximum-number-of-groups -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2501] longest-square-streak-in-an-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2503] maximum-number-of-points-from-grid-queries -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2516] take-k-of-each-character-from-left-and-right -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2523] closest-prime-numbers-in-range -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2528] maximize-the-minimum-powered-city -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2529] maximum-count-of-positive-integer-and-negative-integer -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2530] maximal-score-after-applying-k-operations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2536] increment-submatrices-by-one -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2537] count-the-number-of-good-subarrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2540] minimum-common-value -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2542] maximum-subsequence-score -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2551] put-marbles-in-bags -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2554] maximum-number-of-integers-to-choose-from-a-range-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2558] take-gifts-from-the-richest-pile -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2559] count-vowel-strings-in-ranges -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2560] house-robber-iv -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2561] rearranging-fruits -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2563] count-the-number-of-fair-pairs -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2566] maximum-difference-by-remapping-a-digit -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2570] merge-two-2d-arrays-by-summing-values -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2577] minimum-time-to-visit-a-cell-in-a-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2579] count-total-number-of-colored-cells -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2582] pass-the-pillow -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2583] kth-largest-sum-in-a-binary-tree -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2593] find-score-of-an-array-after-marking-all-elements -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2594] minimum-time-to-repair-cars -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2597] the-number-of-beautiful-subsets -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2598] smallest-missing-non-negative-integer-after-operations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2601] prime-subtraction-operation -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2610] convert-an-array-into-a-2d-array-with-conditions -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2616] minimize-the-maximum-difference-of-pairs -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2618] check-if-object-instance-of-class -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2619] array-prototype-last -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2620] counter -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2621] sleep -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2622] cache-with-time-limit -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2623] memoize -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2624] snail-traversal -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2625] flatten-deeply-nested-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2626] array-reduce-transformation -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2627] debounce -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2629] function-composition -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2630] memoize-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2631] group-by -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2634] filter-elements-from-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2635] apply-transform-over-each-element-in-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2637] promise-time-limit -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2641] cousins-in-binary-tree-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2642] design-graph-with-shortest-path-calculator -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2648] generate-fibonacci-sequence -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2649] nested-array-generator -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2654] minimum-number-of-operations-to-make-all-array-elements-equal-to-1 -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2657] find-the-prefix-common-array-of-two-arrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2658] maximum-number-of-fish-in-a-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2661] first-completely-painted-row-or-column -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2665] counter-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2666] allow-one-function-call -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2667] create-hello-world-function -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2677] chunk-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2678] number-of-senior-citizens -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2683] neighboring-bitwise-xor -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2684] maximum-number-of-moves-in-a-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2685] count-the-number-of-complete-components -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2693] call-function-with-custom-context -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2694] event-emitter -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2695] array-wrapper -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2696] minimum-string-length-after-removing-substrings -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2698] find-the-punishment-number-of-an-integer -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2699] modify-graph-edge-weights -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2703] return-length-of-arguments-passed -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2704] to-be-or-not-to-be -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2705] compact-object -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2706] buy-two-chocolates -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2707] extra-characters-in-a-string -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2709] greatest-common-divisor-traversal -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2715] timeout-cancellation -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2721] execute-asynchronous-functions-in-parallel -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2722] join-two-arrays-by-id -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2723] add-two-promises -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2724] sort-by -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2725] interval-cancellation -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2726] calculator-with-method-chaining -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2727] is-object-empty -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2742] painting-the-walls -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2749] minimum-operations-to-make-the-integer-zero -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2751] robot-collisions -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2762] continuous-subarrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2779] maximum-beauty-of-an-array-after-applying-operation -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2780] minimum-index-of-a-valid-split -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2785] sort-vowels-in-a-string -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2787] ways-to-express-an-integer-as-sum-of-powers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2799] count-complete-subarrays-in-an-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2807] insert-greatest-common-divisors-in-linked-list -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2812] find-the-safest-path-in-a-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2816] double-a-number-represented-as-a-linked-list -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2818] apply-operations-to-maximize-score -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2825] make-string-a-subsequence-using-cyclic-increments -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2843] count-symmetric-integers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2845] count-of-interesting-subarrays -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2849] determine-if-a-cell-is-reachable-at-a-given-time -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2864] maximum-odd-binary-number -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2870] minimum-number-of-operations-to-make-array-empty -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2872] maximum-number-of-k-divisible-components -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2873] maximum-value-of-an-ordered-triplet-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2874] maximum-value-of-an-ordered-triplet-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2877] create-a-dataframe-from-list -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2878] get-the-size-of-a-dataframe -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2879] display-the-first-three-rows -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2880] select-data -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2881] create-a-new-column -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2882] drop-duplicate-rows -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2883] drop-missing-data -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2884] modify-columns -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2885] rename-columns -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2886] change-data-type -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2887] fill-missing-data -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2888] reshape-data-concatenate -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2889] reshape-data-pivot -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2890] reshape-data-melt -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2891] method-chaining -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2894] divisible-and-non-divisible-sums-difference -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2900] longest-unequal-adjacent-groups-subsequence-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2901] longest-unequal-adjacent-groups-subsequence-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2914] minimum-number-of-changes-to-make-binary-string-beautiful -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2918] minimum-equal-sum-of-two-arrays-after-replacing-zeros -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2924] find-champion-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2929] distribute-candies-among-children-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2938] separate-black-and-white-balls -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2940] find-building-where-alice-and-bob-can-meet -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2942] find-words-containing-character -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2943] maximize-area-of-square-hole-in-grid -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2948] make-lexicographically-smallest-array-by-swapping-elements -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2958] length-of-longest-subarray-with-at-most-k-frequency -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2962] count-subarrays-where-max-element-appears-at-least-k-times -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2965] find-missing-and-repeated-values -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2966] divide-array-into-arrays-with-max-difference -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2971] find-polygon-with-the-largest-perimeter -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2975] maximum-square-area-by-removing-fences-from-a-field -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2976] minimum-cost-to-convert-string-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2981] find-longest-special-substring-that-occurs-thrice-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2982] find-longest-special-substring-that-occurs-thrice-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2997] minimum-number-of-operations-to-make-array-xor-equal-to-k -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[2999] count-the-number-of-powerful-integers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3000] maximum-area-of-longest-diagonal-rectangle -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3003] maximize-the-number-of-partitions-after-operations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3005] count-elements-with-maximum-frequency -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3011] find-if-array-can-be-sorted -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3016] minimum-number-of-pushes-to-type-word-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3021] alice-and-bob-playing-flower-game -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3024] type-of-triangle -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3025] find-the-number-of-ways-to-place-people-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3027] find-the-number-of-ways-to-place-people-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3042] count-prefix-and-suffix-pairs-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3043] find-the-length-of-the-longest-common-prefix -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3047] find-the-largest-area-of-square-inside-two-rectangles -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3066] minimum-operations-to-exceed-threshold-value-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3068] find-the-maximum-sum-of-node-values -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3074] apple-redistribution-into-boxes -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3075] maximize-happiness-of-selected-children -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3085] minimum-deletions-to-make-string-k-special -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3097] shortest-subarray-with-or-at-least-k-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3100] water-bottles-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3105] longest-strictly-increasing-or-strictly-decreasing-subarray -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3108] minimum-cost-walk-in-weighted-graph -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3110] score-of-a-string -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3133] minimum-array-end -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3136] valid-word -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3147] taking-maximum-energy-from-the-mystic-dungeon -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3151] special-array-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3152] special-array-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3160] find-the-number-of-distinct-colors-among-the-balls -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3163] string-compression-iii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3169] count-days-without-meetings -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3170] lexicographically-minimum-string-after-removing-stars -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3174] clear-digits -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3186] maximum-total-damage-with-spell-casting -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3190] find-minimum-operations-to-make-all-elements-divisible-by-three -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3191] minimum-operations-to-make-binary-array-elements-equal-to-one-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3195] find-the-minimum-area-to-cover-all-ones-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3197] find-the-minimum-area-to-cover-all-ones-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3201] find-the-maximum-length-of-valid-subsequence-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3202] find-the-maximum-length-of-valid-subsequence-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3203] find-minimum-diameter-after-merging-two-trees -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3208] alternating-groups-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3217] delete-nodes-from-linked-list-present-in-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3223] minimum-length-of-string-after-operations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3227] vowels-game-in-a-string -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3228] maximum-number-of-operations-to-move-ones-to-the-end -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3234] count-the-number-of-substrings-with-dominant-ones -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3243] shortest-distance-after-road-addition-queries-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3254] find-the-power-of-k-size-subarrays-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3264] final-array-state-after-k-multiplication-operations-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3272] find-the-count-of-good-integers -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3289] the-two-sneaky-numbers-of-digitville -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3304] find-the-k-th-character-in-string-game-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3306] count-of-substrings-containing-every-vowel-and-k-consonants-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3307] find-the-k-th-character-in-string-game-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3318] find-x-sum-of-all-k-long-subarrays-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3321] find-x-sum-of-all-k-long-subarrays-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3330] find-the-original-typed-string-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3333] find-the-original-typed-string-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3335] total-characters-in-string-after-transformations-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3337] total-characters-in-string-after-transformations-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3341] find-minimum-time-to-reach-last-room-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3342] find-minimum-time-to-reach-last-room-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3343] count-number-of-balanced-permutations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3346] maximum-frequency-of-an-element-after-performing-operations-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3347] maximum-frequency-of-an-element-after-performing-operations-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3349] adjacent-increasing-subarrays-detection-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3350] adjacent-increasing-subarrays-detection-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3354] make-array-elements-equal-to-zero -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3355] zero-array-transformation-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3356] zero-array-transformation-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3362] zero-array-transformation-iii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3363] find-the-maximum-number-of-fruits-collected -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3370] smallest-number-with-all-set-bits -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3372] maximize-the-number-of-target-nodes-after-connecting-trees-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3373] maximize-the-number-of-target-nodes-after-connecting-trees-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3375] minimum-operations-to-make-array-values-equal-to-k -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3381] maximum-subarray-sum-with-length-divisible-by-k -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3392] count-subarrays-of-length-three-with-a-condition -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3394] check-if-grid-can-be-cut-into-sections -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3396] minimum-number-of-operations-to-make-elements-in-array-distinct -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3397] maximum-number-of-distinct-elements-after-operations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3403] find-the-lexicographically-largest-string-from-the-box-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3405] count-the-number-of-arrays-with-k-matching-adjacent-elements -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3408] design-task-manager -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3423] maximum-difference-between-adjacent-elements-in-a-circular-array -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3432] count-partitions-with-even-sum-difference -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3433] count-mentions-per-user -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3439] reschedule-meetings-for-maximum-free-time-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3440] reschedule-meetings-for-maximum-free-time-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3442] maximum-difference-between-even-and-odd-frequency-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3443] maximum-manhattan-distance-after-k-changes -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3445] maximum-difference-between-even-and-odd-frequency-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3446] sort-matrix-by-diagonals -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3453] separate-squares-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3454] separate-squares-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3459] length-of-longest-v-shaped-diagonal-segment -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3461] check-if-digits-are-equal-in-string-after-operations-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3477] fruits-into-baskets-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3479] fruits-into-baskets-iii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3480] maximize-subarrays-after-removing-one-conflicting-pair -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3484] design-spreadsheet -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3487] maximum-unique-subarray-sum-after-deletion -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3494] find-the-minimum-amount-of-time-to-brew-potions -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3495] minimum-operations-to-make-array-elements-zero -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3508] implement-router -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3512] minimum-operations-to-make-array-sum-divisible-by-k -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3516] find-closest-person -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3531] count-covered-buildings -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3539] find-sum-of-array-product-of-magical-sequences -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3541] find-most-frequent-vowel-and-consonant -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3542] minimum-operations-to-convert-all-elements-to-zero -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3562] maximum-profit-from-trading-stocks-with-discounts -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3573] best-time-to-buy-and-sell-stock-v -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3577] count-the-number-of-computer-unlocking-permutations -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3578] count-partitions-with-max-min-difference-at-most-k -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3583] count-special-triplets -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3606] coupon-code-validator -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3607] power-grid-maintenance -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3623] count-number-of-trapezoids-i -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3625] count-number-of-trapezoids-ii -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30
+[3652] best-time-to-buy-and-sell-stock-using-strategy -> BRAK ROZWIĄZAŃ (def+return) przed 2022-11-30

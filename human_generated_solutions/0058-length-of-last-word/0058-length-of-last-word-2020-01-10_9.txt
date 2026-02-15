@@ -1,0 +1,27 @@
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+		# Since we are going to search last word,
+		# it\'s easier to work with reversed string
+		# We could just iterate from end in reverse order,
+		# but we want to use function find(\' \'), cause it\'s going to be faster
+        s = s[::-1]
+		
+		# Count how many spaces there are in the beginning of the reversed string
+		# This is going to be our `start` argument for find(\' \', start) function
+        start = 0
+        for c in s:
+            if c != \' \':
+                break
+            start += 1
+		
+		# Search next whitespace after start position
+        pos = s.find(\' \', start)
+		
+        if pos < 0:
+			# If we didn\'t find whitespace anymore then:
+			# 1) Either string consists only from whitespaces then start == len(s) and we return 0
+			# 2) Last word is also a first word, so we return len(s) - start
+            return len(s) - start if start < len(s) else 0
+		
+		# Otherwise return found position of whitespace - start position
+        return pos - start

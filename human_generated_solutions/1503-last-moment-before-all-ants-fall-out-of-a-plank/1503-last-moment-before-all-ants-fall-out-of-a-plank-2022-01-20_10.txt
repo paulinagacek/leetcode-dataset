@@ -1,0 +1,40 @@
+def fxr_simu():
+	"""
+	TLE: 137 / 167 test cases passed.
+
+	n=3305, left=[...], right=[...]
+	"""
+	cur = defaultdict(list)  # [[dir,clk]]
+	for i in left:
+		cur[i].append(-1)
+	for i in right:
+		cur[i].append(1)
+	t = 0
+
+	while cur:
+		# print(t, \'\	\', cur)
+
+		nxt = defaultdict(list)
+		for p in sorted(list(cur)):
+			# meet/reverse, update
+			if len(cur[p]) == 2:
+				nxt[p + 0.5].append(1)
+				nxt[p - 0.5].append(-1)
+
+			# regular update
+			else:
+				if cur[p]:
+					d = cur[p].pop()
+					# remove out
+					if p == 0 and d == -1:
+						# noop
+						continue
+					elif p == n and d == 1:
+						# noop
+						continue
+					else:
+						nxt[p + d * 0.5].append(d)
+
+		cur = nxt
+		t += 0.5
+	return math.floor(t - 0.1)

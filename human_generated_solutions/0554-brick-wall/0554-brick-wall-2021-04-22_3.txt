@@ -1,9 +1,39 @@
 class Solution:
     def leastBricks(self, wall: List[List[int]]) -> int:
-        freq = defaultdict(int)
-        for row in wall:
-            rowSum = row[0]
-            for j in range(1, len(row)):
-                freq[rowSum] += 1
-                rowSum += row[j]
-        return len(wall) - max(freq.values() or [0])
+        
+        ## dictioanry
+        # key: boundary
+        # value: occurrence of boundary
+        boundary_occ_dict = defaultdict(int)
+        
+        brick_rows = len(wall)
+        
+        # sacn each brick row
+        for cur_brick_row in wall:
+            
+            # reset current bounary to zero
+            cur_boundary = 0
+            
+            # update boundary into dictionary
+            # Take care that final boundary is excluded to satisfy definition
+            for cur_brick_length in cur_brick_row[:-1]:
+            
+                cur_boundary += cur_brick_length
+            
+                boundary_occ_dict[cur_boundary] += 1
+        
+        # get occurrence of boundary
+        boundary_occurrence = boundary_occ_dict.values()
+        
+        
+        # compute minimal crossing by occurrence of boundary
+        
+        if boundary_occurrence:
+            # general cases: mutiple bricks on each row
+            min_crossing = brick_rows - max(boundary_occurrence)
+            
+        else:
+            # corner case: only one brick on each row
+            min_crossing = brick_rows
+        
+        return min_crossing

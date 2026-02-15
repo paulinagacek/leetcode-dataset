@@ -1,0 +1,32 @@
+python
+def _iter_string_combinations(characters: str, combination_length: int):
+    if combination_length == 0:
+        yield \'\'
+    elif combination_length == 1:
+        yield from characters
+    elif len(characters) == combination_length:
+        yield characters
+    else:
+        for char_index, char in enumerate(characters[:len(characters)-combination_length+1]):
+            for next_result in _iter_string_combinations(characters[char_index+1:], combination_length-1):
+                yield char + next_result
+
+
+class CombinationIterator:
+    def __init__(self, characters: str, combinationLength: int):
+        self._iter = _iter_string_combinations(characters, combinationLength)
+        self._next = self._get_next()
+        
+    def _get_next(self) -> None:
+        try:
+            return next(self._iter)
+        except StopIteration:
+            return None
+    
+    def next(self) -> str:
+        _next = self._next
+        self._next = self._get_next()
+        return _next
+        
+    def hasNext(self) -> bool:
+        return not self._next is None

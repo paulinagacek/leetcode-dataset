@@ -1,0 +1,16 @@
+class Solution:
+    def getImportance(self, employees, id):
+        employee_dict = dict()
+        queue = [id]
+        importance_sum = 0
+
+        for employee in employees:
+            employee_dict[employee.id] = employee
+            
+        while(queue):
+            employee_index = queue.pop(0)
+            employee = employee_dict[employee_index]
+            importance_sum += employee.importance
+            queue.extend(employee.subordinates)
+        
+        return importance_sum

@@ -1,0 +1,19 @@
+class Solution(object):
+    def accountsMerge(self, accounts):
+        """
+        :type accounts: List[List[str]]
+        :rtype: List[List[str]]
+        """
+        res = {}
+        for acc in accounts:
+            if acc[0] in res:
+                temp = [set(acc[1:])]
+                for mail in res[acc[0]]:
+                    if temp[0].intersection(mail):
+                        temp[0] = temp[0].union( mail )
+                    else:
+                        temp.append(mail)
+                res[acc[0]] = temp
+            else:
+                res.update({acc[0]: [set(acc[1:])]})
+        return [ [name] + sorted(list(mail)) for name, mails in res.iteritems() for mail in mails ]

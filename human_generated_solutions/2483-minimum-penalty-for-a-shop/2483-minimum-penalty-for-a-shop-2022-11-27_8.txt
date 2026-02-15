@@ -1,0 +1,25 @@
+class Solution(object):
+    def bestClosingTime(self, customers):
+        """
+        :type customers: str
+        :rtype: int
+        """
+        p_at_beg = customers.count(\'Y\')
+        p_at_end = customers.count(\'N\')
+        current_min_p = p_at_beg if p_at_beg <= p_at_end else p_at_end
+        lowest_p_hr = 0 if p_at_beg <= p_at_end else len(customers)
+        prev_y = 0
+        prev_n = 0
+        for i in range(len(customers)):
+            if customers[i] == \'Y\':
+                prev_y += 1
+            else:
+                prev_n += 1
+            p_at_now = prev_n + p_at_beg - prev_y
+            if p_at_now == current_min_p and i+1 < lowest_p_hr:
+                lowest_p_hr = i + 1
+            elif p_at_now < current_min_p:
+                current_min_p = p_at_now
+                lowest_p_hr = i + 1
+
+        return lowest_p_hr

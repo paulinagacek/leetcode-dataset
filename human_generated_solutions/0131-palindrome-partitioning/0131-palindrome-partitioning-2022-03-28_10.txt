@@ -1,0 +1,22 @@
+def partition(self, s: str) -> List[List[str]]:
+        
+        ans = []
+        
+        stack = [(s,[])]
+        
+        while stack:
+            
+			# ds stands for decision space
+            ds, path = stack.pop()
+            
+            if not ds:
+                ans.append(path)
+                continue
+                      
+            for i in range(len(ds)):
+                if ds[:i+1] == ds[:i+1][::-1]:
+                    path.append(ds[:i+1])
+                    stack.append((ds[i+1:],path[:]))
+                    path.pop()
+                    
+        return ans

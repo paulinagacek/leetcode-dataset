@@ -1,45 +1,37 @@
-class Solution {
-public:
-    // Helper function to check validility of neighbor
-    bool isValidNeighbor(int x, int y, vector<vector<int>>& board) {
-        return (x >= 0 && x < board.size() && y >= 0 && y < board[0].size());
-    }
-    
-    void gameOfLife(vector<vector<int>>& board) {
-        // All directions of neighbors
-        vector<int> ways_x = {0, 0, 1, 1, 1, -1, -1, -1};
-        vector<int> ways_y = {1, -1, 1, -1, 0, 0, 1, -1};
-        
-        for (int row = 0; row < board.size(); row++) {
-            for (int col = 0; col < board[0].size(); col++) {
-                
-                int count_live_neighbors = 0;
-                
-                // Loop to count all live neighbors
-                for (int i = 0; i < 8; i++) {
-                    int curr_x = row + ways_x[i], curr_y = col + ways_y[i];
-                    if (isValidNeighbor(curr_x, curr_y, board) && abs(board[curr_x][curr_y]) == 1)
-                        count_live_neighbors++;
-                }
-                
-                // Rules 1 and 3: -1 indicates a cell that was live but now is dead.
-                if (board[row][col] == 1 && (count_live_neighbors < 2 || count_live_neighbors > 3))
-                    board[row][col] = -1;
-                
-                // Rule 4: 2 indicates a cell that was dead but now is live.
-                if (board[row][col] == 0 && count_live_neighbors == 3)
-                    board[row][col] = 2;
-            }
-        }
-        
-        // Get the final board
-        for (int row = 0; row < board.size(); row++) {
-            for (int col = 0; col < board[0].size(); col++) {
-                if (board[row][col] >= 1)
-                    board[row][col] = 1;
-                else
-                    board[row][col] = 0;
-            }
-        }
-    }
-};
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        m, n, livecells, ans = len(board), len(board[0]), 0, []
+        modified_board = collections.deque([collections.deque(x) for x in board])
+        for rows in modified_board:
+            rows.appendleft(0)
+            rows.append(0)
+        modified_board.appendleft([0] * (n + 2))
+        modified_board.append([0] * (n + 2))
+        for i in range(1, m + 1):
+            temp = []
+            for j in range(1, n + 1):
+                livecells = 0
+                for k in range(i - 1, i + 2):
+                    for l in range(j - 1, j + 2):
+                        if modified_board[k][l]:
+                            livecells += 1
+                if modified_board[i][j]:
+                    livecells -= 1
+                    if livecells < 2:
+                        temp.append(0)
+                    elif 2 <= livecells <= 3:
+                        temp.append(1)
+                    else:
+                        temp.append(0)
+                else:
+                    if livecells == 3:
+                        temp.append(1)
+                    else:
+                        temp.append(0)
+            ans.append(temp)
+        for i in range(m):
+            for j in range(n):
+                board[i][j] = ans[i][j]

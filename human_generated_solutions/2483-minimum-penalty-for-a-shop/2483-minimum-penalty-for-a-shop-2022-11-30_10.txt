@@ -1,6 +1,0 @@
-class Solution:
-    def bestClosingTime(self, customers: str) -> int:
-        Ns, Ys = [0] * (len(customers) + 1), [0] * (len(customers) + 1)
-        for hour in range(len(customers)+1): Ns[hour] = int(customers[hour-1] == "N") + Ns[hour-1]
-        for hour in range(len(customers)-1,-1,-1): Ys[hour] = int(customers[hour] == "Y") + Ys[hour + 1]
-        return min(range(len(customers) + 1), key=lambda hour: Ys[hour] + Ns[hour])

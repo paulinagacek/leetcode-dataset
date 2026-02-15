@@ -1,0 +1,8 @@
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        mn = inf
+        for i in range(k, len(blocks) + 1):
+            window = blocks[i-k:i]
+            wcount = window.count(\'W\')
+            mn = min(mn, wcount)
+        return mn

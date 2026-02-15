@@ -1,0 +1,10 @@
+class Solution:
+    
+    def titleToNumber(self, columnTitle: str) -> int:
+        soln=0
+        # 1.Reverse the given string using [::-1],  enumerate function will generate value of i=0, i=1 etc for each iteration
+        for i,char in enumerate(columnTitle[::-1]):
+        # 2. As per problem statement A-Z is 26 and AA takes 27 which is (26^0)*1 for the 1st A and (26^1)*1 for the second A.Adding it is 27
+        # 3. Assume BB - (26^0)*2= 1*2 = 2 for the first B and (26^1)*2=52 for the next B. Sum is 54
+            soln+=pow(26,i)*(ord(char)-64)
+        return soln

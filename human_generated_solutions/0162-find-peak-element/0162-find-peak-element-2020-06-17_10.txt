@@ -1,0 +1,36 @@
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        ## RC ##
+        ## APPROACH : BINARY SEARCH ##
+        ## question says : The array may contain multiple peaks, in that case return the index to any one of the peaks is fine. ##
+        ## [1,2,3,1,2,1] => peak elements are 3(i=2) and 2(i=4), so  we can return 3 or 2
+        
+        ## LOGIC ##
+        # plot nums as a graph
+        # if both left and right side  are less than curr, return as it is peak
+        #  if left is less and right is greater than, it is increasing sequence, so the graph will come down somewhere right to it, so we move right
+        # if left is greater and right is lesser than curr, then it is decreasing sequence, so peak will be somewhere left to it, so we move left
+        # if both elements are less than curr, we can go any one side
+        
+		## TIME COMPLEXITY : O(lognN) ##
+		## SPACE COMPLEXITY : O(1) ##
+
+        n = len(nums)
+        nums = [float(\'-inf\')] + nums + [float(\'-inf\')]
+        if( n == 1 ): return 0
+        l = 1
+        r = n                                   
+        while(l <= r):                          
+            mid = l + (r - l)//2              
+            curr = nums[ mid ]
+            left = nums[ mid - 1 ]
+            right = nums[ mid + 1 ]
+            if( curr > left and curr > right ):
+                return mid -1                   
+            elif( curr > left and curr < right ):
+                l = mid + 1
+            elif( curr < left and curr > right ):
+                r = mid - 1
+            else:                               # both are less, we can go either way
+                l = mid + 1
+        return 0

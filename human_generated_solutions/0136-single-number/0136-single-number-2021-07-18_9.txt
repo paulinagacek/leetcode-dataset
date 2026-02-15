@@ -1,0 +1,12 @@
+def singleNumber(self, nums: List[int]) -> int:
+         mp = [0]*100000
+         for i in range(len(nums)):
+             nums[i] += 30000
+        
+         for i in range(len(nums)):
+             mp[nums[i]]+=1
+            
+         for j in range(len(mp)):
+             if mp[j] ==1:
+                 return j - 30000
+         return -1

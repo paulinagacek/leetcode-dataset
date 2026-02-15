@@ -1,0 +1,3 @@
+class Solution(object):
+    def toLowerCase(self, str):
+        return \'\'.join([ chr( ord(c) + 32 ) if 64 < ord(c) < 91 else c for c in str ])

@@ -1,0 +1,11 @@
+class Solution:
+    def partitionString(self, s: str) -> int:
+        x="";c=1
+        for i in s:
+            if i in x:
+                c+=1;x=i
+                #Reset the string x to current char if duplicate char found
+            else:
+                x+=i
+                #append current char to x if x does not contain current char
+        return c

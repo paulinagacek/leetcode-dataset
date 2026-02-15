@@ -1,0 +1,7 @@
+def halvesAreAlike(self, s: str) -> bool:
+	n = len(s)
+	vowels = {\'a\', \'e\', \'i\', \'o\', \'u\', \'A\', \'E\', \'I\', \'O\', \'U\'}    # set of vowels, for fast lookups
+    left = sum(1 for i in range(n//2) if s[i] in vowels)           # count number of vowels in first part
+    right = sum(1 for i in range(n//2, n) if s[i] in vowels)       # count number of vowels in second part
+        
+    return left == right

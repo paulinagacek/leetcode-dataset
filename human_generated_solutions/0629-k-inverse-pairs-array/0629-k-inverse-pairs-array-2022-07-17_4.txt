@@ -1,0 +1,14 @@
+class Solution:
+    def kInversePairs(self, n: int, k: int) -> int:
+        mod = 10**9 + 7
+        dp = [0 for _ in range(k + 1)]
+        dp[-1] = 1
+        
+        for i in range(n):
+            new = [0 for _ in range(k + 1)]
+            for j in range(k, -1, -1):
+                for j2 in range(j, min(k + 1, j + n - i)):
+                    new[j] = (new[j] + dp[j2]) % mod
+                    
+            dp = new
+        return dp[0]

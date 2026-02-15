@@ -1,21 +1,19 @@
 class Solution:
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
-        tokens.sort()
-        l = 0
-        r = len(tokens) - 1
-        max_ans = score = 0
+    
+        tokens, ans, score = deque(sorted(tokens)), 0, 0
         
-        while l <= r:
-            if power >= tokens[l]:
-                power -= tokens[l]
-                score += 1
-                max_ans = max(max_ans, score)
-                l += 1
+        while tokens:
+            if tokens[0] <= power:
+                power-= tokens.popleft()
+                score+= 1
+                ans = max(ans, score)
+
             elif score > 0:
-                power += tokens[r]
-                r -= 1
-                score -= 1
+                power+= tokens.pop()
+                score-= 1
+                
             else:
-                break
-        
-        return max_ans
+                return ans
+            
+        return ans

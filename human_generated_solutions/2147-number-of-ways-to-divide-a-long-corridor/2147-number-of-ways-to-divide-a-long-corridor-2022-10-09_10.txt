@@ -1,0 +1,26 @@
+def numberOfWays(self, corridor: str) -> int:
+    #you must have even number of seats in order for each section to have two seats
+    if corridor.count("S")%2: return 0
+    n = len(corridor)
+    
+    def dp(i, j):
+        chairCount = 0
+        k = i
+        while k <= j and chairCount < 2:
+            if corridor[k] == "S":
+                chairCount += 1
+            k += 1
+        #if the no. of chair in curr section < 2 return 0 since its not a valid section
+        if chairCount != 2:
+            return 0
+        #e_i = 2nd chair index
+        e_i = k 
+        while k <= j and corridor[k]!="S":
+            k += 1
+        #if there is no section to the right return 1 because you can only place divider at the end of curr_section
+        if k > j:
+            return 1
+        #k - e_i = number of plant b/w 2nd chair ans start of new section   
+        return (k - e_i + 1) * dp(k, j)
+    
+    return dp(0, len(corridor) - 1) % 1000000007

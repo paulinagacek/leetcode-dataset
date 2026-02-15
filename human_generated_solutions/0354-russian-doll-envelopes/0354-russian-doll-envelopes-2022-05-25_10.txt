@@ -1,26 +1,18 @@
 class Solution:
-    def binarySearch(self, heights, minHeight):
-        start = 0
-        end = len(heights)
-        while start < end:
-            mid = start + ((end - start) // 2)
-            if heights[mid] < minHeight:
-                start = mid + 1
+    def ceil(self,arr,i,j,k):
+        ans=-1
+        while(i<=j):
+            m=(i+j)//2
+            if(arr[m]<k):
+                i=m+1
             else:
-                end = mid
-        return start
-
-    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
-        envelopes.sort(key = lambda x: (x[0], -x[1]))
-        
-        heights = [h for _, h in envelopes]
-        lis = []
-        
-        for height in heights:
-            idx = self.binarySearch(lis, height)
-            if idx == len(lis):
-                lis.append(height)
-            else:
-                lis[idx] = height
-
-        return len(lis)
+                ans=m
+                j=m-1
+        return ans
+    def maxEnvelopes(self, e: List[List[int]]) -> int:
+        l=sorted(e, key=lambda x:[x[0],-x[1]]) #step1
+        dp=[float(\'inf\') for i in range(len(e)+1)] #step2
+        for i in range(len(e)): #step3
+            k=self.ceil(dp,0,len(e)-1,l[i][1])
+            dp[k]=l[i][1] #step4
+        return dp.index(float(\'inf\')) #step5

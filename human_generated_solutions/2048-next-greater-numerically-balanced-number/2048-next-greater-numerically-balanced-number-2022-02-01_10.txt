@@ -1,0 +1,9 @@
+class Solution:
+    def nextBeautifulNumber(self, n: int) -> int:
+        from collections import Counter
+        
+        for val in range(n+1,1224445):
+            
+            counter=Counter(str(val))
+            if all(counter[ch]==int(ch) for ch in str(val)):
+                return val

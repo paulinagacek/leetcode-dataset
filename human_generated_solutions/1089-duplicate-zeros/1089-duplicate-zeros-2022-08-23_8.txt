@@ -1,0 +1,30 @@
+class Solution:
+    def duplicateZeros(self, arr: List[int]) -> None:
+		# getting total count of zeroes in array in O(N) time
+        count_zero = 0
+        
+        for i in range(len(arr)):  
+            if arr[i] == 0:
+                count_zero += 1
+        # if number of zeroes is 0 then return the original array
+        if count_zero == 0:
+            return
+        
+        else:
+
+            k = len(arr) - 1                 # last index
+            
+            while(count_zero > 0 and k > -1):      # index >= 0 and zeroes > 0
+                
+                if arr[k] == 0:
+                    count_zero -= 1                         # reduce zero count by 1 if arr[k] = 0
+                    
+                l = k + count_zero                         # index of element to be replaced
+
+                if l < len(arr):
+                    arr[l] = arr[k]                              # replace element of arr[l] by arr[k]
+                    
+                    if arr[l] == 0 and l < len(arr) - 1:           # if we encounted a zero then arr[l+1]  = 0
+                        arr[l+1] = 0
+                        
+                k -= 1

@@ -1,0 +1,46 @@
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        N = len(arr)
+        
+        q = collections.deque()
+        INF = 10 ** 10
+        dist = [INF] * N
+        
+        lookup = collections.defaultdict(list)
+        done = set()
+        
+        for i, x in enumerate(arr):
+            lookup[x].append(i)
+            
+        def enqueue(index, d):
+            if index < 0 or index >= N:
+                return
+            
+            if dist[index] != INF:
+                return
+            
+            dist[index] = d
+            q.append(index)
+            
+        delta = [-1, +1]
+        
+        
+        
+        enqueue(0, 0)
+        while len(q) > 0:
+            x = q.popleft()
+            
+            if x == N - 1:
+                return dist[x]
+            
+            for dx in delta:
+                nx = x + dx
+                
+                enqueue(nx, dist[x] + 1)
+                
+            if arr[x] not in done:
+                done.add(arr[x])
+                for nx in lookup[arr[x]]:
+                    enqueue(nx, dist[x] + 1)
+                    
+        assert(False)
