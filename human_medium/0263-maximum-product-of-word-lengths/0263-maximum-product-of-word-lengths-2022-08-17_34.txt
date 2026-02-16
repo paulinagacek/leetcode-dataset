@@ -1,8 +1,0 @@
-class Solution:
-    def maxProduct(self, words: List[str]) -> int:
-        n=len(words)
-        wordset=[set(i) for i in words]
-        product=[len(words[i])*len(words[j]) for i in range(n) for j in range(i,n) if wordset[i].isdisjoint(wordset[j])]
-        if len(product)==0:
-            return 0
-        return max(product)

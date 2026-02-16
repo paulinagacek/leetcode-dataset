@@ -1,9 +1,0 @@
-class Solution:
-    def combinationSum4(self, nums: List[int], target: int) -> int:
-        combs = [0] * (target + 1)
-        combs[0] = 1
-        for t in range(1, target + 1): # F1
-            for n in nums: # F2
-                if t >= n:
-                    combs[t] += combs[t-n]
-        return combs[target]

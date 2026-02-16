@@ -1,5 +1,3 @@
-# Runtime: 88 ms, faster than 56.24% of Python3 online submissions for Multiply Strings.
-# Memory Usage: 13.9 MB, less than 87.15% of Python3 online submissions for Multiply Strings.
 class Solution:
     def multiply(self, num1, num2):
         result, mult1 = 0, 1

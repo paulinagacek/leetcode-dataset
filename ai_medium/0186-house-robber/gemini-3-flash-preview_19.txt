@@ -1,0 +1,17 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        prev1 = 0 # Represents dp[i-1]
+        prev2 = 0 # Represents dp[i-2]
+        
+        for num in nums:
+            # At each house, we decide to either:
+            # 1. Rob it (current money + money from 2 houses ago)
+            # 2. Skip it (money from 1 house ago)
+            current = max(prev1, prev2 + num)
+            prev2 = prev1
+            prev1 = current
+            
+        return prev1

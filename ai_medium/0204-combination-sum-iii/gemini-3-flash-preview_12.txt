@@ -1,0 +1,8 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res = []
+        # Generate all unique combinations of size k from numbers 1-9
+        for combo in itertools.combinations(range(1, 10), k):
+            if sum(combo) == n:
+                res.append(list(combo))
+        return res

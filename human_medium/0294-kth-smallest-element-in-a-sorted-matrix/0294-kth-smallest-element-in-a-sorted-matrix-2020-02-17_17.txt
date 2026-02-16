@@ -1,3 +1,0 @@
-class Solution:
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        return heapq.nsmallest(k, heapq.merge(*matrix))[-1]

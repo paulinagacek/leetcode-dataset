@@ -1,0 +1,27 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token == "+":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a + b)
+            elif token == "-":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a * b)
+            elif token == "/":
+                b = stack.pop()
+                a = stack.pop()
+                # Division between two integers truncating toward zero.
+                # In Python, int(a / b) performs this truncation for both positive and negative numbers.
+                stack.append(int(a / b))
+            else:
+                # The token is an integer (positive or negative).
+                stack.append(int(token))
+        # The stack will contain exactly one element, which is the result of the expression.
+        return stack[0]

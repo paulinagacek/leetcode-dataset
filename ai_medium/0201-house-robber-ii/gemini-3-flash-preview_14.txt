@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for money in houses:
+                prev2, prev1 = prev1, max(prev2 + money, prev1)
+            return prev1
+        
+        # We solve the linear house robber problem twice:
+        # 1. Excluding the last house (nums[:-1])
+        # 2. Excluding the first house (nums[1:])
+        # The result is the maximum of these two scenarios.
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

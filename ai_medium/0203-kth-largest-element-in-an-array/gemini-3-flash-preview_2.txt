@@ -1,0 +1,21 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        while True:
+            pivot = random.choice(nums)
+            left, mid, right = [], [], []
+            for x in nums:
+                if x > pivot:
+                    left.append(x)
+                elif x < pivot:
+                    right.append(x)
+                else:
+                    mid.append(x)
+            
+            l_len, m_len = len(left), len(mid)
+            if k <= l_len:
+                nums = left
+            elif k <= l_len + m_len:
+                return pivot
+            else:
+                nums = right
+                k -= l_len + m_len

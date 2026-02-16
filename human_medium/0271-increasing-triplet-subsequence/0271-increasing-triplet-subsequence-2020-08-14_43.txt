@@ -1,9 +1,0 @@
-class Solution:
-    def increasingTriplet(self, nums: List[int]) -> bool:
-        ans = []
-        for x in nums: 
-            if not ans or ans[-1] < x: ans.append(x)
-            else: 
-                i = bisect_left(ans, x)
-                ans[i] = x
-        return len(ans) >= 3

@@ -1,7 +1,3 @@
-# * Iterative Solution | O(nm) Time | O(m) Space
-# * n -> The given input | m -> The length of string
-
-
 class Solution:
     def countAndSay(self, n: int) -> str:
         res = ["1"]

@@ -1,3 +1,0 @@
-class Solution:
-    def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
-        return (lambda x,y: sum([x[v]*y[-v] for v in x if -v in y]))(Counter(starmap(add, product(A, B))), Counter(starmap(add, product(C, D))))

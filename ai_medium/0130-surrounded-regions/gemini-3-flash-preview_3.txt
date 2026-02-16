@@ -1,0 +1,38 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        stack = []
+        
+        # Identify all 'O' cells on the board boundaries.
+        # Mark boundary-connected 'O's as '#' to distinguish them from surrounded 'O's.
+        for r in range(m):
+            for c in range(n):
+                if (r == 0 or r == m - 1 or c == 0 or c == n - 1) and board[r][c] == 'O':
+                    board[r][c] = '#'
+                    stack.append((r, c))
+        
+        # Use iterative DFS to find all 'O' cells connected to the boundary.
+        # Change these to '#' as well.
+        while stack:
+            curr_r, curr_c = stack.pop()
+            for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                nr, nc = curr_r + dr, curr_c + dc
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = '#'
+                    stack.append((nr, nc))
+        
+        # Iterate through the board one final time:
+        # 1. Any remaining 'O' is a captured cell (surrounded), so change it to 'X'.
+        # 2. Any '#' is a boundary-connected 'O' (not surrounded), so change it back to 'O'.
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '#':
+                    board[r][c] = 'O'

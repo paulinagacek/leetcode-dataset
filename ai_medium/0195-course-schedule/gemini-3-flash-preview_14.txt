@@ -1,0 +1,30 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list to represent the graph
+        adj = [[] for _ in range(numCourses)]
+        # Track the in-degree (number of prerequisites) for each course
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize a queue with all courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Counter for courses that can be finished
+        count = 0
+        
+        while queue:
+            u = queue.popleft()
+            count += 1
+            
+            # For each course that depends on course u
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If all prerequisites for course v are satisfied
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If the number of courses we could take equals numCourses, return True
+        return count == numCourses

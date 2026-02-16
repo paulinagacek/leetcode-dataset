@@ -1,4 +1,3 @@
-```python
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         # Use dynamic programming with a 1D array to save space.
@@ -14,5 +13,3 @@ class Solution:
                 
         # The result is the value at the last position of the DP array.
         return dp[n - 1]
-
-```

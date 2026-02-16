@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # If either number is "0", their product is "0"
@@ -33,4 +32,3 @@ class Solution:
             
         # Convert the integer list into a string using chr() and ord('0') == 48
         return "".join(chr(res[k] + 48) for k in range(idx, len(res)))
-```

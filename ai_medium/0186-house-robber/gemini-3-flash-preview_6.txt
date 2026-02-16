@@ -1,0 +1,14 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        prev1 = 0  # Represents the maximum amount robbed up to the previous house
+        prev2 = 0  # Represents the maximum amount robbed up to two houses ago
+        
+        for num in nums:
+            # Current max is either:
+            # 1. Skip current house: max amount remains prev1
+            # 2. Rob current house: max amount is num + prev2
+            current = max(prev1, prev2 + num)
+            prev2 = prev1
+            prev1 = current
+            
+        return prev1

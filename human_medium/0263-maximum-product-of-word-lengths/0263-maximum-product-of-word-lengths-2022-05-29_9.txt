@@ -1,4 +1,0 @@
-class Solution:
-    def maxProduct(self, words: List[str]) -> int:
-        masks = [reduce(lambda a, c: a | 1 << (ord(c) - ord(\'a\')), word, 0) for word in words]
-        return max([len(words[i]) * len(words[j]) for i, j in combinations(range(len(words)), 2) if masks[i] & masks[j] == 0] or [0])

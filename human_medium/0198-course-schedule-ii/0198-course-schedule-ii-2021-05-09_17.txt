@@ -1,5 +1,3 @@
-from graphlib import TopologicalSorter
-
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         g = {i: set() for i in range(numCourses)}

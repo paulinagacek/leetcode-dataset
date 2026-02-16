@@ -1,11 +1,3 @@
-class Number:
-    def __init__(self, val):
-        self.val = str(val)
-    
-    def __lt__(self, other):
-        return self.val + other.val < other.val + self.val
-
-
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
         nums = [Number(num) for num in nums]

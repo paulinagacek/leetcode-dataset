@@ -1,0 +1,16 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 3:
+            return 0
+        
+        # Using bytearray for memory efficiency and faster operations
+        primes = bytearray([1]) * n
+        primes[0] = primes[1] = 0
+        
+        for i in range(2, int(n**0.5) + 1):
+            if primes[i]:
+                # Mark multiples of i starting from i*i as non-prime
+                # Bytearray slicing allows efficient mass updates
+                primes[i*i:n:i] = bytearray((n - 1 - i*i) // i + 1)
+                
+        return primes.count(1)

@@ -1,6 +1,0 @@
-visited={}
-         for n in nums:
-             if n not in visited:
-                  visited[n]=1
-             else:
-			       return n

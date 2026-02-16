@@ -1,0 +1,20 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for money in houses:
+                # The recurrence relation for House Robber:
+                # current_max = max(rob house i + max money from i-2, max money from i-1)
+                prev2, prev1 = prev1, max(prev1, prev2 + money)
+            return prev1
+            
+        # For a circular arrangement, we break the problem into two linear scenarios:
+        # 1. Robbing houses excluding the last one (0 to n-2)
+        # 2. Robbing houses excluding the first one (1 to n-1)
+        # The result is the maximum of these two scenarios.
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

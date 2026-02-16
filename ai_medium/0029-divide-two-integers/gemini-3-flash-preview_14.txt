@@ -1,4 +1,3 @@
-```python
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         # Handle the special case where overflow occurs in a 32-bit environment
@@ -31,5 +30,3 @@ class Solution:
         # The problem requires the result to be clamped within the signed 32-bit range.
         # Given the initial overflow check, this result is guaranteed to be in [−2^31, 2^31 − 1].
         return quotient
-
-```

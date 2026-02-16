@@ -1,8 +1,0 @@
-stack = []
-        for n in num:
-            while k and stack and stack[-1] > n:
-                stack.pop()
-                k -= 1
-            stack.append(n)
-        for _ in range(k): stack.pop()
-        return \'\'.join(stack).lstrip(\'0\') or \'0\'

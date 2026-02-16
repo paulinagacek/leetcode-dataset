@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """
@@ -26,4 +23,3 @@ class Solution:
                 # We don't increment curr because the swapped element needs to be inspected.
                 nums[curr], nums[high] = nums[high], nums[curr]
                 high -= 1
-```

@@ -1,6 +1,0 @@
-class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        # a + b + c + d + d + d + d
-        # a + b + c + d - unique
-        unique = set(nums)
-        return (sum(nums)-sum(unique))//(len(nums)-len(unique))

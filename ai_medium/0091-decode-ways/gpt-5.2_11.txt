@@ -1,0 +1,21 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        n = len(s)
+        dp0, dp1 = 1, 0  # dp[i-2], dp[i-1]
+        
+        for i in range(1, n + 1):
+            cur = 0
+            
+            # One-digit decode
+            if s[i - 1] != '0':
+                cur += dp0 if i == 1 else dp1
+            
+            # Two-digit decode
+            if i >= 2 and s[i - 2] != '0':
+                val = int(s[i - 2:i])
+                if 10 <= val <= 26:
+                    cur += dp0
+            
+            dp0, dp1 = (dp1 if i >= 2 else 1), cur
+        
+        return dp1

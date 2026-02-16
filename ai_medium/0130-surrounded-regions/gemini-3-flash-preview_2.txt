@@ -1,0 +1,42 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+
+        m, n = len(board), len(board[0])
+
+        def mark_safe(r_start, c_start):
+            stack = [(r_start, c_start)]
+            board[r_start][c_start] = 'S'
+            while stack:
+                r, c = stack.pop()
+                for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                        board[nr][nc] = 'S'
+                        stack.append((nr, nc))
+
+        # Check the border cells for any 'O'. If found, mark the entire connected region as safe ('S').
+        for i in range(m):
+            if board[i][0] == 'O':
+                mark_safe(i, 0)
+            if board[i][n - 1] == 'O':
+                mark_safe(i, n - 1)
+        for j in range(n):
+            if board[0][j] == 'O':
+                mark_safe(0, j)
+            if board[m - 1][j] == 'O':
+                mark_safe(m - 1, j)
+
+        # Traverse the entire board:
+        # 1. Any 'O' remaining was not connected to the border, so capture it ('X').
+        # 2. Any 'S' was connected to the border, so restore it back to 'O'.
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'S':
+                    board[r][c] = 'O'

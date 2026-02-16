@@ -1,4 +1,3 @@
-```python
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         # Define the limits for 32-bit signed integers
@@ -33,5 +32,3 @@ class Solution:
         # Apply the sign and return clamped to 32-bit range
         res = -res if is_negative else res
         return max(INT_MIN, min(INT_MAX, res))
-
-```

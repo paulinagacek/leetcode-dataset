@@ -1,3 +1,0 @@
-def maxProduct(self, words: List[str]) -> int:
-	letterSet = list(zip(words, [set(s) for s in [list(word) for word in words]]))
-	return max([len(one[0]) * len(two[0]) for one in letterSet for two in letterSet if one[1].isdisjoint(two[1])] + [0])

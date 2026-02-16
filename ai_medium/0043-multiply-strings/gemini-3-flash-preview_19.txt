@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # If either number is 0, the product is 0
@@ -33,4 +32,3 @@ class Solution:
         # Convert the integer digits back to characters and join them into a string
         # chr(d + 48) converts a single digit d to its corresponding character
         return "".join(chr(d + 48) for d in res[idx:])
-```

@@ -1,0 +1,28 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        results = []
+        
+        def backtrack(remain, k_remaining, next_start, path):
+            # Base case: if we have picked k numbers
+            if k_remaining == 0:
+                # If the sum of the picked numbers equals n
+                if remain == 0:
+                    results.append(list(path))
+                return
+            
+            # Iterate through numbers from next_start up to 9
+            for i in range(next_start, 10):
+                # Optimization: if the current number exceeds the remaining sum, 
+                # no subsequent numbers will satisfy the condition.
+                if i > remain:
+                    break
+                
+                path.append(i)
+                # Recursively call backtrack with updated parameters
+                backtrack(remain - i, k_remaining - 1, i + 1, path)
+                # Backtrack by removing the last element added
+                path.pop()
+        
+        # Start backtracking from number 1 with target sum n and size k
+        backtrack(n, k, 1, [])
+        return results

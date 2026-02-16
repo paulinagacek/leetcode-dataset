@@ -1,9 +1,5 @@
-```python
-from typing import List
-
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         # Using the standard mathematical formula for Gray code: G(i) = i ^ (i >> 1)
         # This generates the reflected binary Gray code sequence for a given n.
         return [i ^ (i >> 1) for i in range(1 << n)]
-```

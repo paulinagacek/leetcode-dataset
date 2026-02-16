@@ -1,6 +1,3 @@
-# Time Complexity: 2^(N), where N = len(candidates)
-# Space Complexity: O(N)
-from collections import Counter
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
     

@@ -1,7 +1,3 @@
-from collections import Counter
-from itertools import chain, product
-
-
 class Solution:
     def exist(self, board: list[list[str]], word: str) -> bool:
 

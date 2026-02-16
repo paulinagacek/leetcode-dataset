@@ -1,12 +1,3 @@
-######################################################
-
-#   Top - Down Approach
-
-#   Runtime: 56ms   -   87.68%
-#   Memory: 15MB  -   86.80%
-
-######################################################
-
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         """

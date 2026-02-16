@@ -1,0 +1,81 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Get total length of the linked list
+        curr = head
+        length = 0
+        while curr:
+            length += 1
+            curr = curr.next
+        
+        dummy = ListNode(0)
+        dummy.next = head
+        
+        # Iterative Merge Sort for O(1) space complexity
+        step = 1
+        while step < length:
+            prev = dummy
+            curr = dummy.next
+            while curr:
+                # Identify the first segment (left)
+                left = curr
+                # Identify the second segment (right) and update curr to the start of the next pair
+                right = self.split(left, step)
+                curr = self.split(right, step)
+                
+                # Merge the two segments and attach to the sorted portion
+                merged_head, merged_tail = self.merge(left, right)
+                prev.next = merged_head
+                prev = merged_tail
+            step <<= 1
+            
+        return dummy.next
+
+    def split(self, head: Optional[ListNode], step: int) -> Optional[ListNode]:
+        """
+        Splits the list starting at head into two parts: 
+        the first part contains 'step' nodes, and the second part contains the rest.
+        Returns the head of the second part.
+        """
+        if not head:
+            return None
+        
+        # Move head to the end of the current segment
+        for _ in range(step - 1):
+            if head.next:
+                head = head.next
+            else:
+                break
+        
+        # Disconnect the current segment and return the head of the remaining list
+        next_part = head.next
+        head.next = None
+        return next_part
+
+    def merge(self, l1: Optional[ListNode], l2: Optional[ListNode]):
+        """
+        Standard merge of two sorted linked lists.
+        Returns the head and the tail of the merged segment.
+        """
+        dummy = ListNode(0)
+        curr = dummy
+        
+        while l1 and l2:
+            if l1.val < l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next
+            curr = curr.next
+            
+        # Attach the remaining portion of whichever list isn't empty
+        curr.next = l1 or l2
+        
+        # Move curr to the end of the merged list to find the tail
+        while curr.next:
+            curr = curr.next
+            
+        return dummy.next, curr

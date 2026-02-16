@@ -1,13 +1,3 @@
-#vis: https://leetcode.com/problems/next-permutation/solution/
-
-#find the pivot item by iterating from the end to start of the nums array
-#pivot = last item that is in strictly increasing order (end to the start of array)
-#if pivot = 0, we hit an edge case that current permutation has max value
-#if pivot = 0, then we reverse the whole number and do an early return
-#assign left adjacent item to the pivot as the new pivot
-#find the value to the right of pivot which is min greater than pivot
-#swap pivot item and the next possible (min) higher value we found in last step
-#reverse the suffix subarray (from index (pivot+1) to the end of the list)
 class Solution:
     #T=O(n), S=O(1)
     def nextPermutation(self, nums: List[int]) -> None:

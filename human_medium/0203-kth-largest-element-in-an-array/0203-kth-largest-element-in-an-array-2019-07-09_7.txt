@@ -1,5 +1,3 @@
-## HEAP RUN TIME O(N + klgN)
-# min - heap
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         ans = nums[:k]

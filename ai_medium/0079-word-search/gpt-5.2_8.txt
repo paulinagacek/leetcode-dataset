@@ -1,0 +1,48 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m, n = len(board), len(board[0])
+
+        board_count = Counter(ch for row in board for ch in row)
+        word_count = Counter(word)
+        for ch, c in word_count.items():
+            if board_count[ch] < c:
+                return False
+
+        if board_count[word[0]] > board_count[word[-1]]:
+            word = word[::-1]
+
+        L = len(word)
+        VIS = '\0'
+
+        def dfs(r: int, c: int, i: int) -> bool:
+            if board[r][c] != word[i]:
+                return False
+            if i == L - 1:
+                return True
+
+            tmp = board[r][c]
+            board[r][c] = VIS
+
+            ni = i + 1
+            if r > 0 and board[r - 1][c] != VIS and dfs(r - 1, c, ni):
+                board[r][c] = tmp
+                return True
+            if r + 1 < m and board[r + 1][c] != VIS and dfs(r + 1, c, ni):
+                board[r][c] = tmp
+                return True
+            if c > 0 and board[r][c - 1] != VIS and dfs(r, c - 1, ni):
+                board[r][c] = tmp
+                return True
+            if c + 1 < n and board[r][c + 1] != VIS and dfs(r, c + 1, ni):
+                board[r][c] = tmp
+                return True
+
+            board[r][c] = tmp
+            return False
+
+        first = word[0]
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == first and dfs(r, c, 0):
+                    return True
+        return False

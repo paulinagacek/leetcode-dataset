@@ -1,0 +1,27 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build adjacency list and in-degree count for each course
+        adj = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize queue with courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        count = 0
+        while queue:
+            course = queue.popleft()
+            count += 1
+            
+            # Decrease the in-degree of all courses that depend on this one
+            for neighbor in adj[course]:
+                in_degree[neighbor] -= 1
+                # If a neighbor's in-degree becomes zero, add it to the queue
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If the number of processed courses equals numCourses, no cycle exists
+        return count == numCourses

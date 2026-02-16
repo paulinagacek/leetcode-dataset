@@ -1,4 +1,3 @@
-```python
 class Solution:
     def numDecodings(self, s: str) -> int:
         # If the string is empty or starts with '0', it cannot be decoded.
@@ -28,5 +27,3 @@ class Solution:
                 
         # The result is the number of ways to decode the entire string s.
         return dp[n]
-
-```

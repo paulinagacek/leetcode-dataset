@@ -1,0 +1,24 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token not in ("+", "-", "*", "/"):
+                stack.append(int(token))
+            else:
+                # The stack follows Last-In-First-Out (LIFO),
+                # so the second operand is popped first.
+                b = stack.pop()
+                a = stack.pop()
+                
+                if token == "+":
+                    stack.append(a + b)
+                elif token == "-":
+                    stack.append(a - b)
+                elif token == "*":
+                    stack.append(a * b)
+                elif token == "/":
+                    # In Python, int(a / b) truncates towards zero,
+                    # which is required for this problem.
+                    stack.append(int(a / b))
+        
+        return stack[0]

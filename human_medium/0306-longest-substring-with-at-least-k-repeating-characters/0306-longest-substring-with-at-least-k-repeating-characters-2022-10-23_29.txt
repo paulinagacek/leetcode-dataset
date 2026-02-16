@@ -1,9 +1,0 @@
-class Solution:
-    def longestSubstring(self, s: str, k: int) -> int:
-        if k > len(s):
-            return 0
-        for letter in set(s):
-            if s.count(letter) < k:
-                temp = s.split(letter)
-                return max(self.longestSubstring(division, k) for division in temp)
-        return len(s)

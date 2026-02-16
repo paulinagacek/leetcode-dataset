@@ -1,0 +1,5 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Using heapq.nlargest to find the k largest elements in O(n log k) time.
+        # This approach is memory-efficient and avoids a full sort of the array.
+        return heapq.nlargest(k, nums)[-1]

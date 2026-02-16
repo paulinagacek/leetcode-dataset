@@ -1,0 +1,36 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res: List[List[int]] = []
+        path: List[int] = []
+
+        def dfs(start: int, remain_k: int, remain_sum: int) -> None:
+            if remain_k == 0:
+                if remain_sum == 0:
+                    res.append(path.copy())
+                return
+
+            max_start = 10 - remain_k
+            for x in range(start, max_start + 1):
+                if x > remain_sum:
+                    break
+
+                # Prune using min/max achievable sums with remaining numbers
+                next_k = remain_k - 1
+                next_sum = remain_sum - x
+
+                min_possible = 0
+                if next_k > 0:
+                    min_possible = sum(range(x + 1, x + 1 + next_k))
+                    max_possible = sum(range(9 - next_k + 1, 10))
+                    if next_sum < min_possible or next_sum > max_possible:
+                        continue
+                else:
+                    if next_sum != 0:
+                        continue
+
+                path.append(x)
+                dfs(x + 1, next_k, next_sum)
+                path.pop()
+
+        dfs(1, k, n)
+        return res

@@ -1,9 +1,0 @@
-class Solution:
-    def getSum(self, a: int, b: int) -> int:
-        def myadd(c, d):
-            while d != 0:
-                c, d = c^d, (c&d)<<1
-            return c
-        if a < 0 and myadd(~a, 1) <= b or b < 0 and myadd(~b, 1) <= a:
-            return ~myadd(myadd(~a, ~b), 1)
-        return myadd(a, b)

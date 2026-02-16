@@ -1,4 +1,0 @@
-class Solution:
-    def deleteNode(self, node):
-        node.val=node.next.val    #Copying the next node data to current node data
-        node.next=node.next.next    #Copying the next node link field data to current node link field

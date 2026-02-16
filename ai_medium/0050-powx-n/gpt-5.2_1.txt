@@ -1,0 +1,17 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1.0
+
+        neg = n < 0
+        n = -n if neg else n
+
+        res = 1.0
+        base = x
+        while n:
+            if n & 1:
+                res *= base
+            base *= base
+            n >>= 1
+
+        return 1.0 / res if neg else res

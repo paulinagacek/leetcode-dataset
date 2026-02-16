@@ -1,9 +1,4 @@
-def dfs(b,i,j):
-		if -1<i<len(b) and -1<j<len(b[0]) and b[i][j]=="O":
-			b[i][j]="A"
-			dfs(b,i+1,j);dfs(b,i-1,j);dfs(b,i,j+1);dfs(b,i,j-1) #checking all the four neighbours of the cell
-	
-	class Solution:
+class Solution:
 		def solve(self, b: List[List[str]]) -> None:
 			if not b: return
 			y,x=len(b[0]),len(b)

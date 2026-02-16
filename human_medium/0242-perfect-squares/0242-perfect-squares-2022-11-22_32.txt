@@ -1,7 +1,0 @@
-class Solution:
-    gdp=[0]
-    def numSquares(self,n:int)->int:
-        dp,l=self.gdp,len(self.gdp)
-        for i in range(l,n+1):
-            dp.append(1+min(dp[i-j*j] for j in range(int(i**.5),0,-1)))
-        return dp[n]

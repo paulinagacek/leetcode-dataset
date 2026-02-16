@@ -1,9 +1,3 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
 class Solution:
     def merge(self, plist1: ListNode, list1: ListNode, plist2: ListNode, list2: ListNode, n, n2: int):
         elist1 = list2

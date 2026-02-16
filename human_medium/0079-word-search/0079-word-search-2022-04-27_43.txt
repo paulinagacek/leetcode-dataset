@@ -1,10 +1,3 @@
-DIRECTIONS = [
-    (-1, 0),
-    (0, -1),
-    (1, 0),
-    (0, 1)
-]
-
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         preWord = self.getPreWord(word)

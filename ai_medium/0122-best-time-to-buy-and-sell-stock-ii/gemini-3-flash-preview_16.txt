@@ -1,0 +1,11 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_p = 0
+        for i in range(1, len(prices)):
+            # If the price today is higher than yesterday, we capture that profit.
+            # This is equivalent to buying yesterday and selling today.
+            # Because we can sell and buy on the same day, this strategy covers
+            # long-term increases as a series of one-day gains.
+            if prices[i] > prices[i - 1]:
+                max_p += prices[i] - prices[i - 1]
+        return max_p

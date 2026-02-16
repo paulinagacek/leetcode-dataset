@@ -1,0 +1,31 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Build adjacency list and calculate in-degrees of all vertices
+        adj = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize queue with all vertices having in-degree 0
+        queue = deque([i for i, degree in enumerate(in_degree) if degree == 0])
+        
+        order = []
+        
+        while queue:
+            u = queue.popleft()
+            order.append(u)
+            
+            # For each neighbor, reduce its in-degree
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If in-degree becomes 0, add it to the queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+        
+        # If the ordering contains all courses, return it. Otherwise, return an empty list.
+        if len(order) == numCourses:
+            return order
+        else:
+            return []

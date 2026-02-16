@@ -1,4 +1,3 @@
-```python
 class Solution:
     def countAndSay(self, n: int) -> str:
         # Base case
@@ -26,5 +25,3 @@ class Solution:
             res = "".join(temp)
             
         return res
-
-```

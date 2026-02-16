@@ -1,16 +1,3 @@
-def solve(ind,s,dp):
-    if ind>=len(s):
-        return 1
-    if s[ind]==\'0\':
-        return 0
-    if ind==len(s)-1:return 1
-    if dp[ind]!=-1:
-        return dp[ind]
-    if s[ind]==\'1\' or (s[ind]==\'2\' and s[ind+1]<=\'6\'):
-        dp[ind] = solve(ind+1,s,dp)+solve(ind+2,s,dp)
-    else:
-        dp[ind]= solve(ind+1,s,dp)
-    return dp[ind]
 class Solution:
     def numDecodings(self, s: str) -> int:
         dp=[-1]*len(s)

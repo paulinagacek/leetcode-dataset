@@ -1,0 +1,29 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        # Start with the root node. The 'leftmost' node is used 
+        # to traverse down the levels of the tree.
+        leftmost = root
+        
+        while leftmost.left:
+            # Iterate through the nodes of the current level using the 'next' pointers 
+            # established in the previous level's iteration.
+            head = leftmost
+            while head:
+                # Connection 1: Connect the children of the current node
+                head.left.next = head.right
+                
+                # Connection 2: Connect the right child of the current node 
+                # to the left child of the next node in the same level.
+                if head.next:
+                    head.right.next = head.next.left
+                
+                # Move to the next node in the current level
+                head = head.next
+            
+            # Move to the next level
+            leftmost = leftmost.left
+            
+        return root

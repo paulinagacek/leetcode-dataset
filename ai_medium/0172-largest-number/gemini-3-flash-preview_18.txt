@@ -1,0 +1,27 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert integers to strings
+        nums_str = [str(num) for num in nums]
+        
+        # Define a custom comparator:
+        # We want to sort such that if combined string (a + b) is greater than (b + a), 
+        # then a should appear before b in the result.
+        def compare(n1, n2):
+            if n1 + n2 > n2 + n1:
+                return -1
+            elif n1 + n2 < n2 + n1:
+                return 1
+            else:
+                return 0
+        
+        # Sort the list using the custom comparison logic
+        nums_str.sort(key=cmp_to_key(compare))
+        
+        # Join the sorted strings
+        result = "".join(nums_str)
+        
+        # Handle the edge case where the largest number is "0" (e.g., [0, 0])
+        if result[0] == "0":
+            return "0"
+            
+        return result

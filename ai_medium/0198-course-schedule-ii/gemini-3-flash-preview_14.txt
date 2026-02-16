@@ -1,0 +1,34 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Adjacency list representation of the graph
+        adj = [[] for _ in range(numCourses)]
+        # Track the in-degree of each course
+        in_degree = [0] * numCourses
+        
+        # Populate adjacency list and in-degree counts
+        # prerequisites[i] = [ai, bi] means bi -> ai
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Queue for nodes with 0 in-degree (Kahn's algorithm)
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        order = []
+        
+        while queue:
+            u = queue.popleft()
+            order.append(u)
+            
+            # Reduce in-degree for all neighbors
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If in-degree becomes 0, add to queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+        
+        # If the ordering contains all courses, return it; otherwise, a cycle exists
+        if len(order) == numCourses:
+            return order
+        else:
+            return []

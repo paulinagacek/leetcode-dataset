@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # If either number is "0", the product is "0"
@@ -33,5 +32,3 @@ class Solution:
         
         # The res array might have a leading zero if the product is smaller than m + n digits
         return res_str.lstrip('0')
-
-```

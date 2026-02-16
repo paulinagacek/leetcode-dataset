@@ -1,0 +1,23 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        res = []
+        queue = deque([root])
+        
+        while queue:
+            level_size = len(queue)
+            for i in range(level_size):
+                node = queue.popleft()
+                # If it's the rightmost node at the current level, add its value to result
+                if i == level_size - 1:
+                    res.append(node.val)
+                
+                # Visit children from left to right to ensure the rightmost node is last in queue
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+        return res

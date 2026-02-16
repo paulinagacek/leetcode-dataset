@@ -1,0 +1,29 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token == "+":
+                # Addition is commutative
+                stack.append(stack.pop() + stack.pop())
+            elif token == "-":
+                # Subtraction is not commutative: (a - b)
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                # Multiplication is commutative
+                stack.append(stack.pop() * stack.pop())
+            elif token == "/":
+                # Division is not commutative: (a / b)
+                # The problem requires truncation toward zero.
+                # In Python 3, a / b returns a float.
+                # int(float) truncates towards zero.
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(int(a / b))
+            else:
+                # Token is an integer
+                stack.append(int(token))
+        
+        # The result is the last remaining element in the stack
+        return stack[0]

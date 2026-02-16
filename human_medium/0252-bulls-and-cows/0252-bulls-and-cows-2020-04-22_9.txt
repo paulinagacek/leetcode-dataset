@@ -1,9 +1,0 @@
-from collections import Counter
-
-class Solution:
-    def getHint(self, secret: str, guess: str) -> str:
-        
-        countA = len(set(enumerate(secret)).intersection(set(enumerate(guess))))
-        countB = len(list((Counter(secret) & Counter(guess)).elements()))
-        
-        return "{}A{}B".format(countA, countB-countA)

@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         # If the grid is empty or the starting cell is an obstacle, no paths exist.
@@ -30,5 +27,3 @@ class Solution:
         
         # The result is the value in the last cell of the DP array.
         return dp[-1]
-
-```

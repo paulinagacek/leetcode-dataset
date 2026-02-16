@@ -1,4 +1,4 @@
-cclass Solution {
+class Solution {
 public:
     string maxPal(string &s, int start) {
  

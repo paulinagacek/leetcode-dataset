@@ -1,0 +1,20 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        # Initialize a bytearray with 1 (True) for all numbers less than n
+        is_prime = bytearray([1]) * n
+        is_prime[0] = is_prime[1] = 0
+        
+        # Mark all even numbers starting from 4 as not prime
+        is_prime[4:n:2] = bytearray(len(range(4, n, 2)))
+        
+        # Sieve of Eratosthenes: mark multiples of each prime p starting from p*p
+        for p in range(3, int(n**0.5) + 1, 2):
+            if is_prime[p]:
+                # We skip even multiples because they are already marked by the 2nd step
+                is_prime[p*p:n:2*p] = bytearray(len(range(p*p, n, 2*p)))
+        
+        # count(1) counts the number of prime markers remaining
+        return is_prime.count(1)

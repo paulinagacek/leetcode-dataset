@@ -1,4 +1,3 @@
-from collections import Counter
 class Solution(object):
     def findRepeatedDnaSequences(self, s):
         freq = Counter([s[i:i+10] for i in range(len(s)-9)])

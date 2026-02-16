@@ -1,0 +1,29 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build adjacency list and in-degree array
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for course, pre in prerequisites:
+            adj[pre].append(course)
+            in_degree[course] += 1
+            
+        # Initialize queue with courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Count of courses we were able to take
+        visited_count = 0
+        
+        while queue:
+            u = queue.popleft()
+            visited_count += 1
+            
+            # For every course that depends on course 'u'
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If all prerequisites for course 'v' are satisfied
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If we could take all courses, return True
+        return visited_count == numCourses

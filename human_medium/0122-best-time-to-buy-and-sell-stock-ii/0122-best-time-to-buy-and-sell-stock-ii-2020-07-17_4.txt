@@ -1,4 +1,3 @@
-# A.1: Clearest Logic
 class Solution:
     def maxProfit(self, prices):
         best = 0

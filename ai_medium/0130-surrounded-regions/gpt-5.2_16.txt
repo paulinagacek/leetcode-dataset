@@ -1,0 +1,34 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        if not board or not board[0]:
+            return
+
+        m, n = len(board), len(board[0])
+        q = deque()
+
+        def enqueue_if_o(r: int, c: int) -> None:
+            if 0 <= r < m and 0 <= c < n and board[r][c] == 'O':
+                board[r][c] = '#'
+                q.append((r, c))
+
+        for c in range(n):
+            enqueue_if_o(0, c)
+            enqueue_if_o(m - 1, c)
+        for r in range(m):
+            enqueue_if_o(r, 0)
+            enqueue_if_o(r, n - 1)
+
+        while q:
+            r, c = q.popleft()
+            enqueue_if_o(r - 1, c)
+            enqueue_if_o(r + 1, c)
+            enqueue_if_o(r, c - 1)
+            enqueue_if_o(r, c + 1)
+
+        for r in range(m):
+            row = board[r]
+            for c in range(n):
+                if row[c] == 'O':
+                    row[c] = 'X'
+                elif row[c] == '#':
+                    row[c] = 'O'

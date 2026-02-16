@@ -1,0 +1,42 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.root = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['$'] = True
+
+    def search(self, word: str) -> bool:
+        n = len(word)
+        
+        # Fast path for search without dots
+        if '.' not in word:
+            node = self.root
+            for char in word:
+                if char not in node:
+                    return False
+                node = node[char]
+            return '$' in node
+
+        def dfs(idx, node):
+            for i in range(idx, n):
+                char = word[i]
+                if char == '.':
+                    # If current character is a wildcard, try all possible paths
+                    for key in node:
+                        if key != '$' and dfs(i + 1, node[key]):
+                            return True
+                    return False
+                # Regular character must exist in the Trie
+                if char not in node:
+                    return False
+                node = node[char]
+            # Verify if current Trie path marks the end of a word
+            return '$' in node
+
+        return dfs(0, self.root)

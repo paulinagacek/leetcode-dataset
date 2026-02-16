@@ -1,0 +1,36 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # dummy node provides a stable reference to the start of the list
+        dummy = ListNode(0)
+        dummy.next = head
+        
+        # last_sorted is the tail of the sorted portion of the list
+        last_sorted = head
+        # curr is the next node to be inserted into the sorted portion
+        curr = head.next
+        
+        while curr:
+            if last_sorted.val <= curr.val:
+                # If the current node is already in the correct relative position,
+                # just advance last_sorted
+                last_sorted = curr
+            else:
+                # Find the location in the sorted portion to insert curr
+                prev = dummy
+                while prev.next.val <= curr.val:
+                    prev = prev.next
+                
+                # Remove curr from its current position
+                last_sorted.next = curr.next
+                
+                # Insert curr after prev
+                curr.next = prev.next
+                prev.next = curr
+            
+            # Move to the next node in the unsorted portion
+            curr = last_sorted.next
+            
+        return dummy.next

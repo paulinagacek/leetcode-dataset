@@ -1,0 +1,21 @@
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional['TreeNode']]:
+        from functools import lru_cache
+
+        @lru_cache(None)
+        def build(lo: int, hi: int) -> List[Optional['TreeNode']]:
+            if lo > hi:
+                return [None]
+            res: List[Optional['TreeNode']] = []
+            for root_val in range(lo, hi + 1):
+                lefts = build(lo, root_val - 1)
+                rights = build(root_val + 1, hi)
+                for l in lefts:
+                    for r in rights:
+                        root = TreeNode(root_val)
+                        root.left = l
+                        root.right = r
+                        res.append(root)
+            return res
+
+        return build(1, n)

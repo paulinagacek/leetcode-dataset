@@ -1,5 +1,3 @@
-# Brute force - This solution did not work for me due to max time met. This will work on a simple/smaller array but not on a 1000 number array. And hence the timeout during code submission.  
-
 class Solution(object):
     def twoSum(self, nums, target):        
         for i in range(len(nums)): # First traversal loop

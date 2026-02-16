@@ -1,8 +1,0 @@
-from collections import Counter
-
-class Solution:
-    def longestSubstring(self, s: str, k: int) -> int:
-        for char, count in Counter(s).items():
-            if count < k:
-                return max(self.longestSubstring(s, k) for s in s.split(char))
-        return len(s)

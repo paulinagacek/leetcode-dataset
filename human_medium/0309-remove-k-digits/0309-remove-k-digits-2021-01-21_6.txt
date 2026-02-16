@@ -1,8 +1,0 @@
-result = []
-for i in range(len(nums)):
-	curr = nums[i]
-	while len(result) and result[-1] > curr and len(result) - 1 + len(nums) - i >= k:
-		result.pop()
-	if len(result) < k:
-		result.append(curr)                
-return result

@@ -1,4 +1,3 @@
-# O(N) | O(1)
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         if head is None or head.next is None:

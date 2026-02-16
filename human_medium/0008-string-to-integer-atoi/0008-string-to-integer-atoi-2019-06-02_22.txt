@@ -1,5 +1,3 @@
-import re
-
 class Solution(object):
     def myAtoi(self, str):
         PATTERN = r"^(\\+|\\-)?[0-9]\\d*"

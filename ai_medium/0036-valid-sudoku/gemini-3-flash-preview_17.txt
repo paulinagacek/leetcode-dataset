@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         # Initialize sets to track numbers seen in each row, column, and 3x3 box
@@ -29,5 +26,3 @@ class Solution:
                 boxes[box_idx].add(num)
         
         return True
-
-```

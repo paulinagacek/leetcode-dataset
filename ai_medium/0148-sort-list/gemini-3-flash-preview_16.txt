@@ -1,0 +1,53 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Get the length of the list
+        length, curr = 0, head
+        while curr:
+            length += 1
+            curr = curr.next
+            
+        dummy = ListNode(0, head)
+        step = 1
+        while step < length:
+            prev, curr = dummy, dummy.next
+            while curr:
+                left = curr
+                right = self._split(left, step)
+                curr = self._split(right, step)
+                merged_h, merged_t = self._merge(left, right)
+                prev.next = merged_h
+                prev = merged_t
+            step *= 2
+        return dummy.next
+        
+    def _split(self, head, step):
+        curr = head
+        for _ in range(step - 1):
+            if not curr: 
+                break
+            curr = curr.next
+        
+        if not curr: 
+            return None
+        
+        next_part = curr.next
+        curr.next = None
+        return next_part
+        
+    def _merge(self, l1, l2):
+        dummy = ListNode(0)
+        curr = dummy
+        while l1 and l2:
+            if l1.val < l2.val:
+                curr.next, l1 = l1, l1.next
+            else:
+                curr.next, l2 = l2, l2.next
+            curr = curr.next
+        
+        curr.next = l1 or l2
+        while curr.next:
+            curr = curr.next
+        return dummy.next, curr

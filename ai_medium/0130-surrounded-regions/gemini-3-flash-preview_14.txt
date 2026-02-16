@@ -1,0 +1,46 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        queue = collections.deque()
+        
+        # Identify 'O' cells on the border and mark them with '#'
+        # Use a BFS approach to mark all border-connected 'O' regions
+        for r in range(m):
+            if board[r][0] == 'O':
+                board[r][0] = '#'
+                queue.append((r, 0))
+            if n > 1 and board[r][n - 1] == 'O':
+                board[r][n - 1] = '#'
+                queue.append((r, n - 1))
+        
+        for c in range(1, n - 1):
+            if board[0][c] == 'O':
+                board[0][c] = '#'
+                queue.append((0, c))
+            if m > 1 and board[m - 1][c] == 'O':
+                board[m - 1][c] = '#'
+                queue.append((m - 1, c))
+                
+        # Traverse the board using BFS to mark all connected 'O' cells
+        while queue:
+            r, c = queue.popleft()
+            for nr, nc in ((r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)):
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = '#'
+                    queue.append((nr, nc))
+        
+        # Iterate through the board to finalise changes
+        # 'O' cells are surrounded and must be captured ('X')
+        # '#' cells are border-connected and must be restored ('O')
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '#':
+                    board[r][c] = 'O'

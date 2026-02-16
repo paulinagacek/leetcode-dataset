@@ -1,0 +1,19 @@
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if node is None:
+            return None
+
+        clones = {node: Node(node.val)}
+        q = deque([node])
+
+        while q:
+            cur = q.popleft()
+            cur_clone = clones[cur]
+
+            for nei in cur.neighbors:
+                if nei not in clones:
+                    clones[nei] = Node(nei.val)
+                    q.append(nei)
+                cur_clone.neighbors.append(clones[nei])
+
+        return clones[node]

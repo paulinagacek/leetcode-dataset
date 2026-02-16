@@ -1,9 +1,0 @@
-class Solution:
-    def rob(self, root: TreeNode) -> int:
-        def dfs(node):
-            if not node: return 0, 0
-            left, right = dfs(node.left), dfs(node.right)
-            v_take = node.val + left[1] + right[1]
-            v_not_take = max(left) + max(right)
-            return v_take, v_not_take
-        return max(dfs(root))

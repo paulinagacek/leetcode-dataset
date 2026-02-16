@@ -1,4 +1,3 @@
-# simply add all the positive profit from the adjacent differences 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         res = 0

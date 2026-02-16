@@ -1,8 +1,0 @@
-class NestedIterator:
-    def __init__(self, nestedList: [NestedInteger]):
-        self.iterator, self.flatten = 0, re.findall("[-0-9]+,{1}", str(nestedList))
-    def next(self) -> int:
-        self.iterator += 1
-        return int(self.flatten[self.iterator - 1][:-1])
-    def hasNext(self) -> bool:
-        if self.iterator < len(self.flatten): return True

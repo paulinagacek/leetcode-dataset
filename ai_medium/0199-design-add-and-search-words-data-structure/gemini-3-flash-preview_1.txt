@@ -1,0 +1,48 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initializes the WordDictionary object.
+        """
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds word to the data structure.
+        The trie is represented using nested dictionaries.
+        Each character points to another dictionary.
+        The key None is used as a marker for the end of a word.
+        """
+        node = self.trie
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node[None] = None
+
+    def search(self, word: str) -> bool:
+        """
+        Returns true if there is any string in the data structure that matches word.
+        word may contain dots '.' that can be matched with any letter.
+        """
+        n = len(word)
+        
+        def dfs(idx, node):
+            curr = node
+            for i in range(idx, n):
+                char = word[i]
+                if char == '.':
+                    # If we encounter a '.', we must explore all possible paths
+                    # in the current trie level except for the terminal None key.
+                    for key, child in curr.items():
+                        if key is not None and dfs(i + 1, child):
+                            return True
+                    return False
+                # Regular character match: move to the next level of the trie.
+                if char not in curr:
+                    return False
+                curr = curr[char]
+            # After iterating through the word, check if we reached a terminal node.
+            return None in curr
+        
+        return dfs(0, self.trie)

@@ -1,14 +1,3 @@
-def compare(a: str, b: str):
-    # Check what would be larger after concatenating.
-    if a + b > b + a:
-        return -1
-    else:
-        return 1
-
-from functools import cmp_to_key
-
-key_fn = cmp_to_key(compare)
-
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
         for i, n in enumerate(nums):

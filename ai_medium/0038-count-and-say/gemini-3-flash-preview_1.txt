@@ -1,4 +1,3 @@
-```python
 class Solution:
     def countAndSay(self, n: int) -> str:
         if n == 1:
@@ -19,5 +18,3 @@ class Solution:
             curr = "".join(next_str)
             
         return curr
-
-```

@@ -1,11 +1,3 @@
-```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         idx_map = {val: i for i, val in enumerate(inorder)}
@@ -26,4 +18,3 @@ class Solution:
             return root
             
         return build(0, len(inorder) - 1, 0, len(postorder) - 1)
-```

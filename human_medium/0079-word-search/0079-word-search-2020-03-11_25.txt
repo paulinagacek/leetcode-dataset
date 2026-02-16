@@ -1,25 +1,3 @@
-from collections import defaultdict
-
-
-class TrieNode:
-    
-    def __init__(self, end_of_word=False):
-        self.end_of_word = end_of_word
-        self.children = defaultdict(TrieNode)
-    
-
-class Trie:
-    
-    def __init__(self):
-        self.root = TrieNode()
-    
-    def insert(self, word):
-        current = self.root
-        for character in word:
-            current = current.children[character]
-        current.end_of_word = True
-        
-        
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         #valid both inputs

@@ -1,0 +1,32 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # dummy node to serve as the start of the sorted list
+        dummy = ListNode(0)
+        dummy.next = head
+        last_sorted = head # last node of the sorted sequence
+        curr = head.next   # current node to be inserted
+        
+        while curr:
+            if last_sorted.val <= curr.val:
+                # If the current node is already in the correct order,
+                # just advance the last_sorted pointer.
+                last_sorted = last_sorted.next
+            else:
+                # Otherwise, find the correct position to insert 'curr'.
+                # We start the search from the beginning of the sorted list.
+                prev = dummy
+                while prev.next.val < curr.val:
+                    prev = prev.next
+                
+                # Remove 'curr' from its current position and insert it after 'prev'.
+                last_sorted.next = curr.next
+                curr.next = prev.next
+                prev.next = curr
+            
+            # Move on to the next element in the original list.
+            curr = last_sorted.next
+            
+        return dummy.next

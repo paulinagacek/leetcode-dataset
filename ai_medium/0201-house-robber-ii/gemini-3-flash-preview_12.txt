@@ -1,0 +1,21 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            # Standard House Robber solution for linear arrangement
+            prev_max = 0
+            curr_max = 0
+            for amount in houses:
+                # The recurrence: max(rob current + rob two houses back, rob previous house)
+                prev_max, curr_max = curr_max, max(prev_max + amount, curr_max)
+            return curr_max
+        
+        # In a circular arrangement, we cannot rob both the first and the last house.
+        # This means the solution is the maximum of:
+        # 1. Robbing houses excluding the last house: nums[0...n-2]
+        # 2. Robbing houses excluding the first house: nums[1...n-1]
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

@@ -1,0 +1,23 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        res = []
+        current_level = [root]
+        
+        while current_level:
+            # The last node in the current level is the rightmost visible node
+            res.append(current_level[-1].val)
+            
+            next_level = []
+            for node in current_level:
+                # Standard BFS: process children in order (left then right)
+                # to maintain their relative position in the next_level list.
+                if node.left:
+                    next_level.append(node.left)
+                if node.right:
+                    next_level.append(node.right)
+            current_level = next_level
+            
+        return res

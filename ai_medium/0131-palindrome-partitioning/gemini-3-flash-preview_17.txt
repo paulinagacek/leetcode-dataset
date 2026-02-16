@@ -1,0 +1,24 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        n = len(s)
+        
+        def is_palindrome(start, end):
+            while start < end:
+                if s[start] != s[end]:
+                    return False
+                start += 1
+                end -= 1
+            return True
+        
+        def backtrack(start, path):
+            if start == n:
+                res.append(list(path))
+                return
+            
+            for end in range(start, n):
+                if is_palindrome(start, end):
+                    backtrack(end + 1, path + [s[start : end + 1]])
+                    
+        backtrack(0, [])
+        return res

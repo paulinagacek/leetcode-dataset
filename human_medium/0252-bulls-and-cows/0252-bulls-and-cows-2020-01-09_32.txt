@@ -1,9 +1,0 @@
-def getHint(secret, guess):
-    from collections import Counter
-    s_dic = Counter(secret)
-    g_dic = Counter(guess)
-    A = sum([s == g for s, g in zip(secret, guess)])
-    common = sum((s_dic & g_dic).values())
-    B = common - A
-    ans = str(A) + \'A\' + str(B) + \'B\'
-    return ans

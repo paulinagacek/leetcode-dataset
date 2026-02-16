@@ -1,4 +1,3 @@
-```python
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if not intervals:
@@ -19,5 +18,3 @@ class Solution:
                 merged[-1][1] = max(merged[-1][1], interval[1])
 
         return merged
-
-```

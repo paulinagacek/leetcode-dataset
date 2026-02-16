@@ -1,4 +1,3 @@
-# Faster than 98% | Recursive |
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         def findCombinations(candidates, target, curr, res):

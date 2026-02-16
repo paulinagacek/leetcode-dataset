@@ -1,5 +1,3 @@
-# Approach 1: Recusrively call bfs on the node and its level
-
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         levels = []

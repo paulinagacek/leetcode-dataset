@@ -1,4 +1,0 @@
-class Solution:
-    def minMoves2(self, nums: List[int]) -> int:
-        med = sorted(nums)[len(nums)//2]
-        return int(sum([abs(med - num) for num in nums]))

@@ -1,0 +1,28 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token == "+":
+                # Addition is commutative: a + b = b + a
+                stack.append(stack.pop() + stack.pop())
+            elif token == "-":
+                # Subtraction order matters: the first popped is the right operand
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                # Multiplication is commutative: a * b = b * a
+                stack.append(stack.pop() * stack.pop())
+            elif token == "/":
+                # Division order matters: the first popped is the right operand
+                b = stack.pop()
+                a = stack.pop()
+                # The division between two integers always truncates toward zero.
+                # In Python, int(a / b) performs this truncation accurately for 32-bit integers.
+                stack.append(int(a / b))
+            else:
+                # The token is an integer (positive or negative)
+                stack.append(int(token))
+        
+        # After evaluating a valid RPN expression, the final result is the only element in the stack.
+        return stack[0]

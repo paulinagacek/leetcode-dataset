@@ -1,5 +1,3 @@
-# Runtime: 118 ms, faster than 74.17% of Python3 online submissions for Group Anagrams.
-# Memory Usage: 17.4 MB, less than 74.19% of Python3 online submissions for Group Anagrams.
 class Solution:
     def groupAnagrams(self, strs):
         result = {}

@@ -1,0 +1,51 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initializes the WordDictionary object with an empty Trie.
+        """
+        self.root = {}
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds word to the data structure. Each word is stored in a Trie.
+        """
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        # Use '$' to mark the end of a valid word.
+        node['$'] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns True if the word is in the data structure, False otherwise.
+        Supports '.' as a wildcard for any character.
+        """
+        n = len(word)
+
+        def dfs(curr, i):
+            """
+            Depth First Search to handle potential wildcard characters.
+            """
+            for j in range(i, n):
+                char = word[j]
+                if char == ".":
+                    # If current character is a dot, iterate through all possible 
+                    # children nodes (excluding the end marker '$').
+                    for char_key, child_node in curr.items():
+                        if char_key != '$' and dfs(child_node, j + 1):
+                            return True
+                    # If none of the paths match, return False.
+                    return False
+                
+                # If character is not a dot, standard Trie traversal.
+                if char not in curr:
+                    return False
+                curr = curr[char]
+            
+            # After checking all characters, confirm if the current node marks a word end.
+            return '$' in curr
+
+        return dfs(self.root, 0)

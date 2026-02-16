@@ -1,11 +1,3 @@
-from collections import deque, defaultdict
-
-# create a graph node for topological sorting.
-class GNode:
-    def __init__(self):
-        self.inDegree = 0
-        self.outNodes = []
-        
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         # instantiate a graph

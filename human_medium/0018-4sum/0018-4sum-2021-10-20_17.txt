@@ -1,4 +1,3 @@
-# Has a problem though...
 class Solution:
     def fourSum(self, nums, target):
         found = set()

@@ -1,0 +1,24 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize variables with the first element of the array.
+        # curr_max and curr_min track the maximum and minimum product subarray ending at the current position.
+        res = curr_max = curr_min = nums[0]
+        
+        for i in range(1, len(nums)):
+            n = nums[i]
+            
+            # Since n could be negative, we compare n with its products with both 
+            # the current maximum and the current minimum.
+            # A negative n multiplied by a negative minimum can produce a large positive number.
+            candidates = (n, n * curr_max, n * curr_min)
+            curr_max = max(candidates)
+            curr_min = min(candidates)
+            
+            # Update the global maximum result.
+            if curr_max > res:
+                res = curr_max
+                
+        return res

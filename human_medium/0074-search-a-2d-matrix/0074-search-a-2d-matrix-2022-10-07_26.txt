@@ -1,4 +1,3 @@
-#----------------------------DO UPVOTE IF IT HELPS YOU---------------------------------
 class Solution:
     def searchMatrix(self, matrix, target):
         l = 0 

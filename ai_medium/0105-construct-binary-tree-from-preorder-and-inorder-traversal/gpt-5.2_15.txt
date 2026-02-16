@@ -1,0 +1,28 @@
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional['TreeNode']:
+        if not preorder:
+            return None
+
+        idx = {v: i for i, v in enumerate(inorder)}
+        n = len(preorder)
+
+        root = TreeNode(preorder[0])
+        stack = [root]
+        in_i = 0
+
+        for pre_i in range(1, n):
+            node_val = preorder[pre_i]
+            node = TreeNode(node_val)
+
+            if idx[stack[-1].val] != in_i:
+                stack[-1].left = node
+                stack.append(node)
+            else:
+                last = None
+                while stack and idx[stack[-1].val] == in_i:
+                    last = stack.pop()
+                    in_i += 1
+                last.right = node
+                stack.append(node)
+
+        return root

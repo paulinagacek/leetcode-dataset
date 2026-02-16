@@ -1,0 +1,22 @@
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        clones = {}
+
+        def dfs(curr):
+            if curr in clones:
+                return clones[curr]
+            
+            # Create a clone for the current node
+            copy = Node(curr.val)
+            clones[curr] = copy
+            
+            # Recursively clone all neighbors
+            for neighbor in curr.neighbors:
+                copy.neighbors.append(dfs(neighbor))
+            
+            return copy
+
+        return dfs(node)

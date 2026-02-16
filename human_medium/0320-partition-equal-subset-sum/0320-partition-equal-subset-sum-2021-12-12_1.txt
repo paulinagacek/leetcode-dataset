@@ -1,5 +1,0 @@
-class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-	    if sum(nums)%2:  # or if sum(nums)&1
-		    return False
-		# main logic here

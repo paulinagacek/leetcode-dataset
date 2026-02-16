@@ -1,0 +1,26 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        result = []
+        
+        def dfs(node, current_path, current_sum):
+            if not node:
+                return
+            
+            # Add current node value to the path
+            current_path.append(node.val)
+            
+            # Check if current node is a leaf and the path sum matches targetSum
+            if not node.left and not node.right and current_sum + node.val == targetSum:
+                result.append(list(current_path))
+            
+            # Continue traversal to child nodes
+            if node.left:
+                dfs(node.left, current_path, current_sum + node.val)
+            if node.right:
+                dfs(node.right, current_path, current_sum + node.val)
+            
+            # Backtrack: remove current node from path before returning
+            current_path.pop()
+            
+        dfs(root, [], 0)
+        return result

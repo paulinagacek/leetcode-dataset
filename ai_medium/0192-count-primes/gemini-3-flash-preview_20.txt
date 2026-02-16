@@ -1,0 +1,22 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 3:
+            return 0
+        
+        # Initialize a bytearray with 1 (representing prime) of size n
+        primes = bytearray([1]) * n
+        # 0 and 1 are not prime numbers
+        primes[0] = primes[1] = 0
+        
+        # Mark all even numbers starting from 4 as not prime
+        primes[4::2] = bytearray(len(range(4, n, 2)))
+        
+        # Sieve of Eratosthenes for odd numbers up to sqrt(n)
+        for i in range(3, int(n**0.5) + 1, 2):
+            if primes[i]:
+                # Starting from i*i, mark all odd multiples of i as not prime
+                # Step is 2*i to skip even multiples which are already marked
+                primes[i*i : n : 2*i] = bytearray(len(range(i*i, n, 2*i)))
+                
+        # The number of set bits (1s) in the bytearray is the prime count
+        return primes.count(1)

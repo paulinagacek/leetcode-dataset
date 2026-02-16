@@ -1,0 +1,22 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert integers to strings
+        strs = [str(num) for num in nums]
+        
+        # Define a custom comparator to sort strings based on concatenation results
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y < y + x:
+                return 1
+            else:
+                return 0
+        
+        # Sort the list using the custom comparator
+        strs.sort(key=cmp_to_key(compare))
+        
+        # Join the sorted strings
+        result = "".join(strs)
+        
+        # If the largest number is "0", return "0" (e.g., in case of [0, 0])
+        return "0" if result[0] == "0" else result

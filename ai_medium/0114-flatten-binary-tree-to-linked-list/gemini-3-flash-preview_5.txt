@@ -1,0 +1,25 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        curr = root
+        while curr:
+            if curr.left:
+                # Find the rightmost node in the left subtree.
+                # In a pre-order traversal, the right subtree of the current node
+                # follows the rightmost node of the current node's left subtree.
+                last = curr.left
+                while last.right:
+                    last = last.right
+                
+                # Rewire the nodes:
+                # 1. Attach the current right subtree to the right of the rightmost node of the left subtree.
+                last.right = curr.right
+                # 2. Move the entire left subtree to the right.
+                curr.right = curr.left
+                # 3. Set the left child to None.
+                curr.left = None
+            
+            # Move on to the next node, which is now always the right child.
+            curr = curr.right

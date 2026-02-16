@@ -1,0 +1,25 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # result, current_max, and current_min are initialized with the first element
+        res = nums[0]
+        cur_max = nums[0]
+        cur_min = nums[0]
+        
+        for i in range(1, len(nums)):
+            num = nums[i]
+            
+            # When multiplied by a negative number, the max becomes the min and vice versa
+            if num < 0:
+                cur_max, cur_min = cur_min, cur_max
+            
+            # Update current max and min products ending at the current element
+            cur_max = max(num, cur_max * num)
+            cur_min = min(num, cur_min * num)
+            
+            # Update the global maximum product
+            res = max(res, cur_max)
+            
+        return res

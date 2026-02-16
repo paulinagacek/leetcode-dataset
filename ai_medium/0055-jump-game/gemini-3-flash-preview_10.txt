@@ -1,4 +1,3 @@
-```python
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         max_reachable = 0
@@ -14,4 +13,3 @@ class Solution:
                 return True
                 
         return max_reachable >= last_index
-```

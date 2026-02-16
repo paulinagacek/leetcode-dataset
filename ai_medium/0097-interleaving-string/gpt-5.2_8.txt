@@ -1,0 +1,23 @@
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        n1, n2 = len(s1), len(s2)
+        if n1 + n2 != len(s3):
+            return False
+
+        if n2 > n1:
+            s1, s2 = s2, s1
+            n1, n2 = n2, n1
+
+        dp = [False] * (n2 + 1)
+        dp[0] = True
+
+        for j in range(1, n2 + 1):
+            dp[j] = dp[j - 1] and s2[j - 1] == s3[j - 1]
+
+        for i in range(1, n1 + 1):
+            dp[0] = dp[0] and s1[i - 1] == s3[i - 1]
+            for j in range(1, n2 + 1):
+                k = i + j - 1
+                dp[j] = (dp[j] and s1[i - 1] == s3[k]) or (dp[j - 1] and s2[j - 1] == s3[k])
+
+        return dp[n2]

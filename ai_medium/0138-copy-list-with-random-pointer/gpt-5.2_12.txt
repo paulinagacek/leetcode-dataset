@@ -1,0 +1,31 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+
+        # 1) Interleave copied nodes with original nodes
+        cur = head
+        while cur:
+            nxt = cur.next
+            copy = Node(cur.val, nxt, None)
+            cur.next = copy
+            cur = nxt
+
+        # 2) Assign random pointers for copied nodes
+        cur = head
+        while cur:
+            copy = cur.next
+            copy.random = cur.random.next if cur.random else None
+            cur = copy.next
+
+        # 3) Detach the copied list from the interleaved list
+        cur = head
+        copy_head = head.next
+        while cur:
+            copy = cur.next
+            nxt = copy.next
+            cur.next = nxt
+            copy.next = nxt.next if nxt else None
+            cur = nxt
+
+        return copy_head

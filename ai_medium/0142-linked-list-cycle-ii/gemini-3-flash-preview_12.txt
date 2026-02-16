@@ -1,0 +1,28 @@
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return None
+        
+        slow = head
+        fast = head
+        
+        # Phase 1: Determine if a cycle exists using Floyd's Tortoise and Hare
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                # Cycle detected
+                break
+        else:
+            # No cycle found
+            return None
+            
+        # Phase 2: Find the entry point of the cycle
+        # Reset one pointer to the head and move both at the same pace
+        ptr1 = head
+        ptr2 = slow
+        while ptr1 != ptr2:
+            ptr1 = ptr1.next
+            ptr2 = ptr2.next
+            
+        return ptr1

@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # If either number is "0", the product is "0"
@@ -36,4 +35,3 @@ class Solution:
         # Convert the digits to characters and join them to form the final string
         # map(str, ...) is used on single-digit integers to satisfy output requirements
         return "".join(map(str, res[start:]))
-```

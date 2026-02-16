@@ -1,2 +1,0 @@
-root.left = recursion(root.left)
-# if the return value is not the original root.left, then root.left is deleted

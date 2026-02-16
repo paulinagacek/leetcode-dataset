@@ -1,0 +1,29 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        # Start with the root node. The current level is the level of 'leftmost'.
+        leftmost = root
+        
+        # Since we are given a perfect binary tree, if 'leftmost.left' exists,
+        # it means there is a next level to process.
+        while leftmost.left:
+            # Iterate through the nodes of the current level to establish
+            # 'next' pointers for the level below it.
+            head = leftmost
+            while head:
+                # Connection 1: Children of the same parent
+                head.left.next = head.right
+                
+                # Connection 2: Children of adjacent parents
+                if head.next:
+                    head.right.next = head.next.left
+                
+                # Move to the next node in the current level
+                head = head.next
+            
+            # Move to the leftmost node of the next level
+            leftmost = leftmost.left
+            
+        return root

@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        prev2 = 0  # Represents the max money robbed excluding the previous house
+        prev1 = 0  # Represents the max money robbed including/excluding the previous house
+        
+        for amount in nums:
+            # At each house, the maximum we can have is:
+            # max(rob current house + total from two houses ago, max from previous house)
+            current = max(prev1, prev2 + amount)
+            prev2 = prev1
+            prev1 = current
+            
+        return prev1

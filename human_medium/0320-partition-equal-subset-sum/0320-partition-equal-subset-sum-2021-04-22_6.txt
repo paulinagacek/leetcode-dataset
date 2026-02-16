@@ -1,5 +1,0 @@
-def canPartition(nums):
-    dp = {0}
-    for num in nums:
-        dp = {num - i for i in dp} | {num + i for i in dp} 
-    return 0 in dp

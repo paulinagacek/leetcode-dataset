@@ -1,9 +1,3 @@
-```python
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
         # Initialize dummy heads for the two partitions
@@ -33,4 +27,3 @@ class Solution:
         
         # The head of the modified list is the node after the less_head dummy
         return less_head.next
-```

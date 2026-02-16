@@ -1,6 +1,3 @@
-# leetcode will even work without this but on other platforms you may need to import this to use heapq
-import heapq  
-
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
 	

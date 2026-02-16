@@ -1,5 +1,3 @@
-from functools import lru_cache
-
 class Solution:    
     def generateTrees(self, n: int) -> List[TreeNode]:
         @lru_cache(None)

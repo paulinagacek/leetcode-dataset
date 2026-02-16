@@ -1,0 +1,28 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        dummy = ListNode(0)
+        dummy.next = head
+        curr = head
+        
+        while curr.next:
+            # If the next element is already in the correct relative position, skip it
+            if curr.val <= curr.next.val:
+                curr = curr.next
+            else:
+                # Element needs to be moved
+                temp = curr.next
+                curr.next = temp.next
+                
+                # Start searching from the beginning of the sorted portion
+                prev = dummy
+                while prev.next.val < temp.val:
+                    prev = prev.next
+                
+                # Insert temp into the sorted portion
+                temp.next = prev.next
+                prev.next = temp
+                
+        return dummy.next

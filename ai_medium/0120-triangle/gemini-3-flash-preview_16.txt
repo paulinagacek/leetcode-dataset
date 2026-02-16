@@ -1,0 +1,21 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        # Get the number of rows in the triangle
+        n = len(triangle)
+        
+        # Initialize the DP array with the values of the last row
+        # This array will store the minimum path sum from the current point to the bottom
+        # We start with the bottom-most row as our base case.
+        dp = triangle[-1][:]
+        
+        # Traverse the triangle from the second-to-last row upwards to the top
+        for i in range(n - 2, -1, -1):
+            # For each element in the current row, update the DP array
+            # The current row 'i' has exactly 'i + 1' elements
+            for j in range(i + 1):
+                # The minimum path sum at triangle[i][j] is the value itself
+                # plus the minimum of the two adjacent values from the row below (already in dp)
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+        
+        # After completing the loops, the first element of dp contains the total minimum path sum
+        return dp[0]

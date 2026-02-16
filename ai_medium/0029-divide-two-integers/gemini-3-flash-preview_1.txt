@@ -1,4 +1,3 @@
-```python
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         # Define limits for a 32-bit signed integer environment
@@ -42,5 +41,3 @@ class Solution:
             return MIN_INT
             
         return quotient
-
-```

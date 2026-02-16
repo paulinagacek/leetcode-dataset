@@ -1,0 +1,26 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        while True:
+            # Randomly select a pivot to ensure average-case time complexity of O(n)
+            pivot = random.choice(nums)
+            
+            # Divide the elements into three categories relative to the pivot
+            left = [x for x in nums if x > pivot]
+            mid = [x for x in nums if x == pivot]
+            right = [x for x in nums if x < pivot]
+            
+            # Count elements in the partitions
+            L, M = len(left), len(mid)
+            
+            # Determine which partition contains the kth largest element
+            if k <= L:
+                # The kth largest element is in the left partition (elements > pivot)
+                nums = left
+            elif k <= L + M:
+                # The kth largest element is equal to the pivot
+                return pivot
+            else:
+                # The kth largest element is in the right partition (elements < pivot)
+                # Adjust k by subtracting the counts of elements in left and mid partitions
+                k -= (L + M)
+                nums = right

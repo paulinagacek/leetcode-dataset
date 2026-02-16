@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         if not obstacleGrid:
@@ -25,5 +22,3 @@ class Solution:
                 # If j == 0 and not an obstacle, dp[j] remains dp[j] from the previous row
         
         return dp[-1]
-
-```

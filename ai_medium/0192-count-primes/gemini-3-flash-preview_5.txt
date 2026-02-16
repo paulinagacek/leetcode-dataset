@@ -1,0 +1,18 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        # Initialize a boolean array "is_prime" to track prime status of numbers up to n-1
+        is_prime = [True] * n
+        is_prime[0] = is_prime[1] = False
+        
+        # Sieve of Eratosthenes algorithm
+        for p in range(2, int(n**0.5) + 1):
+            if is_prime[p]:
+                # Mark multiples of p as False using list slicing for efficiency
+                # The length of the slice is calculated using len(range(...))
+                is_prime[p*p : n : p] = [False] * len(range(p*p, n, p))
+        
+        # The sum of True values in the array gives the count of primes
+        return sum(is_prime)

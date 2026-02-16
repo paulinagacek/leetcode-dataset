@@ -1,0 +1,23 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        target = len(nums) - k  # index of kth largest in sorted ascending order
+        lo, hi = 0, len(nums) - 1
+
+        while True:
+            pivot_idx = random.randint(lo, hi)
+            pivot = nums[pivot_idx]
+            nums[pivot_idx], nums[hi] = nums[hi], nums[pivot_idx]
+
+            store = lo
+            for i in range(lo, hi):
+                if nums[i] < pivot:
+                    nums[store], nums[i] = nums[i], nums[store]
+                    store += 1
+            nums[store], nums[hi] = nums[hi], nums[store]
+
+            if store == target:
+                return nums[store]
+            elif store < target:
+                lo = store + 1
+            else:
+                hi = store - 1

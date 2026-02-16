@@ -1,0 +1,24 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        # Initialize an array to track prime status
+        # bytearray is more memory-efficient than a list of booleans or integers
+        is_prime = bytearray([1]) * n
+        is_prime[0] = is_prime[1] = 0
+        
+        # Sieve of Eratosthenes optimization:
+        # 1. Mark all even numbers (except 2) as non-prime
+        is_prime[4:n:2] = bytearray(len(range(4, n, 2)))
+        
+        # 2. Sieve odd numbers up to sqrt(n)
+        for p in range(3, int(n**0.5) + 1, 2):
+            if is_prime[p]:
+                # 3. Starting from p*p, mark odd multiples of p as non-prime
+                # (even multiples of p are already marked as non-prime by step 1)
+                # The step size is 2*p to skip even numbers.
+                is_prime[p*p:n:2*p] = bytearray(len(range(p*p, n, 2*p)))
+                
+        # The sum of elements in the bytearray gives the count of primes
+        return sum(is_prime)

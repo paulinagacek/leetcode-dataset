@@ -1,0 +1,25 @@
+class WordDictionary:
+    def __init__(self):
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for ch in word:
+            node = node.setdefault(ch, {})
+        node["$"] = True
+
+    def search(self, word: str) -> bool:
+        def dfs(i: int, node: dict) -> bool:
+            if i == len(word):
+                return "$" in node
+            ch = word[i]
+            if ch == ".":
+                for k, nxt in node.items():
+                    if k != "$" and dfs(i + 1, nxt):
+                        return True
+                return False
+            if ch not in node:
+                return False
+            return dfs(i + 1, node[ch])
+
+        return dfs(0, self.trie)

@@ -1,0 +1,19 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        prev1 = 0  # Represents the max money that can be robbed up to the house immediately before the current one
+        prev2 = 0  # Represents the max money that can be robbed up to two houses before the current one
+        
+        for n in nums:
+            # At each house, we have two choices:
+            # 1. Rob this house: Then we must add the current money (n) to the max money from two houses ago (prev2)
+            # 2. Skip this house: Then the max money is the same as the max money from the previous house (prev1)
+            current = max(prev1, n + prev2)
+            
+            # Shift the variables for the next iteration
+            prev2 = prev1
+            prev1 = current
+            
+        return prev1

@@ -1,0 +1,28 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        curr = root
+        while curr:
+            if curr.left:
+                # Find the rightmost node in the left subtree
+                # This node will be the last node visited in a pre-order traversal 
+                # of the left subtree.
+                last = curr.left
+                while last.right:
+                    last = last.right
+                
+                # Move the current node's right subtree to be the right child
+                # of the rightmost node found above.
+                last.right = curr.right
+                
+                # Move the entire left subtree to the right child pointer
+                curr.right = curr.left
+                
+                # Set the left child pointer to None as per the linked list requirement
+                curr.left = None
+            
+            # Move to the next node on the right (which was previously either 
+            # the left child or the original right child).
+            curr = curr.right

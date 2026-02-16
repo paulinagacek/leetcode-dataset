@@ -1,5 +1,0 @@
-int integerBreak(int n) 
-{
-	int k{max(2, (n+1)/3)};
-	return pow(n/k, k-n%k) * pow(n/k+1, n%k); 
-}

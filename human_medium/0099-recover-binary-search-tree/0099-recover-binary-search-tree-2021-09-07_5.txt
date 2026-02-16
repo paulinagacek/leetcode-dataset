@@ -1,5 +1,3 @@
-java
-
 class Solution{
 public static ArrayList<TreeNode> arr;
 

@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         # A valid IP address has between 4 and 12 digits
@@ -34,5 +31,3 @@ class Solution:
         
         backtrack(0, [])
         return res
-
-```

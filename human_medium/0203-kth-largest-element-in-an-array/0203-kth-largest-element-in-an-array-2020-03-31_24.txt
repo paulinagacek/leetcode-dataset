@@ -1,4 +1,3 @@
-from random import uniform
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         # transform into the k smallest

@@ -1,0 +1,29 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res: List[List[int]] = []
+        path: List[int] = []
+
+        def backtrack(start: int, k_left: int, target: int) -> None:
+            if k_left == 0:
+                if target == 0:
+                    res.append(path.copy())
+                return
+
+            # Prune with minimal and maximal possible sums
+            min_sum = k_left * (2 * start + (k_left - 1)) // 2
+            if min_sum > target:
+                return
+            max_start = 10 - k_left
+            max_sum = k_left * (2 * max_start + (k_left - 1)) // 2
+            if max_sum < target:
+                return
+
+            for x in range(start, 10):
+                if x > target:
+                    break
+                path.append(x)
+                backtrack(x + 1, k_left - 1, target - x)
+                path.pop()
+
+        backtrack(1, k, n)
+        return res

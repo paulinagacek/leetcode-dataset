@@ -1,0 +1,27 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        results = []
+        
+        def findPaths(node, currentSum, currentPath):
+            if not node:
+                return
+            
+            # Add current node value to the path
+            currentPath.append(node.val)
+            
+            # Check if current node is a leaf and the path sum equals targetSum
+            if not node.left and not node.right:
+                if node.val == currentSum:
+                    results.append(list(currentPath))
+            else:
+                # Recurse for children, subtracting node value from remaining sum
+                if node.left:
+                    findPaths(node.left, currentSum - node.val, currentPath)
+                if node.right:
+                    findPaths(node.right, currentSum - node.val, currentPath)
+            
+            # Backtrack to explore other paths
+            currentPath.pop()
+
+        findPaths(root, targetSum, [])
+        return results

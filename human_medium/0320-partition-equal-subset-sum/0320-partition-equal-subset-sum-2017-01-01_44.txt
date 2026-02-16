@@ -1,4 +1,0 @@
-class Solution(object):
-    def canPartition(self, nums):
-        s, mod = divmod(sum(nums), 2)
-        return reduce(lambda dp,n:[v or i+n<=s and dp[i+n] for i,v in enumerate(dp)],nums,[False]*s+[not mod])[0]

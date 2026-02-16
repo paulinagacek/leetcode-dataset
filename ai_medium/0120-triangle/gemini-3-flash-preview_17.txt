@@ -1,0 +1,20 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        if not triangle:
+            return 0
+        
+        n = len(triangle)
+        # We use the bottom row as the initial state of our DP array.
+        # This allows us to work upwards toward the peak of the triangle.
+        dp = list(triangle[-1])
+        
+        # Iterate from the second-to-last row up to the top.
+        for i in range(n - 2, -1, -1):
+            for j in range(i + 1):
+                # The minimum path sum at current position is the value
+                # at current position plus the minimum of the two reachable 
+                # paths from the row below.
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+        
+        # The first element will eventually hold the minimum path sum.
+        return dp[0]

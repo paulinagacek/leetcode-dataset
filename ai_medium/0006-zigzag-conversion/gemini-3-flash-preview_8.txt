@@ -1,4 +1,3 @@
-```python
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
         # If numRows is 1 or more than the length of the string, 
@@ -25,5 +24,3 @@ class Solution:
             
         # Join all row strings to get the final converted string.
         return "".join(rows)
-
-```

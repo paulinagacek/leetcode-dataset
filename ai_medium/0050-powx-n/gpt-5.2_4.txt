@@ -1,0 +1,20 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1.0
+
+        exp = n
+        if exp < 0:
+            x = 1.0 / x
+            exp = -exp
+
+        result = 1.0
+        base = x
+
+        while exp > 0:
+            if exp & 1:
+                result *= base
+            base *= base
+            exp >>= 1
+
+        return result

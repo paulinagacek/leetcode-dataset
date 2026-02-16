@@ -1,9 +1,3 @@
-class Node:
-    def __init__(self, len, sfx = None):
-        self.len = len
-        self.sfx = sfx
-        self.next = {}
-        
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         curr = empty = Node(0, Node(-1))

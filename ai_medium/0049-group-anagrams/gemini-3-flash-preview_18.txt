@@ -1,7 +1,3 @@
-```python
-from typing import List
-from collections import defaultdict
-
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagrams = defaultdict(list)
@@ -11,4 +7,3 @@ class Solution:
             anagrams[key].append(s)
         # Return all the groups formed in the dictionary
         return list(anagrams.values())
-```

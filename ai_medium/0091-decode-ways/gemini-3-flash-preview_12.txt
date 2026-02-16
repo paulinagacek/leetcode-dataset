@@ -1,4 +1,3 @@
-```python
 class Solution:
     def numDecodings(self, s: str) -> int:
         if not s:
@@ -25,5 +24,3 @@ class Solution:
                     
         # The result is the total number of ways to decode the whole string
         return dp[n]
-
-```

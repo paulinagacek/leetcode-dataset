@@ -1,0 +1,25 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize variables with the first element of the array
+        res = cur_max = cur_min = nums[0]
+        
+        # Iterate starting from the second element
+        for i in range(1, len(nums)):
+            n = nums[i]
+            
+            # Since n can be negative, we compute three possibilities for the 
+            # new maximum and minimum values ending at the current position.
+            # 1. The number itself (starting a new subarray).
+            # 2. The number multiplied by the previous maximum.
+            # 3. The number multiplied by the previous minimum.
+            vals = (n, n * cur_max, n * cur_min)
+            cur_max = max(vals)
+            cur_min = min(vals)
+            
+            # Update the global maximum result
+            res = max(res, cur_max)
+            
+        return res

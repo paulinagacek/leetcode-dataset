@@ -1,0 +1,18 @@
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional['TreeNode']]:
+        from functools import lru_cache
+
+        @lru_cache(None)
+        def build(lo: int, hi: int) -> List[Optional['TreeNode']]:
+            if lo > hi:
+                return [None]
+            res = []
+            for root_val in range(lo, hi + 1):
+                left_trees = build(lo, root_val - 1)
+                right_trees = build(root_val + 1, hi)
+                for l in left_trees:
+                    for r in right_trees:
+                        res.append(TreeNode(root_val, l, r))
+            return res
+
+        return build(1, n)

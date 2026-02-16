@@ -1,4 +1,4 @@
-1. class Solution:
+class Solution:
 2.     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
 3.         size = len(matrix) * len(matrix[0])
 4.         path = []

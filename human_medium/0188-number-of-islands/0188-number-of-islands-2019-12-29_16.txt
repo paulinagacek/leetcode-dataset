@@ -1,4 +1,3 @@
-# Approach : Using Union Find.  
 class Solution(object):
 
     # the number of islands using

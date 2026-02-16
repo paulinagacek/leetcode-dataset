@@ -1,0 +1,34 @@
+class WordDictionary:
+    class Node:
+        __slots__ = ("children", "end")
+        def __init__(self):
+            self.children = {}
+            self.end = False
+
+    def __init__(self):
+        self.root = self.Node()
+
+    def addWord(self, word: str) -> None:
+        node = self.root
+        for ch in word:
+            nxt = node.children.get(ch)
+            if nxt is None:
+                nxt = self.Node()
+                node.children[ch] = nxt
+            node = nxt
+        node.end = True
+
+    def search(self, word: str) -> bool:
+        def dfs(node, i):
+            if i == len(word):
+                return node.end
+            ch = word[i]
+            if ch == '.':
+                for child in node.children.values():
+                    if dfs(child, i + 1):
+                        return True
+                return False
+            nxt = node.children.get(ch)
+            return False if nxt is None else dfs(nxt, i + 1)
+
+        return dfs(self.root, 0)

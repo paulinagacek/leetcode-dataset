@@ -1,0 +1,23 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(sub_nums: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for x in sub_nums:
+                # prev2 represents the max money robbed excluding the house before the previous one
+                # prev1 represents the max money robbed including the previous house
+                # The current max is the maximum of not robbing this house (prev1) 
+                # or robbing this house plus the max money from two houses ago (prev2 + x)
+                prev2, prev1 = prev1, max(prev1, prev2 + x)
+            return prev1
+        
+        # Since the houses are in a circle, we cannot rob both the first and the last house.
+        # We solve the linear problem for two scenarios:
+        # 1. Excluding the first house.
+        # 2. Excluding the last house.
+        # The answer is the maximum of these two values.
+        return max(rob_linear(nums[1:]), rob_linear(nums[:-1]))

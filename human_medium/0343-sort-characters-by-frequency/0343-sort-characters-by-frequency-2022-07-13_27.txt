@@ -1,9 +1,0 @@
-def frequencySort(self, s: str) -> str:
-	s = [i for i in s]
-	d = Counter(s)
-	temp = [[i, j] for i, j in sorted(d.items(), key = lambda x:x[1], reverse = True)]
-	ans = []
-	for ch, count in temp:
-		for i in range(count):
-			ans.append(ch)
-	return(\'\'.join(ans))

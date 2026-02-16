@@ -1,7 +1,0 @@
-def minMoves2(nums):        
-    return min([
-		sum([
-			abs(i-j) for j in nums
-		])
-		for i in nums
-	])

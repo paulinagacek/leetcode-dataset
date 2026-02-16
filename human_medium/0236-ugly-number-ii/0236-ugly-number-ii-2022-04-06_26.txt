@@ -1,7 +1,0 @@
-ugly_numbers = sorted([n2 * n3 * n5 for n2 in [2 ** i for i in range(31)]
-                                    for n3 in [3 ** i for i in range(20)]
-                                    for n5 in [5 ** i for i in range(14)]])
-
-class Solution:
-    def nthUglyNumber(self, n: int) -> int:
-        return ugly_numbers[n - 1]

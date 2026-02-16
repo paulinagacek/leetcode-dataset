@@ -1,6 +1,3 @@
-MAX_DIGIT, DOTS = 256, 4
-
-
 class Solution:
     def restoreIpAddresses(self, s: str) -> list[str]:
         ip_addr, n = [0] * DOTS, len(s)

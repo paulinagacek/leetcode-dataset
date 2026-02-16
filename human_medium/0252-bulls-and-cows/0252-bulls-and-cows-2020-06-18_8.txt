@@ -1,9 +1,0 @@
-def getHint(self, secret: str, guess: str) -> str:
-        c, b = 0, 0
-        for i in range(len(secret)):
-            if secret[i] == guess[i]: b += 1
-        for i in range(len(secret)):
-            if secret[i] in guess:
-                c += min(secret.count(secret[i]), guess.count(secret[i]))
-                guess = guess.replace(secret[i], "")
-        return str(b) + "A" + str(c-b) + "B"

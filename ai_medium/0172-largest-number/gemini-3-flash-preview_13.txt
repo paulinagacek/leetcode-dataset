@@ -1,0 +1,25 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert all integers to strings
+        strs = [str(num) for num in nums]
+        
+        # Custom comparator: compare x+y with y+x
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y < y + x:
+                return 1
+            else:
+                return 0
+        
+        # Sort using the custom comparator
+        strs.sort(key=cmp_to_key(compare))
+        
+        # Join the sorted strings
+        result = "".join(strs)
+        
+        # Handle the edge case where the result is all zeros (e.g., "000")
+        if result[0] == "0":
+            return "0"
+        
+        return result

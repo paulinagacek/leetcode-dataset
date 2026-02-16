@@ -1,0 +1,35 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Adjacency list representation of the graph
+        adj = [[] for _ in range(numCourses)]
+        # Track the in-degree of each node (number of prerequisites)
+        in_degree = [0] * numCourses
+        
+        # Build the graph: source course (bi) -> destination course (ai)
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Start with all courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        result = []
+        
+        while queue:
+            # Take a course
+            u = queue.popleft()
+            result.append(u)
+            
+            # For every course that depends on this course
+            for v in adj[u]:
+                # Reduce the requirement count for the dependent course
+                in_degree[v] -= 1
+                # If all prerequisites for the dependent course are met, add to queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If the result contains all courses, return the ordering; 
+        # otherwise, it's impossible to complete all courses (cycle detected).
+        if len(result) == numCourses:
+            return result
+        else:
+            return []

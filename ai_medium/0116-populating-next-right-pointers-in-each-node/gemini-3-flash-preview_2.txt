@@ -1,0 +1,30 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        # Start at the root level.
+        leftmost = root
+        
+        # We only need to iterate until we reach the last level with children.
+        while leftmost.left:
+            
+            # Use the 'next' pointers already established in the current level
+            # to connect nodes in the level immediately below it.
+            curr = leftmost
+            while curr:
+                # Connection 1: Connect the left and right children of the same parent.
+                curr.left.next = curr.right
+                
+                # Connection 2: Connect the right child of the current node to 
+                # the left child of its next neighbor in the current level.
+                if curr.next:
+                    curr.right.next = curr.next.left
+                
+                # Progress along the linked list of the current level.
+                curr = curr.next
+            
+            # Move down to the next level.
+            leftmost = leftmost.left
+            
+        return root

@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def findLeft(nums: List[int], target: int) -> int:
@@ -30,5 +27,3 @@ class Solution:
             return index
 
         return [findLeft(nums, target), findRight(nums, target)]
-
-```

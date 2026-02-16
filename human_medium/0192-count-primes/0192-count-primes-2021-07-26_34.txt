@@ -1,12 +1,3 @@
-######################################################
-
-#   Brute Force Approach
-
-#   Time Limit Exceeded
-#   17 / 21 Passed
-
-######################################################
-
 class Solution:
     def countPrimes(self, n: int) -> int:
         """

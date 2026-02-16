@@ -1,8 +1,3 @@
-from itertools import chain
-
-def in_order(node):
-    yield from chain(in_order(node.left), [node], in_order(node.right)) if node else ()
-
 class Solution:
     def recoverTree(self, root: TreeNode) -> None:
         it = in_order(root)

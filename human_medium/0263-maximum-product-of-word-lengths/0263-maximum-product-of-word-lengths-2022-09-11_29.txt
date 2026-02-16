@@ -1,9 +1,0 @@
-class Solution:
-    def maxProduct(self, words: list[str]) -> int:
-        ans, d = 0, {k: set(k) for k in words}
-        for i in range(len(words) - 1):
-            for j in range(i + 1, len(words)):
-                w1, w2 = words[i], words[j]
-                if not d[w1] & d[w2]:
-                    ans = max(ans, len(w1) * len(w2))
-        return ans

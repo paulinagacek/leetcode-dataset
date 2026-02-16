@@ -1,0 +1,35 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        # Count the number of nodes in the linked list
+        def count_nodes(node):
+            count = 0
+            while node:
+                count += 1
+                node = node.next
+            return count
+
+        # Use a class-level variable to keep track of the current linked list node during inorder traversal
+        self.node = head
+
+        def build_bst(n):
+            if n <= 0:
+                return None
+            
+            # Recursively build the left subtree with the first half of the nodes
+            left_subtree = build_bst(n // 2)
+            
+            # The current node in the linked list corresponds to the root of this subtree
+            # in an inorder traversal of a BST
+            root = TreeNode(self.node.val)
+            root.left = left_subtree
+            
+            # Move to the next node in the linked list for the subsequent tree construction
+            self.node = self.node.next
+            
+            # Recursively build the right subtree with the remaining nodes
+            root.right = build_bst(n - n // 2 - 1)
+            
+            return root
+
+        length = count_nodes(head)
+        return build_bst(length)

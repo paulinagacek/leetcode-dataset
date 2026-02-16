@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagram_map = {}
@@ -15,5 +12,3 @@ class Solution:
         
         # Return the groups as a list of lists
         return list(anagram_map.values())
-
-```

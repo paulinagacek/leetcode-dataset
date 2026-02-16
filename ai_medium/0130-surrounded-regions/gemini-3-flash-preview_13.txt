@@ -1,0 +1,41 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        rows, cols = len(board), len(board[0])
+        
+        def bfs(r, c):
+            if board[r][c] != 'O':
+                return
+            queue = collections.deque([(r, c)])
+            board[r][c] = 'T'
+            while queue:
+                curr_r, curr_c = queue.popleft()
+                for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    nr, nc = curr_r + dr, curr_c + dc
+                    if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] == 'O':
+                        board[nr][nc] = 'T'
+                        queue.append((nr, nc))
+
+        # Mark 'O's connected to the borders
+        for r in range(rows):
+            bfs(r, 0)
+            bfs(r, cols - 1)
+        
+        for c in range(cols):
+            bfs(0, c)
+            bfs(rows - 1, c)
+            
+        # Final pass: 
+        # 'O' -> 'X' (surrounded)
+        # 'T' -> 'O' (not surrounded)
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'T':
+                    board[r][c] = 'O'

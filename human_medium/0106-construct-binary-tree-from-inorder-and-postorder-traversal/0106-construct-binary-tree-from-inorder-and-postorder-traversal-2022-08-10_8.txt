@@ -1,4 +1,3 @@
-#For problem 105
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
 	#return if  list is empty, you can also say if one of them is empty suck as (if not preorder):return None

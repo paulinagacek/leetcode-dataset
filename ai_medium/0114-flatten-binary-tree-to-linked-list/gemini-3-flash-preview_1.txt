@@ -1,0 +1,24 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        curr = root
+        while curr:
+            if curr.left:
+                # To maintain pre-order, the current right subtree must come 
+                # after the entire left subtree. Find the rightmost node 
+                # in the left subtree to attach the current right subtree there.
+                predecessor = curr.left
+                while predecessor.right:
+                    predecessor = predecessor.right
+                
+                # Attach the current right subtree to the right of the predecessor
+                predecessor.right = curr.right
+                
+                # Move the left subtree to the right and nullify the left pointer
+                curr.right = curr.left
+                curr.left = None
+            
+            # Move to the next node in the pre-order traversal (now all on the right)
+            curr = curr.right

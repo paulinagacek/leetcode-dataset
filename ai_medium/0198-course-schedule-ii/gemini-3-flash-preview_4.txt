@@ -1,0 +1,35 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Adjacency list representation of the graph
+        adj = [[] for _ in range(numCourses)]
+        # Array to store the in-degree of each node
+        indegree = [0] * numCourses
+        
+        # Build the graph
+        # prerequisites[i] = [ai, bi] means bi -> ai
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            indegree[dest] += 1
+            
+        # Queue for nodes with in-degree 0 (Kahn's Algorithm)
+        queue = deque([i for i in range(numCourses) if indegree[i] == 0])
+        
+        # Result list to store the topological order
+        order = []
+        
+        while queue:
+            u = queue.popleft()
+            order.append(u)
+            
+            # For each neighbor, reduce its in-degree
+            for v in adj[u]:
+                indegree[v] -= 1
+                # If in-degree becomes 0, add to queue
+                if indegree[v] == 0:
+                    queue.append(v)
+                    
+        # If order contains all courses, return it; otherwise, there's a cycle
+        if len(order) == numCourses:
+            return order
+        else:
+            return []

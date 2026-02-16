@@ -1,0 +1,29 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build the graph using an adjacency list and keep track of in-degrees
+        adj = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        for course, pre in prerequisites:
+            adj[pre].append(course)
+            in_degree[course] += 1
+            
+        # Initialize queue with courses that have no prerequisites (in-degree 0)
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Counter for the number of courses that can be completed
+        count = 0
+        
+        while queue:
+            current = queue.popleft()
+            count += 1
+            
+            # Decrease in-degree for all neighboring courses
+            for neighbor in adj[current]:
+                in_degree[neighbor] -= 1
+                # If a neighbor's in-degree becomes 0, add it to the queue
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+                    
+        # If the number of processed courses equals numCourses, a topological sort is possible
+        return count == numCourses

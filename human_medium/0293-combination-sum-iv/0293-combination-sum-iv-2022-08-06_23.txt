@@ -1,6 +1,0 @@
-way_count = [1] + [0] * target
-        for i,w in enumerate(way_count):
-            for n in nums:
-                if i+n <= target:
-                    way_count[i+n] += w
-        return way_count[target]

@@ -1,0 +1,26 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res: List[List[int]] = []
+
+        def dfs(start: int, k_left: int, target: int, path: List[int]) -> None:
+            if k_left == 0:
+                if target == 0:
+                    res.append(path.copy())
+                return
+
+            if start > 9:
+                return
+
+            max_possible = sum(range(9 - k_left + 1, 10))
+            if target < 0 or target > max_possible:
+                return
+
+            for x in range(start, 10):
+                if x > target:
+                    break
+                path.append(x)
+                dfs(x + 1, k_left - 1, target - x, path)
+                path.pop()
+
+        dfs(1, k, n, [])
+        return res

@@ -1,0 +1,28 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token == "+":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a + b)
+            elif token == "-":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a * b)
+            elif token == "/":
+                b = stack.pop()
+                a = stack.pop()
+                # Python's int() function on a float truncates toward zero.
+                # Since intermediate and final values fit in a 32-bit integer,
+                # converting to float for the division is safe without precision loss.
+                stack.append(int(a / b))
+            else:
+                # Token is an integer represented as a string.
+                stack.append(int(token))
+        # The stack will contain exactly one element at the end.
+        return stack[0]

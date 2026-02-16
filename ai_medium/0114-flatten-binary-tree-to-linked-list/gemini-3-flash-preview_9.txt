@@ -1,0 +1,23 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        curr = root
+        while curr:
+            if curr.left:
+                # Find the rightmost node in the left subtree
+                # This is the last node in the pre-order traversal of the left subtree
+                pre = curr.left
+                while pre.right:
+                    pre = pre.right
+                
+                # Connect the current right subtree to the right of the rightmost node
+                pre.right = curr.right
+                
+                # Move the left subtree to the right and nullify the left pointer
+                curr.right = curr.left
+                curr.left = None
+            
+            # Move to the next node in the flattened tree
+            curr = curr.right

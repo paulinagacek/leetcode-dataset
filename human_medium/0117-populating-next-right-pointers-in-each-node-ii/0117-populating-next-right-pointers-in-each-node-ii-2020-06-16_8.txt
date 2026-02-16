@@ -1,4 +1,3 @@
-credits to @cmc: Leetcode discussions
 class Solution:
     def connect(self, root: \'Node\') -> \'Node\':
         ## RC ##

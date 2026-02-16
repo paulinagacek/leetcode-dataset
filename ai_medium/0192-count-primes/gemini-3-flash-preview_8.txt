@@ -1,0 +1,24 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        # Initialize bytearray for sieve, 1 means prime, 0 means not prime
+        # bytearray is used for memory and speed efficiency in Python
+        is_prime = bytearray([1]) * n
+        is_prime[0] = is_prime[1] = 0
+        
+        # Mark all even numbers starting from 4 as not prime
+        is_prime[4:n:2] = bytearray(len(range(4, n, 2)))
+        
+        # Main Sieve of Eratosthenes loop for odd numbers
+        # Start from 3 and iterate only through odd numbers
+        for i in range(3, int(n**0.5) + 1, 2):
+            if is_prime[i]:
+                # Mark all odd multiples of i starting from i*i as not prime
+                # Even multiples (like i*2, i*4, etc.) are already marked by the even number sieve
+                # The step is 2*i to skip even multiples (e.g., 9, 15, 21...)
+                is_prime[i*i:n:i*2] = bytearray(len(range(i*i, n, i*2)))
+        
+        # sum() on a bytearray counts all the bytes with value 1
+        return sum(is_prime)

@@ -1,13 +1,3 @@
-\'\'\'
-We have to take total m-1 steps downwards and n-1 steps towards right. 
-Hence there are total m+n-2 steps. 
-Out of these, we need to choose which m-1 steps should be taken 
-downwards (the rest automatically are fixed as right steps). 
-Hence the number of different ways to reach bottom right 
-from top left becomes (m + n -2) choose (m-1) 
-(also equal to (m + n - 2) choose (n-1))
-\'\'\'
-from math import comb
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         return comb(m + n - 2, min(m-1, n-1))

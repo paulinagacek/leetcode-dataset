@@ -1,0 +1,8 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        dp = triangle[-1][:]
+        for r in range(len(triangle) - 2, -1, -1):
+            row = triangle[r]
+            for i in range(len(row)):
+                dp[i] = row[i] + min(dp[i], dp[i + 1])
+        return dp[0]

@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for amount in houses:
+                current = max(prev1, prev2 + amount)
+                prev2 = prev1
+                prev1 = current
+            return prev1
+        
+        # Scenario 1: Rob houses from index 0 to n-2 (exclude the last house)
+        # Scenario 2: Rob houses from index 1 to n-1 (exclude the first house)
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

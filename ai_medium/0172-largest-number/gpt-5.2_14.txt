@@ -1,0 +1,16 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        s = list(map(str, nums))
+
+        def cmp(a: str, b: str) -> int:
+            ab = a + b
+            ba = b + a
+            if ab > ba:
+                return -1
+            if ab < ba:
+                return 1
+            return 0
+
+        s.sort(key=cmp_to_key(cmp))
+        res = ''.join(s)
+        return "0" if res[0] == "0" else res

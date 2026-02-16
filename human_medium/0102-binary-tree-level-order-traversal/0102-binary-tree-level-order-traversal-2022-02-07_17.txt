@@ -1,4 +1,3 @@
-#O(N): Both Time and Sapce Complexity
 class Solution:
     def levelOrder(self, root):
 		result = []

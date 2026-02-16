@@ -1,0 +1,30 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        n = len(s)
+        res: List[str] = []
+        parts: List[str] = []
+
+        def backtrack(i: int) -> None:
+            if len(parts) == 4:
+                if i == n:
+                    res.append(".".join(parts))
+                return
+
+            remaining_parts = 4 - len(parts)
+            remaining_chars = n - i
+            if remaining_chars < remaining_parts or remaining_chars > 3 * remaining_parts:
+                return
+
+            val = 0
+            for j in range(i, min(n, i + 3)):
+                if j > i and s[i] == '0':
+                    break
+                val = val * 10 + (ord(s[j]) - 48)
+                if val > 255:
+                    break
+                parts.append(s[i:j + 1])
+                backtrack(j + 1)
+                parts.pop()
+
+        backtrack(0)
+        return res

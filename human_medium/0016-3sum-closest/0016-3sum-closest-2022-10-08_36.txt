@@ -1,7 +1,3 @@
-# * Two Pointers Solution | O(n^2) Time | O(1) Space
-# * n -> The length of nums array
-
-
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums_len = len(nums)

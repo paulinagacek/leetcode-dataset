@@ -1,6 +1,0 @@
-def combinationSum4(self, nums: List[int], target: int) -> int:
-	@lru_cache(None)
-	def combs(t=target):
-		if t == 0: return 1
-		return sum(combs(t - n) for n in nums if t >= n)
-	return combs()

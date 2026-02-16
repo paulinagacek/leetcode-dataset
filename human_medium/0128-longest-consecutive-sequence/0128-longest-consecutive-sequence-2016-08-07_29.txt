@@ -1,25 +1,3 @@
-class DisjointSet(object):
-    def __init__(self, n = 1):
-        self.n = n
-        self.rank = [-1 for i in range(0,n)]
-    def find(self, i):
-        if self.rank[i] < 0:
-            return i
-        self.rank[i] = self.find(self.rank[i])
-        return self.rank[i]
-    def union(self, i, j):
-        ip = self.find(i)
-        jp = self.find(j)
-        if ip == jp:
-            return abs(self.rank[ip])
-        if abs(self.rank[ip]) >= abs(self.rank[jp]):
-            self.rank[ip] += self.rank[jp]
-            self.rank[jp] = ip
-            return abs(self.rank[ip])
-        self.rank[jp] += self.rank[ip]
-        self.rank[ip] = jp
-        return abs(self.rank[jp])
-
 class Solution(object):
     def longestConsecutive(self, nums):
         """

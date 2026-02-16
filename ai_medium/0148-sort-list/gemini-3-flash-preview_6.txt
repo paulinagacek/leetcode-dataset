@@ -1,0 +1,68 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Calculate the length of the linked list
+        length = 0
+        curr = head
+        while curr:
+            length += 1
+            curr = curr.next
+        
+        dummy = ListNode(0)
+        dummy.next = head
+        step = 1
+        
+        # Iterative bottom-up merge sort to achieve O(1) space complexity
+        while step < length:
+            prev = dummy
+            curr = dummy.next
+            while curr:
+                # Get the left part of size 'step'
+                left = curr
+                right = self._split(left, step)
+                # Get the remaining part of the list for the next iteration
+                curr = self._split(right, step)
+                
+                # Merge the two sorted sub-lists
+                merged_head, merged_tail = self._merge(left, right)
+                # Connect the merged sub-list back to the main list
+                prev.next = merged_head
+                prev = merged_tail
+            step <<= 1
+            
+        return dummy.next
+
+    def _split(self, head: Optional[ListNode], size: int) -> Optional[ListNode]:
+        """Splits the list into two parts: the first 'size' nodes and the rest."""
+        for _ in range(size - 1):
+            if not head:
+                break
+            head = head.next
+        
+        if not head:
+            return None
+        
+        next_part = head.next
+        head.next = None
+        return next_part
+
+    def _merge(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> (Optional[ListNode], Optional[ListNode]):
+        """Merges two sorted lists and returns the head and tail of the merged result."""
+        dummy = ListNode(0)
+        curr = dummy
+        while l1 and l2:
+            if l1.val < l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next
+            curr = curr.next
+        
+        curr.next = l1 or l2
+        # Move curr to the end of the merged list to identify the new tail
+        while curr.next:
+            curr = curr.next
+        return dummy.next, curr

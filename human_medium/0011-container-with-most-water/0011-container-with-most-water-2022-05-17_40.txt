@@ -1,6 +1,3 @@
-# Two Pointer Solution
-# Time:     O(n),   Iterate through list once.
-# Space:    O(1),   Constant space used.
 class Solution:
     def maxArea(self, heights: List[int]) -> int:
         leftPointer, rightPointer = 0, len(heights)-1                       # One pointer for each end of the list.

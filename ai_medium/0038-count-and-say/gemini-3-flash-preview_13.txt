@@ -1,4 +1,3 @@
-```python
 class Solution:
     def countAndSay(self, n: int) -> str:
         res = "1"
@@ -15,5 +14,3 @@ class Solution:
                 i += 1
             res = "".join(next_res)
         return res
-
-```

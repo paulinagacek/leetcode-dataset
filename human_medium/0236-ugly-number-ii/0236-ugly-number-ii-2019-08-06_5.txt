@@ -1,8 +1,0 @@
-def nthUglyNumber(self, n):
-        queues = {prime: collections.deque([1]) for prime in [2, 3, 5]}
-        for _ in range(n):
-            result = min([queue[0] for queue in queues.values()])
-            for prime, queue in queues.items():
-                if result == queue[0]: queue.popleft()
-                queue.append(result*prime)
-        return result

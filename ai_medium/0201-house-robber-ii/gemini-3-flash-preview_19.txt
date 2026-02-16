@@ -1,0 +1,18 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            prev_max = 0
+            curr_max = 0
+            for money in houses:
+                temp = curr_max
+                curr_max = max(prev_max + money, curr_max)
+                prev_max = temp
+            return curr_max
+        
+        # The circular constraint means we can either rob the first house and 
+        # definitely not the last, or rob the last house and definitely not the first.
+        # We take the maximum of these two linear scenarios.
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

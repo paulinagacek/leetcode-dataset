@@ -1,4 +1,3 @@
-from functools import lru_cache
 class Solution:
     def jump(self, nums: List[int]) -> int:
         #dp take the jump or not

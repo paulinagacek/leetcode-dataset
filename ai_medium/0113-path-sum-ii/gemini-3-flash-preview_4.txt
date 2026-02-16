@@ -1,0 +1,24 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        results = []
+        
+        def findPaths(node, remainingSum, currentPath):
+            if not node:
+                return
+            
+            # Add current node value to the path
+            currentPath.append(node.val)
+            
+            # Check if it's a leaf node and the path sum equals targetSum
+            if not node.left and not node.right and node.val == remainingSum:
+                results.append(list(currentPath))
+            else:
+                # Continue searching in left and right subtrees
+                findPaths(node.left, remainingSum - node.val, currentPath)
+                findPaths(node.right, remainingSum - node.val, currentPath)
+            
+            # Backtrack: remove the current node value before returning to the parent
+            currentPath.pop()
+            
+        findPaths(root, targetSum, [])
+        return results

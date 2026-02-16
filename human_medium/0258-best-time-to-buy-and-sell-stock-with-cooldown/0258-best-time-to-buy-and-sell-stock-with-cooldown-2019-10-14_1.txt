@@ -1,9 +1,0 @@
-def maxProfit(self, prices: List[int]) -> int:
-        if len(prices) < 2:
-            return 0      
-        s1 = -prices[0]   # profit after buying
-        s2 = 0            # profit after selling
-        for p in prices:
-            s1 = max(s1, -p)
-            s2 = max(s2, s1 + p)
-        return s2

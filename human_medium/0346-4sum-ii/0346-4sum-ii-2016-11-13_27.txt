@@ -1,4 +1,0 @@
-def fourSumCount(self, A, B, C, D):
-    n = len(A)
-    s = collections.Counter(-A[a]-B[b] for a in range(n) for b in range(n))
-    return sum(s[C[c]+D[d]] for c in range(n) for d in range(n))

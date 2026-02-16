@@ -1,0 +1,26 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token in {"+", "-", "*", "/"}:
+                # In Reverse Polish Notation, the top element is the second operand
+                # and the next element is the first operand.
+                op2 = stack.pop()
+                op1 = stack.pop()
+                
+                if token == "+":
+                    stack.append(op1 + op2)
+                elif token == "-":
+                    stack.append(op1 - op2)
+                elif token == "*":
+                    stack.append(op1 * op2)
+                elif token == "/":
+                    # Division between two integers truncating toward zero 
+                    # is achieved by using int(op1 / op2) in Python 3.
+                    stack.append(int(op1 / op2))
+            else:
+                # Token is an integer, push it to the stack.
+                stack.append(int(token))
+        
+        # After processing all tokens, the stack will contain one integer representing the result.
+        return stack[0]

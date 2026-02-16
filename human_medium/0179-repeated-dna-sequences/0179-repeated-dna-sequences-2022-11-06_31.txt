@@ -1,6 +1,3 @@
-import re
-import collections
-from collections import Counter
 class Solution:
         
     def findRepeatedDnaSequences(self, s: str) -> List[str]:

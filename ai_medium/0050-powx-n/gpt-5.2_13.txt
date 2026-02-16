@@ -1,0 +1,17 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1.0
+
+        nn = n
+        if nn < 0:
+            x = 1.0 / x
+            nn = -nn
+
+        result = 1.0
+        while nn:
+            if nn & 1:
+                result *= x
+            x *= x
+            nn >>= 1
+        return result

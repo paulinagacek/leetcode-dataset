@@ -1,0 +1,21 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        
+        # Use bytearray for memory efficiency and speed
+        is_prime = bytearray([1]) * n
+        is_prime[0] = is_prime[1] = 0
+        
+        # Mark all even numbers starting from 4 as not prime
+        is_prime[4:n:2] = bytearray(len(range(4, n, 2)))
+        
+        # Sieve of Eratosthenes: only iterate through odd numbers
+        for p in range(3, int(n**0.5) + 1, 2):
+            if is_prime[p]:
+                # Mark odd multiples of p starting from p*p as not prime
+                # The step is 2*p to skip even multiples (already marked)
+                is_prime[p*p:n:2*p] = bytearray(len(range(p*p, n, 2*p)))
+                
+        # count(1) is highly optimized in Python for bytearray objects
+        return is_prime.count(1)

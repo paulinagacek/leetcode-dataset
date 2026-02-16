@@ -1,4 +1,3 @@
-from collections import defaultdict
 class Solution:
     def levelOrder(self, root: Optional[TreeNode], result=None, level=0) -> List[List[int]]:
         if not root: return root

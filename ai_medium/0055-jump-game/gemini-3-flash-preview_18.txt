@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         max_reachable = 0
@@ -11,5 +8,3 @@ class Solution:
             if max_reachable >= len(nums) - 1:
                 return True
         return False
-
-```

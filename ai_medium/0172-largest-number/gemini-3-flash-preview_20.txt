@@ -1,0 +1,24 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert each integer to a string
+        str_nums = [str(num) for num in nums]
+        
+        # Custom comparison function to decide the order
+        # For two strings x and y, if x + y > y + x, then x should come before y
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y < y + x:
+                return 1
+            else:
+                return 0
+        
+        # Sort the strings based on the custom comparator
+        str_nums.sort(key=cmp_to_key(compare))
+        
+        # Join the sorted strings
+        result = "".join(str_nums)
+        
+        # Handle the edge case where the result might be like "00"
+        # If the largest number is "0", the whole number is 0
+        return "0" if result[0] == "0" else result

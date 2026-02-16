@@ -1,0 +1,35 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize res with the first element of the array.
+        # cur_max and cur_min store the maximum and minimum product
+        # of any subarray ending at the current index.
+        res = cur_max = cur_min = nums[0]
+        
+        for i in range(1, len(nums)):
+            n = nums[i]
+            
+            # If the current number is negative, multiplying it with the 
+            # previous max could yield a very small number, and multiplying 
+            # it with the previous min could yield a very large number.
+            # Thus, we swap cur_max and cur_min.
+            if n < 0:
+                cur_max, cur_min = cur_min, cur_max
+            
+            # The maximum product ending at the current index is either 
+            # the current number itself or the product of the number with
+            # the maximum product ending at the previous index.
+            cur_max = max(n, n * cur_max)
+            
+            # Similarly, the minimum product ending at the current index is 
+            # either the number itself or the product of the number with
+            # the minimum product ending at the previous index.
+            cur_min = min(n, n * cur_min)
+            
+            # Update the global result if the new maximum product is larger.
+            if cur_max > res:
+                res = cur_max
+                
+        return res

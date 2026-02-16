@@ -1,0 +1,28 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        result = []
+        
+        def backtrack(node, path, remaining_sum):
+            if not node:
+                return
+            
+            # Add the current node's value to the path
+            path.append(node.val)
+            
+            # Check if the current node is a leaf (no children)
+            if not node.left and not node.right:
+                # If the current node's value matches the remaining sum, we've found a valid path
+                if node.val == remaining_sum:
+                    result.append(list(path))
+            else:
+                # If not a leaf, recurse on the children
+                if node.left:
+                    backtrack(node.left, path, remaining_sum - node.val)
+                if node.right:
+                    backtrack(node.right, path, remaining_sum - node.val)
+            
+            # Backtrack by removing the current node's value before returning
+            path.pop()
+            
+        backtrack(root, [], targetSum)
+        return result

@@ -1,7 +1,3 @@
-from typing import List
-from sortedcontainers import SortedDict
-
-
 class Solution:
     def merge_sorted_map(self, intervals: List[List[int]]) -> List[List[int]]:
         d = SortedDict()

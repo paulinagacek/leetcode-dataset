@@ -1,6 +1,0 @@
-def rob(self, root: TreeNode) -> int:
-        def dfs(node):
-            ln, lc = dfs(node.left) if node.left else (0,0)
-            rn, rc = dfs(node.right) if node.right else (0,0)
-            return node.val + lc + rc, max(ln + rn, ln + rc, lc + rc, lc + rn)
-        return max(dfs(root)) if root else 0

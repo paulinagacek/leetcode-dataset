@@ -1,5 +1,3 @@
-operator=set(["+", "-", "*", "/"])
-import math
 class Solution:
     def evalRPN(self, tokens) -> int:
         stack=[]

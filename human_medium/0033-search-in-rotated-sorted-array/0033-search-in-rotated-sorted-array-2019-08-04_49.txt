@@ -1,4 +1,3 @@
-from typing import List
 class Solution:
     def in_range(self, nums: List[int], target: int, i:int, j: int):    
         

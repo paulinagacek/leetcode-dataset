@@ -1,0 +1,22 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        n = 0
+        cur = head
+        while cur:
+            n += 1
+            cur = cur.next
+
+        self.cur = head
+
+        def build(l: int, r: int) -> Optional[TreeNode]:
+            if l >= r:
+                return None
+            m = (l + r) // 2
+            left = build(l, m)
+            node = TreeNode(self.cur.val)
+            self.cur = self.cur.next
+            node.left = left
+            node.right = build(m + 1, r)
+            return node
+
+        return build(0, n)

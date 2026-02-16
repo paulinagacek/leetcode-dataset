@@ -1,9 +1,0 @@
-def dfs(n):
-	if not n:
-		return 0
-	squares = [i**2 for i in range(1, int(math.floor(math.sqrt(n))) + 1)]
-	shortest = float("inf")
-	for i in range(len(squares)):
-		shortest = min(shortest, 1 + dfs(n - squares[i]))
-	return shortest
-return dfs(n)

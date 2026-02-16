@@ -1,0 +1,19 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+
+        def rob_linear(houses: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for amount in houses:
+                # Use dynamic programming to find max amount for a linear street
+                # current_max = max(don't rob current, rob current + max from 2 houses ago)
+                prev2, prev1 = prev1, max(prev1, prev2 + amount)
+            return prev1
+
+        # The circular constraint means we either:
+        # 1. Skip the last house (rob from index 0 to n-2)
+        # 2. Skip the first house (rob from index 1 to n-1)
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

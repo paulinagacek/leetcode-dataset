@@ -1,0 +1,19 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res: List[str] = []
+
+        def backtrack(s: List[str], open_cnt: int, close_cnt: int) -> None:
+            if open_cnt == close_cnt == n:
+                res.append("".join(s))
+                return
+            if open_cnt < n:
+                s.append("(")
+                backtrack(s, open_cnt + 1, close_cnt)
+                s.pop()
+            if close_cnt < open_cnt:
+                s.append(")")
+                backtrack(s, open_cnt, close_cnt + 1)
+                s.pop()
+
+        backtrack([], 0, 0)
+        return res

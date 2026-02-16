@@ -1,4 +1,3 @@
-```python
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         groups = {}
@@ -11,5 +10,3 @@ class Solution:
         
         # Return the collected values as a list of lists
         return list(groups.values())
-
-```

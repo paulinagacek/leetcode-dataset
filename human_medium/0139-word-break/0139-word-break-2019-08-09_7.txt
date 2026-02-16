@@ -1,4 +1,3 @@
-from collections import deque
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         """

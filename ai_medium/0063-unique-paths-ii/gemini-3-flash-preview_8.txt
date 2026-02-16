@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         # Get the dimensions of the grid
@@ -31,5 +28,3 @@ class Solution:
         
         # Return the number of unique paths to reach the bottom-right corner
         return dp[n - 1]
-
-```

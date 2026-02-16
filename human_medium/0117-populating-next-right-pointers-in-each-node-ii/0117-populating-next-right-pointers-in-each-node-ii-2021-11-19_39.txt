@@ -1,10 +1,3 @@
-def get_nearest_sibling(node):
-    while node:
-        if node.left or node.right:
-            return node.left or node.right
-        node = node.next
-
-
 class Solution:
     def connect(self, root: "Node") -> "Node":
         if not root:

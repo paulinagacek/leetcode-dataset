@@ -1,0 +1,28 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['#'] = True
+
+    def search(self, word: str) -> bool:
+        return self._search_in_node(word, self.trie)
+
+    def _search_in_node(self, word: str, node: dict) -> bool:
+        for i, char in enumerate(word):
+            if char == '.':
+                for child in node:
+                    if child != '#' and self._search_in_node(word[i + 1:], node[child]):
+                        return True
+                return False
+            else:
+                if char not in node:
+                    return False
+                node = node[char]
+        return '#' in node

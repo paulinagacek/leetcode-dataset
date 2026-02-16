@@ -1,9 +1,0 @@
-class Solution:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-        i = -1
-        for num in nums:
-            index = bisect_left(nums, x=num, lo=0, hi=i+1)
-            if index == i + 1:
-                i += 1
-            nums[index] = num
-        return i + 1

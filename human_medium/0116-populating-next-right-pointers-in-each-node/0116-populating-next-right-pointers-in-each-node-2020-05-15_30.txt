@@ -1,5 +1,3 @@
-from collections import deque
-
 class Solution:
     def connect(self, root: \'Node\') -> \'Node\':
         # We will use the common queue pattern to do level order BFS.

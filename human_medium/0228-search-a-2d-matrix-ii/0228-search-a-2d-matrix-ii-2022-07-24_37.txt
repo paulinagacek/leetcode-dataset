@@ -1,9 +1,0 @@
-bool searchMatrix(vector<vector<int>>& matrix, int target) {
-	int j = matrix[0].size() - 1;
-	for(vector<int>& row: matrix) {
-		while(j >= 0 and row[j] > target) j--;
-		if(j < 0) break;
-		if(row[j] == target) return true;
-	}
-	return false;
-}

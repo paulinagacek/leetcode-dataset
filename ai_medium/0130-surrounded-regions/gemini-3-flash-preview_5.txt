@@ -1,0 +1,41 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        queue = deque()
+        
+        # Step 1: Identify and mark all 'O' cells on the border and their connected regions
+        # We mark border-connected 'O's as 'S' (Safe)
+        for r in range(m):
+            for c in (0, n - 1):
+                if board[r][c] == 'O':
+                    board[r][c] = 'S'
+                    queue.append((r, c))
+        for c in range(1, n - 1):
+            for r in (0, m - 1):
+                if board[r][c] == 'O':
+                    board[r][c] = 'S'
+                    queue.append((r, c))
+        
+        # Step 2: Use BFS to find all 'O' cells connected to the border 'O' cells
+        while queue:
+            r, c = queue.popleft()
+            for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = 'S'
+                    queue.append((nr, nc))
+        
+        # Step 3: Iterate through the board to finalize state
+        # Any 'O' remaining was not connected to the border and is therefore surrounded
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'S':
+                    board[r][c] = 'O'

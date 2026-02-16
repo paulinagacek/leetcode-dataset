@@ -1,0 +1,30 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Build adjacency list and calculate in-degrees of all courses
+        adj = collections.defaultdict(list)
+        indegree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            indegree[dest] += 1
+            
+        # Initialize queue with courses having no prerequisites (in-degree 0)
+        queue = collections.deque([i for i in range(numCourses) if indegree[i] == 0])
+        order = []
+        
+        while queue:
+            # Take a course from the queue
+            u = queue.popleft()
+            order.append(u)
+            
+            # For each course that depends on the current course u
+            for v in adj[u]:
+                # Reduce its in-degree as its prerequisite u is completed
+                indegree[v] -= 1
+                # If all prerequisites are completed, add the course to the queue
+                if indegree[v] == 0:
+                    queue.append(v)
+                    
+        # If the length of the ordering equals numCourses, all courses can be finished
+        # Otherwise, a cycle exists, so return an empty array
+        return order if len(order) == numCourses else []

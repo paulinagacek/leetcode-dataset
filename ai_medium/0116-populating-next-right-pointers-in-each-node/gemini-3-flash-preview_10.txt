@@ -1,0 +1,29 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+        
+        # Start with the root node. There are no next pointers to establish at the first level.
+        leftmost = root
+        
+        # Once we reach the last level, we are done.
+        while leftmost.left:
+            
+            # Iterate through the "linked list" established by the next pointers
+            # at the current level to set the next pointers for the level below.
+            head = leftmost
+            while head:
+                # CONNECTION 1: Between children of the same parent
+                head.left.next = head.right
+                
+                # CONNECTION 2: Between children of different parents
+                if head.next:
+                    head.right.next = head.next.left
+                
+                # Move onto the next node in the current level
+                head = head.next
+            
+            # Move onto the next level
+            leftmost = leftmost.left
+            
+        return root

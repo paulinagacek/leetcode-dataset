@@ -1,0 +1,21 @@
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        less_dummy = ListNode(0)
+        ge_dummy = ListNode(0)
+        less = less_dummy
+        ge = ge_dummy
+
+        curr = head
+        while curr:
+            nxt = curr.next
+            curr.next = None
+            if curr.val < x:
+                less.next = curr
+                less = less.next
+            else:
+                ge.next = curr
+                ge = ge.next
+            curr = nxt
+
+        less.next = ge_dummy.next
+        return less_dummy.next

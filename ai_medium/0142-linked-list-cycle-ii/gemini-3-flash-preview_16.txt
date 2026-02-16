@@ -1,0 +1,26 @@
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return None
+            
+        slow = head
+        fast = head
+        
+        # Step 1: Detect if a cycle exists using Floyd's Cycle-Finding Algorithm
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            
+            # Step 2: If slow and fast pointers meet, a cycle exists
+            if slow == fast:
+                # Step 3: Find the entry point of the cycle
+                # Move one pointer back to the head and keep the other at the meeting point.
+                # Move both one step at a time; they will meet at the cycle's starting node.
+                entry = head
+                while entry != slow:
+                    entry = entry.next
+                    slow = slow.next
+                return entry
+        
+        # No cycle found
+        return None

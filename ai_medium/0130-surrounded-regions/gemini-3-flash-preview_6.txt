@@ -1,0 +1,38 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        
+        def mark_boundary_connected(r, c):
+            if board[r][c] != 'O':
+                return
+            stack = [(r, c)]
+            board[r][c] = '#'
+            while stack:
+                curr_r, curr_c = stack.pop()
+                for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    nr, nc = curr_r + dr, curr_c + dc
+                    if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                        board[nr][nc] = '#'
+                        stack.append((nr, nc))
+        
+        # Mark all 'O's connected to the boundary
+        for r in range(m):
+            mark_boundary_connected(r, 0)
+            mark_boundary_connected(r, n - 1)
+        for c in range(n):
+            mark_boundary_connected(0, c)
+            mark_boundary_connected(m - 1, c)
+            
+        # Flip surrounded 'O's to 'X' and boundary-connected '#' back to 'O'
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '#':
+                    board[r][c] = 'O'

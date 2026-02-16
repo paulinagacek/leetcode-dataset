@@ -1,0 +1,48 @@
+class Trie:
+
+    def __init__(self):
+        """
+        Initializes the trie object.
+        """
+        self.root = {}
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts the string word into the trie.
+        """
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        # Mark the end of the word with a special character
+        node['#'] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.
+        """
+        node = self.root
+        for char in word:
+            if char not in node:
+                return False
+            node = node[char]
+        return '#' in node
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.
+        """
+        node = self.root
+        for char in prefix:
+            if char not in node:
+                return False
+            node = node[char]
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)

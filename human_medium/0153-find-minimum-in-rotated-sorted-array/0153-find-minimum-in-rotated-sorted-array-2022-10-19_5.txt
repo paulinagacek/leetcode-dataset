@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public int FindMin(int[] nums) {
         int li = 0;             //low index
         int hi = nums.Length-1; //high index

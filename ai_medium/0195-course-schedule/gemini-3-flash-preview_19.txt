@@ -1,0 +1,29 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list and an in-degree array
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize the queue with nodes having an in-degree of 0
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Track the number of courses processed
+        count = 0
+        
+        while queue:
+            u = queue.popleft()
+            count += 1
+            
+            # Reduce the in-degree of neighbors
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If in-degree becomes 0, the course can be taken
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If the number of processed courses matches numCourses, no cycle exists
+        return count == numCourses

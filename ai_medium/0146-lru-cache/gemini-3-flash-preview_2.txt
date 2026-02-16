@@ -1,0 +1,44 @@
+from collections import OrderedDict
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        """
+        Initialize the LRU cache with a positive capacity.
+        We use an OrderedDict to maintain the access order of keys.
+        In Python's OrderedDict, the items are stored in insertion order.
+        """
+        self.capacity = capacity
+        self.cache = OrderedDict()
+
+    def get(self, key: int) -> int:
+        """
+        Return the value of the key if it exists, otherwise return -1.
+        Update the access order by moving the key to the end (MRU).
+        """
+        if key not in self.cache:
+            return -1
+        # Move the accessed key to the end to mark it as Most Recently Used
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        """
+        Update the value of the key if it exists. Otherwise, add the key-value pair.
+        If the cache exceeds capacity, evict the least recently used (first) item.
+        """
+        if key in self.cache:
+            # Move the existing key to the end before updating its value
+            self.cache.move_to_end(key)
+        
+        self.cache[key] = value
+        
+        # If the number of keys exceeds capacity, pop the first item (LRU)
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)

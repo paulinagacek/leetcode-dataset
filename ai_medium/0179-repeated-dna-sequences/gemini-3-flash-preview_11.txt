@@ -1,0 +1,16 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        seen = set()
+        res = set()
+        # Iterate through the string, extracting all possible 10-letter substrings.
+        # The loop runs up to len(s) - 10, meaning i+10 will be at most len(s).
+        for i in range(len(s) - 9):
+            sub = s[i : i + 10]
+            # If the substring has been encountered before, add it to the results set.
+            if sub in seen:
+                res.add(sub)
+            else:
+                # Otherwise, mark the substring as seen.
+                seen.add(sub)
+        # Convert the set of repeated sequences to a list and return.
+        return list(res)

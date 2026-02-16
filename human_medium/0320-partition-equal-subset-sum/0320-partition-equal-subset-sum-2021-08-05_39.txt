@@ -1,2 +1,0 @@
-def canPartition(self, nums):
-	return (s := sum(nums)) % 2 == 0 and reduce(lambda m, num: m | (m >> num), nums, 1 << (s // 2)) % 2

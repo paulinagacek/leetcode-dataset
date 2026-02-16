@@ -1,4 +1,3 @@
-```python
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
         # If the number of rows is 1 or greater than/equal to the string length, 
@@ -27,5 +26,3 @@ class Solution:
             
         # Concatenate all rows to form the final string.
         return "".join(rows)
-
-```

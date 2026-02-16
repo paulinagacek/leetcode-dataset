@@ -1,7 +1,0 @@
-class Solution(object):
-    def maxProduct(self, words):
-        d = defaultdict(int)
-        for w in words:
-            fs = frozenset(w)
-            d[fs] = max(d[fs], len(w))
-        return max([d[x] * d[y] for x, y in itertools.combinations(d, 2) if not x & y], default=0)

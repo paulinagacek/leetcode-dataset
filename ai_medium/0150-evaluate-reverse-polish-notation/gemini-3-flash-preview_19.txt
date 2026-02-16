@@ -1,0 +1,29 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for token in tokens:
+            if token == "+":
+                # For addition, the order of operands does not matter
+                stack.append(stack.pop() + stack.pop())
+            elif token == "-":
+                # For subtraction, the order of operands matters (a - b)
+                # The first pop is the subtrahend, the second pop is the minuend
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif token == "*":
+                # For multiplication, the order of operands does not matter
+                stack.append(stack.pop() * stack.pop())
+            elif token == "/":
+                # For division, the order of operands matters (a / b)
+                # The first pop is the divisor, the second pop is the dividend
+                # Python's int(a / b) truncates toward zero as required
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(int(a / b))
+            else:
+                # If the token is not an operator, it must be an integer
+                stack.append(int(token))
+        
+        # The result of the expression is the only remaining element in the stack
+        return stack[0]

@@ -1,0 +1,27 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build the graph and calculate in-degrees
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize queue with courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        count = 0
+        while queue:
+            u = queue.popleft()
+            count += 1
+            
+            # Reduce in-degree for all courses dependent on course u
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If a course has no more dependencies, add it to the queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If we processed all courses, there's no cycle
+        return count == numCourses

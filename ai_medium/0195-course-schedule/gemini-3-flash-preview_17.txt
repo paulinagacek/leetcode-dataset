@@ -1,0 +1,27 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build adjacency list and calculate in-degrees
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize queue with nodes having 0 in-degree
+        queue = collections.deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        visited_count = 0
+        
+        # BFS using Kahn's Algorithm
+        while queue:
+            u = queue.popleft()
+            visited_count += 1
+            
+            for v in adj[u]:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If visited_count equals numCourses, no cycle exists
+        return visited_count == numCourses

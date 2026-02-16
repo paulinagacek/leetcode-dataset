@@ -1,8 +1,0 @@
-def canPartition(self, nums: List[int]) -> bool:
-        s = sum(nums)
-        if s & 1: 
-            return False   # ok, this is simple - I also got it in my "normal" code
-        bits = 1
-        for n in nums:  # this is O(n) solition, right? this is crazy!
-            bits |= bits << n
-        return (bits >> (s >> 1)) & 1

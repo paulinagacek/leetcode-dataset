@@ -1,10 +1,6 @@
-```python
-from typing import List
-
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         # The standard formula to generate the i-th number in a Gray code sequence is G(i) = i ^ (i >> 1).
         # This sequence starts at 0, contains 2^n unique integers, and adjacent elements (including 
         # the first and last) differ by exactly one bit.
         return [i ^ (i >> 1) for i in range(1 << n)]
-```

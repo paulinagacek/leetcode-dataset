@@ -1,0 +1,56 @@
+class Solution:
+    def sortList(self, head: Optional['ListNode']) -> Optional['ListNode']:
+        if not head or not head.next:
+            return head
+
+        # Get length
+        n = 0
+        cur = head
+        while cur:
+            n += 1
+            cur = cur.next
+
+        dummy = ListNode(0, head)
+        size = 1
+
+        def split(start: 'ListNode', size: int) -> Optional['ListNode']:
+            cur = start
+            for _ in range(size - 1):
+                if not cur:
+                    return None
+                cur = cur.next
+            if not cur:
+                return None
+            nxt = cur.next
+            cur.next = None
+            return nxt
+
+        def merge(l1: Optional['ListNode'], l2: Optional['ListNode']) -> ('ListNode', 'ListNode'):
+            dummy_m = ListNode(0)
+            tail = dummy_m
+            while l1 and l2:
+                if l1.val <= l2.val:
+                    tail.next = l1
+                    l1 = l1.next
+                else:
+                    tail.next = l2
+                    l2 = l2.next
+                tail = tail.next
+            tail.next = l1 if l1 else l2
+            while tail.next:
+                tail = tail.next
+            return dummy_m.next, tail
+
+        while size < n:
+            prev = dummy
+            cur = dummy.next
+            while cur:
+                left = cur
+                right = split(left, size)
+                cur = split(right, size) if right else None
+                merged_head, merged_tail = merge(left, right)
+                prev.next = merged_head
+                prev = merged_tail
+            size <<= 1
+
+        return dummy.next

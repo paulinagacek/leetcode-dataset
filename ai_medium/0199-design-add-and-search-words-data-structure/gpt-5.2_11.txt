@@ -1,0 +1,30 @@
+class WordDictionary:
+    def __init__(self):
+        self.root = {"#": False}
+
+    def addWord(self, word: str) -> None:
+        node = self.root
+        for ch in word:
+            if ch not in node:
+                node[ch] = {"#": False}
+            node = node[ch]
+        node["#"] = True
+
+    def search(self, word: str) -> bool:
+        def dfs(i: int, node: dict) -> bool:
+            if i == len(word):
+                return node.get("#", False)
+
+            ch = word[i]
+            if ch == ".":
+                for k, nxt in node.items():
+                    if k != "#" and dfs(i + 1, nxt):
+                        return True
+                return False
+            else:
+                nxt = node.get(ch)
+                if not nxt:
+                    return False
+                return dfs(i + 1, nxt)
+
+        return dfs(0, self.root)

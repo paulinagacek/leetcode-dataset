@@ -1,0 +1,26 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for t in tokens:
+            if t in {"+", "-", "*", "/"}:
+                # The stack follows the LIFO rule, so the first popped element 
+                # is the second operand in the original expression.
+                b = stack.pop()
+                a = stack.pop()
+                
+                if t == "+":
+                    stack.append(a + b)
+                elif t == "-":
+                    stack.append(a - b)
+                elif t == "*":
+                    stack.append(a * b)
+                elif t == "/":
+                    # Division between two integers truncates toward zero.
+                    # In Python, int(a / b) achieves this behavior for both positive and negative results.
+                    stack.append(int(a / b))
+            else:
+                # The token is an integer; convert it and push onto the stack.
+                stack.append(int(t))
+                
+        # The result of the final arithmetic expression is the only item remaining in the stack.
+        return stack[0]

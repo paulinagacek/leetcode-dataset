@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         if num1 == "0" or num2 == "0":
@@ -31,5 +30,3 @@ class Solution:
             
         # Convert the integer array back to a string (reversing it back to correct order)
         return "".join(map(str, res[::-1]))
-
-```

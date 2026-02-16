@@ -1,6 +1,3 @@
-```python
-import math
-
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         # The problem can be solved using combinations.
@@ -10,5 +7,3 @@ class Solution:
         # The number of unique paths is the number of ways to choose (m - 1) down moves 
         # out of the total (m + n - 2) moves.
         return math.comb(m + n - 2, m - 1)
-
-```

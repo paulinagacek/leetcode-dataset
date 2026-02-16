@@ -1,5 +1,0 @@
-def combinationSum4(self, nums: List[int], target: int) -> int:
-	@lru_cache(None)
-	def dfs(t):
-		return sum(dfs(t-i) if t-i>=0 else 0 for i in nums) if t else 1
-	return dfs(target)

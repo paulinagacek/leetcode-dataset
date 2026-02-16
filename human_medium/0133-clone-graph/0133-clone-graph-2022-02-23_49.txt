@@ -1,28 +1,3 @@
-def dfs(node,d,s):
-    s.add(node)
-    # Create copy for curr node or use if it is already created
-    if d.get(node,0)==0:
-        node_copy = Node(node.val)
-        d[node]=node_copy
-    else:
-        node_copy = d[node]
-        
-    # Create neighbours copy
-    for i in node.neighbors:
-        if d.get(i,0)==0:
-            neigh_copy = Node(i.val)
-            d[i]=neigh_copy
-        else:
-            neigh_copy = d[i]
-        node_copy.neighbors.append(neigh_copy)
-    
-    # DFS on neighbors
-    for i in node.neighbors:
-        if i not in s:
-            dfs(i,d,s)
-    return node_copy
-        
-    
 class Solution:
     def cloneGraph(self, node: \'Node\') -> \'Node\':
         if node==None:

@@ -1,0 +1,33 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        """
+        Finds all valid combinations of k numbers that sum up to n using numbers 1-9.
+        Each number is used at most once.
+        """
+        results = []
+        
+        def backtrack(start: int, target: int, current_path: List[int]):
+            # Base case: if we have chosen k numbers
+            if len(current_path) == k:
+                # If the sum of these numbers matches our target
+                if target == 0:
+                    results.append(list(current_path))
+                return
+            
+            # Explore numbers from 'start' to 9
+            for i in range(start, 10):
+                # Optimization: since numbers are picked in increasing order,
+                # if i exceeds the remaining target, no future i can satisfy it.
+                if i > target:
+                    break
+                
+                # Add the number and recurse
+                current_path.append(i)
+                backtrack(i + 1, target - i, current_path)
+                
+                # Backtrack to explore other possibilities
+                current_path.pop()
+        
+        # Start recursion with number 1 and target sum n
+        backtrack(1, n, [])
+        return results

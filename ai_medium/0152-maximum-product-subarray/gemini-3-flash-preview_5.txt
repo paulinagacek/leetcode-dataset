@@ -1,0 +1,29 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize the global maximum, and the current maximum/minimum products
+        # ending at the current position.
+        res = curr_max = curr_min = nums[0]
+        
+        for i in range(1, len(nums)):
+            num = nums[i]
+            
+            # If the current number is negative, the maximum and minimum products
+            # will swap their roles when multiplied.
+            if num < 0:
+                curr_max, curr_min = curr_min, curr_max
+            
+            # The maximum product at the current position is either the current number
+            # itself or the product of the current number and the previous maximum.
+            curr_max = max(num, num * curr_max)
+            
+            # The minimum product is similarly tracked to handle future sign flips.
+            curr_min = min(num, num * curr_min)
+            
+            # Update the global result.
+            if curr_max > res:
+                res = curr_max
+                
+        return res

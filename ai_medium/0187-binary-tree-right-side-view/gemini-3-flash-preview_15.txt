@@ -1,0 +1,19 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        
+        def dfs(node, depth):
+            if not node:
+                return
+            
+            # If this is the first node we've encountered at this depth,
+            # it must be the rightmost node because we visit the right child first.
+            if depth == len(res):
+                res.append(node.val)
+            
+            # Traverse the right child first, then the left child
+            dfs(node.right, depth + 1)
+            dfs(node.left, depth + 1)
+            
+        dfs(root, 0)
+        return res

@@ -1,0 +1,41 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        
+        # Iterative DFS to mark 'O's connected to the border
+        def mark_as_safe(start_r, start_c):
+            if board[start_r][start_c] != 'O':
+                return
+            stack = [(start_r, start_c)]
+            board[start_r][start_c] = '#'
+            while stack:
+                r, c = stack.pop()
+                for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                        board[nr][nc] = '#'
+                        stack.append((nr, nc))
+        
+        # Step 1: Start marking safe 'O' regions from the borders
+        for i in range(m):
+            mark_as_safe(i, 0)
+            mark_as_safe(i, n - 1)
+        for j in range(n):
+            mark_as_safe(0, j)
+            mark_as_safe(m - 1, j)
+            
+        # Step 2: Iterate through the board to finalize the state
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    # Surrounded 'O' becomes 'X'
+                    board[i][j] = 'X'
+                elif board[i][j] == '#':
+                    # Safe 'O' (previously marked) reverts to 'O'
+                    board[i][j] = 'O'

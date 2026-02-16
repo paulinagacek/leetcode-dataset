@@ -1,0 +1,35 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Adjacency list to represent the graph: course -> [list of courses that depend on it]
+        adj = [[] for _ in range(numCourses)]
+        # Array to store the in-degree (number of prerequisites) for each course
+        in_degree = [0] * numCourses
+        
+        # Build the graph and calculate in-degrees
+        # Each prerequisite [ai, bi] means bi -> ai
+        for ai, bi in prerequisites:
+            adj[bi].append(ai)
+            in_degree[ai] += 1
+        
+        # Initialize a queue with all courses that have no prerequisites (in-degree 0)
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # List to store the resulting topological ordering
+        result = []
+        
+        # Kahn's algorithm for topological sorting
+        while queue:
+            curr = queue.popleft()
+            result.append(curr)
+            
+            # For each course that depends on the current course
+            for neighbor in adj[curr]:
+                in_degree[neighbor] -= 1
+                # If all prerequisites for the neighbor course are completed, add it to the queue
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If the result includes all courses, return the list; otherwise, return an empty list
+        if len(result) == numCourses:
+            return result
+        return []

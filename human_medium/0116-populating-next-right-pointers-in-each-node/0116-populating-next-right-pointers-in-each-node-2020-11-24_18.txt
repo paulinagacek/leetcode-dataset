@@ -1,6 +1,3 @@
-# TC: O(N) - we visit each node exactly once
-# SC: O(N) - Worst case tree is completely skewed and we have N calls on the stack
-
 class Solution:
     def rob(self, root):
         return max(self.rRob(root))

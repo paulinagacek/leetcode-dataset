@@ -1,7 +1,3 @@
-# The funtion mergesort is the main sorting function which uses another function merge. The merge just merges two sorted arrays.
-# The combination of this two functions is the standard way for sorting (MERGE SORT ALGORITHM)
-# function arguments :  l - left index, m - middle index, r - right index . it means merge [l, m+1]  and [m+1, r] arrays.
-
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """

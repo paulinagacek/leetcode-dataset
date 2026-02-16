@@ -1,0 +1,17 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+
+        sieve = bytearray(b"\x01") * n
+        sieve[0:2] = b"\x00\x00"
+
+        import math
+        limit = int(math.isqrt(n - 1))
+        for p in range(2, limit + 1):
+            if sieve[p]:
+                start = p * p
+                step = p
+                sieve[start:n:step] = b"\x00" * (((n - 1 - start) // step) + 1)
+
+        return int(sum(sieve))

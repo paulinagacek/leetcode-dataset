@@ -1,4 +1,3 @@
-```python
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """
@@ -22,5 +21,3 @@ class Solution:
             else:
                 # If nums[curr] == 1, just move to the next element
                 curr += 1
-
-```

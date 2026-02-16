@@ -1,0 +1,70 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Get the total length of the linked list
+        n, curr = 0, head
+        while curr:
+            n += 1
+            curr = curr.next
+        
+        dummy = ListNode(0)
+        dummy.next = head
+        step = 1
+        # Bottom-up merge sort iterative process
+        while step < n:
+            prev, curr = dummy, dummy.next
+            while curr:
+                # l1 is the head of the first sub-list
+                l1 = curr
+                # l2 is the head of the second sub-list
+                l2 = self.split(l1, step)
+                # curr is the head of the next pair of sub-lists
+                curr = self.split(l2, step)
+                # merge the two sub-lists and connect to the previous tail
+                m_head, m_tail = self.merge(l1, l2)
+                prev.next = m_head
+                prev = m_tail
+            step *= 2
+            
+        return dummy.next
+        
+    def split(self, head, n):
+        """
+        Splits the list starting from head after n nodes.
+        Returns the head of the remaining list.
+        """
+        if not head:
+            return None
+        for i in range(n - 1):
+            if head.next:
+                head = head.next
+            else:
+                break
+        second = head.next
+        head.next = None
+        return second
+        
+    def merge(self, l1, l2):
+        """
+        Merges two sorted linked lists.
+        Returns the head and the tail of the merged list.
+        """
+        dummy = ListNode(0)
+        tail = dummy
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        
+        # Attach the remaining part
+        tail.next = l1 or l2
+        # Move tail to the end of the merged list
+        while tail.next:
+            tail = tail.next
+        return dummy.next, tail

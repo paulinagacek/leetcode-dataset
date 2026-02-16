@@ -1,9 +1,0 @@
-def productExceptSelf(self, nums: List[int]) -> List[int]:
-        from itertools import accumulate, chain
-        from operator import mul
-        C = chain([1], accumulate(nums[:-1], mul))
-        D = [1] + list(accumulate(nums[:0:-1], mul))
-        D.reverse()
-        for i, d in enumerate(D):
-            D[i] *= next(C)
-        return D

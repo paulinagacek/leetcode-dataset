@@ -1,0 +1,25 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # Create a mapping from original nodes to their corresponding new nodes
+        # We initialize with None mapping to None to handle next/random pointers that are null
+        old_to_new = {None: None}
+        
+        # First pass: create all the new nodes without setting next and random pointers
+        curr = head
+        while curr:
+            old_to_new[curr] = Node(curr.val)
+            curr = curr.next
+            
+        # Second pass: set next and random pointers using the mapping
+        curr = head
+        while curr:
+            new_node = old_to_new[curr]
+            new_node.next = old_to_new[curr.next]
+            new_node.random = old_to_new[curr.random]
+            curr = curr.next
+            
+        # Return the head of the new linked list
+        return old_to_new[head]

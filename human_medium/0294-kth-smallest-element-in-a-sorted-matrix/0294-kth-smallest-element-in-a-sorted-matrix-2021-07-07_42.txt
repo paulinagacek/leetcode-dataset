@@ -1,5 +1,0 @@
-class Solution:
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        flatten_list = sum(matrix, [])
-        flatten_list.sort()
-        return flatten_list[k-1]

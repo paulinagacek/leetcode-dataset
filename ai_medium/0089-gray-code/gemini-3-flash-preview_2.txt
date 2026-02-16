@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         # Using the formula G(i) = i ^ (i >> 1) to generate the sequence
@@ -10,4 +7,3 @@ class Solution:
         # 3. Adjacent elements differ by exactly one bit.
         # 4. The first and last elements differ by exactly one bit (cyclic property).
         return [i ^ (i >> 1) for i in range(1 << n)]
-```

@@ -1,0 +1,14 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        # Use the bottom row as the initial state for our DP array
+        n = len(triangle)
+        dp = triangle[-1][:]
+        
+        # Iterate backwards from the second-to-last row to the top
+        for i in range(n - 2, -1, -1):
+            for j in range(len(triangle[i])):
+                # For each element, choose the minimum path from the two adjacent numbers below it
+                dp[j] = triangle[i][j] + min(dp[j], dp[j + 1])
+                
+        # The first element of dp will contain the minimum path sum from top to bottom
+        return dp[0]

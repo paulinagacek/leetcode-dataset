@@ -1,4 +1,3 @@
-from typing import List
 class Solution:
     # 128ms ~ O((M+N) * 3^(M*N))) (upperbound) runtime. The first M+N is from looking through the boundary, and 3^(M*N) for dfs up to a maximum depth of M*N nodes 
     # M+N is dependent on 3^(M*N) if we have 3^(M*N) on the first dfs search, then the rest of the M+N-1 iterations won\'t be searched past the first node

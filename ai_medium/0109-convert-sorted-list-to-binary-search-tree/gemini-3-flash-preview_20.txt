@@ -1,0 +1,36 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        # Step 1: Count the total number of nodes in the linked list
+        n = 0
+        curr = head
+        while curr:
+            n += 1
+            curr = curr.next
+        
+        # We'll use self.node to keep track of the current head of the linked list
+        # as we traverse it during the bottom-up BST construction.
+        self.node = head
+        
+        # Step 2: Recursive helper function to build the BST
+        # This function builds the tree bottom-up to ensure O(N) time complexity
+        # and O(log N) auxiliary space (recursion stack).
+        def convert(count):
+            if count <= 0:
+                return None
+            
+            # Recursively build the left subtree
+            left_subtree = convert(count // 2)
+            
+            # Create the root of the current subtree with the current linked list node's value
+            root = TreeNode(self.node.val)
+            root.left = left_subtree
+            
+            # Move the linked list pointer forward
+            self.node = self.node.next
+            
+            # Recursively build the right subtree
+            root.right = convert(count - (count // 2) - 1)
+            
+            return root
+        
+        return convert(n)

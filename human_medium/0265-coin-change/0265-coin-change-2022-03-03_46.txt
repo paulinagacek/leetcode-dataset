@@ -1,6 +1,0 @@
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        numCoins = [0] + [amount + 1] * amount
-        for i in range(1, amount + 1):
-            numCoins[i] = min(1 + numCoins[i - c] if i - c >= 0 else numCoins[i] for c in coins)
-        return -1 if numCoins[amount] > amount else numCoins[amount]

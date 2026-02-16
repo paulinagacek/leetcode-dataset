@@ -1,4 +1,3 @@
-```python
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         # Get the length of the string
@@ -39,5 +38,3 @@ class Solution:
         
         # Return the longest palindromic substring using slicing
         return s[start : start + max_len]
-
-```

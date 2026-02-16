@@ -1,0 +1,38 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        rows, cols = len(board), len(board[0])
+        
+        def mark_safe(r, c):
+            if board[r][c] != 'O':
+                return
+            stack = [(r, c)]
+            board[r][c] = 'T'
+            while stack:
+                curr_r, curr_c = stack.pop()
+                for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    nr, nc = curr_r + dr, curr_c + dc
+                    if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] == 'O':
+                        board[nr][nc] = 'T'
+                        stack.append((nr, nc))
+        
+        # Traverse from boundary cells to mark connected 'O' cells as safe ('T')
+        for r in range(rows):
+            mark_safe(r, 0)
+            mark_safe(r, cols - 1)
+        for c in range(cols):
+            mark_safe(0, c)
+            mark_safe(rows - 1, c)
+            
+        # All remaining 'O' are surrounded, all 'T' are the safe 'O' cells
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'T':
+                    board[r][c] = 'O'

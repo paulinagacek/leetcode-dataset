@@ -1,0 +1,26 @@
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        # A dictionary to map original nodes to their corresponding clones
+        visited = {}
+        
+        def dfs(u: 'Node') -> 'Node':
+            # If the node has already been cloned, return the cloned version
+            if u in visited:
+                return visited[u]
+            
+            # Create a new Node instance with the same value
+            copy = Node(u.val)
+            # Store the clone in the dictionary before visiting neighbors to handle cycles
+            visited[u] = copy
+            
+            # Recursively clone all neighbors and add them to the cloned node's neighbors list
+            for neighbor in u.neighbors:
+                copy.neighbors.append(dfs(neighbor))
+            
+            return copy
+        
+        # Start the recursive DFS traversal from the given node
+        return dfs(node)

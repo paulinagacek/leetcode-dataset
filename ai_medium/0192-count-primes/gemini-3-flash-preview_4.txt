@@ -1,0 +1,26 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 3:
+            return 0
+        
+        # Initialize a bytearray with 1s of size n
+        # 1 means potentially prime, 0 means not prime
+        primes = bytearray([1]) * n
+        primes[0] = primes[1] = 0
+        
+        # Sieve out even numbers starting from 4
+        # We handle 2 separately to simplify the main sieve loop
+        primes[4::2] = bytearray(len(range(4, n, 2)))
+        
+        # Sieve odd numbers from 3 up to sqrt(n)
+        for i in range(3, int(n**0.5) + 1, 2):
+            if primes[i]:
+                # Start sieving from i*i because smaller multiples are already handled
+                # The step is 2*i to skip even multiples (e.g., if i=3, skip 12, 18, etc.)
+                start = i * i
+                if start < n:
+                    num_multiples = len(range(start, n, 2 * i))
+                    primes[start:n:2*i] = bytearray(num_multiples)
+                    
+        # Return the total number of primes (entries that remain as 1)
+        return primes.count(1)

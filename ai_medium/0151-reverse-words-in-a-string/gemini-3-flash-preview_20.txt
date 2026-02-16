@@ -1,0 +1,8 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # split() without arguments handles multiple spaces and leading/trailing whitespace
+        words = s.split()
+        # Reverse the list of words
+        words.reverse()
+        # Join the words with a single space
+        return " ".join(words)

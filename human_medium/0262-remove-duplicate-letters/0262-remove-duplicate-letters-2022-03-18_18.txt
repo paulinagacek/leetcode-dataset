@@ -1,7 +1,0 @@
-class Solution:
-    def removeDuplicateLetters(self, s: str) -> str:       
-        for i in sorted(set(s)):
-            st = s[s.index(i):]
-            if set(st)==set(s):
-                return i + self.removeDuplicateLetters(st.replace(i,\'\'))
-        return \'\'

@@ -1,7 +1,3 @@
-```python
-from typing import List
-from collections import defaultdict
-
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         # A dictionary to store groups of anagrams. 
@@ -16,5 +12,3 @@ class Solution:
             
         # Return all the lists of anagrams grouped together
         return list(anagram_map.values())
-
-```

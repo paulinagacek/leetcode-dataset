@@ -1,4 +1,0 @@
-1) If the value p or q exist the left/right subtree
-	-  return the node
-2) Until a node have both left and right nodes return, it is the LCA of p and q.
-   Else, either left or right node is the LCA

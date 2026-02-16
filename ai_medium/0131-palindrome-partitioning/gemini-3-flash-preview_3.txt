@@ -1,0 +1,29 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        n = len(s)
+        
+        def is_palindrome(start: int, end: int) -> bool:
+            while start < end:
+                if s[start] != s[end]:
+                    return False
+                start += 1
+                end -= 1
+            return True
+            
+        def backtrack(start: int, path: List[str]):
+            if start == n:
+                res.append(path[:])
+                return
+            
+            for end in range(start, n):
+                if is_palindrome(start, end):
+                    # Add current substring to the partition
+                    path.append(s[start:end+1])
+                    # Recurse for the remainder of the string
+                    backtrack(end + 1, path)
+                    # Backtrack to explore other possible partitions
+                    path.pop()
+                    
+        backtrack(0, [])
+        return res

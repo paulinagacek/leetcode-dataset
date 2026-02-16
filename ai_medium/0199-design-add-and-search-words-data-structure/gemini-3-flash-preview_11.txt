@@ -1,0 +1,48 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initializes the object with an empty trie.
+        """
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word to the data structure.
+        The trie is represented using nested dictionaries.
+        """
+        node = self.trie
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        # Using '#' as a marker for the end of a word.
+        node['#'] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns True if the word matches any previously added string,
+        handling '.' as a wildcard matching any lowercase English letter.
+        """
+        n = len(word)
+        
+        def dfs(index, curr_node):
+            curr = curr_node
+            for i in range(index, n):
+                char = word[i]
+                if char == '.':
+                    # If current character is '.', try matching with all possible child nodes.
+                    for child_key in curr:
+                        if child_key != '#' and dfs(i + 1, curr[child_key]):
+                            return True
+                    return False
+                else:
+                    # For a normal character, follow the trie branch.
+                    if char not in curr:
+                        return False
+                    curr = curr[char]
+            
+            # Check if the traversal ended at a valid word.
+            return '#' in curr
+        
+        return dfs(0, self.trie)

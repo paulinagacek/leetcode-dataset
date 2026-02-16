@@ -1,11 +1,3 @@
-# Strategy is to loop through the the character list in reverse
-# accumulating the ways in which decoding can be done.
-# The ways at each index are stored in a list, and are used
-# in the next iterations if a 1-char or 2-char decoding would land at that index.
-
-# We initialize a list of zeros to avoid an unneeded zero-write in the "0" case.
-# We also add on a [1, 0] so that the the loop works at the very start without
-# an if-statement to check for the end-of-list condition.
 class Solution:
         
     def numDecodings(self, s: str) -> int:

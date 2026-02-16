@@ -1,0 +1,30 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Build adjacency list and calculate in-degrees
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for course, prereq in prerequisites:
+            adj[prereq].append(course)
+            in_degree[course] += 1
+        
+        # Initialize queue with courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        topo_order = []
+        
+        # Standard Kahn's Algorithm for Topological Sort
+        while queue:
+            node = queue.popleft()
+            topo_order.append(node)
+            
+            for neighbor in adj[node]:
+                in_degree[neighbor] -= 1
+                # If in-degree becomes zero, add to queue
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If the topo_order includes all courses, return it; otherwise, a cycle exists
+        if len(topo_order) == numCourses:
+            return topo_order
+        else:
+            return []

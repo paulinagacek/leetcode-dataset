@@ -1,0 +1,19 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left = 0
+        right = len(nums) - 1
+        
+        # While the search range is greater than one element
+        while left < right:
+            mid = left + (right - left) // 2
+            
+            # If the middle element is greater than the element at the right boundary,
+            # the minimum element must be in the right half of the current range.
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            # Otherwise, the minimum element is either at the mid index or to its left.
+            else:
+                right = mid
+        
+        # When left == right, we have narrowed down the search to the minimum element.
+        return nums[left]

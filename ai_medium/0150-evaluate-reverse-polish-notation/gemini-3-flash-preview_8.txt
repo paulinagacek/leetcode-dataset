@@ -1,0 +1,25 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for t in tokens:
+            if t == '+':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a + b)
+            elif t == '-':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif t == '*':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a * b)
+            elif t == '/':
+                b = stack.pop()
+                a = stack.pop()
+                # Division between two integers truncating toward zero
+                stack.append(int(a / b))
+            else:
+                # The token is an integer
+                stack.append(int(t))
+        return stack[0]

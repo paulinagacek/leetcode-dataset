@@ -1,0 +1,37 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        n = len(s)
+        res: List[str] = []
+        parts: List[str] = []
+
+        def valid(seg: str) -> bool:
+            if not seg:
+                return False
+            if len(seg) > 1 and seg[0] == '0':
+                return False
+            if len(seg) > 3:
+                return False
+            return int(seg) <= 255
+
+        def dfs(i: int) -> None:
+            remaining_parts = 4 - len(parts)
+            remaining_chars = n - i
+            if remaining_chars < remaining_parts or remaining_chars > 3 * remaining_parts:
+                return
+
+            if len(parts) == 4:
+                if i == n:
+                    res.append(".".join(parts))
+                return
+
+            for l in range(1, 4):
+                if i + l > n:
+                    break
+                seg = s[i:i + l]
+                if valid(seg):
+                    parts.append(seg)
+                    dfs(i + l)
+                    parts.pop()
+
+        dfs(0)
+        return res

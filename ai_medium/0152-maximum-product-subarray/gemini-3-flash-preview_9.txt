@@ -1,0 +1,26 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize cur_max, cur_min, and res with the first element
+        res = cur_max = cur_min = nums[0]
+        
+        # Iterate through the array starting from the second element
+        for i in range(1, len(nums)):
+            n = nums[i]
+            
+            # Temporary products ending at the current index
+            v1 = n * cur_max
+            v2 = n * cur_min
+            
+            # The new cur_max and cur_min must include the current element n
+            # They could be n itself, n * the previous max, or n * the previous min
+            cur_max = max(n, v1, v2)
+            cur_min = min(n, v1, v2)
+            
+            # Update the global maximum product found so far
+            if cur_max > res:
+                res = cur_max
+                
+        return res

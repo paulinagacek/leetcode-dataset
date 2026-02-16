@@ -1,6 +1,0 @@
-class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        ans, p = [], sorted(p) # due to "anagrams" definition, we don\'t care about the order of the characters here, so we sort the "p"
-        for i in range(len(s)-len(p)+1): #the range here is (len(s)-len(p)+1) because we will be out of range in next line if we don\'t -len(p)
-            if sorted(s[i:i+len(p)]) == p: ans.append(i) #sort the string start from i, if it\'s same to sorted(p), store i to our ans
-        return ans

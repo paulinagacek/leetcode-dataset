@@ -1,0 +1,44 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initializes the object.
+        """
+        self.root = {}
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds word to the data structure, it can be matched later.
+        """
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['$'] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns true if there is any string in the data structure that matches word
+        or false otherwise. word may contain dots '.' which can match any letter.
+        """
+        def dfs(node, index):
+            curr = node
+            for i in range(index, len(word)):
+                char = word[i]
+                if char == '.':
+                    # If we encounter a wildcard, check all possible child nodes
+                    for key in curr:
+                        if key != '$' and dfs(curr[key], i + 1):
+                            return True
+                    return False
+                else:
+                    # Normal character search
+                    if char not in curr:
+                        return False
+                    curr = curr[char]
+            
+            # After the loop, check if we've reached the end of a valid word
+            return '$' in curr
+
+        return dfs(self.root, 0)

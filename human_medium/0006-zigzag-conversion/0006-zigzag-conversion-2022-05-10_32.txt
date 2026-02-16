@@ -1,4 +1,3 @@
-from itertools import chain, cycle
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
         substrs = [[] for _ in range(numRows)]

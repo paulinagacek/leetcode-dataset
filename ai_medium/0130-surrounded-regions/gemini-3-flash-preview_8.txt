@@ -1,0 +1,49 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        queue = collections.deque()
+        
+        # Identify all 'O' cells on the board boundaries.
+        # Mark them as 'S' (safe) and add to the queue for BFS.
+        # This prevents capture because they are not completely surrounded by 'X's.
+        for r in range(m):
+            if board[r][0] == 'O':
+                board[r][0] = 'S'
+                queue.append((r, 0))
+            if n > 1 and board[r][n - 1] == 'O':
+                board[r][n - 1] = 'S'
+                queue.append((r, n - 1))
+        
+        for c in range(1, n - 1):
+            if board[0][c] == 'O':
+                board[0][c] = 'S'
+                queue.append((0, c))
+            if m > 1 and board[m - 1][c] == 'O':
+                board[m - 1][c] = 'S'
+                queue.append((m - 1, c))
+        
+        # Perform BFS starting from boundary 'O' cells.
+        # Any 'O' cell connected to these boundary cells is also marked 'S'.
+        while queue:
+            r, c = queue.popleft()
+            for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = 'S'
+                    queue.append((nr, nc))
+        
+        # In-place transformation of the board:
+        # 1. Any remaining 'O' cells were fully surrounded by 'X's and are now captured ('X').
+        # 2. Any cells marked 'S' are restored to their original state ('O').
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'S':
+                    board[r][c] = 'O'

@@ -1,7 +1,0 @@
-def longestSubstring(self, s: str, k: int) -> int:
-		# get the characters that appear less than `k` times
-        c = \'\'.join([c for c, v in collections.Counter(s).items() if v < k])
-		
-		# split the string by the characters and then further split the substrings
-		# until all characters repeat no less than `k` times, return the longest
-        return max(self.longestSubstring(sub, k) if sub else 0 for sub in re.split(f\'[{c}]\', s)) if c else len(s)

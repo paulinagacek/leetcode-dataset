@@ -1,0 +1,26 @@
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        curr = root
+        
+        while curr:
+            # dummy node acts as a placeholder for the head of the next level
+            dummy = Node(0)
+            tail = dummy
+            
+            # Iterate through the current level using the next pointers
+            while curr:
+                if curr.left:
+                    tail.next = curr.left
+                    tail = tail.next
+                if curr.right:
+                    tail.next = curr.right
+                    tail = tail.next
+                curr = curr.next
+            
+            # Move curr to the start of the next level
+            curr = dummy.next
+            
+        return root

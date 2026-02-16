@@ -1,10 +1,3 @@
-def beatyprint(matrix, n):
-    for i in range(n):
-        ans = ""
-        for j in range(n):
-            ans += str(matrix[i][j]) + " "
-        print(ans)
-
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
         n = len(matrix)

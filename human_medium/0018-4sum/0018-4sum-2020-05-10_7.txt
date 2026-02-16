@@ -1,4 +1,3 @@
-from collections import defaultdict
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         # Store a dp style table of [row][col] for each two sum

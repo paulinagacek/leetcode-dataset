@@ -1,14 +1,3 @@
-# we need to setup two pointers `idx1` and `idx2` to keep track the positions we\'re at in `s1` and `s2`
-# the position of the `s3` can be calculated by `idx1 + idx2`
-
-# if s3[idx1+idx2] matches only either s1[idx1] or s2[idx2]
-#   then that one should be the decsion
-# elif s3[idx1+idx2] matches both s1[idx1] and s2[idx2]
-#   then we\'re going to do backtracking and try every posibility to determine which substring to choose
-
-# time complexity w/o memoization O(2^(n+m)), n + m is the length of s3
-# time complexity w/ memoization O(n*m)
-
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         if len(s3) != (len(s1) + len(s2)):

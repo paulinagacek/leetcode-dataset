@@ -1,5 +1,3 @@
-from functools import cmp_to_key
-
 class Solution:
     """
     This solution implements a custom sorting comparator, so that our

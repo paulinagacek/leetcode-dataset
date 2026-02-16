@@ -1,8 +1,0 @@
-class Solution:
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        for i in range(1, len(matrix)):
-            matrix[0].extend(matrix[i])
-        del(matrix[1:])
-        matrix = matrix[0]
-        matrix.sort()
-        return matrix[k-1]

@@ -1,4 +1,3 @@
-from functools import lru_cache
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
         M, N = len(obstacleGrid), len(obstacleGrid[0])

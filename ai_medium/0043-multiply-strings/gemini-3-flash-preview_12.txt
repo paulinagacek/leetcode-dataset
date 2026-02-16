@@ -1,4 +1,3 @@
-```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         # If either number is 0, the product is 0
@@ -33,4 +32,3 @@ class Solution:
             
         # Convert the integer array into a string
         return "".join(map(str, res[start:]))
-```

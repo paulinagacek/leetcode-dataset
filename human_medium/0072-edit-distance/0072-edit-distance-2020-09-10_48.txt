@@ -1,15 +1,3 @@
-"""
-Approach:
-
-have 2 pointers for each word
-- if same just increment
-- if not do three things and see which one is better. This can be simulated via pointer manipulation
-
-
-Runtime: 100 ms, faster than 96.25% of Python3 online submissions for Edit Distance.
-Memory Usage: 16.5 MB, less than 80.25% of Python3 online submissions for Edit Distance.
-"""
-from functools import lru_cache
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         

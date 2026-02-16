@@ -1,10 +1,6 @@
-```python
-from typing import List
-
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         # The standard Gray code sequence is generated using the formula G(i) = i ^ (i >> 1)
         # This formula produces a sequence where each adjacent pair differs by exactly one bit,
         # and it also satisfies the circular property for the first and last elements.
         return [i ^ (i >> 1) for i in range(1 << n)]
-```

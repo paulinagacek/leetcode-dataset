@@ -1,0 +1,33 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Handle empty list or single node case
+        if not head or not head.next:
+            return head
+        
+        # dummy node helps handle insertion at the head
+        dummy = ListNode(0)
+        dummy.next = head
+        
+        # curr is the last node of the sorted portion of the list
+        curr = head
+        
+        while curr.next:
+            if curr.val <= curr.next.val:
+                # The next node is already in the correct relative position
+                curr = curr.next
+            else:
+                # The next node (target) is out of order and needs to be moved
+                target = curr.next
+                # Remove target from the current position
+                curr.next = target.next
+                
+                # Find the insertion point in the sorted portion starting from the dummy
+                prev = dummy
+                while prev.next.val < target.val:
+                    prev = prev.next
+                
+                # Insert target after prev and before prev.next
+                target.next = prev.next
+                prev.next = target
+        
+        return dummy.next

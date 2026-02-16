@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         def find_bound(is_first: bool) -> int:
@@ -22,4 +19,3 @@ class Solution:
             return bound
         
         return [find_bound(True), find_bound(False)]
-```

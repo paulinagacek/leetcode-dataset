@@ -1,9 +1,0 @@
-class Solution:
-    def maxProfit(self, A):
-        n = len(A)
-        dp = [0] * (n+2)
-        cmax = 0
-        for i in reversed(range(n-1)):
-            cmax = max(cmax,A[i+1] + dp[i+3])
-            dp[i] = max(dp[i+1],cmax - A[i])
-        return dp[0]

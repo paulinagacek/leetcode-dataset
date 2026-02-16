@@ -1,0 +1,28 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Step 1: Initialize adjacency list and in-degree array
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        # Step 2: Build the dependency graph
+        # prerequisites[i] = [ai, bi] indicates bi must be taken before ai (bi -> ai)
+        for ai, bi in prerequisites:
+            adj[bi].append(ai)
+            in_degree[ai] += 1
+            
+        # Step 3: Initialize the queue with courses having no prerequisites (in-degree 0)
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Step 4: Perform topological sort using Kahn's Algorithm (BFS)
+        res = []
+        while queue:
+            u = queue.popleft()
+            res.append(u)
+            
+            for v in adj[u]:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # Step 5: If the topological sort includes all courses, return it; otherwise, a cycle exists
+        return res if len(res) == numCourses else []

@@ -1,0 +1,62 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Get the total length of the linked list
+        length = 0
+        curr = head
+        while curr:
+            length += 1
+            curr = curr.next
+            
+        dummy = ListNode(0)
+        dummy.next = head
+        
+        step = 1
+        while step < length:
+            prev = dummy
+            curr = dummy.next
+            while curr:
+                h1 = curr
+                h2 = self.split(h1, step)
+                curr = self.split(h2, step)
+                
+                merged_h, merged_t = self.merge(h1, h2)
+                prev.next = merged_h
+                prev = merged_t
+            step *= 2
+            
+        return dummy.next
+
+    def split(self, head, size):
+        if not head:
+            return None
+        curr = head
+        for _ in range(size - 1):
+            if curr.next:
+                curr = curr.next
+            else:
+                break
+        
+        next_part = curr.next
+        curr.next = None
+        return next_part
+    
+    def merge(self, h1, h2):
+        dummy = ListNode(0)
+        curr = dummy
+        while h1 and h2:
+            if h1.val < h2.val:
+                curr.next = h1
+                h1 = h1.next
+            else:
+                curr.next = h2
+                h2 = h2.next
+            curr = curr.next
+            
+        curr.next = h1 or h2
+        while curr.next:
+            curr = curr.next
+            
+        return dummy.next, curr

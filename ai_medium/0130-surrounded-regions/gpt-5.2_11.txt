@@ -1,0 +1,32 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m = len(board)
+        n = len(board[0])
+        q = deque()
+
+        def mark(i: int, j: int) -> None:
+            if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+                board[i][j] = 'E'
+                q.append((i, j))
+
+        for i in range(m):
+            mark(i, 0)
+            mark(i, n - 1)
+        for j in range(n):
+            mark(0, j)
+            mark(m - 1, j)
+
+        while q:
+            i, j = q.popleft()
+            mark(i - 1, j)
+            mark(i + 1, j)
+            mark(i, j - 1)
+            mark(i, j + 1)
+
+        for i in range(m):
+            row = board[i]
+            for j in range(n):
+                if row[j] == 'O':
+                    row[j] = 'X'
+                elif row[j] == 'E':
+                    row[j] = 'O'

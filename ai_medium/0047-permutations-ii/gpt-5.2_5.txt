@@ -1,0 +1,22 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        counter = Counter(nums)
+        n = len(nums)
+        res: List[List[int]] = []
+        path: List[int] = []
+
+        def backtrack():
+            if len(path) == n:
+                res.append(path.copy())
+                return
+            for x in list(counter.keys()):
+                if counter[x] == 0:
+                    continue
+                counter[x] -= 1
+                path.append(x)
+                backtrack()
+                path.pop()
+                counter[x] += 1
+
+        backtrack()
+        return res

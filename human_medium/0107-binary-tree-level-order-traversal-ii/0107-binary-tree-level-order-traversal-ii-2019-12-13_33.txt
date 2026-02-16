@@ -1,4 +1,3 @@
-from collections import deque
 class Solution:
     def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
         if not root:

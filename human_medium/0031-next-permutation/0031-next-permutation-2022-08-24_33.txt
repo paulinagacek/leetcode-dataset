@@ -1,6 +1,3 @@
-from math import inf
-
-
 class Solution:
     def nextPermutation(self, nums: list[int]) -> None:
         """

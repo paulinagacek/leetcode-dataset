@@ -1,0 +1,27 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # Dictionary to map each original node to its brand new copy.
+        # Initializing with None: None handles pointers that are null.
+        old_to_new = {None: None}
+        
+        # First pass: Create all the new nodes without setting their connections.
+        # Store the mapping from the original node to the new copy.
+        curr = head
+        while curr:
+            old_to_new[curr] = Node(curr.val)
+            curr = curr.next
+            
+        # Second pass: Establish next and random connections for the new nodes.
+        # These will point only to other new nodes or None.
+        curr = head
+        while curr:
+            copy = old_to_new[curr]
+            copy.next = old_to_new[curr.next]
+            copy.random = old_to_new[curr.random]
+            curr = curr.next
+            
+        # Return the head of the newly constructed deep copy list.
+        return old_to_new[head]

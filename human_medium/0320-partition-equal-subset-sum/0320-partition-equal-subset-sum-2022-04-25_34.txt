@@ -1,9 +1,0 @@
-class Solution(object):
-    def canPartition(self, nums):
-        if sum(nums) % 2 != 0: return False
-        dp = [False for _ in range(sum(nums) + 1)]
-        dp[0] = True
-        for i in range(len(nums)):
-            for j in range(len(dp) - 1, nums[i] - 1, -1):
-                dp[j] = dp[j] or dp[j - nums[i]]
-        return  dp[(sum(nums)) // 2]

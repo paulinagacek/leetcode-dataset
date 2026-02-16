@@ -1,0 +1,33 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        n = len(s)
+        if n < 10:
+            return []
+
+        enc = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+        mask = (1 << 20) - 1  # 10 chars * 2 bits
+
+        x = 0
+        for i in range(10):
+            x = (x << 2) | enc[s[i]]
+
+        seen = set([x])
+        repeated = set()
+
+        for i in range(10, n):
+            x = ((x << 2) & mask) | enc[s[i]]
+            if x in seen:
+                repeated.add(x)
+            else:
+                seen.add(x)
+
+        dec = "ACGT"
+        res = []
+        for code in repeated:
+            tmp = code
+            chars = [''] * 10
+            for i in range(9, -1, -1):
+                chars[i] = dec[tmp & 3]
+                tmp >>= 2
+            res.append(''.join(chars))
+        return res

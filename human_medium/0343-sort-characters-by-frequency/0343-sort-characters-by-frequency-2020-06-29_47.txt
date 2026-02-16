@@ -1,6 +1,0 @@
-from collections import Counter
-class Solution:
-    def frequencySort(self, s: str) -> str:
-        dic = Counter(s)
-        nums = sorted(dic, key = dic.get, reverse = True)
-        return \'\'.join(val*dic[val] for val in nums)

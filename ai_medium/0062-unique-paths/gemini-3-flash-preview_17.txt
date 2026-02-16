@@ -1,4 +1,3 @@
-```python
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         # We use a 1D array to store the number of paths to each cell in the current row.
@@ -15,5 +14,3 @@ class Solution:
                 
         # The last element in the array stores the number of unique paths to the bottom-right corner.
         return dp[-1]
-
-```

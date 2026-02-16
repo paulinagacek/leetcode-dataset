@@ -1,20 +1,3 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-\'\'\'
-             0 1 2  3  4
-inorder =   [9,3,15,20,7]
-             l         r
-           l r   l     r
-			
-postorder = [9,15,7,20,3]
-             l         r
-           l r l     r
-\'\'\'
-
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         def rec(in_l, in_r, post_l, post_r):

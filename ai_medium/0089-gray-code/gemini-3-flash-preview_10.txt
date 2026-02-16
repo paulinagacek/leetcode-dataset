@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         # The standard formula for the i-th number in an n-bit Gray code sequence
@@ -8,4 +5,3 @@ class Solution:
         # unique integers, and ensures that adjacent elements (including the
         # first and last) differ by exactly one bit.
         return [i ^ (i >> 1) for i in range(1 << n)]
-```

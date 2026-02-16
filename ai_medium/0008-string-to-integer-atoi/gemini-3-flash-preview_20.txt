@@ -1,4 +1,3 @@
-```python
 class Solution:
     def myAtoi(self, s: str) -> int:
         i = 0
@@ -35,5 +34,3 @@ class Solution:
             return INT_MAX
         
         return res
-
-```

@@ -1,15 +1,3 @@
-\'\'\'
-w: DP
-h: from bottom to top, at each level (except the last row), we know:
-    1) there is smaller triangle
-    2) for this triangle, the path is min(left edge, right edge) + vertex.val
-       we do this from bottom to update min path for each vertex
-    3) base: at the lowest level (last row), min path = vertex.val
-Time complexity: O(N), N is total element in the triangle
-Space complexity: O(R), R is lenght of triagle[-1], this is largest array we maintain
-\'\'\'
-
-
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
         if len(triangle) == 1:

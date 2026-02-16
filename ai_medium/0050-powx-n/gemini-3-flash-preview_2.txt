@@ -1,4 +1,3 @@
-```python
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         # If n is 0, any number (except potentially 0, but n > 0 if x is 0) raised to 0 is 1.0.
@@ -22,5 +21,3 @@ class Solution:
             n //= 2
             
         return res
-
-```

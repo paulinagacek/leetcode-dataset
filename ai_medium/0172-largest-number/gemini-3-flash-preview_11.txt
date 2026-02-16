@@ -1,0 +1,25 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert each integer in the list to a string
+        nums_str = [str(num) for num in nums]
+        
+        # Define a custom comparator function to determine the sorting order.
+        # For two strings a and b, we compare the concatenated results (a + b) and (b + a).
+        # If (a + b) is greater, a should come before b (represented by returning -1).
+        def compare(a, b):
+            if a + b > b + a:
+                return -1
+            elif a + b < b + a:
+                return 1
+            else:
+                return 0
+        
+        # Sort the list of strings using the custom comparator.
+        nums_str.sort(key=cmp_to_key(compare))
+        
+        # Join the sorted list into a single string.
+        result = "".join(nums_str)
+        
+        # Handle the edge case where the result is multiple zeros (e.g., [0, 0]).
+        # If the first character of the sorted result is '0', the largest possible number is '0'.
+        return "0" if result[0] == "0" else result

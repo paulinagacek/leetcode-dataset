@@ -1,0 +1,21 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        right_view = []
+        level = [root]
+        
+        while level:
+            # The last node in the current level list is the rightmost node
+            right_view.append(level[-1].val)
+            
+            next_level = []
+            for node in level:
+                if node.left:
+                    next_level.append(node.left)
+                if node.right:
+                    next_level.append(node.right)
+            level = next_level
+            
+        return right_view

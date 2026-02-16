@@ -1,0 +1,32 @@
+class Trie:
+    __slots__ = ("children", "end")
+
+    def __init__(self):
+        self.children = {}
+        self.end = False
+
+    def insert(self, word: str) -> None:
+        node = self
+        for ch in word:
+            nxt = node.children.get(ch)
+            if nxt is None:
+                nxt = Trie()
+                node.children[ch] = nxt
+            node = nxt
+        node.end = True
+
+    def search(self, word: str) -> bool:
+        node = self
+        for ch in word:
+            node = node.children.get(ch)
+            if node is None:
+                return False
+        return node.end
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self
+        for ch in prefix:
+            node = node.children.get(ch)
+            if node is None:
+                return False
+        return True

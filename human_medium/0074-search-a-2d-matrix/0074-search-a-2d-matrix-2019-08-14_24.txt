@@ -1,4 +1,3 @@
-import functools, bisect
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         unfolded = functools.reduce(list.__add__, matrix, [])

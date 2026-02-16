@@ -1,5 +1,3 @@
-# Greedy Approach
-# Complexity Linear O(n)
 class Solution:
     def jump(self, nums: List[int]) -> int:
         n = len(nums)

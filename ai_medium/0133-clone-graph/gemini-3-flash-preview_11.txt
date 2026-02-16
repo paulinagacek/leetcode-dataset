@@ -1,0 +1,25 @@
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        # A dictionary to store the mapping from original node to its cloned counterpart
+        clones = {}
+        
+        def dfs(curr_node):
+            # If the node has already been cloned, return its clone
+            if curr_node in clones:
+                return clones[curr_node]
+            
+            # Create a clone for the current node
+            # Note: Do not populate neighbors yet to avoid infinite recursion
+            copy = Node(curr_node.val)
+            clones[curr_node] = copy
+            
+            # Recursively clone neighbors and add them to the cloned node's list
+            for neighbor in curr_node.neighbors:
+                copy.neighbors.append(dfs(neighbor))
+            
+            return copy
+        
+        return dfs(node)

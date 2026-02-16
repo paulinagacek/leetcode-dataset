@@ -1,0 +1,27 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        # Initialize result, current maximum product ending at the current index,
+        # and current minimum product ending at the current index.
+        res = curMax = curMin = nums[0]
+        
+        for i in range(1, len(nums)):
+            n = nums[i]
+            
+            # If the current number is negative, swapping curMax and curMin
+            # allows us to calculate the new max by multiplying the negative
+            # number with the previous minimum.
+            if n < 0:
+                curMax, curMin = curMin, curMax
+            
+            # The current max/min can either be the element itself or the
+            # product of the element and the previous max/min.
+            curMax = max(n, n * curMax)
+            curMin = min(n, n * curMin)
+            
+            # Update the global result with the highest product found so far.
+            res = max(res, curMax)
+            
+        return res

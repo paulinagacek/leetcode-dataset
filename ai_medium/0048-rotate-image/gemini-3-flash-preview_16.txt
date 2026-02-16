@@ -1,4 +1,3 @@
-```python
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
         """
@@ -14,4 +13,3 @@ class Solution:
         # Step 2: Reverse each row
         for i in range(n):
             matrix[i].reverse()
-```

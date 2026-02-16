@@ -1,0 +1,55 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        def split(node, n):
+            """Splits the list after the first n nodes and returns the head of the remainder."""
+            prev = None
+            curr = node
+            for _ in range(n):
+                if not curr:
+                    break
+                prev = curr
+                curr = curr.next
+            if prev:
+                prev.next = None
+            return curr
+
+        def merge(l1, l2, prev_tail):
+            """Merges two sorted lists and attaches the result to prev_tail, returning the new tail."""
+            curr = prev_tail
+            while l1 and l2:
+                if l1.val < l2.val:
+                    curr.next = l1
+                    l1 = l1.next
+                else:
+                    curr.next = l2
+                    l2 = l2.next
+                curr = curr.next
+            curr.next = l1 if l1 else l2
+            while curr.next:
+                curr = curr.next
+            return curr
+
+        # Get total length of the list
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+        
+        dummy = ListNode(0, head)
+        step = 1
+        # Iterative Merge Sort
+        while step < length:
+            prev_tail = dummy
+            curr = dummy.next
+            while curr:
+                left = curr
+                right = split(left, step)
+                curr = split(right, step)
+                prev_tail = merge(left, right, prev_tail)
+            step *= 2
+            
+        return dummy.next

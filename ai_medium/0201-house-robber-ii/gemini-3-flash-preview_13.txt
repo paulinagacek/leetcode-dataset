@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        def rob_linear(houses: List[int]) -> int:
+            prev2, prev1 = 0, 0
+            for amount in houses:
+                # Standard House Robber DP: max(don't rob current, rob current + 2 houses ago)
+                prev2, prev1 = prev1, max(prev1, prev2 + amount)
+            return prev1
+        
+        # The circular constraint means we either exclude the first house or the last house
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

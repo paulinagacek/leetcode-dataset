@@ -1,0 +1,32 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Represent the graph using an adjacency list and track the in-degree of each course
+        adj = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Queue for nodes with no prerequisites (in-degree 0)
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        order = []
+        
+        while queue:
+            u = queue.popleft()
+            order.append(u)
+            
+            # Decrease the in-degree for all neighboring courses
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If a neighbor's in-degree becomes 0, add it to the queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+        
+        # If the number of courses in the topological order equals numCourses, a solution exists
+        if len(order) == numCourses:
+            return order
+        else:
+            # If not, it means there was a cycle in the dependency graph
+            return []

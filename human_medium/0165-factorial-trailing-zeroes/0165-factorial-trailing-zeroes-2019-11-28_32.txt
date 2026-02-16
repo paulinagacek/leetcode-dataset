@@ -1,5 +1,3 @@
-from math import log
-
 class Solution:
     c = 5
 	

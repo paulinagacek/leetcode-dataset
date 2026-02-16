@@ -1,9 +1,0 @@
-class Solution:
-    def combinationSum4(self, nums: List[int], target: int) -> int:
-        back_trace = {0:1} # keep a hashmap as it\'ll help in computation of no of ways
-        for total in range(1, target+1):
-            back_trace[total] = 0
-            for i in nums:
-                print(back_trace)
-                back_trace[total] = back_trace[total] + back_trace.get(total-i, 0)
-        return back_trace[target]

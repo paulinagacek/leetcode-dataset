@@ -1,7 +1,3 @@
-from collections import namedtuple
-
-Interval = namedtuple("Interval", ["start", "end"])
-
 class Solution:
     def insert(self, intervals, newInterval):
         intervals = [Interval(x[0], x[1]) for x in intervals]

@@ -1,0 +1,35 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid or not grid[0]:
+            return 0
+
+        m, n = len(grid), len(grid[0])
+        islands = 0
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] != '1':
+                    continue
+                islands += 1
+                grid[i][j] = '0'
+                stack = [(i, j)]
+                while stack:
+                    r, c = stack.pop()
+                    nr = r - 1
+                    if nr >= 0 and grid[nr][c] == '1':
+                        grid[nr][c] = '0'
+                        stack.append((nr, c))
+                    nr = r + 1
+                    if nr < m and grid[nr][c] == '1':
+                        grid[nr][c] = '0'
+                        stack.append((nr, c))
+                    nc = c - 1
+                    if nc >= 0 and grid[r][nc] == '1':
+                        grid[r][nc] = '0'
+                        stack.append((r, nc))
+                    nc = c + 1
+                    if nc < n and grid[r][nc] == '1':
+                        grid[r][nc] = '0'
+                        stack.append((r, nc))
+
+        return islands

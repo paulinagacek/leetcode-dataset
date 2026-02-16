@@ -1,4 +1,3 @@
-from collections import deque
 class Solution(object):
     def connect(self, root):
         """

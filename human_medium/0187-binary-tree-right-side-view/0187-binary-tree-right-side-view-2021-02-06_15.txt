@@ -1,16 +1,3 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-\'\'\'
-w: level order traversal
-h: traverse the tree level by level
-    only record the last node of each level
-\'\'\'
-import collections
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
         if not root:

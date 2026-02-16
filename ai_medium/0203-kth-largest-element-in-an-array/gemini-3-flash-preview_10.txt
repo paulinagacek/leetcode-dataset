@@ -1,0 +1,14 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Create a min-heap with the first k elements
+        min_heap = nums[:k]
+        heapq.heapify(min_heap)
+        
+        # Iterate through the rest of the array
+        # heappushpop adds the new element and removes the smallest
+        # keeping the k largest elements in the heap
+        for i in range(k, len(nums)):
+            heapq.heappushpop(min_heap, nums[i])
+            
+        # The root of the min-heap is the kth largest element
+        return min_heap[0]

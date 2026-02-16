@@ -1,4 +1,0 @@
-class Solution:
-    def findDuplicate(self, nums: List[int]) -> int:
-        dupsSet = set(nums)
-        return int((abs(sum(nums) - sum(dupsSet)))/(len(nums)-len(dupsSet)))

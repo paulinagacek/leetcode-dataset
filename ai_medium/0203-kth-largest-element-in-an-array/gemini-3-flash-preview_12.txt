@@ -1,0 +1,6 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Use a min-heap to keep track of the k largest elements found so far.
+        # This approach has a time complexity of O(n log k) and space complexity of O(k).
+        # We use heapq.nlargest which is highly optimized in Python.
+        return heapq.nlargest(k, nums)[-1]

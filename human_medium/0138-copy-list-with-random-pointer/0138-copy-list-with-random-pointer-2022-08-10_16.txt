@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 class Solution:
     def copyRandomList(self, head: \'Optional[Node]\') -> \'Optional[Node]\':
         a=deepcopy(head)

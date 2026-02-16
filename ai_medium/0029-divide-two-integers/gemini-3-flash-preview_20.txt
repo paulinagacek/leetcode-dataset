@@ -1,4 +1,3 @@
-```python
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         # Constants for 32-bit signed integer limits
@@ -40,5 +39,3 @@ class Solution:
             return MAX_INT
             
         return res
-
-```

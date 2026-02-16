@@ -1,6 +1,3 @@
-Runtime: 658 ms, faster than 97.67% of Python3 online submissions for Palindrome Partitioning.
-Memory Usage: 29.1 MB, less than 77.79% of Python3 online submissions for Palindrome Partitioning.
-
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         def backtrack(s, res, path):

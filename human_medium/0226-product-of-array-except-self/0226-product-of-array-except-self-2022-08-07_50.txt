@@ -1,3 +1,0 @@
-**Explanation:**
-
-This is similar to the two approaches provided in the solution, but done in a recursive manner instead of using counter variables.  The recursive function takes in the index it\'s currently evaluating, `i`, as well as the product of all numbers before index `i` in the `nums` list, stored in `prefix`.  It will return a postfix representing the product of all numbers to the right of `i`, which combined with `prefix`, will give us the product we need in spot `i`.

@@ -1,0 +1,25 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # A hash map to store the mapping between the original nodes and their copies.
+        # We initialize it with {None: None} to handle cases where next or random are null.
+        node_map = {None: None}
+        
+        # First pass: create all the new nodes (copies) and store them in the hash map.
+        current = head
+        while current:
+            node_map[current] = Node(current.val)
+            current = current.next
+            
+        # Second pass: assign the next and random pointers for the newly created nodes.
+        current = head
+        while current:
+            copy_node = node_map[current]
+            copy_node.next = node_map[current.next]
+            copy_node.random = node_map[current.random]
+            current = current.next
+            
+        # Return the head of the copied linked list.
+        return node_map[head]

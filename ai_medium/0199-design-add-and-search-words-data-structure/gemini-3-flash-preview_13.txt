@@ -1,0 +1,52 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initializes the object with an empty trie.
+        The trie is represented using nested dictionaries.
+        """
+        self.root = {}
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word to the trie data structure.
+        The special character '#' is used to mark the end of a word.
+        """
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['#'] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns True if the string matches any previously added string,
+        otherwise False. '.' can be matched with any character.
+        """
+        def dfs(index, curr):
+            for i in range(index, len(word)):
+                char = word[i]
+                if char == '.':
+                    # When a dot is encountered, iterate through all possible child nodes.
+                    # This recursive search covers all characters that could replace the dot.
+                    for key, child in curr.items():
+                        if key != '#' and dfs(i + 1, child):
+                            return True
+                    # If no child matches the rest of the word, return False.
+                    return False
+                else:
+                    # Standard trie character match.
+                    if char not in curr:
+                        return False
+                    curr = curr[char]
+            # After checking all characters in the word, check for the end-of-word marker.
+            return '#' in curr
+        
+        return dfs(0, self.root)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

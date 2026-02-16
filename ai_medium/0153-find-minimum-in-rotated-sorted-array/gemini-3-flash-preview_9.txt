@@ -1,0 +1,21 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        # Initialize binary search pointers
+        low = 0
+        high = len(nums) - 1
+        
+        # Binary search to find the minimum element
+        while low < high:
+            mid = (low + high) // 2
+            
+            # If the middle element is greater than the rightmost element,
+            # it means the minimum must be in the right half of the array.
+            if nums[mid] > nums[high]:
+                low = mid + 1
+            # If the middle element is less than or equal to the rightmost element,
+            # the minimum could be the middle element itself or in the left half.
+            else:
+                high = mid
+        
+        # After the loop, low and high will converge to the index of the minimum element.
+        return nums[low]

@@ -1,0 +1,26 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+        for t in tokens:
+            if t == '+':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a + b)
+            elif t == '-':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a - b)
+            elif t == '*' or t == '':
+                b = stack.pop()
+                a = stack.pop()
+                stack.append(a * b)
+            elif t == '/':
+                b = stack.pop()
+                a = stack.pop()
+                # Division between two integers truncating toward zero.
+                # In Python 3, int(a / b) performs float division then truncates toward zero.
+                stack.append(int(a / b))
+            else:
+                # If it's not an operator, it's an integer.
+                stack.append(int(t))
+        return stack[0]

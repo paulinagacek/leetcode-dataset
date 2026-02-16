@@ -1,15 +1,3 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-from collections import deque
-
-# Runtime: 41ms 75.01% || Memory: 14mb 95.67%
-# I think its going to be n^2 because we are reversing, and reverse takes linear operation
-# O(n^2) || O(d) where d is the depth of the tree
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:

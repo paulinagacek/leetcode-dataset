@@ -1,4 +1,3 @@
-```python
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         # Define constants for the 32-bit signed integer range
@@ -34,5 +33,3 @@ class Solution:
             quotient = -quotient
         
         return max(MIN_INT, min(MAX_INT, quotient))
-
-```

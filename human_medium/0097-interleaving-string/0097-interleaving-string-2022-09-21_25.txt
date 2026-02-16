@@ -1,7 +1,3 @@
-# * Iterative Bottom-Up Solution | O(mn) Time | O(mn) Space
-# * m -> The length of s1 string | n -> The length of s2 string
-
-
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         s1_len, s2_len, s3_len = len(s1), len(s2), len(s3)

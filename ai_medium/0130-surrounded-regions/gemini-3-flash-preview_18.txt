@@ -1,0 +1,46 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        stack = []
+        
+        # Identify all 'O' cells on the boundaries and add them to the stack
+        for r in range(m):
+            if board[r][0] == 'O':
+                board[r][0] = 'T'
+                stack.append((r, 0))
+            if board[r][n - 1] == 'O':
+                board[r][n - 1] = 'T'
+                stack.append((r, n - 1))
+        
+        for c in range(n):
+            if board[0][c] == 'O':
+                board[0][c] = 'T'
+                stack.append((0, c))
+            if board[m - 1][c] == 'O':
+                board[m - 1][c] = 'T'
+                stack.append((m - 1, c))
+        
+        # Perform iterative DFS to mark all 'O' cells connected to the boundary
+        while stack:
+            r, c = stack.pop()
+            for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < m and 0 <= nc < n and board[nr][nc] == 'O':
+                    board[nr][nc] = 'T'
+                    stack.append((nr, nc))
+        
+        # Traverse the board: 
+        # - Change remaining 'O' to 'X' (these were surrounded)
+        # - Change 'T' back to 'O' (these were connected to the boundary)
+        for r in range(m):
+            for c in range(n):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'T':
+                    board[r][c] = 'O'

@@ -1,4 +1,3 @@
-```python
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         if not s:
@@ -24,5 +23,3 @@ class Solution:
                 end = i + max_len // 2
         
         return s[start:end + 1]
-
-```

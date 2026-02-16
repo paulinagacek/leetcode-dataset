@@ -1,5 +1,0 @@
-class Solution:
-    def getSum(self, a: int, b: int) -> int:
-        x=[]
-        x.extend([a,b])
-        return sum(x)

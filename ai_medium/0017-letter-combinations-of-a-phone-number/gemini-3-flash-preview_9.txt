@@ -1,6 +1,3 @@
-```python
-from typing import List
-
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
@@ -22,5 +19,3 @@ class Solution:
             res = [prev + char for prev in res for char in mapping[digit]]
             
         return res
-
-```

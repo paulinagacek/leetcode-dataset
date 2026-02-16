@@ -1,0 +1,34 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Adjacency list for graph representation
+        adj = [[] for _ in range(numCourses)]
+        # Track in-degrees of all courses
+        in_degree = [0] * numCourses
+        
+        # Build the graph
+        # [ai, bi] means bi -> ai
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_degree[dest] += 1
+            
+        # Initialize queue with nodes having zero in-degree
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        order = []
+        
+        # Process the nodes in topological order
+        while queue:
+            u = queue.popleft()
+            order.append(u)
+            
+            for v in adj[u]:
+                in_degree[v] -= 1
+                # If in-degree becomes zero, add it to the queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+                    
+        # If order contains all courses, return it; otherwise, there's a cycle
+        if len(order) == numCourses:
+            return order
+        else:
+            return []

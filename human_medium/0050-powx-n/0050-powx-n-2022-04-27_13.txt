@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
         public double pow(double x, int m) {
             double temp=x;
             if(m==0)

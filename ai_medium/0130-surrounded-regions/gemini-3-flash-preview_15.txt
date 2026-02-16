@@ -1,0 +1,43 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return
+        
+        rows, cols = len(board), len(board[0])
+        
+        def mark_unsurrounded(r, c):
+            if board[r][c] != 'O':
+                return
+            # Use iterative DFS to avoid potential recursion depth issues
+            stack = [(r, c)]
+            board[r][c] = 'S'  # 'S' stands for Safe (not surrounded)
+            while stack:
+                curr_r, curr_c = stack.pop()
+                for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    nr, nc = curr_r + dr, curr_c + dc
+                    if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] == 'O':
+                        board[nr][nc] = 'S'
+                        stack.append((nr, nc))
+
+        # Check the first and last columns
+        for r in range(rows):
+            mark_unsurrounded(r, 0)
+            mark_unsurrounded(r, cols - 1)
+            
+        # Check the first and last rows
+        for c in range(cols):
+            mark_unsurrounded(0, c)
+            mark_unsurrounded(rows - 1, c)
+            
+        # Traverse the board and update cells
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    # Surrounded 'O's are turned into 'X'
+                    board[r][c] = 'X'
+                elif board[r][c] == 'S':
+                    # Safe 'O's marked as 'S' are turned back into 'O'
+                    board[r][c] = 'O'

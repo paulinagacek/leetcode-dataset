@@ -1,4 +1,3 @@
-```python
 class Solution:
     def numDecodings(self, s: str) -> int:
         # If the string is empty or starts with '0', it cannot be decoded.
@@ -30,5 +29,3 @@ class Solution:
         
         # The answer for the full string is the last element in the dp array.
         return dp[n]
-
-```

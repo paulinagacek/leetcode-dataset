@@ -1,7 +1,0 @@
-class Solution:
-    def calculate(self, s: str) -> int:
-        r, n, prod, op, sgn = 0, 0, 1, "$", 1 # result, int, product_group, */, +-
-        for c in s.replace(" ", "") + "+0":
-            prod = (prod * n if op == "*" else prod // n if op == "/" else n) if c in "+-*/" else prod
-            (r,sgn),op,n = (r + prod * sgn, (1 if c == "+" else -1)) if c in "+-" else (r,sgn),  c if c in "*/" else "$" if c in "+-" else op,0 if c in "+-*/" else n * 10 + int(c)
-        return r

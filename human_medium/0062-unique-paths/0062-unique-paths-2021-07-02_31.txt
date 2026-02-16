@@ -1,14 +1,3 @@
-def dp(m,n,hs):
-    if m==1 and n==1:
-        return 1
-    if m==0 or n==0:
-        return 0
-    if (m,n) in hs:
-        return hs[(m,n)]
-    else:
-        hs[(m,n)]=dp(m-1,n,hs)+ dp(m,n-1,hs)
-        return hs[(m,n)]
-
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         hs={}

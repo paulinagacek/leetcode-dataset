@@ -1,0 +1,18 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            
+            # If nums[mid] is greater than the last element, the minimum must be 
+            # in the right part of the array (after the pivot).
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            # If nums[mid] is less than or equal to the last element, the minimum
+            # is either mid or in the left part.
+            else:
+                right = mid
+                
+        # After the loop, left == right, pointing to the minimum element.
+        return nums[left]

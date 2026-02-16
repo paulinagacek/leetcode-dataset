@@ -1,18 +1,3 @@
-# BCR: O(N)
-
-# Approach 1:
-#  Do inorder traversal. O(N)
-#  Check if all are in order. O(N)
-#  O(N), space: O(N)
-
-# Observation:
-#  a node\'s value is an upper bound for left subtree and lower bound for right subtree
-
-# Approach 2.
-#  While in DFS O(N)
-#   Update upper bound and lower bound and check O(1)
-#  O(N), space: O(N)
-
 class Solution(object):
     def isValidBST(self, root):
         return self.checkBound(root, pow(2, 31) * -2, pow(2, 31))

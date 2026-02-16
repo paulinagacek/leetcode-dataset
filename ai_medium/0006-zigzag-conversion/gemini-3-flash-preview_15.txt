@@ -1,4 +1,3 @@
-```python
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
         # If the number of rows is 1 or if there aren't enough characters to zigzag,
@@ -23,5 +22,3 @@ class Solution:
             
         # Combine all rows to get the final zigzag string.
         return "".join(rows)
-
-```

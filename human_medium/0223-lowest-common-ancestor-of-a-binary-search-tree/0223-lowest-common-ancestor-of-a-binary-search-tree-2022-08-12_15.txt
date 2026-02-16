@@ -1,8 +1,0 @@
-class Solution(object):
-    def lowestCommonAncestor(self, root, p, q):
-        mx, mn = max(p.val, q.val), min(p.val, q.val)
-        if root.val == mn or root.val == mx:
-            return root
-        if root.val < mx and root.val > mn:
-            return root
-        return self.lowestCommonAncestor(root.right if mn > root.val else root.left, p, q)

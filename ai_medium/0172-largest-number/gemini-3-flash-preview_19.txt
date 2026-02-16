@@ -1,0 +1,24 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert integers to strings
+        nums_str = [str(num) for num in nums]
+        
+        # Custom comparator to decide the order of two strings
+        # We want the combination that forms a larger number
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y < y + x:
+                return 1
+            else:
+                return 0
+        
+        # Sort using the custom comparison logic
+        nums_str.sort(key=cmp_to_key(compare))
+        
+        # Join strings into the final result
+        result = "".join(nums_str)
+        
+        # Handle the edge case where the result is multiple zeros (e.g., [0, 0])
+        # "00" should be returned as "0"
+        return "0" if result[0] == "0" else result

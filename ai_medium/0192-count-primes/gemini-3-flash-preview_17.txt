@@ -1,0 +1,14 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 3:
+            return 0
+        
+        is_prime = [True] * n
+        is_prime[0] = is_prime[1] = False
+        
+        for p in range(2, int(n**0.5) + 1):
+            if is_prime[p]:
+                # Using slicing for marking multiples is significantly faster in Python
+                is_prime[p*p : n : p] = [False] * len(range(p*p, n, p))
+                
+        return sum(is_prime)

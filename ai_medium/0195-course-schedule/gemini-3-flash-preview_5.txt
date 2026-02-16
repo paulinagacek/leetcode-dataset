@@ -1,0 +1,34 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list representing the directed graph
+        # where an edge (bi -> ai) means course bi is a prerequisite for ai.
+        adj = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        # Build the graph and track the in-degree of each course
+        for course, prereq in prerequisites:
+            adj[prereq].append(course)
+            in_degree[course] += 1
+            
+        # Kahn's algorithm (BFS topological sort)
+        # Find all courses that have no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Count of courses that can be completed
+        count = 0
+        
+        while queue:
+            u = queue.popleft()
+            count += 1
+            
+            # For each course that depends on course 'u'
+            for v in adj[u]:
+                # Decrease the in-degree as the prerequisite 'u' is finished
+                in_degree[v] -= 1
+                # If all prerequisites for course 'v' are satisfied, add it to the queue
+                if in_degree[v] == 0:
+                    queue.append(v)
+        
+        # If the total number of courses that can be completed equals numCourses, 
+        # it means the graph is a Directed Acyclic Graph (DAG).
+        return count == numCourses

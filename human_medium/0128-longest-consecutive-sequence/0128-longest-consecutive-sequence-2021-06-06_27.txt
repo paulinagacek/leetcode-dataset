@@ -1,30 +1,3 @@
-class UnionFind:
-    def __init__(self):
-        self.par = {}
-        
-    def add_number(self,v):
-        if not v in self.par: self.par[v] = v
-        if (v-1) in self.par: self.union(v,v-1)
-        if (v+1) in self.par: self.union(v,v+1)
-            
-    def find(self,v):
-        if self.par[v]==v:
-            return v
-        self.par[v] = self.find(self.par[v])
-        return self.par[v]
-    
-    def union(self,v1,v2):
-        p1 = self.find(v1)
-        p2 = self.find(v2)
-        if p1!=p2:
-            self.par[p1] = p2
-            
-    def items(self):
-        for v in self.par.keys():
-            yield v,self.find(v)
-            
-from collections import Counter
-            
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         if not nums:

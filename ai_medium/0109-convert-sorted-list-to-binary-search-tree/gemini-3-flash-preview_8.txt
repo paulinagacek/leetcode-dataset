@@ -1,0 +1,28 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        if not head:
+            return None
+        
+        # Convert the linked list to an array for easier access
+        vals = []
+        curr = head
+        while curr:
+            vals.append(curr.val)
+            curr = curr.next
+            
+        # Recursive function to build the height-balanced BST
+        def buildBST(l, r):
+            if l > r:
+                return None
+            
+            # Choosing the middle element as the root ensures height balance
+            mid = (l + r) // 2
+            root = TreeNode(vals[mid])
+            
+            # Recursively build the left and right subtrees
+            root.left = buildBST(l, mid - 1)
+            root.right = buildBST(mid + 1, r)
+            
+            return root
+        
+        return buildBST(0, len(vals) - 1)

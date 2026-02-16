@@ -1,4 +1,0 @@
-def lowestCommonAncestor(self, root: \'TreeNode\', p: \'TreeNode\', q: \'TreeNode\') -> \'TreeNode\':
-        while (root.val - p.val )  * (root.val - q.val) > 0:
-            root = root.left if root.val > p.val else root.right
-        return root

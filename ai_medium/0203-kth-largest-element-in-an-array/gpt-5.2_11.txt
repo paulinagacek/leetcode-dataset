@@ -1,0 +1,25 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        target = len(nums) - k  # kth largest == (n-k)th smallest (0-indexed)
+
+        def partition(l: int, r: int, pivot_idx: int) -> int:
+            pivot = nums[pivot_idx]
+            nums[pivot_idx], nums[r] = nums[r], nums[pivot_idx]
+            store = l
+            for i in range(l, r):
+                if nums[i] < pivot:
+                    nums[store], nums[i] = nums[i], nums[store]
+                    store += 1
+            nums[store], nums[r] = nums[r], nums[store]
+            return store
+
+        l, r = 0, len(nums) - 1
+        while True:
+            pivot_idx = random.randint(l, r)
+            p = partition(l, r, pivot_idx)
+            if p == target:
+                return nums[p]
+            elif p < target:
+                l = p + 1
+            else:
+                r = p - 1

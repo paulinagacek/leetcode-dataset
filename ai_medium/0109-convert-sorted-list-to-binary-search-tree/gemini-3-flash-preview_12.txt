@@ -1,0 +1,25 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        # Step 1: Convert the linked list into an array for O(1) random access
+        values = []
+        curr = head
+        while curr:
+            values.append(curr.val)
+            curr = curr.next
+            
+        # Step 2: Recursively build a height-balanced BST from the sorted array
+        def build_bst(left: int, right: int) -> Optional[TreeNode]:
+            if left > right:
+                return None
+            
+            # Pick the middle element as the root to ensure height balance
+            mid = (left + right) // 2
+            node = TreeNode(values[mid])
+            
+            # Recursively build left and right subtrees
+            node.left = build_bst(left, mid - 1)
+            node.right = build_bst(mid + 1, right)
+            
+            return node
+            
+        return build_bst(0, len(values) - 1)

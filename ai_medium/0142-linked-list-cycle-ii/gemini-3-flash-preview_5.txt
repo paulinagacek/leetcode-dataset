@@ -1,0 +1,36 @@
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return None
+        
+        slow = head
+        fast = head
+        
+        # Phase 1: Determine if a cycle exists using Floyd's Tortoise and Hare
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            
+            # If they meet, a cycle is detected
+            if slow == fast:
+                # Phase 2: Find the entrance to the cycle
+                # Let distance from head to entrance be L1
+                # Let distance from entrance to meeting point be L2
+                # Distance traveled by slow: L1 + L2
+                # Distance traveled by fast: L1 + L2 + nC (C = cycle length)
+                # Since fast moves twice as fast: 2(L1 + L2) = L1 + L2 + nC
+                # This simplifies to: L1 = nC - L2
+                # This means the distance from head to the entrance is the same
+                # as the distance from the meeting point to the entrance.
+                
+                ptr1 = head
+                ptr2 = slow
+                
+                while ptr1 != ptr2:
+                    ptr1 = ptr1.next
+                    ptr2 = ptr2.next
+                
+                return ptr1
+        
+        # No cycle detected
+        return None

@@ -1,0 +1,27 @@
+class Trie:
+    __slots__ = ("root",)
+
+    def __init__(self):
+        self.root = {}
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for ch in word:
+            node = node.setdefault(ch, {})
+        node["#"] = True
+
+    def search(self, word: str) -> bool:
+        node = self.root
+        for ch in word:
+            node = node.get(ch)
+            if node is None:
+                return False
+        return "#" in node
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self.root
+        for ch in prefix:
+            node = node.get(ch)
+            if node is None:
+                return False
+        return True
