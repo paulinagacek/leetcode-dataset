@@ -1,0 +1,29 @@
+from collections import defaultdict
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+
+        original_to_cloned = defaultdict(Node)
+        dummy = Node(0)
+        clone = dummy
+        curr = head
+
+        # Create cloned nodes and map them to their originals
+        while curr:
+            original_to_cloned[curr] = Node(curr.val)
+            clone.next = original_to_cloned[curr]
+            clone = clone.next
+            curr = curr.next
+
+        # Set random pointers for cloned nodes
+        curr = head
+        clone = dummy.next
+        while curr:
+            if curr.random:
+                clone.random = original_to_cloned[curr.random]
+            curr = curr.next
+            clone = clone.next
+
+        return dummy.next

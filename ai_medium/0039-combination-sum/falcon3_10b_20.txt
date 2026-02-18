@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        """Recursive approach to find all unique combinations that sum up to target."""
+        def backtrack(start=0, path=[]):
+            if sum(path) == target:
+                result.append(path[:])
+            elif sum(path) < target:
+                for i in range(start, len(candidates)):
+                    path.append(candidates[i])
+                    backtrack(i, path)  # i, not i+1, because same number can be used multiple times
+                    path.pop()
+        
+        result = []
+        candidates.sort()  # Sort to avoid unnecessary recursive calls
+        backtrack()
+        return result

@@ -1,0 +1,23 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        if not matrix:
+            return []
+        rows, cols = len(matrix), len(matrix[0])
+        order = [0] * (rows * cols)
+        row, col, di = 0, 0, 0
+        for i in range(rows * cols):
+            order[i] = matrix[row][col]
+            matrix[row][col] = None
+            cr, cc = row + directions[di][0], col + directions[di][1]
+            if (
+                0 <= cr < rows and 0 <= cc < cols and matrix[cr][cc] is not None
+            ):
+                row, col = cr, cc
+            else:
+                di = (di + 1) % 4
+                row, col = row + directions[di][0], col + directions[di][1]
+        return order

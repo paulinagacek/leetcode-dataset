@@ -1,0 +1,17 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid(segment):
+            return int(segment) <= 255 and not (segment.startswith('0') and len(segment) > 1)
+        
+        result = []
+        self.backtrack(s, 0, [], result)
+        return result
+
+    def backtrack(self, s: str, start: int, ip: List[str], result: List[str]):
+        if start == len(s) and len(ip) == 4:
+            result.append('.'.join(ip))
+        elif start < len(s):
+            for i in range(start + 1, min(start + 4, len(s) + 1)):
+                segment = s[start:i]
+                if is_valid(segment):
+                    self.backtrack(s, i, ip + [segment], result)

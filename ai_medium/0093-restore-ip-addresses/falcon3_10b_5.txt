@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid_part(num):
+            if len(num) > 1 and num.startswith('0'):
+                return False
+            return 0 <= int(num) <= 255
+
+        def backtrack(start, path):
+            if len(path) == 4:
+                if start == len(s):
+                    yield '.'.join(path)
+                return
+            for end in range(start+1, min(start+4, len(s)+1)):
+                part = s[start:end]
+                if is_valid_part(part):
+                    yield from backtrack(end, path + [part])
+
+        return list(backtrack(0, []))

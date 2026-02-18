@@ -1,0 +1,35 @@
+from typing import List
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create an adjacency list to represent the graph
+        adj_list = [[] for _ in range(numCourses)]
+        
+        # Create an array to keep track of the number of prerequisites for each course
+        pre_count = [0] * numCourses
+        
+        # Populate the adjacency list and pre_count array
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            pre_count[dest] += 1
+        
+        # Initialize the queue with all courses having no prerequisites
+        queue = [i for i in range(numCourses) if pre_count[i] == 0]
+        
+        order = []
+        
+        while queue:
+            node = queue.pop(0)
+            order.append(node)
+            
+            # Reduce the count of prerequisites for each neighbor by 1 and add to queue if it becomes zero
+            for neighbor in adj_list[node]:
+                pre_count[neighbor] -= 1
+                if pre_count[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If the order length is not equal to numCourses, there is a cycle and no valid ordering exists
+        if len(order) != numCourses:
+            return []
+        
+        return order

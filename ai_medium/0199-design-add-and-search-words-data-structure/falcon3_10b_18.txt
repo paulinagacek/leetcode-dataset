@@ -1,0 +1,22 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        def dfs(word, idx, t):
+            if idx == len(word):
+                return t in self.words
+            if word[idx] == '.':
+                for c in 'abcdefghijklmnopqrstuvwxyz':
+                    if dfs(word, idx + 1, t + c):
+                        return True
+            else:
+                if dfs(word, idx + 1, t + word[idx]):
+                    return True
+            return False
+
+        return dfs(word, 0, '')

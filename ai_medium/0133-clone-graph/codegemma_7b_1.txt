@@ -1,0 +1,20 @@
+from typing import Optional
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        visited = {}
+        queue = [node]
+        visited[node] = Node(node.val)
+        
+        while queue:
+            current = queue.pop(0)
+            
+            for neighbor in current.neighbors:
+                if neighbor not in visited:
+                    visited[neighbor] = Node(neighbor.val)
+                    queue.append(neighbor)
+                visited[current].neighbors.append(visited[neighbor])
+        
+        return visited[node]

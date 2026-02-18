@@ -1,0 +1,32 @@
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        
+        if not head or k == 0:
+            return head
+
+        # Create a dummy node to simplify the process
+        dummy = ListNode(0, head)
+
+        # Calculate the length of the linked list
+        length = 1
+        curr = head
+        while curr.next:
+            length += 1
+            curr = curr.next
+
+        # Handle rotations larger than the list length
+        k %= length
+
+        # Close the circular linked list
+        curr.next = dummy.next
+
+        # Find the new tail node after rotation
+        new_tail = dummy
+        for _ in range(length - k):
+            new_tail = new_tail.next
+
+        # Break the circular linked list
+        new_head = new_tail.next
+        new_tail.next = None
+
+        return new_head

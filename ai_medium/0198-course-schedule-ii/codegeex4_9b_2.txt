@@ -1,0 +1,36 @@
+from typing import List
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create an adjacency list to represent the graph of course prerequisites
+        adj_list = [[] for _ in range(numCourses)]
+        # Initialize in-degree array to count incoming edges (prerequisites) for each course
+        in_degree = [0] * numCourses
+        
+        # Build the graph and fill in-degree array
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize a queue with all courses having no prerequisites (in-degree of 0)
+        zero_in_degree_queue = [i for i in range(numCourses) if in_degree[i] == 0]
+        
+        topo_order = []
+        
+        while zero_in_degree_queue:
+            # Remove a course from the queue and add it to the topological order
+            vertex = zero_in_degree_queue.pop(0)
+            topo_order.append(vertex)
+            
+            # Reduce in-degree of neighboring nodes by 1
+            for neighbor in adj_list[vertex]:
+                in_degree[neighbor] -= 1
+                # If in-degree becomes zero, add the course to the queue
+                if in_degree[neighbor] == 0:
+                    zero_in_degree_queue.append(neighbor)
+        
+        # If topological order doesn't contain all courses, there is a cycle and it's impossible to complete all courses
+        if len(topo_order) != numCourses:
+            return []
+        
+        return topo_order

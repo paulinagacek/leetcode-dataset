@@ -1,0 +1,25 @@
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        def helper(start, end):
+            if start > end:
+                return None
+
+            mid = start + (end - start) // 2
+            root = TreeNode(val=head.val)
+            head = head.next
+            root.left = helper(start, mid - 1)
+            root.right = helper(mid + 1, end)
+
+            return root
+
+        if not head:
+            return None
+
+        return helper(0, self.get_size(head) - 1)
+
+    def get_size(self, head):
+        size = 0
+        while head:
+            size += 1
+            head = head.next
+        return size

@@ -1,0 +1,17 @@
+from collections  import deque
+
+def sortList(self, head):
+    vals = deque()
+    while head:
+        vals.append(head.val)
+        head = head.next
+
+    vals.sort()
+
+    dummy = ListNode()
+    pointer = dummy
+    for val in vals:
+        pointer.next = ListNode(val)
+        pointer = pointer.next
+
+    return dummy.next

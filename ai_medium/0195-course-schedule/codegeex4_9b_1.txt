@@ -1,0 +1,36 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list to represent the graph of courses and their dependencies
+        adj_list = [[] for _ in range(numCourses)]
+        # Array to store the in-degree of each node (course)
+        in_degree = [0] * numCourses
+        
+        # Fill the adjacency list and in-degree array based on prerequisites
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Queue to store courses with no dependencies
+        zero_in_degree_queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Counter to track the number of courses that can be completed
+        visited_courses_count = 0
+        
+        while zero_in_degree_queue:
+            # Get a course with no remaining dependencies
+            current_course = zero_in_degree_queue.popleft()
+            visited_courses_count += 1
+            
+            # Visit all adjacent courses (prerequisites)
+            for next_course in adj_list[current_course]:
+                # Reduce the dependency count of each adjacent course
+                in_degree[next_course] -= 1
+                # If no remaining dependencies, add to queue
+                if in_degree[next_course] == 0:
+                    zero_in_degree_queue.append(next_course)
+        
+        # If the count of visited courses is equal to total number of courses, return True
+        return visited_courses_count == numCourses

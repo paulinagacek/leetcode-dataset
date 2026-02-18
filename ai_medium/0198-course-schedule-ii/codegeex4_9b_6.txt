@@ -1,0 +1,32 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create a dictionary to store the indegree of each node and adjacency list
+        adj = {i: [] for i in range(numCourses)}
+        indegree = [0] * numCourses
+        
+        # Populate the adjacency list and indegree array
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            indegree[dest] += 1
+        
+        # Initialize the queue with all nodes having zero indegree
+        q = deque([i for i in range(numCourses) if indegree[i] == 0])
+        topological_order = []
+        
+        # Process the courses in topological order using Kahn's algorithm
+        while q:
+            node = q.popleft()
+            topological_order.append(node)
+            for neighbor in adj[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    q.append(neighbor)
+        
+        # If the number of courses processed is not equal to numCourses, it's impossible to complete all courses
+        if len(topological_order) != numCourses:
+            return []
+        
+        return topological_order

@@ -1,0 +1,13 @@
+class Solution:
+    def numTrees(self, n: int) -> int:
+        def count_trees(start, end):
+            if start > end:
+                return 1
+            total = 0
+            for i in range(start, end + 1):
+                left_trees = count_trees(start, i - 1)
+                right_trees = count_trees(i + 1, end)
+                total += left_trees * right_trees
+            return total
+        
+        return count_trees(1, n)

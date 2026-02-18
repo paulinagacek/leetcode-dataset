@@ -1,0 +1,20 @@
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return None
+        
+        slow, fast = head, head.next  # Initialize two pointers
+        while fast and fast.next:
+            if slow == fast:    
+                # Cycle detected, now find the start of the cycle
+                slow = head
+                while slow != fast:
+                    slow = slow.next
+                    fast = fast.next
+                # Once they meet again, it's guaranteed to be at the beginning of the cycle.
+                return slow
+            slow = slow.next
+            fast = fast.next.next
+        
+        # If there is no cycle, return None (fast will reach None)
+        return None

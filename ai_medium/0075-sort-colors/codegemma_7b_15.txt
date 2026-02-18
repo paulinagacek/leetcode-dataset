@@ -1,0 +1,14 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        zero, cur, two = 0, 0, len(nums) - 1
+
+        while cur <= two:
+            if nums[cur] == 0:
+                nums[cur], nums[zero] = nums[zero], nums[cur]
+                zero += 1
+                cur += 1
+            elif nums[cur] == 2:
+                nums[cur], nums[two] = nums[two], nums[cur]
+                two -= 1
+            else:
+                cur += 1

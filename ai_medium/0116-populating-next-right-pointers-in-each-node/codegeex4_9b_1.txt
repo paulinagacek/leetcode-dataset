@@ -1,0 +1,43 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return None
+        
+        # Initialize the current node to the root of the tree
+        cur = root
+        
+        # This loop will iterate over each level of the tree
+        while cur:
+            # We use a dummy node to help link the nodes in the next level
+            dummy = Node()
+            tail = dummy
+            
+            # Iterate over all nodes in the current level
+            while cur:
+                if cur.left:
+                    # Link the left child to the next node in the next level
+                    tail.next = cur.left
+                    tail = tail.next
+                
+                if cur.right:
+                    # Link the right child to the next node in the next level
+                    tail.next = cur.right
+                    tail = tail.next
+                
+                # Move to the next node in the current level
+                cur = cur.next
+            
+            # Start with the first node of the next level in the next iteration of the loop
+            cur = dummy.next
+        
+        return root

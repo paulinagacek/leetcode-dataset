@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def dfs(path, remaining):
+            if not remaining:
+                result.append(path)
+                return
+            seen = set()
+            for i, num in enumerate(remaining):
+                if num not in seen:
+                    seen.add(num)
+                    dfs(path + [num], remaining[:i] + remaining[i+1:])
+                    
+        nums.sort()
+        result = []
+        dfs([], nums)
+        return result

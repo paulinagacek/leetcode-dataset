@@ -1,0 +1,15 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        SIGN = -1 if (dividend < 0) ^ (divisor < 0) else 1
+        dividend, divisor = abs(dividend), abs(divisor)
+
+        quotient, temp = 0, 0
+        for i in range(32)[::-1]:
+            if temp + (divisor << i) <= dividend:
+                temp += divisor << i
+                quotient |= 1 << i
+
+        result = quotient if SIGN == 1 else -quotient
+        return max(INT_MIN, min(INT_MAX, result))

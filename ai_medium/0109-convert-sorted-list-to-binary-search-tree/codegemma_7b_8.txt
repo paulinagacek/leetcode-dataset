@@ -1,0 +1,10 @@
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        if not head:
+            return None
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+        right = self.sortedListToBST(slow.next)
+        slow.next = None
+        return TreeNode(head.val, self.sortedListToBST(head), right)

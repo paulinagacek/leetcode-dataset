@@ -1,0 +1,26 @@
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or k == 0:
+            return head
+
+        # Calculate the length of the linked list
+        length = 1
+        temp = head
+        while temp.next:
+            temp = temp.next
+            length += 1
+
+        # Adjust k by considering the length of the linked list
+        k = k % length
+
+        # Find the new tail node
+        newTailPosition = length - k - 1
+        newTail = head
+        for _ in range(newTailPosition):
+            newTail = newTail.next
+
+        # Disconnect the tail node from the list
+        temp.next = head
+
+        # Return the new head node
+        return newTail.next

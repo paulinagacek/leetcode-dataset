@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def backtrack(open_n, close_n, path):
+            if open_n == 0 and close_n == 0:
+                result.append("".join(path))
+                return
+            if open_n > 0:
+                path.append("(")
+                backtrack(open_n - 1, close_n, path)
+                path.pop()
+            if close_n > open_n:
+                path.append(")")
+                backtrack(open_n, close_n - 1, path)
+                path.pop()
+
+        result = []
+        backtrack(n, n, [])
+        return result

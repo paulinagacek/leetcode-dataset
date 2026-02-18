@@ -1,0 +1,24 @@
+from collections import deque
+
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        queue = deque([(root, 0)])
+        result = []
+        level = -1
+        
+        while queue:
+            node, curr_level = queue.popleft()
+            
+            if curr_level > level:
+                level = curr_level
+                result.append(node.val)
+            
+            if node.right:
+                queue.append((node.right, curr_level + 1))
+            if node.left:
+                queue.append((node.left, curr_level + 1))
+        
+        return result

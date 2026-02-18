@@ -1,0 +1,4 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        k = k % len(nums)  # ensure k is within the bounds of nums length
+        nums[:] = nums[-k:] + nums[:-k]

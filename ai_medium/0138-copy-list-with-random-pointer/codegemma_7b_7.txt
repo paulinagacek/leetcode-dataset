@@ -1,0 +1,17 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        dummy = Node(0)
+        oldToNew = {None: None}
+        cur = head
+        pointer = dummy
+        while cur:
+            if cur not in oldToNew:
+                oldToNew[cur] = Node(cur.val)
+            pointer.next = oldToNew[cur]
+            if cur.random:
+                if cur.random not in oldToNew:
+                    oldToNew[cur.random] = Node(cur.random.val)
+                pointer.next.random = oldToNew[cur.random]
+            cur = cur.next
+            pointer = pointer.next
+        return dummy.next

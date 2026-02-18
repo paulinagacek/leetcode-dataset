@@ -1,0 +1,27 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph and in-degree array
+        G = [[] for _ in range(numCourses)]
+        degree = [0] * numCourses
+        
+        # Fill the graph and in-degree array
+        for x, y in prerequisites:
+            G[y].append(x)
+            degree[x] += 1
+        
+        # List to store the order of courses
+        L = []
+        
+        # While there are still vertices with non-zero in-degrees
+        while True:
+            W = [i for i in range(numCourses) if degree[i] == 0]
+            if not W: break
+            for w in W:
+                for v in G[w]:
+                    degree[v] -= 1
+                L.append(w)
+        
+        # If the number of courses taken is less than total, return False
+        return len(L) >= numCourses

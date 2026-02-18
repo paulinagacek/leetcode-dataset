@@ -1,0 +1,10 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        numerals = "IVXLCDM"
+        ints = (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+        digits = []
+
+        for (i, n) in enumerate(str(num)[::-1]):
+            digits.append((ord(n) - ord('0')) * 10**i)
+
+        return ''.join(numerals[i // 5 * 2 + i % 5] * (digits[i] // ints[i]) for i in range(len(ints)))

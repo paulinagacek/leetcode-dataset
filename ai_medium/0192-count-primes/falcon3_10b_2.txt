@@ -1,0 +1,10 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 2:
+            return 0
+        sieve = [True] * n
+        sieve[0] = sieve[1] = False
+        for ind, val in enumerate(sieve):
+            if val:
+                sieve[ind*2::ind] = [False] * (((n - 1) // ind) - 1)
+        return sum(sieve)

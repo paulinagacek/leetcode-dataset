@@ -1,0 +1,13 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        
+        if len(nums) <= 3:
+            return max(nums)
+        
+        def rob_linear(nums):
+            prev, curr = 0, 0
+            for num in nums:
+                curr, prev = max(prev + num, curr), curr
+            return curr
+        
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

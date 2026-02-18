@@ -1,0 +1,6 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        sequence = "1"
+        for _ in range(n - 1):
+            sequence = ''.join(str(len(list(group))) + char for char, group in itertools.groupby(sequence))
+        return sequence

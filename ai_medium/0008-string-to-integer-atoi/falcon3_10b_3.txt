@@ -1,0 +1,26 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MIN, INT_MAX = -2147483648, 2147483647
+        result = 0
+        sign = 1
+        i = 0
+
+        # Skip leading whitespaces
+        while i < len(s) and s[i] == ' ':
+            i += 1
+
+        # Determine sign
+        if i < len(s) and (s[i] == '-' or s[i] == '+'):
+            sign = -1 if s[i] == '-' else 1
+            i += 1
+
+        # Convert to integer
+        while i < len(s) and s[i].isdigit():
+            result = result * 10 + int(s[i])
+            if result * sign < INT_MIN:
+                return INT_MIN
+            if result * sign > INT_MAX:
+                return INT_MAX
+            i += 1
+
+        return result * sign

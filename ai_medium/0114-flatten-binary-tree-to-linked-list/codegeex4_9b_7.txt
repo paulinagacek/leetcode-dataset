@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        # Helper function to perform post-order traversal and rearrange the tree
+        def postorder(node):
+            if not node:
+                return
+            postorder(node.left)
+            postorder(node.right)
+            # If left child exists, we need to rearrange it
+            if node.left:
+                # Temporarily store the right subtree
+                temp = node.right
+                # Move the left subtree to the right
+                node.right = node.left
+                node.left = None
+                # Find the rightmost node of the current right subtree
+                last_right_node = node.right
+                while last_right_node.right:
+                    last_right_node = last_right_node.right
+                # Connect the stored right subtree to the end of the new right subtree
+                last_right_node.right = temp
+
+        postorder(root)

@@ -1,0 +1,10 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # Split the string into words using space as delimiter
+        words = s.split(" ")
+        
+        # Remove leading and trailing spaces and ignore empty strings
+        words = [word for word in words if word.strip()]
+        
+        # Reverse the order of words and join them with a single space
+        return " ".join(words[::-1])

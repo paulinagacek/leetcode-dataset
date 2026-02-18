@@ -1,0 +1,37 @@
+from typing import List
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create an adjacency list to represent the graph of courses and their prerequisites
+        adj_list = [[] for _ in range(numCourses)]
+        
+        # Initialize the in-degree array to count incoming edges (prerequisites) for each course
+        in_degree = [0] * numCourses
+        
+        # Fill the adjacency list and in-degree array based on the prerequisites provided
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize the count of visited nodes and the order result list
+        processed_count = 0
+        course_order = []
+        
+        # Process all courses with no incoming edges (prerequisites)
+        queue = [i for i in range(numCourses) if in_degree[i] == 0]
+        while queue:
+            node = queue.pop(0)
+            course_order.append(node)
+            processed_count += 1
+            
+            # Reduce the in-degree of adjacent nodes and add them to the queue if their in-degree becomes zero
+            for neighbor in adj_list[node]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If the number of processed courses is less than total courses, it's impossible to complete all courses
+        if processed_count != numCourses:
+            return []
+        
+        return course_order

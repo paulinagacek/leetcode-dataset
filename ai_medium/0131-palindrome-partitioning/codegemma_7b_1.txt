@@ -1,0 +1,30 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+
+        # Precompute palindromic subarrays
+        for i in range(n):
+            dp[i][i] = True
+        for i in range(n - 1):
+            dp[i][i + 1] = s[i] == s[i + 1]
+
+        for length in range(3, n + 1):
+            for i in range(n - length + 1):
+                dp[i][i + length - 1] = dp[i + 1][i + length - 1] and s[i] == s[i + length - 1]
+
+        result = []
+
+        def backtrack(index, current):
+            if index == n:
+                result.append(current[:])
+                return
+
+            for i in range(index, n):
+                if dp[index][i]:
+                    current.append(s[index:i + 1])
+                    backtrack(i + 1, current)
+                    current.pop()
+
+        backtrack(0, [])
+        return result

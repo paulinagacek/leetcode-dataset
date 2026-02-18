@@ -1,0 +1,14 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        dr = [0, 1, 0, -1]
+        dc = [1, 0, -1, 0]
+        x, y, c = 0, 0, 1
+        for _ in range(n * n):
+            matrix[x][y] = c
+            c += 1
+            nx, ny = x + dr[c % 4], y + dc[c % 4]
+            if nx < 0 or ny < 0 or nx == n or ny == n or matrix[nx][ny]:
+                c %= 4
+            x, y = x + dr[c % 4], y + dc[c % 4]
+        return matrix

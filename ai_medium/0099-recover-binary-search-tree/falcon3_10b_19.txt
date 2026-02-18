@@ -1,0 +1,16 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        def inorder(node):
+            nonlocal first, second, pred
+            if node is not None:
+                inorder(node.left)
+                if first is None and (pred is not None and node.val < pred.val):
+                    first = pred
+                if first is not None and node.val < pred.val:
+                    second = node
+                pred = node
+                inorder(node.right)
+        
+        first, second, pred = None, None, None
+        inorder(root)
+        first.val, second.val = second.val, first.val

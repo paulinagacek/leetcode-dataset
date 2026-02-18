@@ -1,0 +1,22 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        from functools import partial
+        match = partial(self.match, word)
+        return any(match(w) for w in self.words)
+
+    def match(self, pattern, word):
+        if len(pattern) != len(word):
+            return False
+        for p, w in zip(pattern, word):
+            if p == '.':
+                continue
+            elif p != w:
+                return False
+        return True

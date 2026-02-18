@@ -1,0 +1,5 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        n = len(nums)
+        k %= n  # In case k is larger than the length of the list
+        nums[:] = nums[n-k:] + nums[:n-k]

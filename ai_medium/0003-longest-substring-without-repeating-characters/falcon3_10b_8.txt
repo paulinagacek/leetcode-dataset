@@ -1,0 +1,16 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longest = cur_longest = 0
+        seen = {}
+        
+        for i, char in enumerate(s):
+            if char in seen and seen[char] >= cur_longest:
+                cur_longest = i - seen[char]
+            else:
+                cur_longest += 1
+            
+            seen[char] = i
+            
+            longest = max(longest, cur_longest)
+        
+        return longest

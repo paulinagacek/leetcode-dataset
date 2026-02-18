@@ -1,0 +1,11 @@
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        count = 0
+        
+        # Keep dividing n by powers of 5 and update count
+        power_of_5 = 5
+        while n // power_of_5 > 0:
+            count += n // power_of_5
+            power_of_5 *= 5
+        
+        return count

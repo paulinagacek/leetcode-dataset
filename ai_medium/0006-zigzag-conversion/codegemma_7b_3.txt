@@ -1,0 +1,14 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows <= 1:
+            return s
+
+        numRows = min(numRows, len(s))
+        cycle = 2 * numRows - 2
+        result = [""] * numRows
+
+        for i, char in enumerate(s):
+            row = i % cycle // (cycle // numRows)
+            result[row] += char
+
+        return "".join(result)

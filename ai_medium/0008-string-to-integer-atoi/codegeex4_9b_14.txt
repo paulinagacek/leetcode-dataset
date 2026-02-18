@@ -1,0 +1,35 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        i = 0
+        n = len(s)
+        
+        # Step 1: Whitespace
+        while i < n and s[i] == ' ':
+            i += 1
+        
+        # Step 2: Signedness
+        sign = 1
+        if i < n and (s[i] == '+' or s[i] == '-'):
+            sign = -1 if s[i] == '-' else 1
+            i += 1
+        
+        # Step 3: Conversion
+        result = 0
+        while i < n and s[i].isdigit():
+            digit = int(s[i])
+            
+            # Check for overflow/underflow
+            if sign == 1 and (result > INT_MAX // 10 or (result == INT_MAX // 10 and digit > INT_MAX % 10)):
+                return INT_MAX
+            
+            elif sign == -1 and (-result < INT_MIN // 10 or (-result == INT_MIN // 10 and -digit < INT_MIN % 10)):
+                return INT_MIN
+            
+            result = result * 10 + digit
+            i += 1
+        
+        # Return the final result with the correct sign
+        return sign * result

@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+            
+        phone = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+        self.result = []
+        
+        def dfs(index, combination):
+            if index == len(digits):
+                self.result.append(combination)
+                return
+            for letter in phone[int(digits[index]) - 2]:
+                dfs(index + 1, combination + letter)
+        
+        dfs(0, "")
+        return self.result

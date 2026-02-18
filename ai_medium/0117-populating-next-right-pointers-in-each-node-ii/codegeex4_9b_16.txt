@@ -1,0 +1,54 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Initialize the current node to the root of the tree
+        cur = root
+        # Initialize the head of the next level to None
+        next_level_head = None
+        
+        while cur:
+            # Initialize the prev_node to handle the first node in each level
+            prev_node = None
+            # Traverse the current level
+            while cur:
+                # If left child exists, process it
+                if cur.left:
+                    # Connect the previous node's next pointer to the current node's left child
+                    if prev_node:
+                        prev_node.next = cur.left
+                    else:
+                        # If it's the first node in this level, update the head of the next level
+                        next_level_head = cur.left
+                    prev_node = cur.left
+                
+                # If right child exists, process it
+                if cur.right:
+                    # Connect the previous node's next pointer to the current node's right child
+                    if prev_node:
+                        prev_node.next = cur.right
+                    else:
+                        # If it's the first node in this level, update the head of the next level
+                        next_level_head = cur.right
+                    prev_node = cur.right
+                
+                # Move to the next node on the current level
+                cur = cur.next
+            
+            # Update the current node to the head of the next level
+            cur = next_level_head
+            # Reset the head of the next level for processing in the next iteration
+            next_level_head = None
+        
+        return root

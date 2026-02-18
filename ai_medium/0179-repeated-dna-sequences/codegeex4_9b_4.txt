@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        dna_map = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+        n = len(s)
+        seen = set()
+        output = []
+        
+        for i in range(n - 9):
+            tenMer = int(s[i:i+10], 4)
+            
+            if tenMer in seen:
+                if s[i:i+10] not in output:
+                    output.append(s[i:i+10])
+            else:
+                seen.add(tenMer)
+                
+        return output

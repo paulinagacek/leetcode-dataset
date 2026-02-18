@@ -1,0 +1,25 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if divisor == 0:
+            raise ZeroDivisionError("Cannot divide by zero")
+
+        sign = 1
+        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
+            sign = -1
+
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+
+        quotient = 0
+        while dividend >= divisor:
+            dividend -= divisor
+            quotient += 1
+
+        quotient = sign * quotient
+
+        if quotient > 2**31 - 1:
+            return 2**31 - 1
+        elif quotient < -2**31:
+            return -2**31
+        else:
+            return quotient

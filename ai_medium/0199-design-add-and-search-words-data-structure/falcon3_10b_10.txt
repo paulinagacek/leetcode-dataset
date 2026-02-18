@@ -1,0 +1,20 @@
+import re
+
+
+class WordDictionary:
+
+    def __init__(self):
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        pattern = '.'.join(re.escape(char) if char != '.' else '[a-z]' for char in word)
+        return any(re.fullmatch(pattern, w) for w in self.words)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

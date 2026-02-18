@@ -1,0 +1,40 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjency list to represent the graph of course prerequisites
+        adj = [[] for _ in range(numCourses)]
+        
+        # Degree array to count incoming edges (prerequisites) for each node (course)
+        indeg = [0] * numCourses
+        
+        # Populate the adjency list and degree array based on prerequisites
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            indeg[dest] += 1
+        
+        # Queue to process courses with no prerequisites (in-degree of zero)
+        q = deque()
+        for i in range(numCourses):
+            if indeg[i] == 0:
+                q.append(i)
+        
+        # Counter to keep track of the number of courses we can successfully schedule
+        cnt = 0
+        
+        # Process the queue
+        while q:
+            curr = q.popleft()
+            cnt += 1
+            
+            # Decrease the in-degree of neighboring nodes (prerequisites) by 1
+            for neigh in adj[curr]:
+                indeg[neigh] -= 1
+                
+                # If in-degree becomes zero, add to queue
+                if indeg[neigh] == 0:
+                    q.append(neigh)
+        
+        # If the count of processed courses is equal to total number of courses, return True
+        return cnt == numCourses

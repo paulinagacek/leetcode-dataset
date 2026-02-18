@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        self.restoreIpAddressesHelper(s, [], result)
+        return result
+    
+    def restoreIpAddressesHelper(self, s: str, current: List[str], result: List[str]) -> None:
+        if len(current) == 4 and len(s) == 0:
+            result.append('.'.join(current))
+            return
+        if len(current) > 4 or len(s) == 0:
+            return
+        
+        for i in range(min(3, len(s))):
+            sub = s[:i+1]
+            if (len(sub) > 1 and sub[0] == '0') or int(sub) > 255:
+                continue
+            self.restoreIpAddressesHelper(s[i+1:], current + [sub], result)

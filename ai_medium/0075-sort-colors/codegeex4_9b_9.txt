@@ -1,0 +1,28 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        DutchFlag(nums, 0, n - 1)
+
+def DutchFlag(A, low, high):
+    if low >= high:
+        return
+    
+    mid = low
+    while mid <= high:
+        if A[mid] == 0:
+            swap(A, low, mid)
+            low += 1
+            mid += 1
+        elif A[mid] == 2:
+            swap(A, mid, high)
+            high -= 1
+        else:
+            mid += 1
+
+def swap(arr, ind1, ind2):
+    temp = arr[ind1]
+    arr[ind1] = arr[ind2]
+    arr[ind2] = temp

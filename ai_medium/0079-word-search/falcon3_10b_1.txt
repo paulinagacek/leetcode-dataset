@@ -1,0 +1,17 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def search(i: int, j: int, index: int) -> bool:
+            if index == len(word):
+                return True
+            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] != word[index]:
+                return False
+            temp, board[i][j] = board[i][j], '#'  # Mark as visited
+            found = any(search(i + di, j + dj, index + 1) for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)])
+            board[i][j] = temp  # Restore
+            return found
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if search(i, j, 0):
+                    return True
+        return False

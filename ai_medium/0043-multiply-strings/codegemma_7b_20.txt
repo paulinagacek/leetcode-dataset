@@ -1,0 +1,11 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        result = ['0'] * (len(num1) + len(num2))
+        for i in range(len(num1) - 1, -1, -1):
+            for j in range(len(num2) - 1, -1, -1):
+                digit = (int(num1[i]) * int(num2[j])) + int(result[i + j + 1])
+                result[i + j + 1] = str(digit % 10)
+                result[i + j] = str(int(result[i + j]) + digit // 10)
+        
+        zero_count = result.index('0')
+        return ''.join(result[zero_count:])

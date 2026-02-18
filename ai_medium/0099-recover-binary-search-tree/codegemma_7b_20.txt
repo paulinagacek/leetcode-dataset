@@ -1,0 +1,16 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        def dfs(node):
+            nonlocal first, mid, prev
+            if not node:
+                return
+            dfs(node.left)
+            if prev and prev.val > node.val:
+                if not first:
+                    first = prev
+                mid = node
+            prev = node
+            dfs(node.right)
+        first = mid = prev = None
+        dfs(root)
+        first.val, mid.val = mid.val, first.val

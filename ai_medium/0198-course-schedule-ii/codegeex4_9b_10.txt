@@ -1,0 +1,31 @@
+from typing import List
+from collections import defaultdict, deque
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create adjacency list and in-degree array
+        adj_list = defaultdict(list)
+        in_degrees = [0] * numCourses
+        
+        # Fill adjacency list and in-degree array
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            in_degrees[dest] += 1
+        
+        # Initialize queue with courses having no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degrees[i] == 0])
+        topological_order = []
+        
+        # Process the queue
+        while queue:
+            node = queue.popleft()
+            topological_order.append(node)
+            
+            # Decrease in-degree of neighboring nodes and add to queue if in-degree becomes zero
+            for neighbor in adj_list[node]:
+                in_degrees[neighbor] -= 1
+                if in_degrees[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If topological order includes all courses, return it; otherwise, return an empty list
+        return topological_order if len(topological_order) == numCourses else []

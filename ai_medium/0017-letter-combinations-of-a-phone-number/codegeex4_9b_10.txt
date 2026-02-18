@@ -1,0 +1,17 @@
+from typing import List
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        phone = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+        self.ans = []
+        self.dfs(digits, phone, '')
+        return self.ans
+    
+    def dfs(self, digits, phone, path):
+        if not digits:
+            self.ans.append(path)
+            return
+        for c in phone[int(digits[0]) - 2]:
+            self.dfs(digits[1:], phone, path + c)

@@ -1,0 +1,33 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        from collections import defaultdict, deque
+        
+        # Create a graph and in-degree array
+        graph = defaultdict(list)
+        indegree = [0] * numCourses
+        
+        # Populate graph and indegree based on prerequisites
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            indegree[course] += 1
+        
+        # Initialize queue with all nodes having zero in-degree
+        queue = deque([i for i in range(numCourses) if indegree[i] == 0])
+        in_process = set()
+        finished = 0
+        
+        # Perform BFS
+        while queue:
+            course = queue.popleft()
+            
+            if course in in_process:
+                return False
+            in_process.add(course)
+            finished += 1
+            
+            for next_course in graph[course]:
+                indegree[next_course] -= 1
+                if indegree[next_course] == 0:
+                    queue.append(next_course)
+        
+        return finished == numCourses

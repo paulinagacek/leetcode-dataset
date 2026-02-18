@@ -1,0 +1,12 @@
+def permute(self, nums: List[int]) -> List[List[int]]:
+        if len(nums) == 1:
+            return [[nums[0]]]
+
+        result = []
+        for i in range(len(nums)):
+            n = nums[i]
+            remaining = nums[:i] + nums[i+1:]
+            for sublist in self.permute(remaining):
+                result.append([n] + sublist)
+
+        return result

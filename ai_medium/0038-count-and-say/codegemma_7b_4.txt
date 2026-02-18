@@ -1,0 +1,17 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        if n == 1:
+            return "1"
+        
+        s = self.countAndSay(n - 1)
+        l = len(s)
+        
+        i, ans = 0, ""
+        while i < l:
+            j = i + 1
+            while j < l and s[j] == s[i]:
+                j += 1
+            ans += str(j - i) + s[i]
+            i = j
+        
+        return ans

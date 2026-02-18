@@ -1,0 +1,14 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        result = []
+        while matrix:
+            result += matrix.pop(0)  # Move Right: Remove and append the first row
+            if matrix and matrix[0]:  # Check if matrix is not empty and has columns
+                for row in matrix:
+                    result.append(row.pop())  # Move Down: Remove and append last element of each remaining row
+            if matrix:
+                result += matrix.pop()[::-1]  # Move Left: Remove and append the last row in reverse
+            if matrix and matrix[0]:  # Check again if matrix is not empty and has columns
+                for row in matrix[::-1]:
+                    result.append(row.pop(0))  # Move Up: Remove and append first element of each remaining row (reversed)
+        return result

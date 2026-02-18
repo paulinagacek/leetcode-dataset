@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+
+        vals = []
+
+        def inorder(node: Optional[TreeNode]):
+            if node:
+                inorder(node.left)
+                vals.append(node.val)
+                inorder(node.right)
+
+        inorder(root)
+        vals.sort()
+
+        def update(node: Optional[TreeNode], val: int):
+            node.val = val
+
+        i = 0
+
+        def fix(node: Optional[TreeNode]):
+            nonlocal i
+            if node:
+                fix(node.left)
+                update(node, vals[i])
+                i += 1
+                fix(node.right)
+
+        fix(root)

@@ -1,0 +1,29 @@
+from collections import deque
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+        dir_ = [(0,1), (0,-1), (1,0), (-1,0)]
+        
+        def dfs(i, j):
+            if board[i][j] != 'O':
+                return
+            board[i][j] = 'M'
+            for dx, dy in dir_:
+                ni, nj = i + dx, j + dy
+                if 0 <= ni < m and 0 <= nj < n:
+                    dfs(ni, nj)
+
+        # Mark 'O's on borders and their neighbors
+        for i in range(m):
+            for j in range(n):
+                if (i == 0 or i == m-1 or j == 0 or j == n-1) and board[i][j] == 'O':
+                    dfs(i, j)
+        
+        # Convert marked 'M' to 'O', the rest to 'X'
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'M':
+                    board[i][j] = 'O'
+                elif board[i][j] == 'O':
+                    board[i][j] = 'X'

@@ -1,0 +1,21 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        n = len(nums)
+        used = [False] * n
+        res = []
+
+        def dfs(path):
+            if len(path) == n:
+                res.append(path[:])
+                return
+            for i in range(n):
+                if not used[i] and (i == 0 or nums[i] != nums[i - 1] or used[i - 1]):
+                    path.append(nums[i])
+                    used[i] = True
+                    dfs(path)
+                    path.pop()
+                    used[i] = False
+
+        dfs([])
+        return res

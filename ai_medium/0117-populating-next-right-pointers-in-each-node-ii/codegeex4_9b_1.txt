@@ -1,0 +1,48 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Start from the root node
+        leftmost = root
+        
+        while leftmost:
+            # Initialize the prev node as None
+            prev = None
+            curr = leftmost
+            
+            # Iterate through each level
+            while curr:
+                # Connect the next pointers across levels
+                if curr.left:
+                    # If prev is not None, set its next to curr's left child
+                    if prev:
+                        prev.next = curr.left
+                    else:
+                        # Otherwise, update leftmost to curr's left child for the next level
+                        leftmost = curr.left
+                    prev = curr.left
+                
+                if curr.right:
+                    # If prev is not None, set its next to curr's right child
+                    if prev:
+                        prev.next = curr.right
+                    else:
+                        # Otherwise, update leftmost to curr's right child for the next level
+                        leftmost = curr.right
+                    prev = curr.right
+                
+                # Move to the next node in the current level
+                curr = curr.next
+        
+        return root

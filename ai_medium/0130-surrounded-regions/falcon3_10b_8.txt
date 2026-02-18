@@ -1,0 +1,29 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        
+        def dfs(i, j):
+            if not (0 <= i < m and 0 <= j < n) or board[i][j] != 'O':
+                return
+            board[i][j] = 'A'
+            for dx, dy in directions:
+                dfs(i+dx, j+dy)
+        
+        # Mark 'O' cells connected to the edge as 'A'
+        for i in range(m):
+            for j in [0, n-1]:
+                if board[i][j] == 'O':
+                    dfs(i, j)
+        for j in range(n):
+            for i in [0, m-1]:
+                if board[i][j] == 'O':
+                    dfs(i, j)
+        
+        # Convert 'A' to 'O' and 'O' to 'X'
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == 'A':
+                    board[i][j] = 'O'

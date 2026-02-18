@@ -1,0 +1,20 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def isPalindrome(s):
+            return s == s[::-1]
+
+        def backtrack(index, currentPartition):
+            if index == len(s):
+                result.append([...currentPartition])
+                return
+
+            for i in range(index, len(s)):
+                substring = s[index:i + 1]
+                if isPalindrome(substring):
+                    currentPartition.append(substring)
+                    backtrack(i + 1, currentPartition)
+                    currentPartition.pop()
+
+        result = []
+        backtrack(0, [])
+        return result

@@ -1,0 +1,32 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        # Determine the sign of the result
+        negative = (dividend < 0) != (divisor < 0)
+        
+        # Use absolute values to simplify division process
+        abs_dividend = abs(dividend)
+        abs_divisor = abs(divisor)
+        
+        # Edge case where either value is at the limit
+        if abs_dividend == 2147483648:
+            if divisor == -1:
+                return 2147483647
+            elif divisor == 1:
+                return 2147483648
+        
+        # Perform the division using subtraction
+        quotient = 0
+        while abs_dividend >= abs_divisor:
+            abs_quotient, shifted_divisor = 1, abs_divisor
+            while abs_dividend >= (shifted_divisor << 1):
+                shifted_divisor <<= 1
+                abs_quotient <<= 1
+            quotient += abs_quotient
+            abs_dividend -= shifted_divisor
+        
+        # Apply the sign to the result and adjust for edge cases
+        if negative:
+            quotient = -quotient
+        
+        # Ensure the result is within the 32-bit signed integer range
+        return max(-2147483648, min(2147483647, quotient))

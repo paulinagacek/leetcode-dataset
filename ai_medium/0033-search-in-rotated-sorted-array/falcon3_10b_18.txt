@@ -1,0 +1,29 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        def find_pivot(nums):
+            left, right = 0, len(nums) - 1
+            while left < right:
+                mid = (left + right) // 2
+                if nums[mid] > nums[right]:
+                    left = mid + 1
+                else:
+                    right = mid
+            return left
+
+        pivot = find_pivot(nums)
+
+        def binary_search(start, end):
+            while start <= end:
+                mid = (start + end) // 2
+                if nums[mid] == target:
+                    return mid
+                elif nums[mid] < target:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+            return -1
+
+        if nums[0] <= target:
+            return binary_search(0, len(nums) - 1)
+        else:
+            return binary_search(pivot, len(nums) - 1)

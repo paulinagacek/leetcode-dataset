@@ -1,0 +1,26 @@
+from typing import List
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        adj_list = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            indegree[dest] += 1
+        
+        zero_indegree_queue = [i for i in range(numCourses) if indegree[i] == 0]
+        topological_order = []
+        
+        while zero_indegree_queue:
+            node = zero_indegree_queue.pop(0)
+            topological_order.append(node)
+            
+            for neighbor in adj_list[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    zero_indegree_queue.append(neighbor)
+        
+        if len(topological_order) == numCourses:
+            return topological_order
+        else:
+            return []

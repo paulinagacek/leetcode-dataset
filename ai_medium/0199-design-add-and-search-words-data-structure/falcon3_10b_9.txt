@@ -1,0 +1,28 @@
+from typing import List
+
+class WordDictionary:
+
+    def __init__(self):
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        for w in self.words:
+            if self._match(w, word):
+                return True
+        return False
+
+    def _match(self, text: str, pattern: str):
+        if not pattern:
+            return not text
+
+        first_match = bool(text) and (pattern[0] == text[0] or pattern[0] == '.')
+        return self._match(text[1:], pattern[1:]) if first_match else False
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

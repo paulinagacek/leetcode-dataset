@@ -1,0 +1,35 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        dp = [[] for _ in range(n)]
+
+        def isPalindrome(start, end):
+            while start < end:
+                if s[start] != s[end]:
+                    return False
+                start += 1
+                end -= 1
+            return True
+
+        for i in range(n):
+            for j in range(i):
+                if isPalindrome(j + 1, i):
+                    dp[i].append(s[j + 1: i + 1])
+
+            if isPalindrome(0, i):
+                dp[i].append(s[:i + 1])
+
+        result = []
+
+        def backtrack(index, current):
+            if index == n:
+                result.append(current[:])
+                return
+
+            for palindrome in dp[index]:
+                current.append(palindrome)
+                backtrack(index + len(palindrome), current)
+                current.pop()
+
+        backtrack(0, [])
+        return result

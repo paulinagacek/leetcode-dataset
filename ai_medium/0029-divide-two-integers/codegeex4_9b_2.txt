@@ -1,0 +1,23 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        INT_MAX = 2147483647
+        INT_MIN = -2147483648
+        
+        if dividend == INT_MIN and divisor == -1:
+            return INT_MAX
+        
+        sign = (-1) ** ((dividend < 0) != (divisor < 0))
+        
+        dvd = abs(dividend)
+        dvs = abs(divisor)
+        
+        quotient = 0
+        while dvd >= dvs:
+            temp, multiple = dvs, 1
+            while dvd >= (temp << 1):
+                temp <<= 1
+                multiple <<= 1
+            dvd -= temp
+            quotient += multiple
+        
+        return sign * quotient

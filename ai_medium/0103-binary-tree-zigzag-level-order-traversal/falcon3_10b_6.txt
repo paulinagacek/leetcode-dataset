@@ -1,0 +1,23 @@
+def zigzagLevelOrder(self, root):
+    if not root:
+        return []
+
+    queue = [root]
+    result = []
+    left_to_right = True
+
+    while queue:
+        level = []
+        for _ in range(len(queue)):
+            node = queue.pop(0)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+            level.append(node.val)
+        if not left_to_right:
+            level = list(reversed(level))
+        result.append(level)
+        left_to_right = not left_to_right
+
+    return result

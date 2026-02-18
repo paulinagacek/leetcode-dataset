@@ -1,0 +1,40 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2147483647
+        INT_MIN = -2147483648
+        
+        # Step 1: Ignore leading whitespace
+        s = s.lstrip()
+        
+        if not s:
+            return 0
+        
+        # Step 2: Determine the sign
+        sign = 1
+        index = 0
+        if s[0] == '-':
+            sign = -1
+            index += 1
+        elif s[0] == '+':
+            index += 1
+        
+        # Step 3: Read the integer
+        result = 0
+        while index < len(s) and s[index].isdigit():
+            digit = int(s[index])
+            
+            if sign > 0:
+                if result > (INT_MAX - digit) // 10:
+                    return INT_MAX
+            else:
+                if result < (INT_MIN + digit) // 10:
+                    return INT_MIN
+            
+            result = result * 10 + digit
+            index += 1
+        
+        # Step 4: Apply the sign
+        result *= sign
+        
+        # Step 5: Return the integer within the range of 32-bit signed integer
+        return max(INT_MIN, min(result, INT_MAX))

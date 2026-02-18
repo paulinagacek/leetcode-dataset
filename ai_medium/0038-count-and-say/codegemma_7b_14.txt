@@ -1,0 +1,14 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        ans = '1'
+        for _ in range(n - 1):
+            prev, count, res = ans[0], 1, ''
+            for i in ans[1:]:
+                if i == prev:
+                    count += 1
+                else:
+                    res += str(count) + prev
+                    prev, count = i, 1
+            res += str(count) + prev
+            ans = res
+        return ans

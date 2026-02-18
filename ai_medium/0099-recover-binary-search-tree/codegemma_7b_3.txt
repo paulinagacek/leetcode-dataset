@@ -1,0 +1,23 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        prev, first, second = None, None, None
+        cur = root
+        while cur:
+            if cur.left:
+                p = cur.left
+                while p.right and p.right != cur:
+                    p = p.right
+                if p.right:
+                    p.right = None
+                    self.swap(cur, p)
+                    cur = cur.right
+                else:
+                    p.right = cur
+                    cur = cur.left
+            else:
+                cur = cur.right
+        
+        self.swap(first, second)
+
+    def swap(self, first, second):
+        first.val, second.val = second.val, first.val

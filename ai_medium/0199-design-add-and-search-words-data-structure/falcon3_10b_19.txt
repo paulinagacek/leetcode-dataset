@@ -1,0 +1,14 @@
+import re
+
+
+class WordDictionary:
+
+    def __init__(self):
+        self.words = []
+
+    def addWord(self, word: str) -> None:
+        self.words.append(word)
+
+    def search(self, word: str) -> bool:
+        pattern = '^' + word.replace('.', '[a-z]') + '$'
+        return any(re.match(pattern, w) for w in self.words)

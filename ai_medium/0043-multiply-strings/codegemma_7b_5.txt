@@ -1,0 +1,16 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        res = [0] * (len(num1) + len(num2))
+        
+        for i in range(len(num1) - 1, -1, -1):
+            a = int(num1[i])
+            for j in range(len(num2) - 1, -1, -1):
+                b = int(num2[j])
+                prod = a * b
+                res[i + j + 1] += prod % 10
+                res[i + j] += prod // 10
+                
+        index = 0
+        while index < len(res) and res[index] == 0:
+            index += 1
+        return ''.join(map(str, res[index:])) or '0'

@@ -1,0 +1,24 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        for i in range(n):
+            for j in range(i + 1):
+                if s[i] == s[j] and (j + 1 > i - 1 or dp[j + 1][i - 1]):
+                    dp[j][i] = True
+
+        ans = []
+
+        def dfs(index, cur):
+            if index == n:
+                ans.append(cur[:])
+                return
+
+            for i in range(index, n):
+                if dp[index][i]:
+                    cur.append(s[index: i + 1])
+                    dfs(i + 1, cur)
+                    cur.pop()
+
+        dfs(0, [])
+        return ans

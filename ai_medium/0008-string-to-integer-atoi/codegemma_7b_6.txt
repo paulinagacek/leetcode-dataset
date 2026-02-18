@@ -1,0 +1,32 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        result = 0
+        sign = 1
+        i = 0
+
+        # Ignore leading whitespace
+        while i < len(s) and s[i] == ' ':
+            i += 1
+
+        # Determine sign
+        if i < len(s) and s[i] == '-':
+            sign = -1
+            i += 1
+        elif i < len(s) and s[i] == '+':
+            i += 1
+
+        # Extract digits
+        while i < len(s) and s[i].isdigit():
+            result = result * 10 + int(s[i])
+            i += 1
+
+        # Apply sign
+        result *= sign
+
+        # Round to 32-bit range
+        if result < -2147483648:
+            return -2147483648
+        elif result > 2147483647:
+            return 2147483647
+        else:
+            return result

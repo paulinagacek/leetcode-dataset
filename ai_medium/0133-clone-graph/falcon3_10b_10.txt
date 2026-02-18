@@ -1,0 +1,28 @@
+from typing import Optional, List
+
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+class Solution:
+    def cloneGraph(self, node: Optional[Node]) -> Optional[Node]:
+        def dfs(node, visited):
+            if node is None:
+                return None
+            
+            if node in visited:
+                return visited[node]
+
+            clone_node = Node(node.val)
+            visited[node] = clone_node
+
+            clone_neighbors = []
+            for neighbor in node.neighbors:
+                clone_neighbors.append(dfs(neighbor, visited))
+
+            visited[node].neighbors = clone_neighbors
+            
+            return visited[node]
+
+        return dfs(node, {})

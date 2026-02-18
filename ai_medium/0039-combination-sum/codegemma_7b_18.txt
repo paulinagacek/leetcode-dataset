@@ -1,0 +1,10 @@
+from itertools import combinations
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        for i in range(len(candidates) + 1):
+            for combination in combinations(candidates, i):
+                if sum(combination) == target:
+                    result.append(list(combination))
+        return result

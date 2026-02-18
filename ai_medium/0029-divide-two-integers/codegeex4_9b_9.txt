@@ -1,0 +1,23 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if divisor == 1:
+            return min(dividend, 2147483647)
+        elif divisor == -1:
+            return max(-dividend, -2147483648)
+        
+        negative = (dividend < 0) != (divisor < 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        
+        quotient = 0
+        while dividend >= divisor:
+            temp, multiple = divisor, 1
+            while dividend >= (temp << 1):
+                temp <<= 1
+                multiple <<= 1
+            dividend -= temp
+            quotient += multiple
+        
+        if negative:
+            quotient = -quotient
+        
+        return min(max(-2147483648, quotient), 2147483647)

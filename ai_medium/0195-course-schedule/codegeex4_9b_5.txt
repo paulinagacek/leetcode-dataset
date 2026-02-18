@@ -1,0 +1,40 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list to represent the graph of course dependencies
+        adj_list = [[] for _ in range(numCourses)]
+        
+        # Fill the adjacency list with prerequisites
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+        
+        # Array to keep track of visited nodes
+        visited = [0] * numCourses
+        
+        # Helper function to perform DFS and detect cycles
+        def dfs(node):
+            if visited[node] == 1:  # Cycle detected
+                return False
+            if visited[node] == -1:  # Already processed node without cycle
+                return True
+            
+            # Mark the current node as visiting
+            visited[node] = 1
+            
+            # Visit all adjacent nodes
+            for neighbor in adj_list[node]:
+                if not dfs(neighbor):
+                    return False
+            
+            # Mark the current node as fully processed (no cycle detected)
+            visited[node] = -1
+            return True
+        
+        # Perform DFS from each unvisited node
+        for i in range(numCourses):
+            if visited[i] == 0:  # Unvisited node
+                if not dfs(i):
+                    return False
+        
+        return True

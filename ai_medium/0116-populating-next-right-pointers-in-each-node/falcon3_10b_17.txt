@@ -1,0 +1,47 @@
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root: return None
+        
+        # Initialize the head of the level to process
+        level_head = root
+        while level_head:
+            cur = level_head
+            
+            # Connect nodes in the current level
+            while cur:
+                if cur.left: 
+                    if cur.right: 
+                        cur.left.next = cur.right
+                    else: 
+                        left_node = cur.left
+                        
+                        # Find the next node on the same level
+                        next_node = cur.next
+                        while next_node and not next_node.left and not next_node.right:
+                            next_node = next_node.next
+                            
+                        cur.left.next = next_node and (next_node.left or next_node.right)
+                        
+                if cur.right:
+                    right_node = cur.right
+                    # Find the next node on the same level
+                    next_node = cur.next
+                    while next_node and not next_node.left and not next_node.right:
+                        next_node = next_node.next
+                        
+                    cur.right.next = next_node and (next_node.left or next_node.right)
+                
+                cur = cur.next
+            
+            # Move to the head of the next level
+            level_head = level_head.left
+            
+        return root

@@ -1,0 +1,19 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def ip_check(segment):
+            if segment.startswith('0') and len(segment) > 1 or int(segment) > 255:
+                return False
+            return True
+
+        def dfs(start, path, groups):
+            if groups == 4:
+                if start == len(s):
+                    yield ".".join(path)
+                return
+            
+            for end in range(start + 1, min(start + 4, len(s) + 1)):
+                segment = s[start:end]
+                if ip_check(segment):
+                    yield from dfs(end, path + [segment], groups + 1)
+        
+        return list(dfs(0, [], 0))

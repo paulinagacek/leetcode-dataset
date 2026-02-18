@@ -1,0 +1,23 @@
+from typing import List
+
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        result = []
+        placed = False
+        
+        for interval in intervals:
+            if newInterval[0] > interval[1]:
+                result.append(interval)
+            elif newInterval[1] < interval[0]:
+                if not placed:
+                    result.append(newInterval)
+                    placed = True
+                result.append(interval)
+            else:
+                newInterval[0] = min(newInterval[0], interval[0])
+                newInterval[1] = max(newInterval[1], interval[1])
+        
+        if not placed:
+            result.append(newInterval)
+        
+        return result

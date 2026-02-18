@@ -1,0 +1,26 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        row, col = len(board), len(board[0])
+        
+        def dfs(b, x, y):
+            if x < 0 or y < 0 or x >= row or y >= col or b[x][y] != 'O':
+                return
+            b[x][y] = '$'  # Mark as visited
+            dfs(b, x+1, y)
+            dfs(b, x-1, y)
+            dfs(b, x, y+1)
+            dfs(b, x, y-1)
+        
+        # Mark all 'O' at borders and their connected 'O' as visiting state '$'
+        for r in range(row):
+            for c in range(col):
+                if (r in [0, row-1] or c in [0, col-1]) and board[r][c] == 'O':
+                    dfs(board, r, c)
+        
+        # Convert remaining 'O' to 'X' and revert visited '$' to 'O'
+        for r in range(row):
+            for c in range(col):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == '$':
+                    board[r][c] = 'O'

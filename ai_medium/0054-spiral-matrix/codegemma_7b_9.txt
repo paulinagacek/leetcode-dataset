@@ -1,0 +1,22 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        ans = []
+        if not matrix: return ans
+        m, n = len(matrix), len(matrix[0])
+        layer_count = (min(m, n) + 1) // 2
+        for layer in range(layer_count):
+            # Top row
+            for col in range(layer, n - layer):
+                ans.append(matrix[layer][col])
+            # Right column
+            for row in range(layer + 1, m - layer):
+                ans.append(matrix[row][n - layer - 1])
+            # Bottom row
+            if m - layer - 1 > layer:
+                for col in range(n - 2 - layer, layer - 1, -1):
+                    ans.append(matrix[m - layer - 1][col])
+            # Left column
+            if n - layer - 1 > layer:
+                for row in range(m - 2 - layer, layer, -1):
+                    ans.append(matrix[row][layer])
+        return ans

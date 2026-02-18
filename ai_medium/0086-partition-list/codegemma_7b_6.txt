@@ -1,0 +1,20 @@
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        dummy_left = ListNode(0)
+        dummy_right = ListNode(0)
+
+        left, right = dummy_left, dummy_right
+
+        while head:
+            if head.val < x:
+                left.next = head
+                left = left.next
+            else:
+                right.next = head
+                right = right.next
+            head = head.next
+
+        left.next = dummy_right.next
+        right.next = None
+
+        return dummy_left.next

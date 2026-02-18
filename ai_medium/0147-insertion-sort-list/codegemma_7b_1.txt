@@ -1,0 +1,19 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)  # Dummy node for the sorted list
+        curr = head
+
+        while curr:
+            temp = dummy
+            next_node = curr.next
+
+            # Find the insertion point in the sorted list
+            while temp.next and temp.next.val < curr.val:
+                temp = temp.next
+
+            # Insert the current node before the insertion point
+            curr.next = temp.next
+            temp.next = curr
+            curr = next_node
+
+        return dummy.next  # Return the head of the sorted list

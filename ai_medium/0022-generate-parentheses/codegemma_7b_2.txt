@@ -1,0 +1,13 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+        def backtrack(idx, left, right, s):
+            if idx == n*2:
+                ans.append(s[:])
+                return
+            if left < n:
+                backtrack(idx+1, left+1, right, s+'(')
+            if right < left:
+                backtrack(idx+1, left, right+1, s+')')
+        backtrack(0, 0, 0, "")
+        return ans

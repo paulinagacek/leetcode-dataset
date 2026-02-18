@@ -1,0 +1,22 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        res = []
+        path = []
+
+        def dfs(node, curSum):
+            if not node:
+                return
+
+            path.append(node.val)
+            curSum += node.val
+
+            if not node.left and not node.right and curSum == targetSum:
+                res.append(path[:])
+
+            dfs(node.left, curSum)
+            dfs(node.right, curSum)
+
+            path.pop()
+
+        dfs(root, 0)
+        return res

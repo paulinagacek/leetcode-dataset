@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        dna_map = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+        count = {}
+        for i in range(len(s) - 9):
+            num = 0
+            for j in range(i, i + 10):
+                num = (num << 2) | dna_map[s[j]]
+            if num in count:
+                count[num] += 1
+            else:
+                count[num] = 1
+        return [s[i:i+10] for i in range(len(s) - 9) if count[dna_map[s[i]] << 18 | dna_map[s[i+1]] << 16 | dna_map[s[i+2]] << 14 | 
+                                                                     dna_map[s[i+3]] << 12 | dna_map[s[i+4]] << 10 |
+                                                                     dna_map[s[i+5]] << 8 | dna_map[s[i+6]] << 6 | 
+                                                                     dna_map[s[i+7]] << 4 | dna_map[s[i+8]] << 2 | 
+                                                                     dna_map[s[i+9]]]]

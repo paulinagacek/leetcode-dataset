@@ -1,0 +1,11 @@
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        """
+        O(log n) time complexity solution.
+        """
+        count = 0
+        divisor = 5
+        while n >= divisor:
+            count += n // divisor
+            divisor *= 5
+        return count

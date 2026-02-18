@@ -1,0 +1,22 @@
+from typing import List
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        temp = []
+
+        def dfs(start):
+            if start == len(s):
+                res.append(temp[:])
+                return
+            for i in range(start, len(s)):
+                if self.isPalindrome(s[start:i+1]):
+                    temp.append(s[start:i+1])
+                    dfs(i+1)
+                    temp.pop()
+
+        def isPalindrome(s):
+            return s == s[::-1]
+
+        dfs(0)
+        return res

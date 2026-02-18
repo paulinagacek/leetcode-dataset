@@ -1,0 +1,14 @@
+from typing import List
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.helper(nums, 0, [], result)
+        return result
+
+    def helper(self, nums, start, path, result):
+        result.append(path[:])
+        for i in range(start, len(nums)):
+            path.append(nums[i])
+            self.helper(nums, i + 1, path, result)
+            path.pop()

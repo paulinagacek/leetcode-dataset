@@ -1,0 +1,17 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        val_to_idx = {val: idx for idx, val in enumerate(inorder)}
+        postorder_idx = len(postorder) - 1
+        
+        def helper(start, end):
+            if start > end:
+                return None
+            val = postorder[postorder_idx]
+            idx = val_to_idx[val]
+            postorder_idx -= 1
+            root = TreeNode(val)
+            root.right = helper(idx + 1, end)
+            root.left = helper(start, idx - 1)
+            return root
+        
+        return helper(0, len(inorder) - 1)

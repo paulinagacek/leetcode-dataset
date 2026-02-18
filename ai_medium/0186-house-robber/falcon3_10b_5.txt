@@ -1,0 +1,13 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        elif len(nums) <= 2:
+            return max(nums)
+        
+        prev1, prev2 = nums[0], max(nums[0], nums[1])
+        for num in nums[2:]:
+            current = max(prev1 + num, prev2)
+            prev1, prev2 = prev2, current
+        
+        return prev2

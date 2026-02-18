@@ -1,0 +1,24 @@
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()  # Create a dummy head for the result list
+        curr = dummy  # Initialize a pointer to the dummy head
+
+        carry = 0  # Initialize carry to 0
+        while l1 or l2 or carry:
+            # Calculate the value at the current position
+            val = carry
+            if l1:
+                val += l1.val
+                l1 = l1.next
+            if l2:
+                val += l2.val
+                l2 = l2.next
+
+            # Append the digit to the linked list
+            curr.next = ListNode(val % 10)
+            curr = curr.next
+
+            # Update the carry
+            carry = val // 10
+
+        return dummy.next  # Return the next node of the dummy head (the actual head of the result list)

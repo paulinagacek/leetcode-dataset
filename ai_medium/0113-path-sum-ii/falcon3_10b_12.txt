@@ -1,0 +1,24 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        def dfs(node, current_sum, path):
+            # Base case: leaf node
+            if not node:
+                return []
+            
+            # Update the current sum and path
+            new_sum = current_sum + node.val
+            new_path = path + [node.val]
+            
+            # Check if it's a leaf node and sum equals targetSum
+            result = []
+            if not node.left and not node.right:
+                if new_sum == targetSum:
+                    result = [new_path]
+            else:
+                # Recursively search left and right subtrees
+                result += dfs(node.left, new_sum, new_path)
+                result += dfs(node.right, new_sum, new_path)
+            
+            return result
+        
+        return dfs(root, 0, [])

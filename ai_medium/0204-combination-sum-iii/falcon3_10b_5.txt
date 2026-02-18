@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        result = []
+
+        def backtrack(start=1, current=[]):
+            if len(current) == k:
+                if sum(current) == n:
+                    result.append(list(current))
+                return
+
+            for i in range(start, 10):
+                current.append(i)
+                backtrack(i + 1, current)
+                current.pop()
+
+        backtrack()
+        return result

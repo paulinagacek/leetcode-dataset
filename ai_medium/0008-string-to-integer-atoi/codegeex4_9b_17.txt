@@ -1,0 +1,30 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2147483647
+        INT_MIN = -2147483648
+        
+        # Step 1: Whitespace
+        i = 0
+        while i < len(s) and s[i] == ' ':
+            i += 1
+        
+        # Step 2: Signedness
+        sign = 1
+        if i < len(s) and (s[i] == '-' or s[i] == '+'):
+            sign = -1 if s[i] == '-' else 1
+            i += 1
+        
+        # Step 3: Conversion
+        result = 0
+        while i < len(s) and s[i].isdigit():
+            digit = int(s[i])
+            
+            # Check for overflow and underflow
+            if result > (INT_MAX - digit) // 10:
+                return INT_MAX if sign == 1 else INT_MIN
+            
+            result = result * 10 + digit
+            i += 1
+        
+        # Return the result with the sign
+        return sign * result

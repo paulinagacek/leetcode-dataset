@@ -1,0 +1,41 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        length = 0
+        cur = head
+        while cur:
+            length += 1
+            cur = cur.next
+        
+        def merge(left, right):
+            dummy = ListNode()
+            p = dummy
+            while left and right:
+                if left.val <= right.val:
+                    p.next = left
+                    left = left.next
+                else:
+                    p.next = right
+                    right = right.next
+                p = p.next
+            if left:
+                p.next = left
+            if right:
+                p.next = right
+            return dummy.next
+        
+        def findMid(head):
+            slow, fast = head, head.next
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+        
+        if length <= 1:
+            return head
+        
+        mid = findMid(dummy.next)
+        right = self.sortList(mid.next)
+        mid.next = None
+        left = self.sortList(dummy.next)
+        return merge(left, right)

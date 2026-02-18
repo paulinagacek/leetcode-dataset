@@ -1,0 +1,10 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        def generate_sequence(n):
+            if n == 0:
+                return [0]
+            previous = generate_sequence(n - 1)
+            add_on = 1 << (n - 1)
+            return previous + [x + add_on for x in reversed(previous)]
+        
+        return generate_sequence(n)

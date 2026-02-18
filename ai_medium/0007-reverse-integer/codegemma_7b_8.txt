@@ -1,0 +1,10 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        rev = 0
+        while x:
+            digit = x % 10
+            if rev > (1 << 31) // 10 or (rev == (1 << 31) // 10 and digit > 7):
+                return 0
+            rev = rev * 10 + digit
+            x //= 10
+        return rev if x >= 0 else -rev

@@ -1,0 +1,21 @@
+from typing import List
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        dna = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+        pattern_length = 10
+        sequences = set()
+        seen = set()
+        
+        for i in range(len(s) - pattern_length + 1):
+            fragment = s[i:i+pattern_length]
+            num = 0
+            
+            for j in range(pattern_length):
+                num = num * 4 + dna[fragment[j]]
+            
+            if num in seen:
+                sequences.add(fragment)
+            seen.add(num)
+        
+        return list(sequences)

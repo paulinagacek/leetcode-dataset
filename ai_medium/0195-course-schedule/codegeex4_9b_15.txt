@@ -1,0 +1,38 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph from the prerequisites list
+        graph = [[] for _ in range(numCourses)]
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+        
+        # Initialize visited array to track visitation status of each node
+        visited = [0] * numCourses
+        
+        # Define a helper function to perform DFS and detect cycles
+        def dfs(node):
+            if visited[node] == -1:
+                return False  # Cycle detected
+            if visited[node] == 1:
+                return True  # Already completed the course without cycle
+            
+            # Mark the node as being processed
+            visited[node] = -1
+            
+            # Visit all adjacent nodes (courses)
+            for neighbor in graph[node]:
+                if not dfs(neighbor):
+                    return False
+            
+            # Mark the node as fully processed
+            visited[node] = 1
+            return True
+        
+        # Check each course for cycles using DFS
+        for i in range(numCourses):
+            if visited[i] == 0:  # Not yet processed
+                if not dfs(i):
+                    return False
+        
+        return True

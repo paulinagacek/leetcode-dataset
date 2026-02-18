@@ -1,0 +1,22 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def backtrack(index: int, dots: int, current_segment: str, result: List[str]):
+            if dots == 4:
+                if index == len(s):
+                    result.append(".".join(current_segment))
+                return
+
+            for i in range(index, index + 3):
+                segment = s[index: i + 1]
+                if (
+                    1 <= len(segment) <= 3
+                    and not segment.startswith("0")
+                    and int(segment) <= 255
+                ):
+                    current_segment.append(segment)
+                    backtrack(i + 1, dots + 1, current_segment, result)
+                    current_segment.pop()
+
+        result = []
+        backtrack(0, 0, [], result)
+        return result

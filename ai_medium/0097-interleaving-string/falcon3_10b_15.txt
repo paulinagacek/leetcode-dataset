@@ -1,0 +1,23 @@
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, p = len(s1), len(s2), len(s3)
+        
+        # If the combined length of s1 and s2 isn't equal to s3, it's impossible
+        if m + n != p:
+            return False
+        
+        # Dynamic Programming table dp[i][j] will be True if s3[:i+j] can be formed by interleaving s1[:i] and s2[:j]
+        dp = [[False] * (n + 1) for _ in range(m + 1)]
+        
+        # Base case: Two empty strings can form an empty string
+        dp[0][0] = True
+        
+        # Fill dp table
+        for i in range(m + 1):
+            for j in range(n + 1):
+                if i and dp[i - 1][j] and s1[i - 1] == s3[i + j - 1]:
+                    dp[i][j] = True
+                elif j and dp[i][j - 1] and s2[j - 1] == s3[i + j - 1]:
+                    dp[i][j] = True
+        
+        return dp[m][n]

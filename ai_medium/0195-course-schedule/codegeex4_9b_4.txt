@@ -1,0 +1,32 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create adjacency list and in-degree array
+        adj_list = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        # Fill adjacency list and in-degree array
+        for dest, src in prerequisites:
+            adj_list[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize queue with courses having zero in-degree
+        zero_in_degree_queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Count of visited nodes
+        count_visited_nodes = 0
+        
+        # BFS traversal
+        while zero_in_degree_queue:
+            curr_node = zero_in_degree_queue.popleft()
+            count_visited_nodes += 1
+            
+            for neighbor in adj_list[curr_node]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    zero_in_degree_queue.append(neighbor)
+        
+        # If count of visited nodes is equal to number of courses, return True
+        return count_visited_nodes == numCourses

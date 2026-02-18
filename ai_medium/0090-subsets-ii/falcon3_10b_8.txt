@@ -1,0 +1,15 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(start=0, curr=[]):
+            result.append(list(curr))
+            for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i-1]:
+                    continue
+                curr.append(nums[i])
+                backtrack(i+1, curr)
+                curr.pop()
+        
+        nums.sort()
+        result = []
+        backtrack()
+        return result

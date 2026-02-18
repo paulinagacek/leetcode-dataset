@@ -1,0 +1,26 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix:
+            return []
+        
+        rows, cols = len(matrix), len(matrix[0])
+        seen = set()
+        res = []
+        
+        row, col = 0, 0
+        for _ in range(rows * cols):
+            res.append(matrix[row][col])
+            seen.add((row, col))
+            
+            next_row, next_col = row + 1, col
+            if 0 <= next_row < rows and 0 <= next_col < cols and (next_row, next_col) not in seen:
+                row, col = next_row, next_col
+            else:
+                if col < cols - 1:
+                    col += 1
+                elif row < rows - 1:
+                    row += 1
+                else:
+                    col -= 1
+                
+        return res

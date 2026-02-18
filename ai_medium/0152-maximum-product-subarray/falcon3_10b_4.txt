@@ -1,0 +1,9 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        max_product = cur_product = nums[0]
+        for num in nums[1:]:
+            if num < 0:
+                max_product, cur_product = cur_product, max_product
+            max_product = max(max_product, cur_product * num)
+            cur_product = max(num, cur_product * num)
+        return max_product

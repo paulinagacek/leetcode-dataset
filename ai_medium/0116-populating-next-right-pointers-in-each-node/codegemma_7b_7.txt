@@ -1,0 +1,19 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+
+        queue = [root]
+
+        while queue:
+            prev = queue.pop(0)
+
+            if prev.left:
+                queue.append(prev.left)
+                prev.left.next = prev.right
+
+            if prev.right:
+                queue.append(prev.right)
+                prev.right.next = queue[0] if queue else None
+
+        return root

@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        # Helper function to perform preorder traversal and flatten the tree
+        def preorder(node):
+            if not node:
+                return
+            temp = node.right  # Store the right subtree
+            node.right = node.left  # Move left subtree to right
+            node.left = None  # Set left child to None
+            current = node
+            while current.right:  # Traverse the flattened tree
+                current = current.right
+            current.right = temp  # Attach the original right subtree at the end of flattened tree
+        
+        preorder(root)

@@ -1,0 +1,17 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        temp = []
+        nums.sort()  # Sorting helps in skipping duplicates
+
+        def backtrack(start):
+            result.append(list(temp))
+            for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i - 1]:
+                    continue  # Skip duplicate elements
+                temp.append(nums[i])
+                backtrack(i + 1)
+                temp.pop()  # Backtrack
+
+        backtrack(0)
+        return result

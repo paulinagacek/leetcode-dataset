@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        def inorder traversal(node):
+            if node:
+                inorder traversal(node.left)
+                visited.append(node)
+                inorder traversal(node.right)
+
+        visited = []
+        first_node = None
+        second_node = None
+
+        # Perform inorder traversal and find the two swapped nodes
+        inorderTraversal(root)
+        for i in range(len(visited) - 1):
+            if visited[i].val > visited[i + 1].val:
+                second_node = visited[i + 1]
+                if not first_node:
+                    first_node = visited[i]
+                break
+
+        # Swap the values of the two nodes
+        first_node.val, second_node.val = second_node.val, first_node.val

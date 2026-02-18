@@ -1,0 +1,23 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        self.first = None
+        self.second = None
+        self.prev = TreeNode(float('-inf'))
+        self.inorder(root)
+        self.swap(self.first, self.second)
+
+    def inorder(self, root):
+        if not root:
+            return
+        self.inorder(root.left)
+        if self.prev.val >= root.val:
+            if not self.first:
+                self.first = self.prev
+            self.second = root
+        self.prev = root
+        self.inorder(root.right)
+
+    def swap(self, first, second):
+        temp = first.val
+        first.val = second.val
+        second.val = temp

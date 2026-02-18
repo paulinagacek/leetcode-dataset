@@ -1,0 +1,29 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        if not board or not board[0]: return
+        
+        m, n = len(board), len(board[0])
+        
+        def dfs(x, y):
+            if 0 <= x < m and 0 <= y < n and board[x][y] == 'O':
+                board[x][y] = 'T'
+                dfs(x + 1, y)
+                dfs(x - 1, y)
+                dfs(x, y + 1)
+                dfs(x, y - 1)
+        
+        # Mark all 'O' cells connected to border as 'T'
+        for i in range(m):
+            dfs(i, 0)
+            dfs(i, n - 1)
+        for j in range(n):
+            dfs(0, j)
+            dfs(m - 1, j)
+        
+        # Change 'O' to 'X' and 'T' back to 'O'
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == 'T':
+                    board[i][j] = 'O'

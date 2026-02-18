@@ -1,0 +1,45 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = {}
+        
+
+    def addWord(self, word: str) -> None:
+        self.words[word] = True
+        
+
+    def search(self, word: str) -> bool:
+        def dfs(node, idx):
+            if idx == len(word):
+                return bool(node.get('is_word'))
+            
+            char = word[idx]
+            if char == '.':
+                return any(dfs(child, idx + 1) for child in node.values() if not isinstance(child, bool))
+            else:
+                return bool(node.get(char) and dfs(node[char], idx + 1))
+        
+        def construct_trie():
+            root = {}
+            for w in self.words:
+                node = root
+                node['is_word'] = True
+                for char in w:
+                    if char not in node:
+                        node[char] = {}
+                    node = node[char]
+            return root
+        
+        trie = construct_trie()
+        return dfs(trie, 0)
+
+
+# Example usage:
+# wordDictionary = WordDictionary()
+# wordDictionary.addWord("bad")
+# wordDictionary.addWord("dad")
+# wordDictionary.addWord("mad")
+# print(wordDictionary.search("pad")) # Output: False
+# print(wordDictionary.search("bad")) # Output: True
+# print(wordDictionary.search(".ad")) # Output: True
+# print(wordDictionary.search("b..")) # Output: True

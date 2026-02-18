@@ -1,0 +1,14 @@
+class Solution:
+    def largestNumber(self, nums):
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y == y + x:
+                return 0
+            else:
+                return 1
+        
+        str_nums = list(map(str, nums))
+        str_nums.sort(key=lambda x: x*10, cmp=compare)
+        largest_num = ''.join(str_nums).lstrip('0')
+        return largest_num if largest_num else '0'

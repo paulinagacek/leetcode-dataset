@@ -1,0 +1,16 @@
+from collections import deque
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        queue = deque([node])
+        visited = {node: Node(node.val)}
+        while queue:
+            curr = queue.popleft()
+            for neighbor in curr.neighbors:
+                if neighbor not in visited:
+                    visited[neighbor] = Node(neighbor.val)
+                    queue.append(neighbor)
+                visited[curr].neighbors.append(visited[neighbor])
+        return visited[node]

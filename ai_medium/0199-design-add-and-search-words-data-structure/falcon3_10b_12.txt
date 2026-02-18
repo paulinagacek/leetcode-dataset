@@ -1,0 +1,30 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for char in word:
+            node = node.setdefault(char, {})
+        node[None] = True
+
+    def search(self, word: str) -> bool:
+        return self._search_helper(word, 0, self.trie)
+
+    def _search_helper(self, word: str, index: int, node: dict) -> bool:
+        if not word:
+            return None in node
+
+        char = word[index]
+        if char == '.':
+            for node_val in node.values():
+                if self._search_helper(word, index + 1, node_val):
+                    return True
+            return False
+        else:
+            target_node = node.get(char)
+            if not target_node:
+                return False
+
+            return self._search_helper(word, index + 1, target_node)

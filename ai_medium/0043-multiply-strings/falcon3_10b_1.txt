@@ -1,0 +1,28 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+
+        n1, n2 = len(num1), len(num2)
+        result = [0] * (n1 + n2)
+
+        for i in range(n1 - 1, -1, -1):
+            carry = 0
+            digit1 = ord(num1[i]) - ord('0')
+
+            for j in range(n2 - 1, -1, -1):
+                digit2 = ord(num2[j]) - ord('0')
+                total = digit1 * digit2 + result[i + j + 1] + carry
+                result[i + j + 1] = total % 10
+                carry = total // 10
+
+            result[i] += carry
+
+        idx = 0
+        while idx < len(result) and result[idx] == 0:
+            idx += 1
+
+        if idx == len(result):
+            return "0"
+
+        return ''.join(map(str, result[idx:]))

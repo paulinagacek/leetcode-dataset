@@ -1,0 +1,23 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        from functools import cache
+        @cache
+        def helper(word, prefix=""):
+            if not word:
+                return prefix in self.words
+            if word[0] == ".":
+                for i in range(26):
+                    ch = chr(ord("a") + i)
+                    if helper(word[1:], prefix + ch):
+                        return True
+                return False
+            else:
+                return helper(word[1:], prefix + word[0])
+        return helper(word)

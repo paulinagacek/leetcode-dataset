@@ -1,0 +1,20 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        MAX_INT = 2147483647
+        MIN_INT = -2147483648
+        
+        if dividend == MIN_INT and divisor == -1:
+            return MAX_INT
+        positive = (dividend < 0) is (divisor < 0)
+        a, b = abs(dividend), abs(divisor)
+        
+        ret = 0
+        while a >= b:
+            value, i = b, 1
+            while a >= (value << 1):
+                value <<= 1
+                i <<= 1
+            a -= value
+            ret += i
+        
+        return -ret if not positive else ret

@@ -1,0 +1,22 @@
+from typing import List
+
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        result = []
+        nums.sort()
+
+        def dfs(start, path):
+            if len(path) == 4:
+                if sum(path) == target:
+                    result.append(path)
+                return
+            for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i-1]:
+                    continue
+                if len(path) < 3 or sum(path) + nums[i] < target:
+                    dfs(i+1, path + [nums[i]])
+                else:
+                    break
+
+        dfs(0, [])
+        return result

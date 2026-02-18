@@ -1,0 +1,24 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        
+        # Step 1: Mark all 'O's connected to the border as '.'
+        for i in range(m):
+            for j in range(n):
+                if (i == 0 or i == m - 1 or j == 0 or j == n - 1) and board[i][j] == 'O':
+                    self.dfs(board, i, j, directions)
+        
+        # Step 2: Replace all remaining 'O's with 'X's and previously marked '.' back to 'O'
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == '.':
+                    board[i][j] = 'O'
+
+    def dfs(self, board, i, j, directions):
+        if 0 <= i < len(board) and 0 <= j < len(board[0]) and board[i][j] == 'O':
+            board[i][j] = '.'
+            for di, dj in directions:
+                self.dfs(board, i + di, j + dj, directions)

@@ -1,0 +1,18 @@
+from collections import defaultdict
+from heapq import heappop, heappush
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+        for x, y in prerequisites:
+            graph[y].append(x)
+            in_degree[x] += 1
+        queue = [(x, 0) for x in range(numCourses) if in_degree[x] == 0]
+        for x, time in queue:
+            if time == numCourses: return True
+            for y in graph[x]:
+                in_degree[y] -= 1
+                if in_degree[y] == 0:
+                    heappush(queue, (y, time + 1))
+        return False

@@ -1,0 +1,9 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def compare(x: int, y: int) -> bool:
+            return str(x) + str(y) > str(y) + str(x)
+
+        nums.sort(reverse=True, key=compare)
+
+        result = ''.join(map(str, nums))
+        return result if result[0] != '0' else '0'

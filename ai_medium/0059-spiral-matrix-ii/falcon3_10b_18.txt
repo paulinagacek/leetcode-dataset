@@ -1,0 +1,13 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0]*n for _ in range(n)]
+        num, dx, dy = 1, [0, 1, 0, -1], [1, 0, -1, 0]
+        x, y, cx, cy, d = 0, 0, 0, 0, 0
+        for _ in range(n*n):
+            matrix[x][y] = num
+            num += 1
+            if not (0 <= x+dx[d] < n and 0 <= y+dy[d] < n or matrix[x+dx[d]][y+dy[d]]):
+                d = (d+1) % 4
+            x += dx[d]
+            y += dy[d]
+        return matrix

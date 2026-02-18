@@ -1,0 +1,20 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def helper(start, end):
+            if start > end:
+                return None
+            mid = (start + end) // 2
+            left = helper(start, mid - 1)
+            root = TreeNode(head.val)
+            head = head.next
+            right = helper(mid + 1, end)
+            root.left = left
+            root.right = right
+            return root
+        return helper(0, self.len_count(head) - 1)
+    def len_count(self, head):
+        count = 0
+        while head:
+            count += 1
+            head = head.next
+        return count

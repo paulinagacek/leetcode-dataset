@@ -1,0 +1,31 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        self.ROWS, self.COLS = len(board), len(board[0])
+        self.board = board
+
+        for i in range(self.ROWS):
+            self.dfs(i, 0)  # left edge
+            self.dfs(i, self.COLS - 1)  # right edge
+
+        for j in range(self.COLS):
+            self.dfs(0, j)  # top edge
+            self.dfs(self.ROWS - 1, j)  # bottom edge
+
+        for i in range(self.ROWS):
+            for j in range(self.COLS):
+                if self.board[i][j] == 'O':
+                    self.board[i][j] = 'X'
+
+    def dfs(self, row: int, col: int) -> None:
+        if row < 0 or row >= self.ROWS or col < 0 or col >= self.COLS or self.board[row][col] != 'O':
+            return
+
+        self.board[row][col] = 'X'
+
+        self.dfs(row + 1, col)
+        self.dfs(row - 1, col)
+        self.dfs(row, col + 1)
+        self.dfs(row, col - 1)

@@ -1,0 +1,6 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        gray_code = [0]
+        for i in range(1, 2**n):
+            gray_code.append(gray_code[i//2] ^ (i % 2))
+        return gray_code

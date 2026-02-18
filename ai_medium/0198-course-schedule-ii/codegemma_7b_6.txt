@@ -1,0 +1,31 @@
+from collections import defaultdict
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        # Build graph and calculate in-degree
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            in_degree[course] += 1
+        
+        # Find courses with in-degree 0
+        queue = [course for course in range(numCourses) if in_degree[course] == 0]
+        
+        # Perform topological sort
+        result = []
+        while queue:
+            course = queue.pop(0)
+            result.append(course)
+            
+            for neighbor in graph[course]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # Check if all courses were visited
+        if len(result) == numCourses:
+            return result
+        else:
+            return []

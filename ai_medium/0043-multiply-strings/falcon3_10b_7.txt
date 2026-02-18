@@ -1,0 +1,32 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        def mul_digit(a, b):
+            res = a * b
+            return res
+
+        def add(a, b):
+            res = a + b
+            return res
+
+        def carry(val):
+            if val < 10:
+                return 0, val
+            else:
+                c, v = val // 10, val % 10
+                return c, v
+
+        len_num1, len_num2 = len(num1), len(num2)
+        result = [0] * (len_num1 + len_num2)
+        for i in range(len_num1 - 1, -1, -1):
+            carry_digit = 0
+            for j in range(len_num2 - 1, -1, -1):
+                position = len_num1 + len_num2 - i - j - 1
+                digit_product = mul_digit(int(num1[i]), int(num2[j]))
+                result[position] += digit_product + carry_digit
+                carry_digit, result[position] = carry(result[position])
+            if carry_digit != 0:
+                position = len_num1 + len_num2 - i - 1
+                result[position] += carry_digit
+
+        res_str = ''.join(map(str, result))
+        return res_str.lstrip('0') or '0'

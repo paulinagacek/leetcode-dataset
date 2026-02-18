@@ -1,0 +1,22 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        dp = [[False] * len(s) for _ in range(len(s))]
+        for i in range(len(s)):
+            for j in range(i + 1):
+                dp[j][i] = s[j] == s[i] and (j + i < 2 or dp[j + 1][i - 1])
+
+        res = []
+        temp = []
+
+        def dfs(index):
+            if index == len(s):
+                res.append(temp[:])
+                return
+            for i in range(index, len(s)):
+                if dp[index][i]:
+                    temp.append(s[index:i + 1])
+                    dfs(i + 1)
+                    temp.pop()
+
+        dfs(0)
+        return res

@@ -1,0 +1,8 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        goal = len(nums) - 1
+        cur = 0
+        while cur < goal and nums[cur] > 0:
+            goal = min(goal, cur + nums[cur])
+            cur += 1
+        return cur == goal

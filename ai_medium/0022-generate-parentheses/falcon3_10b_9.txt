@@ -1,0 +1,17 @@
+from typing import List
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        output = []
+        self.dfs(output, "", 0, 0, n)
+        return output
+
+    def dfs(self, output, path, open_count, close_count, max_count):
+        if len(path) == 2 * max_count:
+            output.append(path)
+            return
+
+        if open_count < max_count:
+            self.dfs(output, path + "(", open_count + 1, close_count, max_count)
+        if close_count < open_count:
+            self.dfs(output, path + ")", open_count, close_count + 1, max_count)

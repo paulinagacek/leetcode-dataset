@@ -1,0 +1,15 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        from collections import defaultdict
+        dna_sequences = defaultdict(int)
+        result = []
+        
+        for i in range(len(s) - 9):
+            sequence = s[i:i+10]
+            dna_sequences[sequence] += 1
+        
+        for seq, count in dna_sequences.items():
+            if count > 1:
+                result.append(seq)
+        
+        return result

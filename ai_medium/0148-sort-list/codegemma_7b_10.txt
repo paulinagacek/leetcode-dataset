@@ -1,0 +1,47 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+
+        # Find the length of the list
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+
+        # Merge sort
+        def mergeSort(left, right):
+            if left >= right:
+                return
+
+            mid = (left + right) // 2
+            mergeSort(left, mid)
+            mergeSort(mid + 1, right)
+
+            # Merge two sorted sublists
+            temp = dummy
+            p1, p2 = left, mid + 1
+            while p1 <= mid and p2 <= right:
+                if dummy.next.val <= dummy.next.next.val:
+                    temp.next = dummy.next
+                    temp = temp.next
+                    p1 += 1
+                else:
+                    temp.next = dummy.next.next
+                    temp = temp.next
+                    p2 += 1
+
+            # Append remaining elements
+            while p1 <= mid:
+                temp.next = dummy.next
+                temp = temp.next
+                p1 += 1
+            while p2 <= right:
+                temp.next = dummy.next.next
+                temp = temp.next
+                p2 += 1
+
+        mergeSort(0, length - 1)
+
+        return dummy.next

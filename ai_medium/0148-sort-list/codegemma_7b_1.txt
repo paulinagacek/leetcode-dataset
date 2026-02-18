@@ -1,0 +1,26 @@
+class Solution:
+    def merge(self, left, right):
+        dummy = ListNode()
+        p = dummy
+        while left and right:
+            if left.val < right.val:
+                p.next = left
+                left = left.next
+            else:
+                p.next = right
+                right = right.next
+            p = p.next
+        p.next = left or right
+        return dummy.next
+
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        right = self.sortList(slow.next)
+        slow.next = None
+        left = self.sortList(head)
+        return self.merge(left, right)

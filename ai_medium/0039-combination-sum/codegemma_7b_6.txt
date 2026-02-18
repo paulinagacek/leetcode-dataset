@@ -1,0 +1,5 @@
+from itertools import product
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        return [[num for num in sub] for sub in product(*([[candidate] * i for candidate in candidates for i in range(target // candidate + 1)])) if sum(num) == target]

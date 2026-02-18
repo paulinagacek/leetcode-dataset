@@ -1,0 +1,27 @@
+class Solution:
+    def recoverTree(self, root):
+        self.first = None
+        self.second = None
+        self.prev = TreeNode(float('-inf'))  # Initialize to negative infinity
+
+        def inorder(node):
+            if not node:
+                return
+
+            inorder(node.left)
+
+            if self.prev.val >= node.val:  # Check for decreasing node values
+                self.second = node  # Set second node
+                if self.first is None:  # Check if first node is set
+                    self.first = self.prev  # Set first node
+                else:
+                    return  # Stop traversal if two violating nodes found
+
+            self.prev = node  # Update previous node
+
+            inorder(node.right)
+
+        inorder(root)
+
+        # Swap values of first and second violating nodes
+        self.first.val, self.second.val = self.second.val, self.first.val

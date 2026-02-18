@@ -1,0 +1,32 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph and an in-degree array
+        graph = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        # Fill the graph and in-degree array
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize queue with all courses having zero in-degree
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Count of visited nodes
+        visited = 0
+        
+        # Process the graph using Kahn's algorithm for topological sort
+        while queue:
+            node = queue.popleft()
+            visited += 1
+            
+            for neighbor in graph[node]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If all courses are visited, return True. Otherwise, return False.
+        return visited == numCourses

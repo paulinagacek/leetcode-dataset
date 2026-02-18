@@ -1,0 +1,23 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.word_dict = {}
+
+    def addWord(self, word: str) -> None:
+        self.word_dict[word] = True
+
+    def search(self, word: str) -> bool:
+        if word in self.word_dict:
+            return True
+
+        for key in self.word_dict.keys():
+            if len(key) == len(word):
+                match = True
+                for i in range(len(key)):
+                    if key[i] != word[i] and key[i] != '.':
+                        match = False
+                        break
+                if match:
+                    return True
+
+        return False

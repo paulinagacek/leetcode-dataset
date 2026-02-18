@@ -1,0 +1,27 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        def mark(r, c):
+            if 0 <= r < h and 0 <= c < w and board[r][c] == 'O':
+                board[r][c] = 'B'
+                mark(r+1, c)
+                mark(r-1, c)
+                mark(r, c+1)
+                mark(r, c-1)
+
+        h, w = len(board), len(board[0])
+        for r in range(h):
+            if board[r][0] == 'O':
+                mark(r, 0)
+            if board[r][w-1] == 'O':
+                mark(r, w-1)
+        for c in range(w):
+            if board[0][c] == 'O':
+                mark(0, c)
+            if board[h-1][c] == 'O':
+                mark(h-1, c)
+        for r in range(h):
+            for c in range(w):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                elif board[r][c] == 'B':
+                    board[r][c] = 'O'

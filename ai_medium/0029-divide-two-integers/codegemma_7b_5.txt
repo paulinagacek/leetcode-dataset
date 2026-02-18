@@ -1,0 +1,15 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        sign = 1 if (dividend > 0 and divisor > 0) or (dividend < 0 and divisor < 0) else -1
+        total, count, quot, dividend, divisor = 0, 0, 0, abs(dividend), abs(divisor)
+        while dividend >= divisor:
+            total += divisor
+            count += 1
+            dividend -= divisor
+        quot = sign * count if sign == 1 else -count
+        if quot > 2**31 - 1:
+            return 2**31 - 1
+        elif quot < -2**31:
+            return -2**31
+        else:
+            return quot

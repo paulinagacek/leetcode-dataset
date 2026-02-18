@@ -1,0 +1,17 @@
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0, head)  # Dummy node to simplify head swapping
+        prev, curr = dummy, head
+
+        while curr and curr.next:
+            # Save the next two nodes
+            temp1, temp2 = curr.next.next, curr.next
+            
+            # Swap the current pair of nodes
+            curr.next.next, curr.next = curr, temp1
+            prev.next, prev = curr.next, temp2
+            
+            # Move to the next pair of nodes
+            curr = prev.next
+
+        return dummy.next  # Return the head of the swapped list

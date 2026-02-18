@@ -1,0 +1,21 @@
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        def dfs(start, end):
+            if start > end:
+                return None
+            mid = (start + end) // 2
+            left = dfs(start, mid - 1)
+            root = TreeNode(head.val)
+            head = head.next
+            right = dfs(mid + 1, end)
+            root.left = left
+            root.right = right
+            return root
+        return dfs(0, self.get_length(head))
+
+    def get_length(self, head):
+        count = 0
+        while head:
+            count += 1
+            head = head.next
+        return count

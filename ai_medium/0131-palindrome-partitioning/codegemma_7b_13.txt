@@ -1,0 +1,20 @@
+class Solution:
+    def is_palindrome(self, s: str) -> bool:
+        return s == s[::-1]
+
+    def helper(self, s: str, partition: List[str], result: List[List[str]], start: int):
+        if start == len(s):
+            result.append(partition[:])
+            return
+
+        for i in range(start, len(s)):
+            substring = s[start:i+1]
+            if self.is_palindrome(substring):
+                partition.append(substring)
+                self.helper(s, partition, result, i+1)
+                partition.pop()
+
+    def partition(self, s: str) -> List[List[str]]:
+        result = []
+        self.helper(s, [], result, 0)
+        return result

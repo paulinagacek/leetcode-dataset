@@ -1,0 +1,29 @@
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+from typing import Optional
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        cloned_node = Node(node.val)
+        visited = {node: cloned_node}
+        
+        queue = [node]
+        while queue:
+            cur_node = queue.pop(0)
+            cloned_node = visited[cur_node]
+            
+            for neighbor in cur_node.neighbors:
+                if neighbor not in visited:
+                    cloned_neighbor = Node(neighbor.val)
+                    visited[neighbor] = cloned_neighbor
+                    queue.append(neighbor)
+                cloned_node.neighbors.append(visited[neighbor])
+        
+        return cloned_node
