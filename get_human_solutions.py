@@ -42,7 +42,7 @@ class LeetCodeVoteScraper:
                 # Dekodowanie znaków specjalnych
                 code = code.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&').replace('&quot;', '"')
                 
-                # --- WARUNEK: def ORAZ return (pewność, że to funkcja Pythona) ---
+                
                 if "def " in code and "return " in code:
                     return code
         return None
