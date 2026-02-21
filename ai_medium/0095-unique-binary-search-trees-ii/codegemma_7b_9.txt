@@ -1,0 +1,28 @@
+from typing import List, Optional
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        if n == 0:
+            return []
+        
+        dp = [None] * (n + 1)
+        dp[0] = [None]
+        dp[1] = [TreeNode(1)]
+        
+        for i in range(2, n + 1):
+            temp = []
+            for j in range(1, i + 1):
+                left = dp[j - 1]
+                right = dp[i - j]
+                for l in left:
+                    for r in right:
+                        temp.append(TreeNode(j, l, r))
+            dp[i] = temp
+        
+        return dp[n]

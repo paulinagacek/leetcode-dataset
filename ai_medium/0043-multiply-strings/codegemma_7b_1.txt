@@ -1,0 +1,15 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        
+        m, n = len(num1), len(num2)
+        result = ['0'] * (m + n)
+
+        for i in reversed(range(m)):
+            for j in reversed(range(n)):
+                product = int(num1[i]) * int(num2[j])
+                sum = product + int(result[i + j + 1])
+                result[i + j + 1] = str(sum % 10)
+                result[i + j] = str(sum // 10)
+
+        start_index = next((i for i in range(len(result)) if result[i] != '0'), 0)
+        return ''.join(result[start_index:])

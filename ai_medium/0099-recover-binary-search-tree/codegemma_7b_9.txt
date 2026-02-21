@@ -1,0 +1,21 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        first = mid = last = None  # Initialize variables for the first, middle, and last swapped nodes
+
+        def inorder(node):
+            nonlocal first, mid, last
+            if node:
+                inorder(node.left)
+
+                if mid is None and node.val < root.val:  # Check for the first swap
+                    first = node
+                    mid = root
+                elif mid is not None and node.val < mid.val:  # Check for the second swap
+                    last = node
+
+                inorder(node.right)
+
+        inorder(root)
+
+        # Swap the values of the first and last swapped nodes
+        first.val, last.val = last.val, first.val

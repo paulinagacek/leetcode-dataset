@@ -1,0 +1,23 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        startRow, startCol, endRow, endCol = 0, 0, n - 1, n - 1
+        number = 1
+        while startRow <= endRow and startCol <= endCol:
+            for col in range(startCol, endCol + 1):
+                matrix[startRow][col] = number
+                number += 1
+            startRow += 1
+            for row in range(startRow, endRow + 1):
+                matrix[row][endCol] = number
+                number += 1
+            endCol -= 1
+            for col in reversed(range(startCol, endCol + 1)):
+                matrix[endRow][col] = number
+                number += 1
+            endRow -= 1
+            for row in reversed(range(startRow, endRow + 1)):
+                matrix[row][startCol] = number
+                number += 1
+            startCol += 1
+        return matrix

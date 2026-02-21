@@ -1,0 +1,27 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        result = []
+        nums.sort()
+
+        for l in range(len(nums)-3):
+            if l > 0 and nums[l] == nums[l-1]:
+                continue
+            for r in range(l+1, len(nums)-1):
+                if r < len(nums) - 2 and nums[r] == nums[r+1]:
+                    continue
+                left, right = r+1, len(nums)-1
+                while left < right:
+                    total = nums[l] + nums[r] + nums[left] + nums[right]
+                    if total < target:
+                        left += 1
+                    elif total > target:
+                        right -= 1
+                    else:
+                        result.append([nums[l], nums[r], nums[left], nums[right]])
+                        while left < right and nums[left] == nums[left+1]:
+                            left += 1
+                        while left < right and nums[right] == nums[right-1]:
+                            right -= 1
+                        left += 1
+                        right -= 1
+        return result

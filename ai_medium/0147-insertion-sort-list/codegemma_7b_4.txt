@@ -1,0 +1,19 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()  # Create a dummy node for the sorted list
+        curr = head  # Current node in the input list
+
+        while curr:
+            val = curr.val
+            temp = dummy  # Pointer to the dummy node for insertion
+
+            # Find the correct position for the current node's value
+            while temp.next and temp.next.val < val:
+                temp = temp.next
+
+            # Insert the current node after the found position
+            curr.next = temp.next
+            temp.next = curr
+            curr = curr.next
+
+        return dummy.next  # Return the head of the sorted list, excluding the dummy node

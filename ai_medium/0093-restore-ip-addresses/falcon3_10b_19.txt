@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid(segment):
+            if segment[0] == '0':
+                return segment == '0'
+            return 0 <= int(segment) <= 255
+
+        def backtrack(start, path):
+            if len(path) == 4 and start == len(s):
+                yield '.'.join(path)
+            elif len(path) < 4:
+                for i in range(start, min(start + 3, len(s))):
+                    segment = s[start:i + 1]
+                    if is_valid(segment):
+                        yield from backtrack(i + 1, path + [segment])
+
+        return list(backtrack(0, []))

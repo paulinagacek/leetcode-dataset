@@ -1,0 +1,16 @@
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        results = []
+        
+        def backtrack(start=0, remaining=target, path=[]):
+            if remaining == 0:
+                results.append(path)
+                return
+            for i in range(start, len(candidates)):
+                if candidates[i] <= remaining:
+                    backtrack(i, remaining - candidates[i], path + [candidates[i]])
+        
+        backtrack()
+        return results

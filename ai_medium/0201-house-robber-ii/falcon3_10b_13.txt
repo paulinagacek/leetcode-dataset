@@ -1,0 +1,11 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        def rob_linear(houses):
+            dp_prev, dp_curr = 0, 0
+            for num in houses:
+                dp_prev, dp_curr = dp_curr, max(dp_prev + num, dp_curr)
+            return dp_curr
+        n = len(nums)
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

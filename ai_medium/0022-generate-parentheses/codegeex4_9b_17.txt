@@ -1,0 +1,16 @@
+from typing import List
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def backtrack(curr:str, openCount:int, closeCount:int):
+            if len(curr) == 2 * n:
+                result.append(curr)
+                return
+            if openCount < n:
+                backtrack(curr + '(', openCount + 1, closeCount)
+            if closeCount < openCount:
+                backtrack(curr + ')', openCount, closeCount + 1)
+
+        result = []
+        backtrack('', 0, 0)
+        return result

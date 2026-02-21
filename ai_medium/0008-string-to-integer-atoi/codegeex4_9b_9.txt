@@ -1,0 +1,33 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2147483647
+        INT_MIN = -2147483648
+        
+        # Step 1: Strip leading whitespace
+        s = s.lstrip()
+        
+        if not s:
+            return 0
+        
+        # Step 2: Determine sign and strip the sign character
+        sign = 1
+        start_index = 0
+        if s[0] == '+':
+            start_index = 1
+        elif s[0] == '-':
+            sign = -1
+            start_index = 1
+        
+        # Step 3: Convert string to integer
+        result = 0
+        for i in range(start_index, len(s)):
+            if s[i].isdigit():
+                result = result * 10 + (ord(s[i]) - ord('0'))
+                if sign == 1 and result > INT_MAX:
+                    return INT_MAX
+                elif sign == -1 and -result < INT_MIN:
+                    return INT_MIN
+            else:
+                break
+        
+        return sign * result

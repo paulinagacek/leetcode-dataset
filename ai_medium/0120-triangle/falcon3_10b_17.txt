@@ -1,0 +1,6 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        dp = triangle[-1]
+        for row in triangle[::-1][1:]:
+            dp = [min(dp[i], dp[i+1]) + val for i, val in enumerate(row)]
+        return dp[0]

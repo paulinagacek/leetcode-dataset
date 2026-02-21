@@ -1,0 +1,12 @@
+from typing import List
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        sequence_length = 10
+        dna_sequence_set = set()
+        result_set = set()
+        for i in range(len(s) - sequence_length + 1):
+            current_sequence = s[i:i+sequence_length]
+            if current_sequence in dna_sequence_set:
+                result_set.add(current_sequence)
+            dna_sequence_set.add(current_sequence)
+        return list(result_set)

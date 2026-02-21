@@ -1,0 +1,24 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid(segment: str) -> bool:
+            if segment[0] == '0' and len(segment) > 1:
+                return False
+            if not 0 <= int(segment) <= 255:
+                return False
+            return True
+
+        def restore_ip_addresses(s: str, path: List[str], start: int):
+            if len(path) == 4:
+                if start == len(s):
+                    ip_address = '.'.join(path)
+                    ans.append(ip_address)
+            for i in range(start + 1, min(start + 4, len(s) + 1)):
+                segment = s[start:i]
+                if is_valid(segment):
+                    restore_ip_addresses(s, path + [segment], i)
+
+        ans = []
+        restore_ip_addresses(s, [], 0)
+        return ans

@@ -1,0 +1,8 @@
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, l = len(s1), len(s2), len(s3)
+        dp = [False] * (n + 1)
+        dp[0] = True
+        for i in range(l):
+            dp[i % (n + 1)] = dp[i % (n + 1)] and (i < m and s1[i] == s3[i]) or (i >= n and dp[(i - n) % (n + 1)] and s2[i - n] == s3[i])
+        return dp[(l - 1) % (n + 1)]

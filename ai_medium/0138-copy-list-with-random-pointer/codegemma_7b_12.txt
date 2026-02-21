@@ -1,0 +1,24 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        seen = {}
+        # Create new nodes and map original nodes to new nodes
+        dummy = Node(0)
+        new_head = dummy
+        while head:
+            if head not in seen:
+                seen[head] = Node(head.val)
+            new_head.next = seen[head]
+            
+            # Handle random pointer
+            if head.random:
+                if head.random not in seen:
+                    seen[head.random] = Node(head.random.val)
+                seen[head].random = seen[head.random]
+            
+            head = head.next
+            new_head = new_head.next
+        
+        return dummy.next

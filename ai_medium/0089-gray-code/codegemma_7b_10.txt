@@ -1,0 +1,8 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        res = [0]
+        mask = 1
+        while mask < 2**n:
+            res.extend([x ^ mask for x in res[::-1]])
+            mask <<= 1
+        return res

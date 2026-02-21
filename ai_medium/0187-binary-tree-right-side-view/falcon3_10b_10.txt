@@ -1,0 +1,12 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root: return []
+        result, stack = [], [(root, 0)]
+        while stack:
+            node, depth = stack.pop()
+            if node:
+                if depth == len(result):
+                    result.append(node.val)
+                stack.append((node.right, depth + 1))
+                stack.append((node.left, depth + 1))
+        return result

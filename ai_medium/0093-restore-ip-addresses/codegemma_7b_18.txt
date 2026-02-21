@@ -1,0 +1,18 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def backtrack(index, dots, ip):
+            if dots == 4 and index == len(s):
+                res.append('.'.join(ip))
+                return
+
+            for i in range(1, 4):
+                if index + i <= len(s):
+                    val = s[index:index+i]
+                    if int(val) <= 255 and (val[0] != '0' or val == '0'):
+                        ip.append(val)
+                        backtrack(index+i, dots+1, ip)
+                        ip.pop()
+
+        res = []
+        backtrack(0, 0, [])
+        return res

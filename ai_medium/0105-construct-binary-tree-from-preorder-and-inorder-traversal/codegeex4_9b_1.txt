@@ -1,0 +1,41 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def myBuildTree(in_left, in_right):
+            nonlocal pre_idx
+            if in_left > in_right:
+                return None
+            
+            # Choosing the root based on idx from preorder traversal
+            root_val = preorder[pre_idx]
+            root = TreeNode(root_val)
+
+            # print(preorder[pre_idx], in_left, in_right)
+
+            # Checking the index of this element in inorder traversal
+            idx = idx_map[root_val]
+
+            # Increasing preindex for next rootelement
+            pre_idx += 1
+
+            # Building left and right subtrees
+            root.left = myBuildTree(in_left, idx - 1)
+            root.right = myBuildTree(idx + 1, in_right)
+            
+            return root
+        
+        # The first element in preorder list is the root
+        n = len(preorder)
+        
+        # Creating a hashmap to store the index of each value in inorder list
+        idx_map = {val:idx for idx, val in enumerate(inorder)}
+        
+        pre_idx = 0
+
+        return myBuildTree(0, n - 1)

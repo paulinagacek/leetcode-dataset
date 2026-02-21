@@ -1,0 +1,15 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        if not root:
+            return
+        stack = [root]
+        prev = None
+        while stack:
+            curr = stack.pop()
+            if prev:
+                prev.right = curr
+                prev.left = None
+            while curr.right:
+                stack.append(curr.right)
+                curr = curr.right
+            prev = curr

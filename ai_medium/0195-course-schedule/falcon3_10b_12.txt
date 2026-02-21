@@ -1,0 +1,19 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = [[] for _ in range(numCourses)]
+        visited = [False] * numCourses
+
+        def dfs(node):
+            visited[node] = True
+            for neighbor in graph[node]:
+                if visited[neighbor]:
+                    return False
+                if not dfs(neighbor):
+                    return False
+            visited[node] = False
+            return True
+
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+
+        return all(dfs(node) for node in range(numCourses))

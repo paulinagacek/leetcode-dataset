@@ -1,0 +1,14 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # convert the list of integers to a list of strings
+        nums = [str(num) for num in nums]
+        
+        # sort the list of strings in descending order using a lambda function
+        nums.sort(key=lambda x: x*3, reverse=True)
+        
+        # if the first element is 0, return 0
+        if nums[0] == '0':
+            return '0'
+        
+        # join the list of strings into a single string
+        return ''.join(nums)

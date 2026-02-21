@@ -1,0 +1,29 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        MAX_INT = 2147483647 # maximum value for a 32-bit signed integer
+        MIN_INT = -2147483648 # minimum value for a 32-bit signed integer
+        
+        if divisor == 1:
+            return min(MAX_INT, max(MIN_INT, dividend))
+        elif divisor == -1:
+            if dividend == MIN_INT:
+                return MAX_INT
+            else:
+                return -dividend
+        
+        pos = 1
+        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
+            pos = -1
+        
+        dividend, divisor = abs(dividend), abs(divisor)
+        
+        result = 0
+        while dividend >= divisor:
+            temp, multiple = divisor, 1
+            while dividend >= (temp << 1):
+                temp <<= 1
+                multiple <<= 1
+            dividend -= temp
+            result += multiple
+        
+        return min(MAX_INT, max(MIN_INT, result * pos))

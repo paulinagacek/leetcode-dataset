@@ -1,0 +1,25 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        sign = 1
+        result = 0
+        i = 0
+
+        # Ignore whitespace
+        while i < len(s) and s[i].isspace():
+            i += 1
+
+        # Determine sign
+        if i < len(s) and s[i] in ["-", "+"]:
+            sign = -1 if s[i] == "-" else 1
+            i += 1
+
+        # Convert to integer
+        while i < len(s) and s[i].isdigit():
+            result = result * 10 + int(s[i])
+            if result * sign > 2**31 - 1:
+                return 2**31 - 1
+            if result * sign < -2**31:
+                return -2**31
+            i += 1
+
+        return int(result * sign)

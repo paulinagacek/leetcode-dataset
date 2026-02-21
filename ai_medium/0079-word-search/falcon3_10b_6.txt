@@ -1,0 +1,26 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if self.dfs(board, i, j, word):
+                    return True
+        return False
+            
+    def dfs(self, board, i, j, word):
+        if len(word) == 0:  # all characters in `word` have been matched
+            return True
+        if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or board[i][j] != word[0]:
+            return False
+  
+        # Using the first character of `word`, mark the current cell as visited
+        tmp, board[i][j] = board[i][j], "#"  # using "#" to denote "visited"
+          
+        # Exploring all 8 directions (up, down, left, right, and diagonals)
+        found = (self.dfs(board, i+1, j, word[1:]) or  # down
+                 self.dfs(board, i-1, j, word[1:]) or  # up
+                 self.dfs(board, i, j+1, word[1:]) or  # right
+                 self.dfs(board, i, j-1, word[1:])) # left
+                 
+        # Backtrack: restore the original board state
+        board[i][j] = tmp
+        return found

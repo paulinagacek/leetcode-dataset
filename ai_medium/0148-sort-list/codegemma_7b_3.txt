@@ -1,0 +1,34 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        def mergeSort(left, right):
+            if not left or not right:
+                return left or right
+            if left.val > right.val:
+                left, right = right, left
+            head = left
+            left = left.next
+            while left and right:
+                if left.val > right.val:
+                    head.next = right
+                    right = right.next
+                else:
+                    head.next = left
+                    left = left.next
+                head = head.next
+            head.next = left or right
+            return head
+
+        def divide(node):
+            if not node or not node.next:
+                return node
+            slow, fast = node, node.next
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            right = divide(slow.next)
+            slow.next = None
+            left = divide(node)
+            return mergeSort(left, right)
+        
+        return divide(head)

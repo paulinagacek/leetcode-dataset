@@ -1,0 +1,5 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        words = s.split()  # Split the string into words
+        words.reverse()  # Reverse the list of words
+        return ' '.join(words)  # Concatenate the reversed words with a single space

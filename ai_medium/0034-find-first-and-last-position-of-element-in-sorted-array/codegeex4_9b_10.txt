@@ -1,0 +1,29 @@
+from typing import List
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def findLeft(nums, target):
+            left, right = 0, len(nums) - 1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] >= target:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            return left
+        
+        def findRight(nums, target):
+            left, right = 0, len(nums) - 1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] > target:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            return right
+        
+        leftIdx = findLeft(nums, target)
+        if leftIdx == len(nums) or nums[leftIdx] != target:
+            return [-1, -1]
+        rightIdx = findRight(nums, target)
+        return [leftIdx, rightIdx]

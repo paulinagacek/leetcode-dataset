@@ -1,0 +1,27 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        result = []
+        temp = []
+        self.dfs(s, 0, result, temp)
+        return result
+    
+    def dfs(self, s: str, start: int, result: List[List[str]], temp: List[str]) -> None:
+        if start == len(s):
+            result.append([...temp])
+            return
+        
+        for i in range(start, len(s)):
+            substring = s[start:i+1]
+            if self.isPalindrome(substring):
+                temp.append(substring)
+                self.dfs(s, i+1, result, temp)
+                temp.pop()
+        
+    def isPalindrome(self, s: str) -> bool:
+        left, right = 0, len(s) - 1
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True

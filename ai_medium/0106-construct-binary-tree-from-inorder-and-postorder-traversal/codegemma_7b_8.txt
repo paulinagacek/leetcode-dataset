@@ -1,0 +1,15 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        in_idx = {val: idx for idx, val in enumerate(inorder)}
+        post_idx = {}
+        def helper(start_in, end_in, start_post, end_post):
+            if start_in > end_in:
+                return None
+            root_val = postorder[end_post]
+            root = TreeNode(root_val)
+            idx = in_idx[root_val]
+            left_size = idx - start_in
+            root.left = helper(start_in, idx - 1, start_post, start_post + left_size - 1)
+            root.right = helper(idx + 1, end_in, start_post + left_size, end_post - 1)
+            return root
+        return helper(0, len(inorder) - 1, 0, len(postorder) - 1)

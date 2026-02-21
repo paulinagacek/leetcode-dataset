@@ -1,0 +1,39 @@
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0, head)
+        length = 0
+
+        # Calculate the length of the linked list
+        current = head
+        while current:
+            length += 1
+            current = current.next
+
+        # Merge sort the linked list
+        def mergeSort(start, end):
+            if start == end:
+                return
+
+            mid = (start + end) // 2
+            mergeSort(start, mid)
+            mergeSort(mid + 1, end)
+            merge(start, mid, end)
+
+        def merge(start, mid, end):
+            dummy.next = start
+            left = start
+            right = mid + 1
+
+            while left <= mid and right <= end:
+                if left.val <= right.val:
+                    current.next = left
+                    left = left.next
+                else:
+                    current.next = right
+                    right = right.next
+                current = current.next
+
+            current.next = left if left <= mid else right
+
+        mergeSort(dummy.next, dummy.next + length - 1)
+        return dummy.next

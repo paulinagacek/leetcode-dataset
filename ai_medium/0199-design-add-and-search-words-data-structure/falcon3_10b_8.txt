@@ -1,0 +1,23 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = []
+
+    def addWord(self, word: str) -> None:
+        self.words.append(word)
+
+    def search(self, word: str) -> bool:
+        def dfs(index, word, dictionary):
+            if index == len(word):
+                return not dictionary or not any(char != '.' for char in dictionary)
+            if word[index] == '.':
+                return any(dfs(index + 1, word, dict_word) for dict_word in dictionary)
+            return any(dfs(index + 1, word, dict_word) for dict_word in dictionary if dict_word[index] == word[index] or dict_word[index] == '.')
+        
+        return dfs(0, word, self.words)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

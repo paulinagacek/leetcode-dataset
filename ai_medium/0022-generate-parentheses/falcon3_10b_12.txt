@@ -1,0 +1,14 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        self.backtrack(result, "", 0, 0, n)
+        return result
+
+    def backtrack(self, result, path, open_count, close_count, max_count):
+        if len(path) == 2 * max_count:
+            result.append(path)
+            return
+        if open_count < max_count:
+            self.backtrack(result, path + '(', open_count + 1, close_count, max_count)
+        if close_count < open_count:
+            self.backtrack(result, path + ')', open_count, close_count + 1, max_count)

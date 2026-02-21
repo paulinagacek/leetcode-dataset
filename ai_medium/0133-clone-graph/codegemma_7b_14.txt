@@ -1,0 +1,25 @@
+from typing import Optional
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+        
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return node
+        
+        visited = {node.val: Node(node.val)}
+        stack = [node]
+        
+        while stack:
+            curr = stack.pop()
+            
+            for neighbor in curr.neighbors:
+                if neighbor.val not in visited:
+                    visited[neighbor.val] = Node(neighbor.val)
+                    stack.append(neighbor)
+                
+                visited[curr.val].neighbors.append(visited[neighbor.val])
+                
+        return visited[node.val]

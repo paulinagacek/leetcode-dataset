@@ -1,0 +1,26 @@
+from typing import List
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        def is_valid_block(block):
+            seen = set()
+            for num in block:
+                if num != '.' and num in seen:
+                    return False
+                if num != '.': 
+                    seen.add(num)
+            return True
+
+        for row in board:
+            if not is_valid_block(row):
+                return False
+        for col in range(9):
+            block = [board[row][col] for row in range(9)]
+            if not is_valid_block(block):
+                return False
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                block = [board[x][y] for x in range(i, i+3) for y in range(j, j+3)]
+                if not is_valid_block(block):
+                    return False
+        return True

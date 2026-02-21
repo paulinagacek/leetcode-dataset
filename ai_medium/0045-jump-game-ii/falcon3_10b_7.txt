@@ -1,0 +1,13 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        n = len(nums)
+        reached, jumps = 1, 0
+        end, max_reach = 0, 0
+        
+        for i in range(n - 1):
+            max_reach = max(max_reach, i + nums[i])
+            if i == end:
+                jumps += 1
+                end = max_reach
+        
+        return jumps

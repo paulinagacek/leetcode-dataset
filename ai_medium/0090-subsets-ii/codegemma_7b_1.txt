@@ -1,0 +1,18 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        result = [[]]
+        temp = []
+
+        for i in range(len(nums)):
+            start = i
+            if i > 0 and nums[i] == nums[i-1]:
+                start = i - 1
+
+            for j in range(start, len(nums)):
+                temp.append(nums[j])
+                result.append(temp[:])
+                
+            temp.pop()
+
+        return result

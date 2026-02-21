@@ -1,0 +1,43 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+from typing import Optional
+from collections import deque
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        # Dictionary to keep track of visited nodes and their clones
+        visited = {}
+        
+        # Function to perform BFS and clone the graph
+        def bfs_clone(node):
+            queue = deque([node])
+            while queue:
+                n = queue.popleft()
+                if n in visited:
+                    continue
+                # Create a copy of node if it is not already visited
+                clone_node = Node(n.val)
+                visited[n] = clone_node
+                
+                for neighbor in n.neighbors:
+                    if neighbor not in visited:
+                        queue.append(neighbor)
+                    # Add the cloned neighbors to the clone node's neighbors list
+                    clone_neighbor = visited.get(neighbor, None)
+                    if clone_neighbor is None:
+                        clone_neighbor = Node(neighbor.val)
+                        visited[neighbor] = clone_neighbor
+                        queue.append(neighbor)
+                    clone_node.neighbors.append(clone_neighbor)
+        
+        bfs_clone(node)
+        return visited[node]

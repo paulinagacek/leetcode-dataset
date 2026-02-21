@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or not head.next or k == 0:
+            return head
+        
+        # First, find the length of the linked list
+        length = 1
+        curr = head
+        while curr.next:
+            length += 1
+            curr = curr.next
+        curr.next = head  # Make the linked list circular
+        
+        # Find the new tail which is at position 'length - k % length'
+        steps_to_new_tail = length - k % length
+        new_tail = head
+        for _ in range(steps_to_new_tail - 1):
+            new_tail = new_tail.next
+        
+        # The new head is next of the new tail
+        new_head = new_tail.next
+        # Break the connection to make it circular again
+        new_tail.next = None
+        
+        return new_head

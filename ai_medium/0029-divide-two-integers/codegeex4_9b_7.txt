@@ -1,0 +1,37 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        # Determine the sign of the result
+        negative = (dividend < 0) != (divisor < 0)
+        
+        # Use absolute values to simplify the division process
+        a, b = abs(dividend), abs(divisor)
+        
+        # If the dividend is less than the divisor, return 0
+        if a < b:
+            return 0
+        
+        # Initialize the quotient and the current sum
+        quotient = 0
+        current_sum = 0
+        
+        # Iterate until the current sum is greater than or equal to the divisor
+        while current_sum <= a:
+            # Start with the smallest power of two multiple of the divisor
+            power = 1
+            value = b
+            
+            # Increase the power and the value until the current sum plus the value is still less than or equal to the dividend
+            while current_sum + value <= a:
+                value <<= 1
+                power <<= 1
+            
+            # Subtract the last multiple that was too large and update the current sum and quotient
+            current_sum += value >> 1
+            quotient += power >> 1
+        
+        # Adjust the sign of the quotient
+        if negative:
+            quotient = -quotient
+        
+        # Check for overflow and return the result within the allowed range
+        return max(-2**31, min(2**31 - 1, quotient))

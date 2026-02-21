@@ -1,0 +1,20 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix: return []
+        res = []
+        dx = [0, 1, 0, -1]
+        dy = [1, 0, -1, 0]
+        x, y, n = 0, 0, len(matrix) * len(matrix[0])
+        vis = set()
+        for c in range(4):
+            while n > 0:
+                n -= 1
+                res.append(matrix[x][y])
+                vis.add((x, y))
+                nx, ny = x + dx[c], y + dy[c]
+                if 0 <= nx < len(matrix) and 0 <= ny < len(matrix[0]) and (nx, ny) not in vis:
+                    x, y = nx, ny
+                else:
+                    c = (c + 1) % 4
+                    x, y = x + dx[c], y + dy[c]
+        return res

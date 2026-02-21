@@ -1,0 +1,20 @@
+def connect(self, root: 'Node') -> 'Node':
+    if not root:
+        return None
+
+    queue = collections.deque([root])
+    while queue:
+        for i in range(len(queue)-1):
+            queue[i].next = queue[i+1]
+        queue[-1].next = None
+
+        next_level = collections.deque()
+        while queue:
+            node = queue.popleft()
+            if node.left:
+                next_level.append(node.left)
+            if node.right:
+                next_level.append(node.right)
+        queue = next_level
+    
+    return root

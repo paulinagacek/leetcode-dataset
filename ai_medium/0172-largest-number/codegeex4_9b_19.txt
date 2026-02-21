@@ -1,0 +1,16 @@
+from typing import List
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert all numbers to strings for easy manipulation
+        arr_str = [str(x) for x in nums]
+        
+        # Sort the array based on custom comparator function: y + x > x + y
+        arr_str.sort(key=lambda x: x*10, reverse=True)
+        
+        # Handle edge case where the highest number is 0
+        if arr_str[0] == '0':
+            return '0'
+        
+        # Join the sorted array into a string and return it
+        return ''.join(arr_str)

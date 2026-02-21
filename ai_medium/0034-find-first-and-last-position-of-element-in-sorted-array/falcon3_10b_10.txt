@@ -1,0 +1,24 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binary_search(nums, target, find_start):
+            left, right = 0, len(nums) - 1
+            result = -1
+            while left <= right:
+                mid = left + (right - left) // 2
+                if nums[mid] == target:
+                    result = mid
+                    if find_start:
+                        right = mid - 1
+                    else:
+                        left = mid + 1
+                elif nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return result
+        
+        start = binary_search(nums, target, True)  # find the first occurrence
+        if start == -1:  # if not found in array
+            return [-1, -1]
+        end = binary_search(nums, target, False)  # find the last occurrence
+        return [start, end]

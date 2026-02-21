@@ -1,0 +1,26 @@
+from collections import defaultdict, deque
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        in_degree = [0]*numCourses
+        result = []
+
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            in_degree[course] += 1
+
+        start_nodes = deque([i for i in range(numCourses) if in_degree[i] == 0])
+
+        while start_nodes:
+            course = start_nodes.popleft()
+            result.append(course)
+            for nebr in graph[course]:
+                in_degree[nebr] -= 1
+                if in_degree[nebr] == 0:
+                    start_nodes.append(nebr)
+
+        if len(result) == numCourses:
+            return result
+        else:
+            return []

@@ -1,0 +1,15 @@
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, o = len(s1), len(s2), len(s3)
+        if m + n != o:
+            return False
+        count = [0] * 26
+        for char in s1:
+            count[ord(char) - ord('a')] += 1
+        for char in s2:
+            count[ord(char) - ord('a')] -= 1
+        for char in s3:
+            if count[ord(char) - ord('a')] == 0:
+                return False
+            count[ord(char) - ord('a')] -= 1
+        return True

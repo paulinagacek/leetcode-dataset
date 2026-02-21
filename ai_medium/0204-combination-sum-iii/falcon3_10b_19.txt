@@ -1,0 +1,21 @@
+from typing import List
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def backtrack(start, path):
+            if len(path) == k:
+                if sum(path) == n:
+                    result.append(path[:])
+                return 
+            
+            for i in range(start, 10):
+                if i > n - sum(path):  # If current number is larger than remaining sum
+                    break
+                if i not in path:  # Avoid duplicates
+                    path.append(i)
+                    backtrack(i + 1, path)  # Recur with updated path
+                    path.pop()  # Backtrack
+
+        result = []
+        backtrack(1, [])
+        return result

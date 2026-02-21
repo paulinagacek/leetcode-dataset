@@ -1,0 +1,13 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        s = "1"
+        for _ in range(n - 1):
+            ans = ""
+            i, j = 0, 0
+            while j < len(s):
+                while j < len(s) and s[j] == s[i]:
+                    j += 1
+                ans += str(j - i) + s[i]
+                i = j
+            s = ans
+        return s

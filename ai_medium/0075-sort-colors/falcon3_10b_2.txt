@@ -1,0 +1,13 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        red, white, blue = 0, 0, len(nums) - 1  # pointers for 0, 1, and 2
+        while white <= blue:
+            if nums[white] == 0:  # swap with red and move both pointers
+                nums[red], nums[white] = nums[white], nums[red]
+                red += 1
+                white += 1
+            elif nums[white] == 1:  # 1 is already in the right position
+                white += 1
+            else:  # swap with blue and only move blue pointer
+                nums[white], nums[blue] = nums[blue], nums[white]
+                blue -= 1

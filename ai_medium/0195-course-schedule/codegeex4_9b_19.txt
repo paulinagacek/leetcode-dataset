@@ -1,0 +1,45 @@
+from typing import List
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph from the prerequisites list
+        graph = defaultdict(list)
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+        
+        # Initialize visited set to keep track of the visit status of each node
+        visited = set()
+        
+        def dfs(node):
+            # If the node is being visited (part of a cycle), return False
+            if node in visiting:
+                return False
+            # If the node is already processed, return True
+            if node in visited:
+                return True
+            
+            # Mark the node as visiting
+            visiting.add(node)
+            
+            # Visit all the neighbours/recourses
+            for neighbor in graph[node]:
+                if not dfs(neighbor):
+                    return False
+            
+            # Mark the node as fully visited
+            visiting.remove(node)
+            visited.add(node)
+            
+            return True
+        
+        # Set to keep track of nodes currently being visited (detect cycles)
+        visiting = set()
+        
+        # Check for cycles in the graph
+        for i in range(numCourses):
+            if i not in visited:
+                if not dfs(i):
+                    return False
+        
+        return True

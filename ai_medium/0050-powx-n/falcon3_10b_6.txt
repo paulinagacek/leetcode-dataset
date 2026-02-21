@@ -1,0 +1,11 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        sign = -1 if n < 0 else 1
+        n = abs(n)
+        result = 1
+        while n > 0:
+            if n % 2 == 1:
+                result *= x
+            x *= x
+            n //= 2
+        return result * sign

@@ -1,0 +1,32 @@
+from typing import List
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binary_search_left(nums, left, right, target):
+            while left < right:
+                mid = (left + right) // 2
+                if nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid
+            return left
+
+        def binary_search_right(nums, left, right, target):
+            while left < right:
+                mid = (left + right + 1) // 2
+                if nums[mid] > target:
+                    right = mid - 1
+                else:
+                    left = mid
+            return left
+
+        if not nums:
+            return [-1, -1]
+
+        n = len(nums)
+        left_index = binary_search_left(nums, 0, n - 1, target)
+        if left_index == n or nums[left_index] != target:
+            return [-1, -1]
+
+        right_index = binary_search_right(nums, 0, n - 1, target)
+        return [left_index, right_index]

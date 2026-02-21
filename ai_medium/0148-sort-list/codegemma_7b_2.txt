@@ -1,0 +1,38 @@
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        dummy = ListNode(next=head)
+        length = 0
+        cur = head
+        while cur:
+            length += 1
+            cur = cur.next
+        cur = dummy.next
+        dummy.next = None
+        
+        def mergeSort(start, end):
+            if start == end:
+                return start
+            mid = (start+end) // 2
+            left = mergeSort(start, mid)
+            right = mergeSort(mid+1, end)
+            return merge(left, right)
+        
+        def merge(left, right):
+            dummy = ListNode()
+            p = dummy
+            while left and right:
+                if left.val <= right.val:
+                    p.next = left
+                    left = left.next
+                else:
+                    p.next = right
+                    right = right.next
+                p = p.next
+            if left:
+                p.next = left
+            if right:
+                p.next = right
+            return dummy.next
+        
+        mergeSort(dummy, dummy.next+length-1)
+        return dummy.next

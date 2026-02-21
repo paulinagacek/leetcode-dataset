@@ -1,0 +1,18 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = set()
+        cols = set()
+        blocks = set()
+
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                if num != '.':
+                    block_key = (i // 3, j // 3)
+                    if (num, i) in rows or (num, j) in cols or (num, block_key) in blocks:
+                        return False
+                    rows.add((num, i))
+                    cols.add((num, j))
+                    blocks.add((num, block_key))
+
+        return True

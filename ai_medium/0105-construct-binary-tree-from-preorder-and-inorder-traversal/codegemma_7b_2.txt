@@ -1,0 +1,18 @@
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder or not inorder:
+            return None
+
+        # Use the first element of preorder as the root node
+        root = TreeNode(preorder[0])
+
+        # Find the index of the root node in inorder
+        root_index = inorder.index(preorder[0])
+
+        # Build the left subtree recursively
+        root.left = self.buildTree(preorder[1:root_index+1], inorder[:root_index])
+
+        # Build the right subtree recursively
+        root.right = self.buildTree(preorder[root_index+1:], inorder[root_index+1:])
+
+        return root

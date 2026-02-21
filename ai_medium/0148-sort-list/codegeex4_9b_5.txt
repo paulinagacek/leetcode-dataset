@@ -1,0 +1,49 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        # Step 1: Use the slow and fast pointer approach to find the middle of the linked list
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # Step 2: Break the linked list into two halves
+        mid_next = slow.next
+        slow.next = None
+        
+        # Step 3: Recursively sort both halves
+        left_sorted = self.sortList(head)
+        right_sorted = self.sortList(mid_next)
+        
+        # Step 4: Merge the two sorted halves
+        sorted_head = self.merge(left_sorted, right_sorted)
+        return sorted_head
+    
+    def merge(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        current = dummy
+        
+        while l1 and l2:
+            if l1.val < l2.val:
+                current.next = l1
+                l1 = l1.next
+            else:
+                current.next = l2
+                l2 = l2.next
+            current = current.next
+        
+        # Attach the remaining nodes of l1 or l2 to the sorted list
+        if l1:
+            current.next = l1
+        elif l2:
+            current.next = l2
+        
+        return dummy.next

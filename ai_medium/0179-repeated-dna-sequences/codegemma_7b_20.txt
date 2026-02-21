@@ -1,0 +1,6 @@
+from collections import Counter
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        count = Counter(s[i:i+10] for i in range(len(s) - 9))
+        return [seq for seq, cnt in count.items() if cnt > 1]

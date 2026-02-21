@@ -1,0 +1,29 @@
+from collections import defaultdict
+
+def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+
+        # Build graph and calculate in-degree
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degree[dest] += 1
+
+        # Find nodes with in-degree 0
+        queue = [node for node in range(numCourses) if in_degree[node] == 0]
+
+        # Topological sort
+        result = []
+        while queue:
+            node = queue.pop(0)
+            result.append(node)
+
+            for neighbor in graph[node]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+
+        # Check if all nodes are visited
+        if len(result) == numCourses:
+            return result
+        return []

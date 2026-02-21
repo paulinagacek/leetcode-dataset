@@ -1,0 +1,17 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def dfs(s, start, path, result):
+            if len(path) == 4:
+                if start == len(s):
+                    result.append('.'.join(path))
+                return
+            
+            for end in range(start+1, min(start+4, len(s)+1)):
+                num = s[start:end]
+                if (num.startswith('0') and len(num) > 1) or int(num) > 255:
+                    break
+                dfs(s, end, path + [num], result)
+        
+        result = []
+        dfs(s, 0, [], result)
+        return result

@@ -1,0 +1,13 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = [[]]
+        cur = []
+        l = 0
+        for r in range(len(nums)):
+            if r > l and nums[r] == nums[r-1]:
+                continue
+            l = r
+            cur.append(nums[r])
+            res.extend([i+[nums[r]] for i in res])
+        return res

@@ -1,0 +1,46 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Initialize the current node as the root
+        cur = root
+        
+        # Dummy node to always point to the next level start
+        dummy = Node(0)
+        
+        while cur:
+            # Move through each level
+            prev = dummy
+            
+            while cur:
+                if cur.left:
+                    # Connect left child to next in the list
+                    prev.next = cur.left
+                    prev = prev.next
+
+                if cur.right:
+                    # Connect right child to next in the list if left exists, else start from dummy
+                    prev.next = cur.right
+                    prev = prev.next
+                
+                # Move to the next node in the current level
+                cur = cur.next
+            
+            # Go to the next level by setting current to the first node of this level
+            # which is stored as the "next" of dummy
+            cur = dummy.next
+            # Reset dummy's next to None for the next iteration
+            dummy.next = None
+        
+        return root

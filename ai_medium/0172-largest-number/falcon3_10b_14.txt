@@ -1,0 +1,10 @@
+from functools import cmp_to_key
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def compare(x, y):
+            return int(y + x) - int(x + y)
+
+        sorted_nums = sorted(map(str, nums), key=cmp_to_key(compare))
+        largest = ''.join(sorted_nums)
+        return largest.lstrip('0') or '0'

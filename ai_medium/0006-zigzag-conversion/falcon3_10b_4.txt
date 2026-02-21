@@ -1,0 +1,16 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+        
+        cycles = 2 * numRows - 2
+        row = [""] * numRows
+        
+        for i in range(len(s)):
+            cur_row = i % cycles
+            if cur_row < numRows:
+                row[cur_row] += s[i]
+            else:
+                row[cycles - cur_row] += s[i]
+        
+        return "".join(row)

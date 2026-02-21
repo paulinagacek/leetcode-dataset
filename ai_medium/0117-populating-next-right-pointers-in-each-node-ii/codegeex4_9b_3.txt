@@ -1,0 +1,54 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Initialize the prev Node as None
+        prev = None
+        # Use a flag to check if we are at the beginning of a level
+        isBeginningOfLevel = True
+        
+        # Start from the root and traverse the tree using BFS
+        queue = [root]
+        
+        while queue:
+            cur = queue.pop(0)
+            
+            # Check if we are at the start of a new level
+            if isBeginningOfLevel:
+                # Set the previous node to current
+                prev = cur
+                # Reset the flag as we are no longer at the beginning of the level
+                isBeginningOfLevel = False
+            else:
+                # Link the previous node's next pointer to the current node
+                prev.next = cur
+                # Move the previous pointer to the current node
+                prev = cur
+            
+            # Add the left child to the queue if it exists
+            if cur.left:
+                queue.append(cur.left)
+            
+            # Add the right child to the queue if it exists
+            if cur.right:
+                queue.append(cur.right)
+                
+            # Check if we have processed all nodes at this level
+            if not queue or queue[0].left == None and queue[0].right == None:
+                # Set the next pointer of the last node in the current level to None
+                prev.next = None
+                # Set the flag as we are now at the beginning of a new level
+                isBeginningOfLevel = True
+        
+        return root

@@ -1,0 +1,19 @@
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        def find_mid(start, end):
+            slow, fast = start, start
+            while fast != end and fast.next != end:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+        
+        def construct_bst(start, end):
+            if start > end:
+                return None
+            mid = find_mid(start, end)
+            root = TreeNode(mid.val)
+            root.left = construct_bst(start, mid)
+            root.right = construct_bst(mid.next, end)
+            return root
+        
+        return construct_bst(head, None)

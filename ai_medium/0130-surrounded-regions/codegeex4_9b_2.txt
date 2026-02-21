@@ -1,0 +1,37 @@
+class Solution:
+    def solve(self, board):
+        if not board:
+            return
+        
+        m, n = len(board), len(board[0])
+        
+        def capture(x, y):
+            if x < 0 or x >= m or y < 0 or y >= n or board[x][y] != 'O':
+                return
+            board[x][y] = 'T'
+            capture(x + 1, y)
+            capture(x - 1, y)
+            capture(x, y + 1)
+            capture(x, y - 1)
+        
+        # Start from the first and last row, capture all 'O' connected to them
+        for i in range(m):
+            capture(i, 0)
+            capture(i, n - 1)
+        
+        # Start from the first and last column, capture all 'O' connected to them
+        for j in range(n):
+            capture(0, j)
+            capture(m - 1, j)
+        
+        # Capture all the remaining 'O's which are surrounded by 'X's
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+        
+        # Replace all 'T's back to 'O' as those were not surrounded
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'T':
+                    board[i][j] = 'O'

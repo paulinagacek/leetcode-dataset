@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        
+        phone = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+        combs = ['']
+        
+        for digit in digits:
+            tmp = []
+            for comb in combs:
+                for letter in phone[int(digit) - 2]:
+                    tmp.append(comb + letter)
+            combs = tmp
+        
+        return combs

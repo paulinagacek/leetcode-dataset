@@ -1,0 +1,15 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        m, n = len(num1), len(num2)
+        result = [0] * (m + n)
+
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                num = (ord(num1[i]) - ord('0')) * (ord(num2[j]) - ord('0'))
+                p1, p2 = i + j, i + j + 1
+                s = num + result[p2]
+                result[p1] += s // 10
+                result[p2] = s % 10
+
+        res_str = ''.join(map(str, result))
+        return res_str.lstrip('0') or '0'

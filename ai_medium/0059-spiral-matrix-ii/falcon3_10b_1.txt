@@ -1,0 +1,12 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        dire = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # right, down, left, up
+        x, y, d = 0, 0, 0
+        for i in range(n * n):
+            matrix[x][y] = i + 1
+            nx, ny = x + dire[d][0], y + dire[d][1]
+            if nx < 0 or nx >= n or ny < 0 or ny >= n or matrix[nx][ny] != 0:
+                d = (d + 1) % 4  # change direction
+            x, y = x + dire[d][0], y + dire[d][1]
+        return matrix

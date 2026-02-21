@@ -1,0 +1,21 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        memo = {}
+        
+        def dfs(pos):
+            if pos == len(s):
+                return True
+            if pos in memo:
+                return memo[pos]
+            
+            for word in wordDict:
+                start = pos
+                while start < len(s) and s[start:].startswith(word):
+                    if dfs(start + len(word)):
+                        memo[pos] = True
+                        return True
+                    start += len(word)
+            memo[pos] = False
+            return False
+        
+        return dfs(0)

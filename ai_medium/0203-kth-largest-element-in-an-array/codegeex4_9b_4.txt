@@ -1,0 +1,35 @@
+from typing import List
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        if not nums:
+            return None
+        
+        # Create a min-heap of size k with the first k elements of nums
+        MinHeap = nums[:k]
+        for i in range(k // 2):
+            self.siftDown(MinHeap, i)
+        
+        # Iterate over the remaining elements and maintain the heap property
+        for i in range(k, len(nums)):
+            if nums[i] > MinHeap[0]:
+                MinHeap[0] = nums[i]
+                self.siftDown(MinHeap, 0)
+        
+        # The root of the min-heap is the kth largest element
+        return MinHeap[0]
+    
+    def siftDown(self, heap: List[int], i: int):
+        smallest = i
+        left_child = 2 * i + 1
+        right_child = 2 * i + 2
+        
+        if left_child < len(heap) and heap[left_child] < heap[smallest]:
+            smallest = left_child
+        
+        if right_child < len(heap) and heap[right_child] < heap[smallest]:
+            smallest = right_child
+        
+        if smallest != i:
+            heap[i], heap[smallest] = heap[smallest], heap[i]
+            self.siftDown(heap, smallest)

@@ -1,0 +1,21 @@
+from typing import List
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        nucleotide_to_number = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+        dna_to_int = [nucleotide_to_number[nuc] for nuc in s]
+        length = len(dna_to_int)
+        ten_letter_subsequences = set()
+        seen = set()
+        
+        for i in range(length - 9):
+            sequence = 0
+            for j in range(i, i + 10):
+                sequence = (sequence << 2) | dna_to_int[j]
+            
+            if sequence in seen:
+                ten_letter_subsequences.add(s[i:i+10])
+            else:
+                seen.add(sequence)
+        
+        return list(ten_letter_subsequences)

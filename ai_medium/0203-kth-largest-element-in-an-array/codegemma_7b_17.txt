@@ -1,0 +1,11 @@
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        min_val = float('-inf')
+        min_count = 0
+        for num in nums:
+            if num > min_val:
+                min_val = num
+                min_count = 1
+            elif num == min_val:
+                min_count += 1
+        return min_val if k <= min_count else float('-inf')

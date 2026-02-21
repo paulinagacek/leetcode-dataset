@@ -1,0 +1,12 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        mp = {}
+        def dfs(node):
+            if not node: return None
+            if node in mp: return mp[node]
+            newNode = Node(node.val)
+            mp[node] = newNode
+            newNode.next = dfs(node.next)
+            newNode.random = dfs(node.random)
+            return newNode
+        return dfs(head)

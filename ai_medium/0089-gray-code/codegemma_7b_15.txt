@@ -1,0 +1,8 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        result = [0]
+
+        for i in range(1, 2**n):
+            result.append(result[-1] ^ i)
+
+        return result

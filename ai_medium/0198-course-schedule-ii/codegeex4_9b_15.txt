@@ -1,0 +1,32 @@
+from typing import List
+import collections
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create a graph and in-degree array
+        G = [[] for _ in range(numCourses)]
+        degree = [0] * numCourses
+        
+        # Populate the graph and in-degree array
+        for dest, src in prerequisites:
+            G[src].append(dest)
+            degree[dest] += 1
+        
+        # Initialize the queue with all courses having zero in-degree
+        Q = collections.deque([i for i in range(numCourses) if degree[i] == 0])
+        L = []
+        
+        # Process the courses in topological order
+        while Q:
+            node = Q.popleft()
+            L.append(node)
+            for dest in G[node]:
+                degree[dest] -= 1
+                if degree[dest] == 0:
+                    Q.append(dest)
+        
+        # If we have processed all courses, return the ordering
+        if len(L) == numCourses:
+            return L
+        else:
+            return []  # Return an empty array if it's impossible to complete all courses

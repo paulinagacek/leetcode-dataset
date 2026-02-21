@@ -1,0 +1,45 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def findMiddle(start, end):
+            slow = start 
+            fast = start 
+            prev = None
+            while fast != end and fast.next != end:
+                prev = slow 
+                slow = slow.next
+                fast = fast.next.next
+            return prev
+        
+        def convertListToBST(left, right):
+            if left == right:
+                return None
+            
+            prevMid = findMiddle(left, right)
+            if prevMid:
+                mid = prevMid.next
+            else:
+                mid = left
+            
+            node = TreeNode(mid.val)
+
+            node.left = convertListToBST(left, prevMid)
+            node.right = convertListToBST(prevMid.next, right)
+            
+            return node
+        
+        if not head:
+            return None
+
+        return convertListToBST(head, None)

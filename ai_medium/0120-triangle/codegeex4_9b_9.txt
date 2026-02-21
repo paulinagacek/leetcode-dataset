@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        if not triangle:
+            return 0
+        
+        # Initialize the dp array with the values of the last row of the triangle
+        dp = triangle[-1]
+        
+        # Traverse the triangle from bottom to top
+        for i in range(len(triangle) - 2, -1, -1):
+            for j in range(len(triangle[i])):
+                # Update the dp array with the minimum path sum to each element
+                dp[j] = min(dp[j], dp[j + 1]) + triangle[i][j]
+        
+        # The first element of the dp array will be the minimum path sum from top to bottom
+        return dp[0]

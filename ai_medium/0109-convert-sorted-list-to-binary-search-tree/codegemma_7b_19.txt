@@ -1,0 +1,26 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        
+        def length(node):
+            count = 0
+            while node:
+                count += 1
+                node = node.next
+            return count
+        
+        def createTree(start, end):
+            if start > end:
+                return None
+            mid = (start + end) // 2
+            left = createTree(start, mid - 1)
+            root = TreeNode(head.val)
+            head = head.next
+            right = createTree(mid + 1, end)
+            root.left = left
+            root.right = right
+            return root
+        
+        if not head:
+            return None
+        n = length(head)
+        return createTree(0, n - 1)

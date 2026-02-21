@@ -1,0 +1,21 @@
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        candidates.sort()
+
+        def backtrack(remain, combo, start):
+            if remain == 0:
+                result.append(list(combo))
+                return
+            elif remain < 0:
+                return
+
+            for i in range(start, len(candidates)):
+                combo.append(candidates[i])
+                backtrack(remain - candidates[i], combo, i)  # Allow reusing elements
+                combo.pop()  # Backtrack
+
+        backtrack(target, [], 0)
+        return result

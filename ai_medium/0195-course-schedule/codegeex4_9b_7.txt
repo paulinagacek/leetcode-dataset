@@ -1,0 +1,32 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph representation of the courses and their dependencies
+        graph = [[] for _ in range(numCourses)]
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+        
+        # Helper function to perform DFS and detect cycles
+        def DFS(node, visited, stack):
+            if node in visited:
+                return visited[node] == 1
+            visited[node] = 0  # Mark the node as being visited
+            stack.add(node)
+            for neighbor in graph[node]:
+                if not DFS(neighbor, visited, stack):
+                    return False
+            visited[node] = 1  # Mark the node as fully visited
+            stack.remove(node)
+            return True
+        
+        # Arrays to keep track of the visitation status of each node
+        visited = [0] * numCourses
+        stack = set()
+        
+        # Perform DFS from each unvisited node
+        for i in range(numCourses):
+            if not DFS(i, visited, stack):
+                return False
+        
+        return True

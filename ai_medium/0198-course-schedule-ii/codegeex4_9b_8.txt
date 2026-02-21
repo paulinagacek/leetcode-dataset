@@ -1,0 +1,30 @@
+from typing import List
+from collections import defaultdict
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Build graph and in-degree array
+        graph = defaultdict(list)
+        in_degrees = [0] * numCourses
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degrees[dest] += 1
+        
+        # Initialize the queue with courses having zero in-degrees
+        queue = [i for i in range(numCourses) if in_degrees[i] == 0]
+        topological_order = []
+        
+        while queue:
+            node = queue.pop(0)
+            topological_order.append(node)
+            
+            for neighbor in graph[node]:
+                in_degrees[neighbor] -= 1
+                if in_degrees[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If we have visited all courses, return the order
+        if len(topological_order) == numCourses:
+            return topological_order
+        else:
+            return []  # Imposible to take all courses

@@ -1,0 +1,19 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def is_palindrome(s: str) -> bool:
+            return s == s[::-1]
+
+        def dfs(index: int, temp: List[str], result: List[List[str]]):
+            if index == len(s):
+                result.append(temp[:])
+                return
+            for i in range(index, len(s)):
+                substring = s[index: i + 1]
+                if is_palindrome(substring):
+                    temp.append(substring)
+                    dfs(i + 1, temp, result)
+                    temp.pop()
+
+        result = []
+        dfs(0, [], result)
+        return result

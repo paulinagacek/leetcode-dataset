@@ -1,0 +1,24 @@
+from collections import defaultdict
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = defaultdict(list)
+        indegrees = [0] * numCourses
+
+        for a, b in prerequisites:
+            graph[b].append(a)
+            indegrees[a] += 1
+
+        queue = [i for i in range(numCourses) if indegrees[i] == 0]
+
+        result = []
+        while queue:
+            node = queue.pop(0)
+            result.append(node)
+
+            for neighbor in graph[node]:
+                indegrees[neighbor] -= 1
+                if indegrees[neighbor] == 0:
+                    queue.append(neighbor)
+
+        return result if len(result) == numCourses else []

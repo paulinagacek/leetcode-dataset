@@ -1,0 +1,31 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize data structure.
+        """
+        self.word_dict = set()
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        self.word_dict.add(word)
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any letter.
+        """
+        for w in self.word_dict:
+            if len(w) != len(word):
+                continue
+            flag = True
+            for i in range(len(word)):
+                if word[i] == '.':
+                    continue
+                elif word[i] != w[i]:
+                    flag = False
+                    break
+            if flag:
+                return True
+        return False

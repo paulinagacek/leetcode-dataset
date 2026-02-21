@@ -1,0 +1,40 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+
+
+class WordDictionary:
+
+    def __init__(self):
+        self.root = TrieNode()
+
+    def addWord(self, word: str) -> None:
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end = True
+
+    def search(self, word: str) -> bool:
+        def dfs(node, i):
+            if i == len(word):
+                return node.is_end
+            char = word[i]
+            if char == '.':
+                for child in node.children.values():
+                    if dfs(child, i + 1):
+                        return True
+                return False
+            else:
+                node = node.children.get(char)
+                return node is not None and dfs(node, i + 1)
+
+        return dfs(self.root, 0)
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# wordDictionary = WordDictionary()
+# wordDictionary.addWord("word")
+# wordDictionary.search("pattern")

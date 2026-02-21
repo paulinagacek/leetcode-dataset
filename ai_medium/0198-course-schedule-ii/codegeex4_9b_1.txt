@@ -1,0 +1,39 @@
+from typing import List
+from collections import defaultdict, deque
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create a graph and in-degree array
+        graph = defaultdict(list)
+        in_degrees = [0] * numCourses
+        
+        # Populate the graph and in-degree array
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degrees[dest] += 1
+        
+        # Initialize the queue with courses having no prerequisites
+        zero_in_degree_queue = deque()
+        for i in range(numCourses):
+            if in_degrees[i] == 0:
+                zero_in_degree_queue.append(i)
+        
+        order = []
+        
+        # Process the courses in topological order
+        while zero_in_degree_queue:
+            node = zero_in_degree_queue.popleft()
+            order.append(node)
+            
+            # Reduce the in-degree of neighboring nodes
+            for neighbor in graph[node]:
+                in_degrees[neighbor] -= 1
+                if in_degrees[neighbor] == 0:
+                    zero_in_degree_queue.append(neighbor)
+        
+        # If all courses have been processed, return the order
+        if len(order) == numCourses:
+            return order
+        
+        # If there is a cycle, return an empty array
+        return []

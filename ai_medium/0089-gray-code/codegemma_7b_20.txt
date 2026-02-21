@@ -1,0 +1,10 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        res = [0]
+        curr = 1
+        
+        for _ in range(n):
+            res.extend([curr + r for r in res[::-1]])
+            curr <<= 1
+        
+        return res

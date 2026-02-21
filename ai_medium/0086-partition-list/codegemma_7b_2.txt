@@ -1,0 +1,13 @@
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        dummy = ListNode(0)
+        dummy.next = head
+
+        p1, p2 = dummy, dummy.next
+        while p2:
+            if p2.val < x:
+                p1.next, p2.next, p2 = p2, p1.next, p2.next
+            else:
+                p1, p2 = p1.next, p2.next
+
+        return dummy.next

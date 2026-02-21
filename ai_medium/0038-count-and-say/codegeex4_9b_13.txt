@@ -1,0 +1,21 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        def ca(s):
+            res = []
+            cur = 1
+            for i in range(1,len(s)):
+                if s[i] == s[i-1]:
+                    cur += 1
+                else:
+                    res.append(str(cur))
+                    res.append(s[i-1])
+                    cur = 1
+            res.append(str(cur))
+            res.append(s[-1])
+            return ''.join(res)
+        
+        if n == 1: return "1"
+        t = '1'
+        for i in range(n - 1):
+            t = ca(t)
+        return t

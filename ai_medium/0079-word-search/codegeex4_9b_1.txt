@@ -1,0 +1,18 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def dfs(board, word, seen, index, i, j):
+            if index == len(word):
+                return True
+            if i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) or board[i][j] != word[index] or (i, j) in seen:
+                return False
+            seen.add((i, j))
+            result = dfs(board, word, seen, index + 1, i + 1, j) or dfs(board, word, seen, index + 1, i - 1, j) or dfs(board, word, seen, index + 1, i, j + 1) or dfs(board, word, seen, index + 1, i, j - 1)
+            seen.remove((i, j))
+            return result
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == word[0]:
+                    if dfs(board, word, set(), 0, i, j):
+                        return True
+        return False

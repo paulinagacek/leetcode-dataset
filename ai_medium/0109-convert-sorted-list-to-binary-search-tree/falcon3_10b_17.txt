@@ -1,0 +1,43 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import deque
+
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def inorder_traversal():
+            node, stack = head, deque()
+            while node:
+                stack.append(node)
+                node = node.next
+            while stack:
+                yield stack.pop()
+
+        def construct_bst(start, end):
+            if start > end:
+                return None
+
+            mid = (start + end) // 2
+            left = construct_bst(start, mid - 1)
+            root = TreeNode(next(generator).val)  # assuming generator is properly defined
+            root.left = left
+            root.right = construct_bst(mid + 1, end)
+            return root
+
+        generator = inorder_traversal()
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+
+        return construct_bst(0, length - 1)

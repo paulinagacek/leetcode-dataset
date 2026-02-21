@@ -1,0 +1,14 @@
+from typing import List
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        else:
+            def rob_linear(start: int, end: int) -> int:
+                prev = next_ = 0
+                for i in range(start, end):
+                    prev, next_ = next_, max(next_, prev + nums[i])
+                return next_
+            
+            return max(rob_linear(0, len(nums)-1), rob_linear(1, len(nums)))

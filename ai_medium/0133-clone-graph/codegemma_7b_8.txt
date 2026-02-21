@@ -1,0 +1,31 @@
+from typing import Optional
+from collections import deque
+
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+
+        visited = {}
+        queue = deque([node])
+
+        # Create new nodes with the same values as the original nodes
+        visited[node] = Node(node.val)
+
+        # Clone the neighbors and add them to the queue for further traversal
+        while queue:
+            curr = queue.popleft()
+            for neighbor in curr.neighbors:
+                if neighbor not in visited:
+                    visited[neighbor] = Node(neighbor.val)
+                    queue.append(neighbor)
+
+                # Add the cloned neighbor to the current node's neighbors list
+                visited[curr].neighbors.append(visited[neighbor])
+
+        return visited[node]

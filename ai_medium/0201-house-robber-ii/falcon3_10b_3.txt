@@ -1,0 +1,15 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        def rob_linear(nums):
+            include = 0
+            exclude = 0
+            for num in nums:
+                include, exclude = num + exclude, max(include, exclude)
+            return max(include, exclude)
+
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))

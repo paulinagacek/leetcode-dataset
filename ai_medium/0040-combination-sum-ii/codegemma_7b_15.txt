@@ -1,0 +1,18 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        result = []
+        self.dfs(candidates, target, [], result, 0)
+        return result
+
+    def dfs(self, candidates, target, current, result, start):
+        if target == 0:
+            result.append(current[:])
+            return
+        for i in range(start, len(candidates)):
+            if i > start and candidates[i] == candidates[i-1]:
+                continue
+            if candidates[i] <= target:
+                current.append(candidates[i])
+                self.dfs(candidates, target - candidates[i], current, result, i+1)
+                current.pop()

@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        n = len(nums)
+        
+        # iterates over all possible combinations of indices
+        for i in range(2**n):
+            sub_set = []
+            
+            # checks each bit of i to determine if the corresponding element should be included in the current subset
+            for j in range(n):
+                if (i >> j) & 1:
+                    sub_set.append(nums[j])
+            
+            res.append(sub_set)
+        
+        return res

@@ -1,0 +1,41 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2147483647
+        INT_MIN = -2147483648
+        
+        # Step 1: ignore leading whitespace
+        i = 0
+        while i < len(s) and s[i] == ' ':
+            i += 1
+        
+        # check if string is empty after removing leading whitespaces
+        if i == len(s):
+            return 0
+        
+        # Step 2: determine sign
+        sign = 1
+        if s[i] == '-':
+            sign = -1
+            i += 1
+        elif s[i] == '+':
+            i += 1
+        
+        # Step 3: read integer
+        result = 0
+        while i < len(s) and s[i].isdigit():
+            digit = int(s[i])
+            
+            # check if adding this digit will cause overflow or underflow
+            if sign == 1 and (result > INT_MAX // 10 or (result == INT_MAX // 10 and digit >= 7)):
+                return INT_MAX
+            
+            if sign == -1 and (result < INT_MIN // 10 or (result == INT_MIN // 10 and digit >= 8)):
+                return INT_MIN
+            
+            result = result * 10 + digit
+            i += 1
+        
+        # Step 4: apply sign
+        result *= sign
+        
+        return result

@@ -1,0 +1,25 @@
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        merged = []
+        i = 0
+        n = len(intervals)
+        new_start, new_end = newInterval
+
+        # Add all intervals that end before the start of newInterval
+        while i < n and intervals[i][1] < new_start:
+            merged.append(intervals[i])
+            i += 1
+
+        # Merge intervals that start before or during newInterval
+        while i < n and intervals[i][0] <= new_end:
+            new_start = min(new_start, intervals[i][0])
+            new_end = max(new_end, intervals[i][1])
+            i += 1
+
+        # Add the merged interval and remaining intervals to the result
+        merged.append([new_start, new_end])
+        while i < n:
+            merged.append(intervals[i])
+            i += 1
+
+        return merged

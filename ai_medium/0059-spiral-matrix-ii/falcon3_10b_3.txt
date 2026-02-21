@@ -1,0 +1,14 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        num, dr, dc = 1, 0, 1
+        cr, cc = 0, 0
+        matrix[cr][cc] = num
+        for _ in range(n * n):
+            newcr, newcc = cr + dr, cc + dc
+            if not (0 <= newcr < n and 0 <= newcc < n and matrix[newcr][newcc] == 0):
+                dr, dc = dc, -dr
+            cr, cc = cr + dr, cc + dc
+            num += 1
+            matrix[cr][cc] = num
+        return matrix

@@ -1,0 +1,19 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def is_palindrome(sub):
+            return sub == sub[::-1]
+
+        result = []
+
+        def backtrack(start, path):
+            if start == len(s):
+                result.append(path[:])
+            else:
+                for i in range(start, len(s)):
+                    if is_palindrome(s[start:i+1]):
+                        path.append(s[start:i+1])
+                        backtrack(i+1, path)
+                        path.pop()
+
+        backtrack(0, [])
+        return result

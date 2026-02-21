@@ -1,0 +1,28 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def mergeSort(start, end):
+            if start == end:
+                return start
+            mid = (start + end) // 2
+            left = mergeSort(start, mid)
+            right = mergeSort(mid + 1, end)
+            return merge(left, right)
+
+        def merge(left, right):
+            dummy = ListNode()
+            curr = dummy
+            while left and right:
+                if left.val < right.val:
+                    curr.next = left
+                    left = left.next
+                else:
+                    curr.next = right
+                    right = right.next
+                curr = curr.next
+            if left:
+                curr.next = left
+            if right:
+                curr.next = right
+            return dummy.next
+
+        return mergeSort(head, head) if head else head

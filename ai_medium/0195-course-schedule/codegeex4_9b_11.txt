@@ -1,0 +1,28 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph from the prerequisites
+        graph = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize the queue with all courses having zero in-degrees
+        queue = [i for i in range(numCourses) if in_degree[i] == 0]
+        
+        visited_courses = 0
+        
+        while queue:
+            course = queue.pop(0)
+            visited_courses += 1
+            
+            for neighbor in graph[course]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+                
+        # If the number of visited courses is equal to the total number of courses, return True
+        return visited_courses == numCourses

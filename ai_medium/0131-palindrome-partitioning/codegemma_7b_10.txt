@@ -1,0 +1,23 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        
+        for i in range(n):
+            for j in range(i, n):
+                dp[i][j] = s[i] == s[j] and (j - i <= 2 or dp[i+1][j-1])
+        
+        ans = []
+        def backtrack(index, cur):
+            if index == n:
+                ans.append(cur[:])
+                return
+            
+            for i in range(index, n):
+                if dp[index][i]:
+                    cur.append(s[index:i+1])
+                    backtrack(i+1, cur)
+                    cur.pop()
+        
+        backtrack(0, [])
+        return ans

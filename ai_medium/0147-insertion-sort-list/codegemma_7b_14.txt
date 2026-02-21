@@ -1,0 +1,23 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+
+        dummy = ListNode(0, head)
+        cur = head.next
+
+        while cur:
+            prev = dummy
+            target = cur.next
+
+            while prev.next and prev.next.val < cur.val:
+                prev = prev.next
+
+            if prev.next != cur:
+                cur.next = target
+                prev.next = cur
+                cur = target
+            else:
+                cur = target
+
+        return dummy.next

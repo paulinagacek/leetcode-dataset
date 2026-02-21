@@ -1,0 +1,9 @@
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(next=head)
+        cur = dummy
+        while cur.next and cur.next.next:
+            cur.next = cur.next.next
+            cur.next.next = cur.next
+            cur = cur.next.next
+        return dummy.next

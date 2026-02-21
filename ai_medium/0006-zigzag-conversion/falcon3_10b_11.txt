@@ -1,0 +1,17 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        
+        zigzag = [''] * numRows
+        current_row, step = 0, 1
+        
+        for char in s:
+            zigzag[current_row] += char
+            if current_row == 0:
+                step = 1
+            elif current_row == numRows - 1:
+                step = -1
+            current_row += step
+        
+        return ''.join(zigzag)

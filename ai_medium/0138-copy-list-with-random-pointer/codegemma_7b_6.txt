@@ -1,0 +1,32 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+
+        # Create a mapping from original nodes to new nodes
+        node_map = {}
+
+        # Create the new head node
+        new_head = Node(head.val)
+        node_map[head] = new_head
+
+        # Copy the remaining nodes and their connections
+        curr = head
+        new_curr = new_head
+        while curr.next:
+            new_node = Node(curr.next.val)
+            new_curr.next = new_node
+            node_map[curr.next] = new_node
+            curr = curr.next
+            new_curr = new_curr.next
+
+        # Connect the random pointers
+        curr = head
+        new_curr = new_head
+        while curr:
+            if curr.random:
+                new_curr.random = node_map[curr.random]
+            curr = curr.next
+            new_curr = new_curr.next
+
+        return new_head

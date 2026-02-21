@@ -1,0 +1,14 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        self.dfs(result, "", n, n)
+        return result
+
+    def dfs(self, result, path, open_count, close_count):
+        if len(path) == 2 * n:
+            result.append(path)
+            return
+        if open_count > 0:
+            self.dfs(result, path + '(', open_count - 1, close_count)
+        if close_count > open_count:
+            self.dfs(result, path + ')', open_count, close_count - 1)

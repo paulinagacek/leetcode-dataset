@@ -1,0 +1,40 @@
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+
+        ## Find the middle node
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+
+        ## Split the list into two halves
+        right = slow.next
+        slow.next = None
+
+        ## Recursively sort the halves
+        left = self.sortList(head)
+        right = self.sortList(right)
+
+        ## Merge the sorted halves
+        return self.merge(left, right)
+
+    def merge(self, left: ListNode, right: ListNode) -> ListNode:
+        dummy = ListNode()
+        curr = dummy
+
+        while left and right:
+            if left.val < right.val:
+                curr.next = left
+                left = left.next
+            else:
+                curr.next = right
+                right = right.next
+            curr = curr.next
+
+        if left:
+            curr.next = left
+        if right:
+            curr.next = right
+
+        return dummy.next

@@ -1,0 +1,15 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        j = len(nums) - 2
+        while j >= 0 and nums[j] >= nums[j+1]:
+            j -= 1
+        if j >= 0:
+            k = len(nums) - 1
+            while k >= 0 and nums[j] >= nums[k]:
+                k -= 1
+            nums[j], nums[k] = nums[k], nums[j]
+        left, right = j + 1, len(nums) - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1

@@ -1,0 +1,27 @@
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = defaultdict(list)
+        for a, b in prerequisites:
+            graph[b].append(a)
+
+        visited = set()
+        path = set()
+
+        def dfs(node):
+            if node in path:
+                return False
+            if node in visited:
+                return True
+
+            path.add(node)
+            for neighbor in graph[node]:
+                if not dfs(neighbor):
+                    return False
+            path.remove(node)
+            visited.add(node)
+
+            return True
+
+        return all(dfs(node) for node in range(numCourses))

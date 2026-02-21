@@ -1,0 +1,12 @@
+class Solution:
+    memo = {}
+    def numTrees(self, n: int) -> int:
+        if n == 0 or n == 1:
+            return 1
+        if n in self.memo:
+            return self.memo[n]
+        res = 0
+        for i in range(n):
+            res += self.numTrees(i) * self.numTrees(n - i - 1)
+        self.memo[n] = res
+        return res

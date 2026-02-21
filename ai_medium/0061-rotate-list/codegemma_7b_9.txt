@@ -1,0 +1,27 @@
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        if not head or k == 0:
+            return head
+
+        # Calculate the length of the list
+        length = 1
+        curr = head
+        while curr.next:
+            curr = curr.next
+            length += 1
+
+        # Adjust k to handle rotations beyond the list length
+        k %= length
+
+        # Create a new linked list with the reversed sequence
+        dummy = ListNode()
+        reversed_curr = head
+        for i in range(length - k):
+            reversed_curr = reversed_curr.next
+            dummy.next = reversed_curr
+
+        # Connect the tail of the reversed list to the head of the original list
+        curr.next = head
+
+        # Return the new head, which comes after the first k nodes
+        return dummy.next

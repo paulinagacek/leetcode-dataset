@@ -1,0 +1,65 @@
+def sortedListToBST(self, head):
+    def inorder(root):
+        if root:
+            yield from inorder(root.left)
+            yield root
+            yield from inorder(root.right)
+
+    def height(root):
+        if not root:
+            return 0
+        return max(height(root.left), height(root.right)) + 1
+
+    def balance(root):
+        if not root:
+            return 0, None
+
+        left_height, _ = balance(root.left)
+        right_height, right = balance(root.right)
+
+        balance_factor = left_height - right_height
+
+        if abs(balance_factor) > 1:
+            if left_height > right_height:
+                return right_height + 1, rotate_right(root)
+            else:
+                return left_height + 1, rotate_left(root)
+
+        return max(left_height, right_height) + 1, root
+
+    def rotate_left(root):
+        new_root = root.right
+        root.right = new_root.left
+        new_root.left = root
+        return new_root
+
+    def rotate_right(root):
+        new_root = root.left
+        root.left = new_root.right
+        new_root.right = root
+        return new_root
+
+    def sorted_list_to_bst(start, end):
+        if start == end:
+            return None
+
+        mid = (start + end) // 2
+        left_subtree = sorted_list_to_bst(start, mid)
+
+        root = TreeNode(next(inorder(head)).val)
+        root.left = left_subtree
+
+        head = next(inorder(head)
+        if start == 0 and end == self.size - 1:
+            return root
+
+        root.right = sorted_list_to_bst(mid + 1, end)
+        return balance(root)[1]
+
+    size = 0
+    current = head
+    while current:
+        current = current.next
+        size += 1
+
+    return sorted_list_to_bst(0, size - 1)

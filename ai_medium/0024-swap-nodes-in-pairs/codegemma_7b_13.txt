@@ -1,0 +1,18 @@
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0)
+        dummy.next = head
+
+        p = dummy
+
+        while p.next and p.next.next:
+            q = p.next
+            r = q.next
+
+            p.next = r
+            q.next = r.next
+            r.next = q
+
+            p = q
+
+        return dummy.next

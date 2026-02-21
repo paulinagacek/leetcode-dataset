@@ -1,0 +1,17 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        def rob_linear(houses):
+            incl, excl = 0, 0
+            for house in houses:
+                incl, excl = excl + house, max(incl, excl)
+            return max(incl, excl)
+        
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        
+        excl_last = rob_linear(nums[:-1])
+        incl_last = rob_linear(nums[1:])
+        
+        return max(excl_last, incl_last)

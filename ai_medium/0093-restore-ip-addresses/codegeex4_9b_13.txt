@@ -1,0 +1,23 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]: 
+        def is_valid(segment: str) -> bool:
+            return segment.isdigit() and int(segment) <= 255
+        
+        def update_output(curr_pos: int, curr_segment: int):
+            if curr_segment == 4 and curr_pos == len(s):
+                output.append('.'.join(ip_parts))
+            elif curr_segment == 4 or curr_pos >= len(s):
+                return
+            else:
+                for end in range(curr_pos + 1, min(len(s), curr_pos + 4)):
+                    segment = s[curr_pos:end]
+                    if is_valid(segment):
+                        ip_parts[curr_segment] = segment
+                        update_output(end, curr_segment + 1)
+        
+        output = []
+        ip_parts = ['', '', '', '']
+        update_output(0, 0)
+        return output

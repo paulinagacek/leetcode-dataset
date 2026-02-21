@@ -1,0 +1,46 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a dictionary to represent the graph of courses and their dependencies
+        course_dependencies = {i: [] for i in range(numCourses)}
+        
+        # Populate the graph with the given prerequisites
+        for dest, src in prerequisites:
+            course_dependencies[dest].append(src)
+        
+        # Array to keep track of the number of prerequisites each course has
+        prerequisites_count = [0] * numCourses
+        
+        # Fill the prerequisites_count array
+        for deps in course_dependencies.values():
+            for dep in deps:
+                prerequisites_count[dep] += 1
+        
+        # Queue to hold courses with no dependencies (indegree 0)
+        queue = deque()
+        
+        # Initialize the queue with all courses having zero indegree
+        for i in range(numCourses):
+            if prerequisites_count[i] == 0:
+                queue.append(i)
+        
+        # Counter to keep track of how many courses have been successfully taken
+        courses_taken = 0
+        
+        # Process the queue
+        while queue:
+            course = queue.popleft()
+            courses_taken += 1
+            
+            # Reduce the indegree of each neighbor by 1
+            for neighbor in course_dependencies[course]:
+                prerequisites_count[neighbor] -= 1
+                
+                # If indegree becomes zero, add it to the queue
+                if prerequisites_count[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        # If all courses have been taken, return True. Otherwise, return False.
+        return courses_taken == numCourses

@@ -1,0 +1,29 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph and an in-degree array
+        graph = [[] for _ in range(numCourses)]
+        in_degree = [0] * numCourses
+        
+        # Fill the graph and in-degree array
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize the queue with all courses having zero in-degrees
+        q = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        # Visit all nodes reachable from the in-degree zero nodes
+        visited_count = 0
+        while q:
+            node = q.popleft()
+            visited_count += 1
+            for neigh in graph[node]:
+                in_degree[neigh] -= 1
+                if in_degree[neigh] == 0:
+                    q.append(neigh)
+        
+        # If there are visited nodes less than total courses, return false
+        return visited_count == numCourses

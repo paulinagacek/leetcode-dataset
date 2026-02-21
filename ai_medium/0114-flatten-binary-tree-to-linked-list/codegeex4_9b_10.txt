@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if not root:
+            return
+        
+        stack = [root]
+        
+        while stack:
+            node = stack.pop()
+            
+            # If there is a right child, push it first so that pre-order traversal order is maintained
+            if node.right:
+                stack.append(node.right)
+            # If there is a left child, push it
+            if node.left:
+                stack.append(node.left)
+            
+            # If the stack is not empty, set the current node's right to the top of the stack
+            # and set its left to None
+            if stack:
+                next_node = stack[-1]
+                node.right = next_node
+                node.left = None

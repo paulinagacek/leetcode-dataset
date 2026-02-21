@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+
+        def dfs(idx, arr, su):
+            if su == target:
+                ans.append(arr[:])
+                return
+            if idx >= len(candidates) or su > target:
+                return
+            dfs(idx + 1, arr, su)
+            arr.append(candidates[idx])
+            dfs(idx, arr, su + candidates[idx])
+            arr.pop()
+        
+        dfs(0, [], 0)
+        return ans

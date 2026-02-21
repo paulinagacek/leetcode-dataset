@@ -1,0 +1,13 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        result = [[]]
+        for num in nums:
+            new_result = []
+            for perm in result:
+                for i in range(len(perm) + 1):
+                    new_perm = perm[:i] + [num] + perm[i:]
+                    if new_perm not in new_result:
+                        new_result.append(new_perm)
+            result = new_result
+        return result

@@ -1,0 +1,26 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        prev = first = second = None
+        cur = root
+
+        while cur:
+            if cur.left:
+                nxt = cur.left
+                while nxt.right and nxt.right != cur:
+                    nxt = nxt.right
+                if not nxt.right:
+                    nxt.right = cur
+                    cur = cur.left
+                else:
+                    if first is None:
+                        first = cur
+                    second = cur
+                    cur.left.right = None
+                    cur = cur.right
+            else:
+                if first is None:
+                    first = cur
+                second = cur
+                cur = cur.right
+
+        first.val, second.val = second.val, first.val

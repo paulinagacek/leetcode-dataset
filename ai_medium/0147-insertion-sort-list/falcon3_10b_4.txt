@@ -1,0 +1,29 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Helper function to add a node at the end of sorted list
+        def append_sorted(node):
+            current = dummy
+            while current.next and current.next.val < node.val:
+                current = current.next
+            new_node = ListNode(node.val)
+            new_node.next = current.next
+            current.next = new_node
+
+        # Create a dummy node to help with sorting
+        dummy = ListNode()
+        dummy.next = head
+
+        # Iterate through the linked list
+        current = dummy
+        while current.next and current.next.next:
+            # Insert current node into the correct position in the sorted part of the list
+            append_sorted(current.next)
+            current = current.next
+
+        # Return the new head of the sorted list
+        return dummy.next

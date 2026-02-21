@@ -1,0 +1,19 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        self.first = self.mid = self.last = None
+        self.prev = TreeNode(float('-inf'))
+        
+        def inorder(node):
+            if not node:
+                return
+            inorder(node.left)
+            if self.prev.val >= node.val:
+                self.last = node if not self.last else self.last
+                self.mid = self.prev if not self.mid else self.mid
+                self.first = self.root if not self.first else self.first
+            self.prev = node
+            inorder(node.right)
+        
+        self.root = root
+        inorder(root)
+        self.first.val, self.last.val = self.last.val, self.first.val

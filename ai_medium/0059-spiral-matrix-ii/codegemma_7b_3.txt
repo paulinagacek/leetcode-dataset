@@ -1,0 +1,16 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        direction = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        x, y = 0, 0
+        count = 1
+        i = 0
+        while count <= n * n:
+            matrix[x][y] = count
+            count += 1
+            new_x, new_y = x + direction[i][0], y + direction[i][1]
+            if 0 <= new_x < n and 0 <= new_y < n and matrix[new_x][new_y] == 0:
+                x, y = new_x, new_y
+            else:
+                i = (i + 1) % 4
+        return matrix

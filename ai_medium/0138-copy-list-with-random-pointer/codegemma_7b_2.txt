@@ -1,0 +1,19 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        oldToNew = {}
+        dummy = Node(0)
+        p = head
+        cp = dummy
+        while p:
+            cp.next = Node(p.val)
+            oldToNew[p] = cp.next
+            p = p.next
+            cp = cp.next
+        p = head
+        cp = dummy.next
+        while p:
+            if p.random:
+                cp.random = oldToNew[p.random]
+            p = p.next
+            cp = cp.next
+        return dummy.next

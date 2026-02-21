@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def backtrack(start, remaining_target, path):
+            if remaining_target == 0:
+                results.append(path)
+                return
+            if remaining_target < 0:
+                return
+            
+            for i in range(start, len(candidates)):
+                if i > start and candidates[i] == candidates[i - 1]:
+                    continue
+                backtrack(i + 1, remaining_target - candidates[i], path + [candidates[i]])
+        
+        results = []
+        candidates.sort()
+        backtrack(0, target, [])
+        return results

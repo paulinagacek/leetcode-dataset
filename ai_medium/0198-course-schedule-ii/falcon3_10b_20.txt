@@ -1,0 +1,26 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        from collections import defaultdict, deque
+
+        # Build the graph and in-degree counts
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            in_degree[course] += 1
+
+        # Queue to hold courses with no prerequisites
+        queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        order = []
+
+        # Perform topological sort using Kahn's algorithm
+        while queue:
+            prereq = queue.popleft()
+            order.append(prereq)
+            for course in graph[prereq]:
+                in_degree[course] -= 1
+                if in_degree[course] == 0:
+                    queue.append(course)
+
+        # If not all courses are included in the order, it's impossible to take all courses
+        return order if len(order) == numCourses else []

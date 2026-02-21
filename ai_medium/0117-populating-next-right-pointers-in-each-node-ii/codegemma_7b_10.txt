@@ -1,0 +1,20 @@
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root: return root
+        
+        level_start = root
+        while level_start:
+            dummy = Node(0, level_start)
+            prev = dummy
+            
+            while prev.next:
+                if prev.next.left:
+                    prev.next = prev.next.left
+                elif prev.next.right:
+                    prev.next = prev.next.right
+                else:
+                    prev = prev.next
+            
+            level_start = level_start.left or level_start.right
+        
+        return root

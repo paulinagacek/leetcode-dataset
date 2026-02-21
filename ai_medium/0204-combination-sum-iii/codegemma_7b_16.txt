@@ -1,0 +1,15 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        result = []
+        def backtrack(index, current_sum, current_combination):
+            if index == 10:
+                if len(current_combination) == k and current_sum == n:
+                    result.append(current_combination[:])
+                return
+            for i in range(1, 10):
+                if i not in current_combination and current_sum + i <= n:
+                    current_combination.append(i)
+                    backtrack(i+1, current_sum + i, current_combination)
+                    current_combination.pop()
+        backtrack(1, 0, [])
+        return result

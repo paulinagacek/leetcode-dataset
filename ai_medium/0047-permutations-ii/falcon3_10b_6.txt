@@ -1,0 +1,14 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(path, remaining):
+            if not remaining:
+                result.append(path)
+            for i in range(len(remaining)):
+                if i > 0 and remaining[i] == remaining[i - 1]:
+                    continue
+                backtrack(path + [remaining[i]], remaining[:i] + remaining[i+1:])
+        
+        nums.sort()
+        result = []
+        backtrack([], nums)
+        return result

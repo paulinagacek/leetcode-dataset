@@ -1,0 +1,31 @@
+from typing import List
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create a graph representation of the courses and their dependencies
+        graph = [[] for _ in range(numCourses)]
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+        
+        # Helper function to perform DFS and detect cycle
+        def dfs(node, visited, recStack):
+            if not visited[node]:
+                visited[node] = True
+                recStack[node] = True
+                for neighbor in graph[node]:
+                    if not visited[neighbor] and not self.canFinish(numCourses, prerequisites):
+                        return False
+                    elif recStack[neighbor]:
+                        return False
+                recStack[node] = False
+            return True
+        
+        visited = [False] * numCourses
+        recStack = [False] * numCourses
+        
+        # Check for cycle in the graph
+        for i in range(numCourses):
+            if not visited[i] and not dfs(i, visited, recStack):
+                return False
+        
+        return True

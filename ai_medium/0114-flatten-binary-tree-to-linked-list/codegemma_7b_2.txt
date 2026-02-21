@@ -1,0 +1,16 @@
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        cur = root
+        while cur:
+            if cur.left and cur.right:
+                tmp = cur.right
+                cur.right = cur.left
+                cur.left = None
+                cur.right.right = tmp
+                cur = cur.right
+            elif cur.left:
+                cur.right = cur.left
+                cur.left = None
+                cur = cur.right
+            else:
+                cur = cur.right

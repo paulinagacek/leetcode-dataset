@@ -1,0 +1,21 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        queue = [root]
+        res = []
+
+        while queue:
+            level_size = len(queue)
+            temp = []
+
+            for _ in range(level_size):
+                node = queue.pop(0)
+
+                if node:
+                    temp.append(node.val)
+                    queue.append(node.left)
+                    queue.append(node.right)
+
+            if temp:
+                res.append(temp[-1])
+
+        return res

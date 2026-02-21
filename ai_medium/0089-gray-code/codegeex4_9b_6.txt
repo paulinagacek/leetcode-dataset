@@ -1,0 +1,14 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        def helper(n):
+            if n==1:
+                return ['0','1']
+            prev = helper(n-1)
+            for i in range(len(prev)):
+                prev.append('1'+prev[i][1:])
+                prev[i] = '0'+prev[i]
+            return prev
+        res = []
+        for i in helper(n):
+            res.append(int(i,2))
+        return res

@@ -1,0 +1,15 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        first = last = prev = root
+        while root:
+            if root.left:
+                l = root.left
+                if l.val > root.val:
+                    first = l if first is root else first
+                    last = root
+                prev = root
+                root = root.left
+            else:
+                prev = root
+                root = root.right
+        first.val, last.val = last.val, first.val

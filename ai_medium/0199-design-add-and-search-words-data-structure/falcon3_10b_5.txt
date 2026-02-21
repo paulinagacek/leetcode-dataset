@@ -1,0 +1,24 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.words = {}
+
+    def addWord(self, word: str) -> None:
+        self.words[word] = True
+
+    def search(self, word: str) -> bool:
+        def dfs(word, ind):
+            if ind == len(word):
+                return word in self.words
+            
+            if word[ind] == '.':
+                return any(dfs(word, ind+1) for char in 'abcdefghijklmnopqrstuvwxyz')
+            
+            return dfs(word, ind+1) if word[ind] in self.words[word][0:ind] else False
+
+        return dfs(word, 0)
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

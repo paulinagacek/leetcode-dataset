@@ -1,0 +1,28 @@
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        dummy = TreeNode(float('-inf'))
+        dummy.right = root
+        pred, first, mid, last = dummy, None, None, None
+        while dummy.right:
+            if dummy.right.left:
+                pred = dummy.right.left
+                while pred.right and pred.right != dummy.right:
+                    pred = pred.right
+                if not pred.right:
+                    pred.right = dummy.right
+                    dummy.right = dummy.right.left
+                else:
+                    pred.right = None
+                    if first is None:
+                        first = dummy.right.val
+                        mid = dummy.right.val
+                    else:
+                        last = dummy.right.val
+                        break
+            else:
+                dummy = dummy.right
+        first, last = list(sorted([first, mid, last]))[0], list(sorted([first, mid, last]))[2]
+        dummy.right.val = first
+        while dummy.right.right:
+            dummy = dummy.right.right
+        dummy.right.val = last

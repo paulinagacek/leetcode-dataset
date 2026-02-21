@@ -1,0 +1,7 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums: return 0
+        include, exclude = 0, 0
+        for num in nums:
+            include, exclude = max(include, exclude + num), include
+        return max(include, exclude)

@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.right = right
+#         self.left = left
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        stack, nodes = [], []
+        
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            nodes.append(root.val)
+            root = root.right
+
+        for i in range(len(nodes) - 1):
+            if nodes[i] > nodes[i + 1]:
+                break
+
+        for node in [stack, root]:
+            while node:
+                if node.val == nodes[i]:
+                    node.val, nodes[i] = nodes[i + 1], node.val
+                    break
+                elif node.val > nodes[i]:
+                    break
+                node = node.left
+            if node.val != nodes[i + 1]:
+                for child in [node.right, None]:
+                    if child and child.val == nodes[i + 1]:
+                        child.val, nodes[i + 1] = nodes[i + 1], child.val
+                        break
