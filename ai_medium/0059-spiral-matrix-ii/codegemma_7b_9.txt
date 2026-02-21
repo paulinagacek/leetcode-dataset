@@ -1,0 +1,26 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        start, end = 0, n - 1
+        label = 1
+        while start <= end:
+            for i in range(start, end+1):
+                matrix[start][i] = label
+                label += 1
+            start += 1
+
+            for i in range(start, end+1):
+                matrix[i][end] = label
+                label += 1
+            end -= 1
+
+            for i in range(end, start-1, -1):
+                matrix[end][i] = label
+                label += 1
+            start += 1
+
+            for i in range(start-1, end-1, -1):
+                matrix[i][start] = label
+                label += 1
+            end -= 1
+        return matrix

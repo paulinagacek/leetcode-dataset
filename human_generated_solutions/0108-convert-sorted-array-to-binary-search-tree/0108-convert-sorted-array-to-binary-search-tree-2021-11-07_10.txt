@@ -1,0 +1,15 @@
+def sortedArrayToBSTRec(self, nums: List[int], start, end) -> Optional[TreeNode]:
+	if start >= end:
+		return None
+
+	mid = (start + end) // 2
+
+	newNode = TreeNode(nums[mid])
+	newNode.left = self.sortedArrayToBSTRec(nums, start, mid)
+	newNode.right = self.sortedArrayToBSTRec(nums, mid + 1, end)
+
+	return newNode
+
+
+def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+	return self.sortedArrayToBSTRec(nums, 0, len(nums))

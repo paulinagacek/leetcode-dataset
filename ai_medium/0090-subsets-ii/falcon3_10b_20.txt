@@ -1,0 +1,19 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(start=0, path=[]):
+            # Add the current subset to the result set
+            res.append(path[:])
+            for i in range(start, len(nums)):
+                # Skip duplicates to avoid repeated subsets
+                if i > start and nums[i] == nums[i-1]:
+                    continue
+                path.append(nums[i])
+                # Recursive call with the next index
+                backtrack(i + 1, path)
+                # Backtrack by removing the last element added
+                path.pop()
+        
+        nums.sort() # Sort to handle duplicates
+        res = [] # Initialize result list
+        backtrack() # Start the backtracking process
+        return res

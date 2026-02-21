@@ -1,0 +1,17 @@
+class WordDictionary:
+
+    def __init__(self):
+        self.word_dict = {}
+
+    def addWord(self, word: str) -> None:
+        self.word_dict[word] = True
+
+    def search(self, word: str) -> bool:
+        if word in self.word_dict:
+            return True
+
+        for key in self.word_dict.keys():
+            if len(key) == len(word) and all(a == b or b == '.' for a, b in zip(key, word)):
+                return True
+
+        return False

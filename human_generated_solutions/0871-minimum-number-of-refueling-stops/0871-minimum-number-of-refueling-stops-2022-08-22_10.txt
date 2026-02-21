@@ -1,0 +1,30 @@
+class Solution:
+    def minRefuelStops(
+        self, target: int, startFuel: int, stations: List[List[int]]
+    ) -> int:
+
+        last_station = {0: startFuel}
+        for station in stations:
+            cur_station = {}
+            for stop, fuel in last_station.items():
+                if fuel >= station[0]:
+                    cur_station[stop] = fuel
+
+            if last_station[stop] >= station[0]:
+                cur_station[stop + 1] = last_station[stop] + station[1]
+
+            for stop, fuel in last_station.items():
+                if fuel >= station[0]:
+                    cur_station[stop + 1] = max(
+                        fuel + station[1], cur_station[stop + 1]
+                    )
+
+            if not cur_station.keys():
+                return -1
+
+            last_station = cur_station
+
+        for stop, fuel in last_station.items():
+            if fuel >= target:
+                return stop
+        return -1

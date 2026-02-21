@@ -1,13 +1,4 @@
 class Solution:
     def minCostToMoveChips(self, position: List[int]) -> int:
-        ans = float(inf)
-        for i in position:
-            res = 0
-            for j in position:
-                x = abs(i-j)
-                if x%2!=0:
-                    res+=1
-            if res<ans:
-                ans = res
-                    
-        return ans
+        pos_at_zero = sum(pos % 2 == 0 for pos in position)
+        return min(pos_at_zero, len(position) - pos_at_zero)

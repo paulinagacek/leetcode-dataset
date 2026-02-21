@@ -1,0 +1,27 @@
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums) < 2:
+            return nums
+        p0 = 0
+        p2 = len(nums)
+        for i, n in enumerate(nums):
+            if n == 1:
+                continue
+            if n == 0:
+                nums[p0] = 0
+                p0 += 1
+            else:
+                p2 -= 1
+                while p2 > i and nums[p2] == 2:
+                    p2 -= 1
+                if p2 <= i: 
+                    break
+                if nums[p2] == 0:
+                    nums[p0] = 0
+                    p0 += 1
+                nums[p2] = 2
+            if i >= p0 and i < p2:
+                nums[i] = 1

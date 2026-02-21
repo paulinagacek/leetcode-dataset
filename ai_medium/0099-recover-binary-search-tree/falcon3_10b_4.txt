@@ -1,0 +1,20 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.right = right
+#         self.left = left
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        prev, first, second = [None], [None, None], [None, None]
+        self.inorder(root, prev, first, second)
+        first[0].val, second[0].val = second[0].val, first[0].val
+
+    def inorder(self, node, prev, first, second):
+        if node is None: return
+        self.inorder(node.left, prev, first, second)
+        if prev[0] and node.val < prev[0].val:
+            if not first[0]: first[0] = prev[0]            
+            second[0] = node      
+        prev[0] = node
+        self.inorder(node.right, prev, first, second)

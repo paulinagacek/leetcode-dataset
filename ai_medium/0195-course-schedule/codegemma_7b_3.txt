@@ -1,0 +1,28 @@
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+
+        # Build graph and calculate in-degrees
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            in_degree[course] += 1
+
+        # Find nodes with in-degree 0
+        queue = [i for i in range(numCourses) if in_degree[i] == 0]
+
+        # Perform topological sort
+        count = 0
+        while queue:
+            node = queue.pop(0)
+            count += 1
+
+            for neighbor in graph[node]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+
+        # Return True if all nodes are visited
+        return count == numCourses

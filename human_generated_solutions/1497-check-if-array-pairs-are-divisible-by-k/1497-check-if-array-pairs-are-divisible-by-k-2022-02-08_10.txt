@@ -1,0 +1,19 @@
+class Solution:
+    def canArrange(self, arr: List[int], k: int) -> bool:
+        if sum(arr) % k != 0:
+            return False
+        freq = [0] * k 
+        for val in arr:
+            freq[val % k] += 1
+        if freq[0] % 2 != 0 or (k % 2 == 0 and freq[k//2] % 2 != 0):
+            return False
+        
+        start, end = 1, k - 1
+        while start < end:
+            if freq[start] != freq[end]:
+                return False
+            start += 1
+            end -= 1
+        return True
+    
+#TC -> O(n) || SC -> O(n)

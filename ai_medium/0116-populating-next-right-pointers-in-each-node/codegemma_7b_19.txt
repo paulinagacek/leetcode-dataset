@@ -1,0 +1,19 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+
+        start = root
+
+        while start:
+            curr = start
+
+            while curr:
+                if curr.left: curr.left.next = curr.right
+                if curr.right and curr.next: curr.right.next = curr.next.left
+
+                curr = curr.next
+
+            start = start.left
+
+        return root

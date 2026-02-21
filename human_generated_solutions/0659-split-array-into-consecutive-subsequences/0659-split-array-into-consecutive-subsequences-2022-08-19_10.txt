@@ -1,19 +1,23 @@
-class Solution(object):
-    def isPossible(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        ends_with = defaultdict(list)
-        for n in nums:
-            if ends_with[n-1]:
-                length = heapq.heappop(ends_with[n-1])
-                heapq.heappush(ends_with[n], length+1)
-            else:
-                heapq.heappush(ends_with[n], 1)
+import heapq
+from collections import defaultdict
 
-        for lengths in ends_with.values():
-            if lengths and lengths[0] < 3:
-                return False
+
+class Solution:
+    def isPossible(self, nums: List[int]) -> bool:
+        lookup = defaultdict(list)
         
+        for num in nums: 
+            if not lookup[num - 1]:
+                heapq.heappush(lookup[num], 1)
+            else:
+                heapq.heappush(
+                    lookup[num], 
+                    heapq.heappop(lookup[num - 1]) + 1
+                )
+        
+        for key, heap in lookup.items():
+            if not heap:
+                continue 
+            if not all(x >= 3 for x in heap):
+                return False
         return True

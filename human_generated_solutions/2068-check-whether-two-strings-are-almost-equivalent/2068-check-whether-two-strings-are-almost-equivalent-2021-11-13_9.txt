@@ -1,8 +1,0 @@
-class Solution:
-    def checkAlmostEquivalent(self, word1: str, word2: str) -> bool:
-        f1 = Counter(word1)
-        f2 = Counter(word2)
-        for ch in string.ascii_lowercase:
-            if abs(f1[ch]-f2[ch]) > 3:
-                return False
-        return True

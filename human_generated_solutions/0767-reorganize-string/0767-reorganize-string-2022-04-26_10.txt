@@ -1,0 +1,37 @@
+from heapq import heappush, heappop
+class Solution:
+    def reorganizeString(self, s: str) -> str:
+        
+        if not s:
+            return ""
+
+        mapping = {}
+        for c in s:
+            if c in mapping:
+                mapping[c] += 1
+            else:
+                mapping[c] = 1
+
+        heap = []
+        for key in mapping:
+            heappush(heap, (-mapping[key], key))
+
+        res_list = []
+        while len(heap) > 1:
+            freq1, char1 = heappop(heap)
+            freq2, char2 = heappop(heap)
+            res_list.append(char1)
+            res_list.append(char2)
+            if abs(freq1) > 1:
+                heappush(heap, (freq1 + 1, char1))
+            if abs(freq2) > 1: 
+                heappush(heap, (freq2 + 1, char2))
+
+        if heap:
+            freq, char = heap[0]
+            if abs(freq) > 1: 
+                return ""
+            else:
+                res_list.append(char)
+        
+        return \'\'.join(res_list)

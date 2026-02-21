@@ -1,0 +1,20 @@
+class Solution:
+    def reverseOnlyLetters(self, s: str) -> str:
+        ans = [0] * len(s)
+        temp_s = list(s)
+        # dividing
+        for i in range(len(s)):
+            temp = \'\'
+            if 65 <= ord(s[i]) <= 90:
+                continue
+            elif 97 <= ord(s[i]) <= 122:
+                continue
+            else:
+                ans[i] = s[i]
+                temp_s.remove(s[i])
+                continue
+        # Put in reversed letters
+        for j in range(len(ans)):
+            if ans[j] == 0:
+                ans[j] = temp_s.pop()
+        return \'\'.join(ans)

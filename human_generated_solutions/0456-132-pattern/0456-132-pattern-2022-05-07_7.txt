@@ -1,0 +1,21 @@
+class Solution:
+    def find132pattern(self, nums: List[int]) -> bool:
+	""" Monotonic decreasing stack """
+        st=[] 
+		""" Assume first element as minimum"""
+        minn=nums[0]
+        for i in nums[1:]:
+			""" We try to maintain the highest value at the top of the stacksuch that it is greater than i too ."""
+            while st and i>=st[-1][0]:
+                st.pop()
+			""" Below statement defines i>st[-1][1] i.e.,  we have founded a value (i) which is greater than st[-1][1]
+			(minimum) and and smaller than st[-1][0] . Here in this below statement i acts as k (given in question) as it 
+			is greater than st[-1][1] and less than st[-1][0] . st[-1][1] acts as i(in question) and st[-1][0] acts as j(in 
+			question) as it has highest value among all."""
+            if st and i>st[-1][1]:
+                return True
+			""" Appending value and minimum value in stack. Here minn acts as i for the given question i.e., i<j<k """
+            st.append([i,minn])
+			""" Updating minimum value """
+            minn=min(minn,i)
+        return False

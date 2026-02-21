@@ -1,13 +1,23 @@
 class Solution:
     def removePalindromeSub(self, s: str) -> int:
         
-        if len(s) == 0:
+        if not s:
+            
+            # empty string
+            # do nothing
             return 0
         
-        if s == s[::-1]:
+        elif s == s[::-1]:
+            
+            # s is palindrome itself
+            # remove s and get empty string
+            
             return 1
         
-        if "a" not in s or  "b" not in s:
-            return 1
-        
-        return 2
+        else:
+            
+            # remove all \'a\' on first pass
+            # then remove all \'b\' on second pass
+            # finally, s will be empty string
+            
+            return 2

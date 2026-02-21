@@ -1,0 +1,6 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        nums = map(str, nums)
+        nums.sort(key=lambda x: x*3, reverse=True)
+        res = ''.join(nums)
+        return res if res[0] != '0' else res[1:]

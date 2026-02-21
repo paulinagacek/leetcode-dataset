@@ -1,0 +1,28 @@
+from typing import List
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def quick_select(nums, left, right, k):
+            if left == right:
+                return nums[left]
+            
+            pivot_index = partition(nums, left, right)
+            
+            if k == pivot_index:
+                return nums[k]
+            elif k < pivot_index:
+                return quick_select(nums, left, pivot_index - 1, k)
+            else:
+                return quick_select(nums, pivot_index + 1, right, k)
+        
+        def partition(nums, left, right):
+            pivot = nums[right]
+            i = left - 1
+            for j in range(left, right):
+                if nums[j] <= pivot:
+                    i += 1
+                    nums[i], nums[j] = nums[j], nums[i]
+            nums[i + 1], nums[right] = nums[right], nums[i + 1]
+            return i + 1
+        
+        return quick_select(nums, 0, len(nums) - 1, k - 1)

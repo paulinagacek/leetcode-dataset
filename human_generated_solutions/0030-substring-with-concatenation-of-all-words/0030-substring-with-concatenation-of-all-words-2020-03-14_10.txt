@@ -1,0 +1,35 @@
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        if not s or not words:
+            return []
+        
+        allwords = {}
+        for word in words:
+            if word in allwords:
+                allwords[word] += 1
+            else:
+                allwords[word] = 1
+       
+	    lens = len(s)
+        lenoneword = len(words[0])
+        lenallwords = len(words) * lenoneword
+        ans = []
+       
+        for i in range(lens - lenallwords + 1):
+            thissegmentwords = {}
+            for start in range(i, i + lenallwords, lenoneword): 
+                temp_word = s[start: start + lenoneword] 
+                #print(temp_word)
+                
+                if temp_word in allwords:
+                    if temp_word in thissegmentwords:
+                        thissegmentwords[temp_word] += 1
+                        if thissegmentwords[temp_word] > allwords[temp_word]:
+                            break
+                    else:
+                        thissegmentwords[temp_word] = 1
+                else:
+                    break
+            if allwords == thissegmentwords:
+                ans.append(i)
+        return ans

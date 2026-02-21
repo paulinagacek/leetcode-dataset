@@ -1,0 +1,6 @@
+class Solution:
+    def fib(self, n: int) -> int:
+        v = [0, 1]
+        for i in range(2, n+1):
+            v.append(v[i-1] + v[i-2])
+        return v[n]

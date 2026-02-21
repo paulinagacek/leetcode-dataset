@@ -1,0 +1,16 @@
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        n,m=len(mat[0]),len(mat)
+        if n*m!=r*c:
+            return mat
+        k=0
+        tmp=[]
+        output=[[0 for i in range(c)] for j in range(r)]
+        for i in mat:
+            for j in i:
+                tmp.append(j)
+        for i in range(r):
+            for j in range(c):
+                output[i][j] = tmp[k]
+                k+=1
+        return output

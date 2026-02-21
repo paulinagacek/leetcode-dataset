@@ -1,9 +1,0 @@
-max_variance = 0
-unique = list(set(s))
-for a in unique: #     see below
-    for b in unique: # rules dictate these 2 loops would be no more than O(26*26)
-      if a == b: continue
-      a_against_b_var = solveOne(a, b, s) # <= you want to do this efficiently
-      max_variance = max(a_against_b_var, max_variance)
-
-return max_variance

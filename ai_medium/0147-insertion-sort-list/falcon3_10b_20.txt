@@ -1,0 +1,35 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+        
+class Solution:
+    def insertionSortList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+
+        # Separate the list into sorted and unsorted part
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = head
+        curr = head.next
+
+        # Iterate through the unsorted part
+        while curr:
+            if curr.val < prev.val:
+                # Move elements in sorted part which are greater than curr
+                temp = dummy
+                while temp.next and temp.next.val < curr.val:
+                    temp = temp.next
+
+                # Insert curr in the correct position
+                next_curr = curr.next
+                curr.next = temp.next
+                temp.next = curr
+                prev.next = next_curr
+            else:
+                prev = curr
+            curr = prev.next
+
+        return dummy.next

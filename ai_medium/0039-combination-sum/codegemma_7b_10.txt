@@ -1,0 +1,5 @@
+from itertools import product
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        return [list(p) for p in product(*([c] * target for c in candidates)) if sum(p) == target]

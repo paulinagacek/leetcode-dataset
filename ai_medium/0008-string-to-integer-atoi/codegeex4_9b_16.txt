@@ -1,0 +1,31 @@
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        sign = 1
+        index = 0
+        result = 0
+        
+        # Step 1: Skip whitespaces
+        while index < len(s) and s[index] == ' ':
+            index += 1
+            
+        # Step 2: Handle signs
+        if index < len(s) and (s[index] == '-' or s[index] == '+'):
+            sign = -1 if s[index] == '-' else 1
+            index += 1
+        
+        # Step 3: Convert string to integer
+        while index < len(s) and s[index].isdigit():
+            result = result * 10 + int(s[index])
+            index += 1
+            
+            # Check for overflow/underflow
+            if sign == 1 and result >= 2147483648:
+                return 2147483647
+            elif sign == -1 and -result <= -2147483648:
+                return -2147483648
+        
+        return sign * result

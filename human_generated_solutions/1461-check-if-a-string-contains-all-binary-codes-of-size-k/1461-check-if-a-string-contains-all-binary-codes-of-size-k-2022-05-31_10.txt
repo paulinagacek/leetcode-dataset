@@ -1,16 +1,24 @@
-def hasAllCodes(self, s: str, k: int) -> bool:
-        d = {}
-        i = 0
-        n = len(s)
-        
-        while i+k<=n:
-            if s[i:i+k] not in d:
-                d[s[i:i+k]] = 1
-            else:
-                d[s[i:i+k]] += 1
-            i += 1
-        
-        if len(d) == 2 ** k:
-            return True
-        else:
-            return False
+class Solution:
+  def hasAllCodes(self, s: str, k: int) -> bool:
+    if len(s) - k + 1 < (1<<k) :  return False           #string not contain all numbers from the whole set 
+    
+    table = [0]*(1<<k)                                   #list for each number from the whole set
+    
+    num = 0                                              #for first number for sliding window with size = k
+    mask = 1<<(k-1)                                      #for discharging current bit (start - hi bit)
+    for i in range(k) :                       #construct first number for sliding window   
+      if s[i] == \'1\' : num |= mask;                      #add current bit into number
+      mask >>= 1                                         #shift bit in mask                                
+    table[num] = 1                            #and check this number in list as presented
+   
+    delete_hi_bit = (1<<(k-1)) - 1                       #mask for deleting hi bit  
+    for i in range (k, len(s)) :              #moving sliding window 
+      num &= delete_hi_bit                               #deleting hi bit into number  
+      num <<= 1                                          #shifting number
+      if s[i] == \'1\' : num |= 1                          #adding low bit (if it present)
+      table[num] = 1                                     #and check this number in list as presented
+      
+    for n in table :                          #checking allnumbers from the whole set
+      if n == 0 : return False                           #if current number isn\'t presented
+    
+    return True                                          #all nubers are presented

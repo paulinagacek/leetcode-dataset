@@ -1,0 +1,17 @@
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        dummy1, dummy2 = ListNode(), ListNode()
+        p1, p2 = dummy1, dummy2
+
+        while head:
+            if head.val < x:
+                p1.next = head
+                p1 = p1.next
+            else:
+                p2.next = head
+                p2 = p2.next
+            head = head.next
+
+        p2.next = None  # Disconnect the second partition
+        p1.next = dummy2.next  # Connect the first and second partitions
+        return dummy1.next

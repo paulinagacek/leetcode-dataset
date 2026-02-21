@@ -1,0 +1,4 @@
+def addDigits(self, num):
+        if num < 10:
+            return num
+        return self.addDigits(sum([int(d) for d in list(str(num))]))

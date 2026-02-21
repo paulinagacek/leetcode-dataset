@@ -1,0 +1,16 @@
+class Solution:
+    def minFallingPathSum(self, grid: List[List[int]]) -> int:
+        @cache
+        def dp(r,c):
+            if r == row - 1 and c >= 0 and c < col:
+                return grid[r][c]
+            ans = float(\'inf\')
+            for i in range(col):
+                if i != c:
+                    ans = min(ans,grid[r][c] + dp(r+1,i))
+            return ans
+        row,col = len(grid),len(grid[0])
+        ans = float(\'inf\')
+        for c in range(col):
+            ans = min(ans,dp(0,c))
+        return ans

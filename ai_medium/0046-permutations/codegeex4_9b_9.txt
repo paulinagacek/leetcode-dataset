@@ -1,0 +1,22 @@
+from typing import List
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(first = 0):
+            # if all numbers are placed then add a permutation
+            if first == n: 
+                output.append(nums[:])
+            for i in range(first, n):
+                # place nums[i] at the first position
+                nums[first], nums[i] = nums[i], nums[first]
+                # use next idx as first to build the next permutation
+                backtrack(first + 1)
+                # backtrack
+                nums[first], nums[i] = nums[i], nums[first]
+
+        n = len(nums)
+        output = []
+        backtrack()
+        return output
+
+Solution().permute([1,2,3])

@@ -1,0 +1,30 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        MAX_INT = 2147483647
+        MIN_INT = -2147483648
+        
+        # Handle overflow by checking edge cases
+        if dividend == MIN_INT and divisor == -1:
+            return MAX_INT
+        
+        # Determine the sign of the result
+        negative = (dividend < 0) != (divisor < 0)
+        
+        # Work with absolute values to simplify the division process
+        a, b = abs(dividend), abs(divisor)
+        
+        quotient = 0
+        while a >= b:
+            temp, multiple = b, 1
+            while temp <= (a >> 1):
+                temp <<= 1
+                multiple <<= 1
+            a -= temp
+            quotient += multiple
+        
+        # Apply the sign to the result
+        if negative:
+            quotient = -quotient
+        
+        # Adjust the final result according to the problem constraints
+        return max(MIN_INT, min(MAX_INT, quotient))

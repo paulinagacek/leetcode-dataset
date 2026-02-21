@@ -1,0 +1,12 @@
+from collections import Counter
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        seen = Counter()
+        result = set()
+        for i in range(len(s) - 9):
+            subsequence = s[i:i+10]
+            seen[subsequence] += 1
+            if seen[subsequence] == 2:
+                result.add(subsequence)
+        return list(result)

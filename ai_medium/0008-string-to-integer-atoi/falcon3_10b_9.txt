@@ -1,0 +1,24 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        result, sign = 0, 1
+        index = 0
+
+        # Ignore leading whitespace
+        while index < len(s) and s[index] == ' ':
+            index += 1
+
+        if index < len(s) and (s[index] == '-' or s[index] == '+'):
+            sign = -1 if s[index] == '-' else 1
+            index += 1
+
+        # Convert integer
+        while index < len(s) and s[index].isdigit():
+            result = result * 10 + int(s[index])
+            if (result * sign) > INT_MAX:
+                return INT_MAX
+            if (result * sign) < INT_MIN:
+                return INT_MIN
+            index += 1
+        
+        return result * sign

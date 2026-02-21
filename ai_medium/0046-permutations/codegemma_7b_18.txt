@@ -1,0 +1,18 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+
+        def backtrack(current, remaining):
+            if not remaining:
+                result.append(current[:])
+                return
+
+            for num in remaining:
+                current.append(num)
+                remaining.remove(num)
+                backtrack(current, remaining)
+                current.pop()
+                remaining.append(num)
+
+        backtrack([], nums)
+        return result

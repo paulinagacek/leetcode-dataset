@@ -1,5 +1,0 @@
-a = [0]*(n+1)
-a = numpy.array(a)
-for i in xrange(1,n+1):
-    a[::i] = 1-a[::i] 
-return sum(a[1:])

@@ -1,0 +1,18 @@
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        copy_nodes, mapping = {}, {}
+        
+        def dfs(node):
+            if node not in mapping:
+                copy_node = Node(node.val)
+                mapping[node] = copy_node
+                copy_nodes[copy_node] = node[:]  # Shallow copy of neighbors list
+                for n in node.neighbors:
+                    copy_node.neighbors.append(dfs(n))
+            return mapping[node]
+        
+        root_copy = dfs(node)
+        return root_copy

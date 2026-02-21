@@ -1,0 +1,15 @@
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        return self.helper(root, float(\'-inf\'), float(\'inf\'))
+    
+    def helper(self, node, minVal, maxVal):
+        if node == None:
+            return True
+        
+        if node.val <= minVal or node.val >= maxVal:
+            return False
+        
+        left = self.helper(node.left, minVal, node.val)
+        right = self.helper(node.right, node.val, maxVal)
+        
+        return left and right

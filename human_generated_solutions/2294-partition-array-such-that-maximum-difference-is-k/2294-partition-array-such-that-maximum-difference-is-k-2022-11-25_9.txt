@@ -1,0 +1,11 @@
+class Solution:
+    def partitionArray(self, nums: List[int], k: int) -> int:
+        s = sorted(nums)
+        c=0
+        temp = []
+        for i in range(len(s)):
+            if len(temp)>0 and (s[i]-temp[0])>k:
+                temp.clear()
+                c+=1
+            temp.append(s[i])
+        return c+1

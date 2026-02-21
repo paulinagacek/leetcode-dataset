@@ -1,0 +1,21 @@
+def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+	l = len(times)
+	heap = []
+
+	for i in range(0, l):
+		times[i] = [times[i][0],times[i][1],i]
+		heapq.heappush(heap, i)
+
+	times.sort()
+	sheap = []
+
+	for i in range(0, l):
+		while sheap and times[i][0]>=sheap[0][0]:
+			till, seat = heapq.heappop(sheap)
+			heapq.heappush(heap, seat)
+
+		available = heapq.heappop(heap)
+		if targetFriend==times[i][2]:
+			return available
+
+		heapq.heappush(sheap, (times[i][1], available))

@@ -1,0 +1,14 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        index = len(inorder) - 1
+        def helper(start, end):
+            if start > end:
+                return None
+            val = postorder[index]
+            index -= 1
+            root = TreeNode(val)
+            pos = inorder.index(val)
+            root.right = helper(pos + 1, end)
+            root.left = helper(start, pos - 1)
+            return root
+        return helper(0, len(inorder) - 1)

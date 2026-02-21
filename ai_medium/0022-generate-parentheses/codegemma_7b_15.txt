@@ -1,0 +1,21 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+
+        def backtrack(combination, open_count, close_count):
+            if len(combination) == 2 * n:
+                ans.append("".join(combination))
+                return
+
+            if open_count < n:
+                combination.append("(")
+                backtrack(combination, open_count + 1, close_count)
+                combination.pop()
+
+            if close_count < open_count:
+                combination.append(")")
+                backtrack(combination, open_count, close_count + 1)
+                combination.pop()
+
+        backtrack([], 0, 0)
+        return ans

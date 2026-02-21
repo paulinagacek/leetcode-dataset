@@ -1,0 +1,41 @@
+Good to Know
+You need to know the difference between subarray and subsequence.
+Subarray need to be consecutive\u3002
+Subsequence don\'t have to be consecutive.
+
+
+Intuition
+If it\'s empty sting, return 0;
+If it\'s palindrome, return 1;
+Otherwise, we need at least 2 operation.
+
+
+Explanation
+We can delete all characters \'a\' in the 1st operation,
+and then all characters \'b\' in the 2nd operation.
+So return 2 in this case
+
+
+Complexity
+Time O(N)
+Space O(N), also O(1) space checking palindrome is suuggested.
+
+
+Java:
+
+    public int removePalindromeSub(String s) {
+        return s.isEmpty() ? 0 : (s.equals(new StringBuilder(s).reverse().toString()) ? 1:2);
+    }
+C++:
+
+    int removePalindromeSub(string s) {
+        return 2 - (s == string(s.rbegin(), s.rend())) - s.empty();
+    }
+
+    int removePalindromeSub(string s) {
+        return 2 - equal(s.begin(), s.end(), s.rbegin()) - s.empty();
+    }
+Python:
+
+    def removePalindromeSub(self, s):
+        return 2 - (s == s[::-1]) - (s == "")

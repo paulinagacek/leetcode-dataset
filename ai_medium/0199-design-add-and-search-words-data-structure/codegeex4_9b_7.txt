@@ -1,0 +1,41 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.words = []
+
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        self.words.append(word)
+
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any letter.
+        """
+        from functools import lru_cache
+        
+        @lru_cache(None)
+        def helper(i, word):
+            if i == len(word):
+                return False
+            if word[i] == '.':
+                for c in range(ord('a'), ord('z') + 1):
+                    sub_word = chr(c)
+                    if helper(i + 1, word) or (i == len(word) - 1 and sub_word in self.words):
+                        return True
+                return False
+            else:
+                if i == len(word) - 1 and word[i] in self.words[-1]:
+                    return True
+                elif word[i] not in self.words[-1]:
+                    return False
+                else:
+                    return helper(i + 1, word)
+        
+        return helper(0, word)

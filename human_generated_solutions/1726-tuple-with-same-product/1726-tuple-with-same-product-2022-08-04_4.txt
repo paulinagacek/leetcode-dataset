@@ -1,2 +1,0 @@
-class Solution:
-    tupleSameProduct = lambda _, nums: sum(count*(count-1) for _, count in Counter([nums[i] * nums[j] for j in range(1, len(nums)) for i in range(len(nums) - 1) if j > i]).items()) * 4

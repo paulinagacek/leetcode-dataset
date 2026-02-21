@@ -1,1 +1,0 @@
-return True if n%100%4 else False

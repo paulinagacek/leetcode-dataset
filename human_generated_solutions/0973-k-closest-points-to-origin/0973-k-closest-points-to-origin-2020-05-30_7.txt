@@ -1,0 +1,16 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        import heapq
+        max_heap = []
+        
+        find_distance = lambda x,y: x**2 + y**2 
+
+        for point in points[:k]:
+            max_heap.append((-find_distance(*point), point)) #Default heap is a min-heap, making it negative to get a max-heap
+
+        heapq.heapify(max_heap)
+
+        for point in points[k:]:
+            heapq.heappushpop(max_heap, (-find_distance(*point), point))  #For the next set of points, push point into the heap, and pop out the top one. Eventually the heap will contain the K closest points to origin
+
+        return [point for _,point in max_heap]

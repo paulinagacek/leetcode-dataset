@@ -1,0 +1,15 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+        for layer in range(n // 2):
+            first, last = layer, n - layer - 1
+            for i in range(first, last):
+                top = matrix[first][i]
+                # left -> top
+                matrix[first][i] = matrix[last - i][first]
+                # bottom -> left
+                matrix[last - i][first] = matrix[last][last - i]
+                # right -> bottom
+                matrix[last][last - i] = matrix[i][last]
+                # top -> right
+                matrix[i][last] = top

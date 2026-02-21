@@ -1,0 +1,17 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        s = s.strip()
+        sign = 1
+        if len(s) > 0 and (s[0] == '-' or s[0] == '+'):
+            if s[0] == '-':
+                sign = -1
+            s = s[1:]
+        num = 0
+        for char in s:
+            if not char.isdigit():
+                break
+            num = num * 10 + int(char)
+        num = num * sign
+        min_num = -2**31
+        max_num = 2**31 - 1
+        return max(min_num, min(max_num, num))

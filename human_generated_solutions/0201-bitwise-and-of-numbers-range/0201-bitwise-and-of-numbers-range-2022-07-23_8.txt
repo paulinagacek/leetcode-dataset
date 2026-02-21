@@ -1,0 +1,16 @@
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        # if right crosses the next 2**n for n s.t. 2**n > left
+        # then the answer will always be 0
+        # e.g 1010 and 10000 => bitwise AND is 0
+        
+        # this is quick way to test this (not perfect, but straightforward)
+        # this will prove [left, right] contains a power of 2 described above
+        if right >= left<<1:
+            return 0
+        
+        # else calculate it manually 
+        res = left
+        for i in range(left, right+1):
+            res = res & i
+        return res

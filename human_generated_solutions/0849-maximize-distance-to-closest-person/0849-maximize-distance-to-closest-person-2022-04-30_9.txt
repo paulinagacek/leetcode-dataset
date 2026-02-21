@@ -1,0 +1,13 @@
+class Solution:
+    def maxDistToClosest(self, seats: List[int]) -> int:
+        queue = deque() # for bfs, it contains (index, distance from "1")
+        for idx, val in enumerate(seats): # put starting points in queue
+            if val == 1:
+                queue.append((idx, 0)) # initialize distance = 0
+        while queue:
+            curr_idx, curr_dist = queue.popleft()
+            for neighbor_idx in [curr_idx - 1, curr_idx + 1]:
+                if 0 <= neighbor_idx < len(seats) and seats[neighbor_idx] == 0: # check if it is in range and not visited 
+                    seats[neighbor_idx] += curr_dist + 1
+                    queue.append((neighbor_idx, curr_dist + 1))
+        return max(seats)

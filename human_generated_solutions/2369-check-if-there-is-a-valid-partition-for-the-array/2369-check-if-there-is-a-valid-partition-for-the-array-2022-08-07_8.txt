@@ -1,55 +1,20 @@
 class Solution:
     def validPartition(self, nums: List[int]) -> bool:
         n = len(nums)
-
-        @cache
-        def go(ind):
-            if ind == n:
-                return True
+        dp = [False for _ in range(n + 1)]
+        dp[0] = True
+        
+        for i in range(2, n + 1):
+            if nums[i - 1] == nums[i - 2]:
+                dp[i] = dp[i] or dp[i - 2]
             
-            count = 3
-            prev = None
-            sol1 = sol2 = sol3 = sol4 = False
-            sol4_flag = True
+            if i - 3 < 0:
+                continue
             
-            while count and ind < n:
-                count -= 1
-                if prev is None:
-                    prev = nums[ind]
-
-                elif nums[ind] == prev:
-                    if count == 1:
-                        sol1 = go(ind + 1)
-
-                elif nums[ind] != prev:
-                    sol4_flag = False
-                    if count == 0:
-                        sol2 = go(ind)
-
-                    else:
-                        count = 2
-                        bf = 0
-                        while count and ind < n:
-                            count -= 1
-                            if nums[ind] - prev != 1:
-                                bf = 1
-                                break
-                            prev = nums[ind]
-                            ind += 1
-
-                        if count == bf == 0:
-                            sol3 = go(ind)
-
-                        break
-
-                prev = nums[ind]
-                ind += 1
-
-            if sol4_flag and count == 0:
-                sol4 = go(ind)
-
-            if sol1 or sol2 or sol4 or sol3:
-                return True
-            return False
-
-        return go(0)
+            if nums[i - 1] == nums[i - 2] and nums[i - 2] == nums[i - 3]:
+                dp[i] = dp[i] or dp[i - 3]
+            
+            if nums[i - 1] == nums[i - 2] + 1 and nums[i - 2] == nums[i - 3] + 1:
+                dp[i] = dp[i] or dp[i - 3]
+            
+        return dp[n]

@@ -1,18 +1,18 @@
-class Solution {
-public:
-    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size(); 
-        vector<int> row(m), col(n); 
-        for (int i = 0; i < m; ++i) 
-            for (int j = 0; j < n; ++j) 
-                if (grid[i][j]) {
-                    ++row[i]; 
-                    ++col[j]; 
-                }
-        vector<vector<int>> ans(m, vector<int>(n)); 
-        for (int i = 0; i < m; ++i) 
-            for (int j = 0; j < n; ++j) 
-                ans[i][j] = 2*row[i] + 2*col[j] - m - n;
-        return ans; 
-    }
-};
+class Solution:
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+        row,col=len(grid),len(grid[0])
+        one_row,one_col=[0]*row,[0]*col
+
+        for i in range(row):
+            for j in range(col):
+                if grid[i][j]==1:
+                    one_row[i]+=1
+                    one_col[j]+=1
+
+
+        ans=[[0]*col for _ in range(row)]
+        for i in range(row):
+            for j in range(col):
+                ans[i][j]=one_row[i]+one_col[j]-(row-one_row[i])-(col -one_col[j])
+
+        return ans

@@ -1,0 +1,20 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+        value = 1
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # right, down, left, up
+        row, col, dir_idx = 0, 0, 0
+        
+        for _ in range(n * n):
+            matrix[row][col] = value
+            value += 1
+            
+            next_row, next_col = row + directions[dir_idx][0], col + directions[dir_idx][1]
+            
+            if not (0 <= next_row < n and 0 <= next_col < n and matrix[next_row][next_col] == 0):
+                dir_idx = (dir_idx + 1) % 4
+                next_row, next_col = row + directions[dir_idx][0], col + directions[dir_idx][1]
+            
+            row, col = next_row, next_col
+        
+        return matrix

@@ -1,0 +1,17 @@
+class Solution:
+    def numberOfWeakCharacters(self, P: List[List[int]]) -> int:
+        
+        # 1. prep
+        P.sort(key=lambda x: (x[0], -x[1]))
+        stack = []
+        res = 0
+        
+        # 2. monotonic stack and main work
+        for a, d in P:
+            # monotonic stack
+            while stack and d > stack[-1]:
+                stack.pop()
+                res += 1
+            stack.append(d)
+            
+        return res

@@ -1,0 +1,20 @@
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def generate(start, end):
+            if start > end:
+                return [None]
+            result = []
+            for i in range(start, end + 1):
+                left = generate(start, i - 1)
+                right = generate(i + 1, end)
+                for l in left:
+                    for r in right:
+                        node = TreeNode(i)
+                        node.left = l
+                        node.right = r
+                        result.append(node)
+            return result
+
+        if n == 0:
+            return []
+        return generate(1, n)

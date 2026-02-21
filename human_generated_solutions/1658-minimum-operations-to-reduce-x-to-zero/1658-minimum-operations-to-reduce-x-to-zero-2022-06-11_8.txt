@@ -1,0 +1,52 @@
+import bisect
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        n = len(nums)
+        left = [0] * n
+        right = [0] * n
+        left[0] = nums[0]
+        for i in range(1,n):
+            left[i] = left[i-1] + nums[i]
+        nums = nums[::-1]
+        right[0] = nums[0]
+        for i in range(1,n):
+            right[i] = right[i-1] + nums[i]
+            
+        res = n+1
+        
+        a = bisect.bisect_left(left,x)
+        
+        if a != n:
+            
+            if left[a] == x:
+                res = min(res,a+1)
+        
+        b = bisect.bisect_left(right,x)
+        
+        if b != n:
+            
+            if right[b] == x:
+                res = min(res,b+1)
+        
+        
+        l, r = 0, n-1
+        
+        while l+r <= n :
+            if l>=n or r<0:      #######
+				break            #  those lines 
+            if left[l]>= x:      #  are used  to 
+                break            #  reduce time,
+            if right[r]>=x:      #  to fast exit loops or 
+                r -= 1           # let r get to possible place fast
+                continue         ########
+            if left[l] + right[r] == x:
+                res = min(res,l+1+r+1)
+                l += 1
+                r -= 1
+            elif left[l] + right[r] > x:
+                r -= 1
+            elif left[l] + right[r] < x:
+                l += 1
+        if res == n+1:
+            return -1
+        return res

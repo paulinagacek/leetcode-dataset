@@ -1,4 +1,13 @@
-1) If the value p or q exist the left/right subtree
-	-  return the node
-2) Until a node have both left and right nodes return, it is the LCA of p and q.
-   Else, either left or right node is the LCA
+class Solution:
+    def lowestCommonAncestor(self, root: \'TreeNode\', p: \'TreeNode\', q: \'TreeNode\') -> \'TreeNode\':
+        
+        # found what we want or there is nothing 
+        if (root == p or root == q or not root): return root 
+        
+        #recursion
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q) 
+        
+        if left and right: return root    # found common ancestor 
+        elif left: return left
+        elif right: return right

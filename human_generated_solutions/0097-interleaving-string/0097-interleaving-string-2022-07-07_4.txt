@@ -1,23 +1,19 @@
-class Solution {
-public:
-    bool isInterleave(string s1, string s2, string s3) {
-		if (s1.length() + s2.length() != s3.length()) return false;
-		if (s1.length() < s2.length()) swap(s1, s2);
-		int m = s1.length(), n = s2.length();
-			
-        vector<bool> dp(n + 1, false);
-        dp[0] = true;
-        for (int j = 1; j <= n; j++) {
-            dp[j] = s3[j - 1] == s2[j - 1] && dp[j - 1];
-        }
-
-        for (int i = 1; i <= m; i++) {
-            dp[0] = s3[i - 1] == s1[i - 1] && dp[0];
-            for (int j = 1; j <= n; j++) {
-                dp[j] = (s3[i + j - 1] == s1[i - 1] && dp[j]);
-                dp[j] = dp[j] || (s3[i + j - 1] == s2[j - 1] && dp[j - 1]);
-            }
-        }
-        return dp.back();
-    }
-};
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        if len(s1) + len(s2) != len(s3):
+            return False
+        
+        curr_layer, next_layer = set([(-1, -1)]), set()
+        i3 = 0
+        
+        while curr_layer and i3 < len(s3):
+            for i1, i2 in curr_layer:
+                if i1 + 1 < len(s1) and s1[i1 + 1] == s3[i3]:
+                    next_layer.add((i1 + 1, i2))
+                if i2 + 1 < len(s2) and s2[i2 + 1] == s3[i3]:
+                    next_layer.add((i1, i2 + 1))
+            curr_layer, next_layer = next_layer, set()
+            if curr_layer:
+                i3 += 1
+        
+        return i3 == len(s3)

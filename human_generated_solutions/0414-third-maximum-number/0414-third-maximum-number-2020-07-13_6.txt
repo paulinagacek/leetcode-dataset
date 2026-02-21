@@ -1,1 +1,0 @@
-2. If the length of the set is greater than 2, then sort the set, convert it into a list, and **return the 3rd element from the end of the list.**

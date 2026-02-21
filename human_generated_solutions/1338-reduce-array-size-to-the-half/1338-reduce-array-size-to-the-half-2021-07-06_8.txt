@@ -1,0 +1,12 @@
+class Solution:
+    def minSetSize(self, arr: List[int]) -> int:
+        if not arr : return 
+        d = {}
+        for num in arr : d[num] = d.get(num, 0) + 1
+        pq = [-i for i in d.values()]
+        heapq.heapify(pq)
+        deleted, res = 0, 0 
+        while deleted < len(arr)>>1:
+            res += 1
+            deleted += -heapq.heappop(pq)
+        return res

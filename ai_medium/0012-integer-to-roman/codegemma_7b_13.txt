@@ -1,0 +1,44 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        val = [
+            1000,
+            900,
+            500,
+            400,
+            100,
+            90,
+            50,
+            40,
+            10,
+            9,
+            5,
+            4,
+            1,
+        ]
+        roman_symbols = [
+            "M",
+            "CM",
+            "D",
+            "CD",
+            "C",
+            "XC",
+            "L",
+            "XL",
+            "X",
+            "IX",
+            "V",
+            "IV",
+            "I",
+        ]
+
+        roman_numeral = ""
+
+        i = 0
+        while num > 0:
+            if num - val[i] >= 0:
+                num -= val[i]
+                roman_numeral += roman_symbols[i]
+            else:
+                i += 1
+
+        return roman_numeral

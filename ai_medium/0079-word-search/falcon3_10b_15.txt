@@ -1,0 +1,21 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        rows, cols = len(board), len(board[0])
+        
+        def dfs(r, c, k):
+            if k == len(word):
+                return True
+            visited = board[r][c]
+            board[r][c] = '#'  # Mark as visited
+            for nr, nc in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
+                if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] == word[k]:
+                    if dfs(nr, nc, k+1):
+                        return True
+            board[r][c] = visited  # Restore
+            return False
+        
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == word[0] and dfs(r, c, 0):
+                    return True
+        return False

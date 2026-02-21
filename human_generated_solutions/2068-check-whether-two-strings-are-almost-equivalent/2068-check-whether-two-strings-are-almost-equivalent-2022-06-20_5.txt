@@ -1,6 +1,0 @@
-masterset = set(word1).union(set(word2))
-
-for i in masterset:
-	if abs(word1.count(i) - word2.count(i)) > 3:
-		return False
-return True

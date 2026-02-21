@@ -1,0 +1,14 @@
+class Solution:
+    def numTrees(self, n: int) -> int:        
+        from functools import lru_cache
+        @lru_cache(None)
+        def helper(l, r):
+            if l > r:
+                return 1
+            res = 0
+            for i in range(l, r + 1):
+                left = helper(l, i - 1)
+                right = helper(i + 1, r)
+                res += left * right
+            return res
+        return helper(1, n)

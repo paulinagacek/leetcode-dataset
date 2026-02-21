@@ -1,0 +1,16 @@
+class Solution:
+    def flatten(self, root):
+        if not root:
+            return None
+        start = root
+        while start:
+            if start.left and start.right:
+                left, right = start.left, start.right
+                while left.right:
+                    left = left.right
+                start.right = left
+                left.left, left.right = None, right
+            elif start.left:
+                start.right = start.left
+                start.left = None
+            start = start.right

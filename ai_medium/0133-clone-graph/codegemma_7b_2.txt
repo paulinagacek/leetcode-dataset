@@ -1,0 +1,27 @@
+from typing import Optional, Dict
+
+class Node:
+    def __init__(self, val=0, neighbors=None):
+        self.val = val
+        self.neighbors = neighbors or []
+
+def cloneGraph(node: Optional[Node]) -> Optional[Node]:
+    if not node:
+        return None
+
+    visited: Dict[int, Node] = {}
+
+    def dfs(node: Node) -> Node:
+        if node.val in visited:
+            return visited[node.val]
+
+        cloned_node = Node(node.val)
+        visited[node.val] = cloned_node
+
+        for neighbor in node.neighbors:
+            cloned_neighbor = dfs(neighbor)
+            cloned_node.neighbors.append(cloned_neighbor)
+
+        return cloned_node
+
+    return dfs(node)

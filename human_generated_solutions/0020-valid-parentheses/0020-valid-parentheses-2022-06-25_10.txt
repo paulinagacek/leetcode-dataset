@@ -1,0 +1,17 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        st=[]
+        leftb=["(", "{","["]
+        rightb=[")","}","]"]
+        for i in s:
+		# If opening bracket is found, push in stack.
+            if i in leftb: st.append(i)
+			elif i in rightb:
+			 # If the top element matches the closing bracket correponding to the 
+			 # opening bracket, pop it.
+                if len(st)!=0 and st[-1] == leftb[rightb.index(i)]:
+                    st.pop()
+		     # If closing bracket doesnt match with its corresponding opening bracket.
+                else:
+                    return False
+        return len(st)==0

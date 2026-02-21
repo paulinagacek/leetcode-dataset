@@ -1,5 +1,0 @@
-if mismatch:
-	return False
-else:
-	i++
-	j++

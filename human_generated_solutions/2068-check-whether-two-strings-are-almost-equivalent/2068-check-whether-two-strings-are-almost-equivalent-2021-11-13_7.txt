@@ -1,6 +1,8 @@
 class Solution:
     def checkAlmostEquivalent(self, word1: str, word2: str) -> bool:
-        freq = [0]*26
-        for x in word1: freq[ord(x)-97] += 1
-        for x in word2: freq[ord(x)-97] -= 1
-        return all(abs(x) <= 3 for x in freq)
+        f1 = Counter(word1)
+        f2 = Counter(word2)
+        for ch in string.ascii_lowercase:
+            if abs(f1[ch]-f2[ch]) > 3:
+                return False
+        return True

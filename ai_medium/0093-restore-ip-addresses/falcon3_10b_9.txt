@@ -1,0 +1,16 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid(ip):
+            return all(0 <= int(x) <= 255 and (x != '0' or len(x) == 1) for x in ip)
+        
+        def dfs(start, path):
+            if len(path) == 4:
+                if start == len(s):
+                    yield '.'.join(path)
+                return
+            for end in range(start + 1, min(start + 4, len(s) + 1)):
+                segment = s[start:end]
+                if is_valid([segment]):
+                    yield from dfs(end, path + [segment])
+        
+        return list(dfs(0, []))

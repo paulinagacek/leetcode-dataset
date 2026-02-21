@@ -1,0 +1,25 @@
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+
+        graph = defaultdict(list)
+        degree = [0] * numCourses
+
+        for u, v in prerequisites:
+            graph[v].append(u)
+            degree[u] += 1
+
+        queue = [u for u in range(numCourses) if degree[u] == 0]
+        visited = 0
+
+        while queue:
+            u = queue.pop()
+            visited += 1
+
+            for v in graph[u]:
+                degree[v] -= 1
+                if degree[v] == 0:
+                    queue.append(v)
+
+        return visited == numCourses

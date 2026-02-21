@@ -1,31 +1,14 @@
-#define max(X, Y) ((X) > (Y) ? (X) : (Y)) 
+class Solution:
+    def minSetSize(self, arr: List[int]) -> int:
+        total_len = len(arr)
+        target_len = total_len // 2
+        counter = 0
+        arr_chr_count = Counter(arr).most_common()
+        for x in arr_chr_count:
+            total_len -= x[1]
+            counter += 1
+            print(counter)
+            if total_len <= target_len:
+                break
 
-int minSetSize(int* arr, int arrSize){
-    int i, number_cnt = 0, unique_cnt = 0, target = arrSize / 2;
-    int map_max = 0, cnt_max = 0;
-    int map[100001] = {0};
-    int cnt[50000] = {0};
-    
-    // map[] is the counting of original numbers.
-    // cnt[] is the counting of map[], meaning counting of apearence times.
-    for (i=0; i < arrSize; i++){
-        map[arr[i]]++;
-        if (map[arr[i]] >= target) return 1;
-        map_max = max(map_max, arr[i]);
-    }
-    
-    for (i = map_max; i > 0; i--){
-        cnt[map[i]]++;
-        cnt_max = max(cnt_max, map[i]);
-    }
-    
-    for (i = cnt_max; i > 0; i--){
-        if (number_cnt + (i * cnt[i]) > target){
-            return unique_cnt + (target - number_cnt + i - 1) / i;
-        }
-        number_cnt += i * cnt[i];
-        unique_cnt += cnt[i];
-    }
-    
-    return 0;
-}
+        return counter

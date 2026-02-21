@@ -1,0 +1,39 @@
+from heapq import heappush, heappop
+
+class Solution:
+    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
+        
+        # min heap to store building gaps
+        building_gap_heap = []
+        
+        total_buildings = len(heights)
+        
+        # scan each building pair\'s gap
+        for i in range( total_buildings-1 ):
+            
+            cur_building_gap = heights[i+1] - heights[i]
+            
+            
+            if cur_building_gap > 0:
+                
+                # next building is higher than current one, add to min heap
+                
+                heappush(building_gap_heap, cur_building_gap)
+            
+            
+            if len(building_gap_heap) > ladders:
+                
+                # the number of positive gaps is more than the number of ladders
+                # use bricks to fill those smaller gaps
+            
+                gap_to_climb = heappop(building_gap_heap)
+                bricks -= gap_to_climb
+            
+            
+            if bricks < 0:
+                
+                # we can not fill more gaps, because the bricks is run out
+                return i
+        
+        # we can reach last building
+        return total_buildings-1

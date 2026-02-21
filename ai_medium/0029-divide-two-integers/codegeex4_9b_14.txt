@@ -1,0 +1,21 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        MAX_INT = 2147483647
+        MIN_INT = -2147483648
+        
+        if dividend == MIN_INT and divisor == -1:
+            return MAX_INT
+        
+        sign = -1 if (dividend < 0) ^ (divisor < 0) else 1
+        
+        a, b = abs(dividend), abs(divisor)
+        count = 0
+        while a >= b:
+            temp, i = b, 1
+            while a >= (temp << 1):
+                temp <<= 1
+                i <<= 1
+            a -= temp
+            count += i
+        
+        return max(MIN_INT, min(sign * count, MAX_INT))

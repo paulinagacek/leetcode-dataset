@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(start=0):
+            if start == len(nums) - 1:
+                result.append(nums[:])
+            else:
+                for i in range(start, len(nums)):
+                    if i != start and nums[i] == nums[start]:
+                        continue
+                    nums[i], nums[start] = nums[start], nums[i]
+                    backtrack(start + 1)
+                    nums[i], nums[start] = nums[start], nums[i]
+
+        result = []
+        nums.sort()
+        backtrack()
+        return result

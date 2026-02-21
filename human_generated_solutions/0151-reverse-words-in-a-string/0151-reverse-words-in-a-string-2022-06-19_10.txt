@@ -1,0 +1,26 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+	
+        result, i, n = \'\', 0, len(s)
+		
+        while i < n:
+		
+            while i < n and s[i] == \' \':  # conditions will keep going till when the next character is not a space and
+                i += 1                    # i will point to the first letter of the word
+				
+            if i >= n: break
+				
+            j = i + 1                     # j will begin from the next character where i point
+            while j < n and s[j] != \' \':  # j will keep going till when the next character is a space and
+                j += 1                    # j will point to the end of the word started with i
+
+            sub = s[i:j]  # creating a substring of that word from i=start to j=space after the last letter
+
+            if len(result) == 0:  # when adding the first letter to the result
+                result = sub
+            else:  # let\'s say if there are two letters in the string s first and last, first will be added in the last and last will be added in the front
+                result = sub + \' \' + result  # adding the new substrings in front of the result
+           
+		   i = j + 1  # now i will point to next index from the space possibly a word, cause after a space usually a word is there
+			
+        return result

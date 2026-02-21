@@ -1,0 +1,18 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        n1, n2 = len(num1), len(num2)
+        result = [0] * (n1 + n2)
+
+        for i in range(n1 - 1, -1, -1):
+            carry = 0
+            for j in range(n2 - 1, -1, -1):
+                sum = int(num1[i]) * int(num2[j]) + result[i + j + 1] + carry
+                result[i + j + 1] = sum % 10
+                carry = sum // 10
+
+        # Remove leading zeros
+        start = 0
+        while start < len(result) and result[start] == 0:
+            start += 1
+
+        return ''.join(map(str, result[start:])) or '0'

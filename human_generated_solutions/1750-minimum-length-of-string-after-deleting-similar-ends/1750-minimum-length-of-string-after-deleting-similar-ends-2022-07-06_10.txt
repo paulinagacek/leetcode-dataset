@@ -1,0 +1,23 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        left = 0
+        right = len(s) - 1
+        
+        while left < right:
+            
+            while left < right and s[left] == s[right]:
+                left += 1
+            
+            # We will compare right to (left - 1) because in after the above loop
+            # left will point to the first element which is not equal to right element
+            # therefore, (left - 1) is the element which is equal to right
+            while right >= left and left > 0 and s[left-1] == s[right]:
+                right -= 1
+                
+            if s[left] != s[right]:
+                break
+        
+        if left > right:
+            return 0
+        
+        return right - left + 1

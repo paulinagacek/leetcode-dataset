@@ -1,0 +1,11 @@
+from itertools import combinations_with_replacement
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        for i in range(target // min(candidates) + 1):  # number of combinations with each candidate
+            combs = [list(c) for c in combinations_with_replacement(candidates, i)]
+            for comb in combs:
+                if sum(comb) == target:
+                    res.append(comb)
+        return res

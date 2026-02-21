@@ -1,50 +1,24 @@
 class Solution:
+    
+    def __init__(self):
+        self.table = {(0,0):1, (0,3):1}
+        self.mod = 1000000007
+    
+    def func(self, pos, state):
+        if pos < 0: return 0
+        elif (pos, state) not in self.table:
+            if state == 0:
+                self.table[(pos, state)] = self.func(pos-1, 3)
+            elif state == 1:
+                self.table[(pos, state)] = self.func(pos-1, 0) + self.func(pos-1, 2)
+            elif state == 2:
+                self.table[(pos, state)] = self.func(pos-1, 0) + self.func(pos-1, 1)
+            elif state == 3:
+                self.table[(pos, state)] = self.func(pos-1, 0) + self.func(pos-1, 1) + self.func(pos-1, 2) + self.func(pos-1, 3)
+        
+        self.table[(pos, state)] %= self.mod
+        return self.table[(pos, state)]
+    
     def numTilings(self, n: int) -> int:
         
-        MOD=(10**9) + 7
-        dir=[[1,1],[2,2],[2,1],[1,2]]
-
-        @lru_cache(None)
-        def recur(index1,index2):
-            
-            # base case->
-            
-            # jab dono index poore ho jayen toh ans me ek jodh do
-            if index1==n and index2==n:
-                return 1
-            
-            # jab ek bhi index overflow ho jaye toh usko ans me count mt kro
-            if index1>n and index2>n:
-                return 0
-
-            ans=0
-            # jab index1 aur index 2 ke beech me ek ka difference ho
-            if abs(index1-index2)==1:
-                
-                # ya toh L shape laga do... tab ek index ek se badh jayga aur doosra 2 se
-                # ya toh ek 2x1 domino tile laga do... usme ek indeex 2 se badh jayga
-                if index1<index2:
-                    ans+=recur(index1+2,index2+1)
-                    ans+=recur(index1+2,index2)
-                else:
-                    ans+=recur(index1+1,index2+2)
-                    ans+=recur(index1,index2+2)
-                    
-            # jab index1 aur index 2 ke beech me do ka difference ho
-            elif abs(index1-index2)==2:
-                
-                # tab sirf 2x1 ka domino lag sakta hai
-                if index1<index2:
-                    ans+=recur(index1+2,index2)
-                else:
-                    ans+=recur(index1,index2+2)
-                    
-             # jab index1 aur index 2 ke beech me zero ka difference ho         
-            elif abs(index1-index2)==0:
-                
-                # toh ek ek krke sare domino laga ke try krte jao
-                for val in dir:
-                    ans+=recur(index1+val[0],index2+val[1])  
-            return ans
-
-        return recur(0,0)%MOD
+        return self.func(n-1, 3)

@@ -1,0 +1,52 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        # The root node is not guaranteed to be convered
+        @cache
+        def helper(root):
+            if not root:
+                return 0
+            
+            l, r = root.left, root.right
+
+            # place a camera at the root
+            c1 = helper2(root.left) + helper2(root.right) + 1
+
+            # place a camera at the left child
+            if root.left:
+                c2 = helper(root.right) + helper2(root.left.left) + helper2(root.left.right) + 1
+            else:
+                c2 = float("inf")
+
+            # place a camera at the right child
+            if root.right:
+                c3 = helper(root.left) + helper2(root.right.left) + helper2(root.right.right) + 1
+            else:
+                c3 = float("inf")
+            
+            return min(c1, c2, c3)
+        
+        # The root node is already guaranteed to be convered
+        @cache
+        def helper2(root):
+            if not root:
+                return 0
+            
+            if not root.left and not root.right:
+                return 0
+            
+            # not place a camera at the root node
+            c1 = helper(root.left) + helper(root.right)
+
+            # still place a camera at the root node
+            c2 = 1 + helper2(root.left) + helper2(root.right)
+
+            return min(c1, c2)
+
+        
+        return helper(root)

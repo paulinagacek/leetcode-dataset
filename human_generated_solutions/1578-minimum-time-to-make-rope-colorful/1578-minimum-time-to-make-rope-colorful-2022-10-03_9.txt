@@ -1,21 +1,15 @@
 class Solution:
     def minCost(self, colors: str, neededTime: List[int]) -> int:
         
-        time = 0
-        if len(colors) == 1:
-            return time
+        n = len(colors)
         
+        dp = [0] * n
         
-        for i in range(len(colors)-1):
-            curColor = colors[i]
-            nextColor = colors[i+1]
-			
-            if curColor == nextColor:
-                if neededTime[i] < neededTime[i+1]:
-                    time += neededTime[i]
-                else:
-                    time += neededTime[i+1]
-                    neededTime[i+1], neededTime[i] = neededTime[i], neededTime[i+1]
+        for i in range(1, n):
+            if colors[i] != colors[i-1]: dp[i] = dp[i-1]
+            elif neededTime[i-1] <= neededTime[i]: dp[i] = dp[i-1] + neededTime[i-1]
+            else: 
+                dp[i] = dp[i-1] + min(neededTime[i-1], neededTime[i])
+                neededTime[i-1], neededTime[i] = neededTime[i], neededTime[i-1]
                 
-        
-        return time
+        return dp[-1]

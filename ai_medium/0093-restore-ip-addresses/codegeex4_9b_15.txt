@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        self.backtrack(s, 0, [], result)
+        return result
+    
+    def backtrack(self, s: str, start: int, path: List[str], result: List[str]):
+        if len(path) == 4 and start == len(s):
+            result.append('.'.join(path))
+            return
+        if len(path) >= 4:
+            return
+        
+        for i in range(start, min(len(s), start + 3)):
+            substring = s[start:i+1]
+            if int(substring) > 255 or (substring[0] == '0' and len(substring) > 1):
+                continue
+            self.backtrack(s, i+1, path+[substring], result)

@@ -1,0 +1,15 @@
+def minDistance(self, word1: str, word2: str) -> int:
+	bigw, smw = (word1, word2) if len(word1) >= len(word2) else (word2, word1)
+	chpos = defaultdict(list)
+	for i, ch in enumerate(smw):
+		chpos[ch].append(i)
+
+	len_upto_idx = [0] * (len(smw) + 1)
+	for ch in bigw:
+		if ch not in chpos: continue
+		agg = list(accumulate(len_upto_idx[:chpos[ch][-1]+1], max))
+		for i in reversed(chpos[ch]):
+			len_upto_idx[i+1] = agg[i] + 1
+
+	maxcommon = max(len_upto_idx[1:])
+	return len(bigw) + len(smw) - 2 * maxcommon

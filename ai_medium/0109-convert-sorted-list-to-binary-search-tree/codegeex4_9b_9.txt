@@ -1,0 +1,38 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        if not head:
+            return None
+        if not head.next:
+            return TreeNode(head.val)
+        
+        # Find the middle element of the linked list
+        slow, fast = head, head.next.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # Split the list into two halves
+        mid_next = slow.next.next
+        slow.next.next = None
+        slow.next = None
+        
+        # Create a new tree node with the middle element as root
+        root = TreeNode(slow.val)
+        
+        # Recursively build the left and right subtrees
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(mid_next)
+        
+        return root

@@ -1,0 +1,33 @@
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or k==0:
+            return head
+        
+        # get the length of the linked list
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+        
+        # adjust k to be within the range of the linked list length
+        k = k % length
+        
+        # move the head pointer to point to the node after k jumps
+        temp = head
+        for i in range(k):
+            temp = temp.next
+        
+        # move the tail pointer to the last node
+        tail = head
+        while tail.next:
+            tail = tail.next
+        
+        # connect the tail pointer to the head pointer
+        tail.next = head
+        
+        # move the head pointer to the node after k jumps
+        head = temp.next
+        temp.next = None
+        
+        return head

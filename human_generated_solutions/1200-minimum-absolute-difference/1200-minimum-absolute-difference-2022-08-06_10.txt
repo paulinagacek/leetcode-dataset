@@ -1,0 +1,15 @@
+def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+	arr.sort()          # sort arr ascending
+        
+    pairs = []          # found pairs with abs diff equal to min abs diff will be stored here
+    min_abs = 2000001
+    for i in range(1, len(arr)):
+		pair_abs = abs(arr[i] - arr[i-1])       # abs diff of the current pair
+		if pair_abs < min_abs:                  # check if we found a new minimum abs diff
+			min_abs = pair_abs                  # then update min_abs
+            pairs = []                          # clear prev found pairs
+            
+		if pair_abs == min_abs:                 # if the abs diff of the current pair equals to min abs 
+			pairs.append([arr[i-1], arr[i]])    # store this pair in resulting list
+                
+	return pairs

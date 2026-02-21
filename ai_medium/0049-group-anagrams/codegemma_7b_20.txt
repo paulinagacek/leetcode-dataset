@@ -1,0 +1,10 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        m = {}
+        for i in strs:
+            t = ''.join(sorted(i))
+            if t not in m:
+                m[t] = [i]
+            else:
+                m[t].append(i)
+        return list(m.values())

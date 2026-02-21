@@ -1,11 +1,23 @@
 class CombinationIterator:
-
+     
     def __init__(self, characters: str, combinationLength: int):
-        from itertools import combinations
-        self.combs = ["".join(c) for c in combinations(characters, combinationLength)]
-
+        
+        #using itertools.combinations to generate all combinations of characters of length combinationLength
+        self.combination = [\'\'.join(combo) for combo in combinations(characters, combinationLength)]
+        
+        #counter to keep track of iterator\'s next
+        self.counter = 0
+        
+        
     def next(self) -> str:
-        return self.combs.pop(0)
+        #check if there is a next
+        if self.hasNext():
+            #counter must be updated
+            self.counter += 1
+            
+            return self.combination[self.counter - 1]
 
     def hasNext(self) -> bool:
-        return bool(self.combs)
+        
+        #check if counter did not reach end
+        return  self.counter < len(self.combination)

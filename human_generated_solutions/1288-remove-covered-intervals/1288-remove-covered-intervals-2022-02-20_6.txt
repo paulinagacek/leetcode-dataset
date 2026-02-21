@@ -1,9 +1,32 @@
-class Solution:
-    def removeCoveredIntervals(self, new: List[List[int]]) -> int:
-        arr=[]
-        for i in range(len(new)):
-            for j in range(len(new)):
-                if i!=j and new[j][0] <= new[i][0] and new[i][1] <= new[j][1]:
-                    arr.append(new[i])
-                    break
-        return len(new)-len(arr)
+class Solution(object):
+    def removeCoveredIntervals(self, intervals):
+	    n = allIntervals = len(intervals)
+		l = 0
+		r = 1
+		
+		# this built in function can sort by first element as well as second
+		# so given sorted [l1,u1],[l2,u2] it can also satisfy l1 = l2 AND u1 < u2
+		intervals.sort()
+		
+		# we have a left and right pointer
+		while r < n:
+		    # we check for equal lower bound
+			# we will shift both left and right if equal since we only really need the interval with greatest upper bound among equal lower bounds
+			# the greater upper bound the larger the interval
+			# the interval with same lower bound but lower upper bound is also covered, hence the allIntervals decrement
+		    while r<n and intervals[l][0] == intervals[r][0]:
+			    l += 1
+				r += 1
+				allIntervals -= 1
+				
+			# we scan through the upper bounds
+			# we only shift right - left will serve as the basis for maximum upper bound
+			# if current max upper bound is greater than interval[r], this also makes interval[r] covered, hence the allIntervals decrement
+			while r<n and intervals[l][1] >= intervals[r][1]:
+			    r += 1
+				allIntervals -= 1
+				
+			l = r
+			r += 1
+			
+		return allIntervals

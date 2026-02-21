@@ -1,0 +1,15 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = [{} for _ in range(9)]
+        cols = [{} for _ in range(9)]
+        boxes = [{} for _ in range(9)]
+
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] != '.':
+                    num = int(board[r][c])
+                    box_id = (r // 3) * 3 + c // 3
+                    if num in rows[r] or num in cols[c] or num in boxes[box_id]:
+                        return False
+                    rows[r][num] = cols[c][num] = boxes[box_id][num] = True
+        return True

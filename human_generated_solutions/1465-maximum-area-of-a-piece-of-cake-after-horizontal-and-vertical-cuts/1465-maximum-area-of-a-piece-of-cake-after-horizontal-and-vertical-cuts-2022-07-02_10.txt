@@ -1,16 +1,24 @@
-class Solution {
-    public int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
-        Arrays.sort(horizontalCuts);
-        Arrays.sort(verticalCuts);
-        int max_hor_dis = Math.max(horizontalCuts[0], h - horizontalCuts[horizontalCuts.length-1]);
-        int max_ver_dis = Math.max(verticalCuts[0], w - verticalCuts[verticalCuts.length-1]);
-        int mod = (int)Math.pow(10,9)+7;
-        for(int i=1; i<horizontalCuts.length; i++){
-            max_hor_dis = Math.max(max_hor_dis, horizontalCuts[i] - horizontalCuts[i-1]);
-        }
-        for(int i=1; i<verticalCuts.length; i++){
-            max_ver_dis = Math.max(max_ver_dis, verticalCuts[i] - verticalCuts[i-1]);
-        }
-        return (int)((long) max_hor_dis * max_ver_dis % mod);
-    }
-}
+class Solution:
+    def getMaxConsecutiveDifference(self,distances,lenTotal):
+        #Appending first boundary
+        distances.append(0)
+        #Appending last boundary
+        distances.append(lenTotal)
+        #Sorting
+        distances.sort()
+        maxDistancesDiff = 0 
+        #Looping to calculate max consecutive distance
+        for i in range(1,len(distances)):
+            #Getting the difference of two consecutive elements
+            currDiff = distances[i] - distances[i-1]
+            #Updating max difference value
+            maxDistancesDiff = max(maxDistancesDiff,currDiff)       
+        return maxDistancesDiff
+    
+    def maxArea(self, h: int, w: int, horizontalCuts: List[int], verticalCuts: List[int]) -> int:
+        #Getting max consecutive distance from horizontal distance
+        horizontalMaxDiff = self.getMaxConsecutiveDifference(horizontalCuts,h) 
+        #Getting max consecutive distance from vertical distance
+        verticalMaxDiff = self.getMaxConsecutiveDifference(verticalCuts,w) 
+        #Returning the result after performing the modulo operation
+        return ((horizontalMaxDiff*verticalMaxDiff)%(10**9+7))

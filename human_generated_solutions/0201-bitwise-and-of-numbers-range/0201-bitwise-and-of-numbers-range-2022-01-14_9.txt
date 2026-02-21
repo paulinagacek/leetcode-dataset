@@ -1,0 +1,14 @@
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        if left==0 or right==0:
+            return 0
+        if left==right:
+            return left
+        if int(log(right,2))==int(log(left,2)):
+            leftBinStr=bin(left&right)
+            diff=bin(right-left)
+            leng=len(diff)-2
+            newBinStr=leftBinStr[0:-leng]+leng*"0"
+            return int(newBinStr,2)
+        else:
+            return 0

@@ -1,0 +1,23 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def dfs(board, word, start_x, start_y, index):
+            if not (0 <= start_x < len(board) and 0 <= start_y < len(board[0]) and board[start_x][start_y] == word[index]):
+                return False
+            if index == len(word) - 1:
+                return True
+            
+            temp = board[start_x][start_y]
+            board[start_x][start_y] = '#'
+            
+            for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+                if dfs(board, word, start_x + dx, start_y + dy, index + 1):
+                    return True
+            
+            board[start_x][start_y] = temp
+            return False
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if dfs(board, word, i, j, 0):
+                    return True
+        return False

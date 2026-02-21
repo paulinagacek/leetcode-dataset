@@ -1,0 +1,8 @@
+# Runtime: 40 ms, faster than 63.66% of Python3 online submissions for Excel Sheet Column Number.
+# Memory Usage: 13.8 MB, less than 83.72% of Python3 online submissions for Excel Sheet Column Number.
+class Solution:
+    def titleToNumber(self, s):
+        result, letters = 0, list("0ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        for i in s:
+            result = result*26 + letters.index(i)
+        return result

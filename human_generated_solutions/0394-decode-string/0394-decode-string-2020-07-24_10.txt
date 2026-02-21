@@ -1,0 +1,21 @@
+import re
+
+class Solution:
+    def decodeString(self, s: str) -> str:
+	
+        while True:
+			# find a match with a number followed by a bracket enclosing a substring (with no more brackets inside)
+            match = re.search(\'(\\d+)\\[(\\w+)\\]\', s)
+			
+			# if no match we are done
+            if not match:
+                break
+				
+			# break the match into the number and substring
+            mult = int(match.group(1))
+            sub = match.group(2)
+			
+			# substitute the original match with the substring multiplied by the number and continue with the updated string
+            s = re.sub(\'\\d+\\[\\w+\\]\', mult*sub, s, 1)
+			
+        return s

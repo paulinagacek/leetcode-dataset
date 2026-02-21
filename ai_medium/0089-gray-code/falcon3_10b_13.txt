@@ -1,0 +1,6 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        result = [0]
+        while len(result) < 1 << n:
+            result += [(1 << len(result)) - 1 - i for i in reversed(result)]
+        return result

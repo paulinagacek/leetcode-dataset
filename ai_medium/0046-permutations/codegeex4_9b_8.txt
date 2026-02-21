@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def backtrack(first = 0):
+            # base case: if we're at the end of the array, add a permutation to the result
+            if first == n:
+                output.append(nums[:])
+            for i in range(first, n):
+                # swap the current element with the first element
+                nums[first], nums[i] = nums[i], nums[first]
+                # use next index as first (moving forward in the array)
+                backtrack(first + 1)
+                # backtrack: swap back to original order
+                nums[first], nums[i] = nums[i], nums[first]
+        
+        n = len(nums)
+        output = []
+        backtrack()
+        return output

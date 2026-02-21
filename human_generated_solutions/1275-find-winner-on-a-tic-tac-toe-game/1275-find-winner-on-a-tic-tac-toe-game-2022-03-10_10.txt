@@ -1,0 +1,9 @@
+class Solution:
+    def tictactoe(self, moves: List[List[int]]) -> str:
+        wins= [ [[0,0],[1,1],[2,2]], [[0,2],[1,1],[2,0]], [[0,0],[1,0],[2,0]], [[0,1],[1,1],[2,1]], [[0,2],[1,2],[2,2]], [[0,0],[0,1],[0,2]], [[1,0],[1,1],[1,2]], [[2,0],[2,1],[2,2]] ]
+        MA=[moves[i] for i in range(0,len(moves),2)] ; MB=[moves[i] for i in range(1,len(moves),2)]
+        for win in wins:
+            if all(item in MA for item in win): return \'A\'
+            if all(item in MB for item in win): return \'B\'
+        if len(moves)==9: return \'Draw\'
+        return \'Pending\'

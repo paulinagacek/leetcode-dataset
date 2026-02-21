@@ -1,0 +1,24 @@
+class Solution:
+    def findBall(self, grid: List[List[int]]) -> List[int]:
+        
+        N = len(grid)
+        M = len(grid[0])
+        answer = [[-2]*M for _ in range(N+1)]
+        
+        for i in range(M):
+            answer[N][i] = i
+    
+        def find_end(i,j):
+            if answer[i][j] == -2:
+                if j < M-1 and grid[i][j] == 1 and grid[i][j+1] == 1:
+                    answer[i][j] = find_end(i+1,j+1)
+                elif j > 0 and grid[i][j] == -1 and grid[i][j-1] == -1:
+                    answer[i][j] = find_end(i+1,j-1)
+                else:
+                    answer[i][j] = -1
+            return answer[i][j]
+            
+        for j in range(M):
+            find_end(0,j)
+            
+        return answer[0]

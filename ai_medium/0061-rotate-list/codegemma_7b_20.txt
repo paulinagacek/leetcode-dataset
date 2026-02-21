@@ -1,0 +1,27 @@
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or k == 0:
+            return head
+
+        dummy = ListNode(0, head)
+        length = 1
+
+        # Calculate length and move tail pointer
+        tail = dummy
+        while tail.next:
+            tail = tail.next
+            length += 1
+
+        k %= length
+
+        # Close the loop and find new tail position
+        prev = dummy
+        for _ in range(length - k):
+            prev = prev.next
+            tail = tail.next
+
+        # Disconnect tail and set new head
+        new_head = prev.next
+        prev.next = None
+
+        return new_head

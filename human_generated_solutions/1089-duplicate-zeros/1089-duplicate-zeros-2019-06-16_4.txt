@@ -1,9 +1,0 @@
-class Solution(object):
-    def duplicateZeros(self, arr):
-        x = 0
-        while x < len(arr):
-            if arr[x] == 0:
-                arr.insert(x, 0)
-                arr.pop(-1)
-                x+=1
-            x += 1

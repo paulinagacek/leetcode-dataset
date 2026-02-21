@@ -1,0 +1,25 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = {i: [] for i in range(numCourses)}
+        in_degree = {i: 0 for i in range(numCourses)}
+        
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+            in_degree[course] += 1
+        
+        queue = [node for node in in_degree if in_degree[node] == 0]
+        top_order = []
+        
+        while queue:
+            current = queue.pop(0)
+            top_order.append(current)
+            
+            for neighbor in graph[current]:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+        
+        if len(top_order) == numCourses:
+            return top_order
+        else:
+            return []

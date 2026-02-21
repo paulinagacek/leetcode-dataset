@@ -1,0 +1,11 @@
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        arr = [(s, l) for word in arr if (l:=len(s:=set(word))) == len(word)]
+        ans, n = 0, len(arr)
+        def dfs(arr, cur_s, cur_l, idx):
+            nonlocal ans, n
+            ans = max(ans, cur_l)
+            if idx == n: return 
+            [dfs(arr, union, union_len, i+1) for i in range(idx, n) if (union_len:=len(union:=arr[i][0] | cur_s)) == arr[i][1] + cur_l]
+        dfs(arr, set(), 0, 0)                    
+        return ans

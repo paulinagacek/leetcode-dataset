@@ -1,0 +1,26 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        nums = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+        sign = 1
+        result = 0
+        i = 0
+
+        while i < len(s) and s[i] == ' ':
+            i += 1
+
+        if i < len(s) and s[i] in ('+', '-'):
+            if s[i] == '-':
+                sign = -1
+            i += 1
+
+        while i < len(s) and s[i] in nums:
+            result = result * 10 + nums[s[i]]
+            i += 1
+
+        result *= sign
+        if result < -2**31:
+            return -2**31
+        elif result > 2**31 - 1:
+            return 2**31 - 1
+        else:
+            return result

@@ -1,9 +1,19 @@
 class Solution:
     def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head.next: return None
-        slow, fast = head, head.next.next
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        slow.next = slow.next.next
+        
+        sz: int = 0
+        
+        # [1] find the size of the list
+        node = head
+        while node: node = node.next; sz += 1
+        
+        # [2] trivial case
+        if sz <= 1: return None
+        
+        # [3] typical case
+        sz //= 2
+        node = head
+        while sz > 1: node = node.next; sz -= 1
+        node.next = node.next.next
+        
         return head

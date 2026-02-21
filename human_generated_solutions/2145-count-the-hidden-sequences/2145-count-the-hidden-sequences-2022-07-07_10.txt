@@ -1,6 +1,0 @@
-maxx = minn = start = 0
-for i in differences:
-	start += i
-	minn = min(minn, start)
-	maxx = max(maxx, start)
-return max(0, (upper-lower)-(maxx-minn)+1)

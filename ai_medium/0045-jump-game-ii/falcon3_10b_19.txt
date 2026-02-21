@@ -1,0 +1,13 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        steps = 0
+        curEnd = 0
+        furthest = 0
+
+        for i in range(len(nums) - 1):
+            furthest = max(furthest, i + nums[i])
+            if i == curEnd:
+                steps += 1
+                curEnd = furthest
+                
+        return steps

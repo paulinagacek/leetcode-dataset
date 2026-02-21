@@ -1,6 +1,0 @@
-int minBitFlips(int n, int m)
-{
-	int out{};
-	for(n^=m; n; n=n&(n-1), out++);
-	return out;
-}

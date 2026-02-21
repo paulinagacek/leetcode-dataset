@@ -1,0 +1,27 @@
+class Solution:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        
+        # defining a global variable for recursive helper to modify
+        ret = [0]
+        def helper(curr, currpath):
+            if curr is None:
+                return
+            
+            # case where leaf node has been reached
+            if curr.left is None and curr.right is None:
+                currpath.append(curr.val)
+                bin_str = "".join(map(str, currpath))
+                ret[0] += int(bin_str, 2)
+                currpath.pop()
+                return
+            
+            # append the current node\'s value to the array before processing children
+            currpath.append(curr.val)
+            helper(curr.left, currpath)
+            helper(curr.right, currpath)
+            
+            # remove the current node\'s value before returning to callee
+            currpath.pop()
+            
+        helper(root, [])
+        return ret[0]

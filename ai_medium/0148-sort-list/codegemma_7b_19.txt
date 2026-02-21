@@ -1,0 +1,48 @@
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    
+        dummy = ListNode(0, head)
+        length = 0
+        
+        # Find length of linked list
+        cur = dummy
+        while cur.next:
+            length += 1
+            cur = cur.next
+        
+        # Merge sort for linked list
+        def merge(start, mid, end):
+            pre = dummy
+            left = start
+            right = mid.next
+    
+            while left and right:
+                if left.val <= right.val:
+                    pre.next = left
+                    left = left.next
+                else:
+                    pre.next = right
+                    right = right.next
+                pre = pre.next
+            
+            pre.next = left or right
+        
+        # Merge sort recursively
+        gap = 1
+        while gap < length:
+            start = dummy.next
+            while start:
+                mid = start
+                for _ in range(gap):
+                    mid = mid.next
+                    if not mid:
+                        break
+                end = mid
+                while end and end.next:
+                    end = end.next
+                
+                if start and mid and end:
+                    merge(start, mid, end)
+            gap *= 2
+        
+        return dummy.next

@@ -1,19 +1,29 @@
-def partition(self, s: str) -> List[List[str]]:
-    # dp[i][j] = True if s[i:j] is a palindrome
-    n = len(s)
-    dp = [[False] * (n + 1) for _ in range(n + 1)]
-    for diff in range(n + 1):
-        for i in range(n + 1 - diff):
-            j = i + diff
-            if diff <= 1: dp[i][j] = True
-            elif s[i] == s[j - 1]: dp[i][j] = dp[i + 1][j - 1]
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        l = len(s)
+        
+        def isPalindrom(s):
+            return s == s[::-1]
+        
+        @cache
+        def rec(start):
+            if start == l:
+                return []
 
-    @cache
-    def find_part(start: int):
-        ans = list()
-        for i in range(start, n):
-            if dp[start][i + 1]: # is a palindrome
-                if i + 1 < n: ans += [[s[start:i + 1]] + p for p in find_part(i + 1)]
-                else: ans.append([s[start:i + 1]])
-        return ans
-    return find_part(0)
+            res = []
+            for i in range(start + 1, l + 1):
+                sub = s[start:i]
+
+                if isPalindrom(sub):
+                    subres = rec(i)
+                    if not subres:
+                        res.append(deque([sub]))
+                    else:
+                        for arr in subres:
+                            copy = arr.copy()
+                            copy.appendleft(sub)
+                            res.append(copy)
+    
+            return res
+            
+        return rec(0)

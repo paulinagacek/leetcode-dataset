@@ -1,0 +1,20 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        hsh = {} # hsh is not required. thanks for pointing it in comments
+        
+        while head:
+            #empty the value of every node
+            if head.val:
+                head.val = None
+            else:
+                #if we come across empty node during traversal, it is a cycle
+                return True
+            head = head.next
+        #if we reach the end, we can return False as no cycle formed
+        return False

@@ -1,7 +1,0 @@
-class Solution:
-    def sortPeople(self, n: List[str], h: List[int]) -> List[str]:
-        ans=[]
-        for i in range(len(h)):
-            ans.append([h[i],n[i]])
-        ans=sorted(ans,reverse=True)
-        return[n for h,n in ans]

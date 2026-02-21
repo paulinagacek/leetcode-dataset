@@ -1,0 +1,13 @@
+from typing import List
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # Use a heap to keep track of the k largest elements seen so far
+        smallest_k = []
+        
+        for num in nums:
+            heapq.heappush(smallest_k, num)
+            if len(smallest_k) > k:
+                heapq.heappop(smallest_k)
+        
+        return smallest_k[0]

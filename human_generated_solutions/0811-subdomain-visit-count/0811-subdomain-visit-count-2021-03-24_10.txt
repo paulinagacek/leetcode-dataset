@@ -1,0 +1,15 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        d = {}
+        for cpd in cpdomains:
+            count, domain = cpd.split()
+            subdomains = domain.split(\'.\')
+            for i in range(len(subdomains)):
+                if \'.\'.join(subdomains[i:]) not in d:
+                    d[\'.\'.join(subdomains[i:])] = int(count)
+                else:
+                    d[\'.\'.join(subdomains[i:])] += int(count)
+        ans = []
+        for domain, count in d.items():
+            ans += [str(count)+\' \'+domain]
+        return ans

@@ -1,0 +1,25 @@
+from typing import List
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix or not matrix[0]:
+            return []
+        
+        m, n = len(matrix), len(matrix[0])
+        seen = set()
+        dr = [0, 1, 0, -1]
+        dc = [1, 0, -1, 0]
+        r = c = di = 0
+        res = []
+        
+        for _ in range(m * n):
+            res.append(matrix[r][c])
+            seen.add((r, c))
+            cr, cc = r + dr[di], c + dc[di]
+            if 0 <= cr < m and 0 <= cc < n and (cr, cc) not in seen:
+                r, c = cr, cc
+            else:
+                di = (di + 1) % 4
+                r, c = r + dr[di], c + dc[di]
+        
+        return res

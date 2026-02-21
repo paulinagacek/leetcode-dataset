@@ -1,0 +1,35 @@
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or k == 0:
+            return head
+        
+        current = head
+        n = 1
+        
+        # Get length and last node
+        while current.next:
+            current = current.next
+            n += 1
+            
+        # Connect list to form a circle
+        current.next = head
+        
+        # Calculate rotation position from right
+        k = n - k % n
+        
+        # Find new tail and new head
+        new_tail = current
+        for _ in range(k):
+            new_tail = new_tail.next
+            
+        # Separate the new list from the circle
+        new_head = new_tail.next
+        new_tail.next = None
+        
+        return new_head

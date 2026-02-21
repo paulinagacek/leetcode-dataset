@@ -1,0 +1,22 @@
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        self.dfs(s, [], 0, result)
+        return result
+
+    def dfs(self, s, current, start, result):
+        if start == len(s) and len(current) == 4:
+            result.append(".".join(current[:]))
+            return
+
+        for i in range(start, min(start + 3, len(s))):
+            segment = s[start:i+1]
+            if self.isValid(segment):
+                current.append(segment)
+                self.dfs(s, current, i+1, result)
+                current.pop()
+
+    def isValid(self, segment):
+        if len(segment) > 3 or (segment[0] == '0' and len(segment) > 1) or int(segment) > 255:
+            return False
+        return True

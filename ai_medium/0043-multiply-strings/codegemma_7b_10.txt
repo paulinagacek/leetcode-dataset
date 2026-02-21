@@ -1,0 +1,13 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        n1, n2 = len(num1), len(num2)
+        result = [0] * (n1 + n2)
+        for i in range(n1-1, -1, -1):
+            for j in range(n2-1, -1, -1):
+                digit_sum = int(num1[i]) * int(num2[j])
+                result[i+j+1] += digit_sum % 10
+                result[i+j] += digit_sum // 10
+        index = 0
+        while index < len(result) and result[index] == 0:
+            index += 1
+        return ''.join(map(str, result[index:])) or '0'

@@ -1,0 +1,6 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        cnt = "1"
+        for _ in range(n - 1):
+            cnt = ''.join(str(len(list(grp))) + digit for digit, grp in itertools.groupby(cnt))
+        return cnt

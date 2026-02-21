@@ -1,19 +1,37 @@
-class Solution(object):
-    def accountsMerge(self, accounts):
-        """
-        :type accounts: List[List[str]]
-        :rtype: List[List[str]]
-        """
-        res = {}
-        for acc in accounts:
-            if acc[0] in res:
-                temp = [set(acc[1:])]
-                for mail in res[acc[0]]:
-                    if temp[0].intersection(mail):
-                        temp[0] = temp[0].union( mail )
-                    else:
-                        temp.append(mail)
-                res[acc[0]] = temp
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        self.p = {i:i for i in range(len(accounts))} # parents
+               
+        eta = dict() # maps email to account
+        for i, acc in enumerate(accounts):
+            for email in acc[1:]:
+                if email in eta:
+                    self.union(eta[email], i)
+                    continue
+                
+                eta[email] = i
+    
+        ate = dict() # maps account to emails
+        for email in eta:
+            acc = self.find(eta[email])
+            
+            if acc in ate:
+                ate[acc].append(email)
             else:
-                res.update({acc[0]: [set(acc[1:])]})
-        return [ [name] + sorted(list(mail)) for name, mails in res.iteritems() for mail in mails ]
+                ate[acc] = [email]
+             
+        res = []   
+        for p in ate: # build the result list
+            res.append([accounts[p][0]] + sorted(ate[p]))
+            
+        return res
+    
+    def union(self, a, b):
+        self.p[self.find(b)] = self.find(a)
+
+    def find(self, res):
+        while self.p[res] != res:
+            self.p[res] = self.p[self.p[res]]
+            res = self.p[res]
+
+        return res

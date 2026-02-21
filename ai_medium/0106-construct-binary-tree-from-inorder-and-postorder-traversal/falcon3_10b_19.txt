@@ -1,0 +1,18 @@
+def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+    def build(inStart, inEnd, postStart):
+        if inStart > inEnd:
+            return None
+        
+        rootVal = postorder[postStart]
+        root = TreeNode(rootVal)
+        
+        inIndex = inOrderMap[rootVal]
+        
+        root.right = build(inIndex + 1, inEnd, postStart - 1)
+        root.left = build(inStart, inIndex - 1, postStart - len(inorder) + inIndex)
+        
+        return root
+    
+    inOrderMap = {val: idx for idx, val in enumerate(inorder)}
+    
+    return build(0, len(inorder) - 1, len(postorder) - 1)

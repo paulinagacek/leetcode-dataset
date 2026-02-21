@@ -1,0 +1,18 @@
+from typing import List
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def compare(x, y):
+            if x + y > y + x:
+                return 1
+            else:
+                return -1
+        
+        nums_as_str = [str(num) for num in nums]
+        nums_as_str.sort(key=lambda x: x*10, cmp=compare)
+        
+        largest_number = ''.join(nums_as_str)
+        if largest_number[0] == '0':
+            return '0'
+        
+        return largest_number

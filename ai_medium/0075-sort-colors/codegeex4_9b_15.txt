@@ -1,0 +1,17 @@
+class Solution:
+    def sortColors(self, nums):
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        red, white, blue = 0, 1, 2
+        n = len(nums)
+        count = [0, 0, 0]
+        
+        for i in range(n):
+            count[nums[i]] += 1
+        
+        j = 0
+        for i in range(3):
+            for _ in range(count[i]):
+                nums[j] = i
+                j += 1

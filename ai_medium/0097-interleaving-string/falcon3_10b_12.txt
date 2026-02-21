@@ -1,0 +1,14 @@
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        if len(s1) + len(s2) != len(s3):
+            return False
+        dp = set([(0, 0)])
+        for i in range(len(s3)):
+            temp = set()
+            for x, y in dp:
+                if x < len(s1) and s1[x] == s3[i]:
+                    temp.add((x+1, y))
+                if y < len(s2) and s2[y] == s3[i]:
+                    temp.add((x, y + 1))
+            dp = temp
+        return bool(dp) and (len(s1), len(s2)) in dp

@@ -1,34 +1,43 @@
 class Solution:
     def minimumScore(self, nums: List[int], edges: List[List[int]]) -> int:
         n = len(nums)
-        tree = [set() for _ in range(n)]
-        for e in edges:
-            tree[e[0]].add(e[1])
-            tree[e[1]].add(e[0])
+        par = {i:i for i in range(n)}
+        val = {i:nums[i] for i in range(0,n)}
+      
+        def rec(i,path):
+            t = nums[i]
+            for j in d[i]:
+                if j not in path:
+                    t^=rec(j,path|{j})
+            val[i] = t
+            par[i] = path
+            return t
+        
+        d = defaultdict(list)
+        
+        for i,j in edges:
+            d[i].append(j)
+            d[j].append(i)
+        
+        rec(0,set([0]))
+        tot = val[0]
+        
+        ans = 10**10
+        for i in range(len(edges)):
+            for j in range(i+1,len(edges)):
+                a,b = edges[i]
+                par1 = (b if a in par[b] else a)                
+                a,b = edges[j]
+                par2 = (b if a in par[b] else a)
 
-        def make_tree(i, parent):
-            ancestors[i].add(parent)
-            for j in ancestors[parent]:
-                ancestors[i].add(j)
-            tree[i].remove(parent)
-            for child in tree[i]:
-                make_tree(child, i)
-                xor[i] ^= xor[child]
+                if par1 in par[par2]:
+                    x1,x2,x3 = tot^val[par1],val[par2]^val[par1],val[par2]
 
-        xor = [nums[i] for i in range(n)]
-        ancestors = [set() for _ in range(n)]
-        for child in tree[0]:
-            make_tree(child, 0)
-            xor[0] ^= xor[child]
+                elif par2 in par[par1]:
+                    x1,x2,x3 = tot^val[par2],val[par2]^val[par1],val[par1]
 
-        ans = 2 ** 31 - 1
-        for i in range(1, n - 1):
-            for j in range(i + 1, n):
-                if i in ancestors[j]:
-                    parts = [xor[0] ^ xor[i], xor[i] ^ xor[j], xor[j]]
-                elif j in ancestors[i]:
-                    parts = [xor[0] ^ xor[j], xor[i], xor[i] ^ xor[j]]
                 else:
-                    parts = [xor[0] ^ xor[i] ^ xor[j], xor[i], xor[j]]
-                ans = min(ans, max(parts) - min(parts))
+                    x1,x2,x3 = tot^val[par1]^val[par2],val[par1],val[par2]
+                
+                ans = min(ans,max(x1,x2,x3)-min(x1,x2,x3))
         return ans

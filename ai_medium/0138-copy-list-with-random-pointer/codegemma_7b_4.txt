@@ -1,0 +1,13 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head: return None
+        seen = {}
+        original = head
+        copy = Node(head.val)
+        seen[original] = copy
+        while original:
+            copy.random = seen.get(original.random, None)
+            copy.next = seen.get(original.next, None)
+            original = original.next
+            copy = copy.next
+        return seen[head]

@@ -1,0 +1,18 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        if not board or not board[0]: return False
+        m, n = len(board), len(board[0])
+        def dfs(i, j, k):
+            if k == len(word): return True
+            if i < 0 or i >= m or j < 0 or j >= n or board[i][j] != word[k]:
+                return False
+            tmp, board[i][j] = board[i][j], '#'  # Using '#' to mark visited
+            res = any(dfs(i+x, j+y, k+1) for x, y in [(0, 1), (0, -1), (1, 0), (-1, 0)])
+            board[i][j] = tmp  # Restore the cell
+            return res
+        
+        for r in range(m):
+            for c in range(n):
+                if dfs(r, c, 0):
+                    return True
+        return False

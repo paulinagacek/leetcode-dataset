@@ -1,0 +1,17 @@
+from typing import List
+
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        def is_valid(segment: str) -> bool:
+            return segment.isdigit() and (segment[0] != '0' or segment == '0') and int(segment) < 256
+        
+        res = []
+        
+        for i in range(1, min(len(s), 4)):
+            for j in range(i+1, min(len(s), i+4)):
+                for k in range(j+1, min(len(s), j+4)):
+                    segment1, segment2, segment3, segment4 = s[:i], s[i:j], s[j:k], s[k:]
+                    if is_valid(segment1) and is_valid(segment2) and is_valid(segment3) and is_valid(segment4):
+                        res.append(f"{segment1}.{segment2}.{segment3}.{segment4}")
+        
+        return res

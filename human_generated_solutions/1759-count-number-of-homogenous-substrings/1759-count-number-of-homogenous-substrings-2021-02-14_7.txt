@@ -1,19 +1,20 @@
 class Solution:
     def countHomogenous(self, s: str) -> int:
-        i = j = 0
-        n = len(s)
-        res = 0
-        
-        while i < n:
-            while j < n and s[j] == s[i]:
-                j += 1
-				
-            # l is the length of  the homogenous substrings
-            l = j - i
-			# our formula goes here
-            res += l * (l + 1) // 2
-			# keep on iterating
-            i = j
-           
-		# it is said in the problem to return answer modulo 10 ** 9 + 7
-        return res % (10 ** 9 + 7)
+		# Function to calculate total possible substring
+		# from a contiguous subarray having the same character
+        def sum_n(n):
+            return (n * (n + 1)) // 2
+		i = sumn = 0
+		n = 1               # The starting value for any character
+        while i < len(s) - 1:
+			# Keep incrementing n until different characters are encountered
+            if s[i] == s[i + 1]:
+                n += 1
+            else:
+				# Add all the cases for that substring and initialize n = 1
+                sumn += sum_n(n)
+                n = 1
+            i += 1
+		# For the last index of the array (Since, the loop will only run till n - 1)
+        sumn += sum_n(n)
+        return sumn % (pow(10, 9) + 7)

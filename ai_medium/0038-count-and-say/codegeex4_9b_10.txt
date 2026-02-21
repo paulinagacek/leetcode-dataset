@@ -1,0 +1,18 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        def encode(s):
+            run = 1
+            out = ''
+            for i in range(1, len(s)):
+                if s[i] == s[i - 1]:
+                    run += 1
+                else:
+                    out += (str(run) + s[i - 1])
+                    run = 1
+            out += (str(run) + s[-1])
+            return out
+        
+        out = '1'
+        for _ in range(n - 1):
+            out = encode(out)
+        return out

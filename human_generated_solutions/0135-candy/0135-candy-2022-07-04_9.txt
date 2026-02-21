@@ -1,0 +1,45 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        
+        ans = 0
+        i = 0
+        n = len(ratings)
+        left = 0
+        right = 0
+        it = 0
+        while i<n-1:
+            #climb
+            while i < n-1 and ratings[i] < ratings[i+1]:
+                left +=1
+                i+=1
+            #descent
+            while i  <n-1 and ratings[i] > ratings[i+1]:
+                right +=1
+                i+=1
+                
+			#candies
+            ans = ans +  (left*(left+1)//2 + right*(right+1)//2) + max(left, right) + 1
+            
+			# the painful plateu part where the values are same like x, x, x, x. 
+			#Apart from the last one and first one for all x we could give 1 candy 
+			#and 1st one and last one are just part of different sequences 
+			#so we dont have to care about them.
+            p = 0
+        
+            while i < n-1 and ratings[i] == ratings[i+1]:
+                p += 1
+                i+=1
+    
+            ans += p
+            
+            left = 0
+            right = 0
+			
+			#every junction of two sequences would be double counted due to which
+			#we can add all the junctions and remove the double counting see the
+			#diagram below to see the double counting junction
+			
+            it+=1
+        
+        
+        return ans-it+1

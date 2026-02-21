@@ -1,0 +1,22 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def dfs(left, right):
+            if left > right:
+                return None
+            mid = (left + right) // 2
+            root = TreeNode(head.val)
+            head = head.next
+            root.left = dfs(left, mid - 1)
+            root.right = dfs(mid + 1, right)
+            return root
+
+        if not head:
+            return None
+        return dfs(0, self.getSize(head) - 1)
+
+    def getSize(self, head):
+        size = 0
+        while head:
+            size += 1
+            head = head.next
+        return size

@@ -1,0 +1,31 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        if not board or not board[0]:
+            return
+        
+        m, n = len(board), len(board[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        
+        # Mark all O on border and their connected O with 'Y'
+        for i in range(m):
+            for j in range(n):
+                if (i == 0 or i == m - 1 or j == 0 or j == n - 1) and board[i][j] == 'O':
+                    self.dfs(board, i, j, directions)
+                    
+        # Convert all remaining O to X and Y back to O
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == 'Y':
+                    board[i][j] = 'O'
+        
+    def dfs(self, board, x, y, directions):
+        if not (0 <= x < len(board) and 0 <= y < len(board[0])) or board[x][y] != 'O':
+            return
+        
+        board[x][y] = 'Y'  # Mark this cell as visited
+        
+        # Recur for all 4 directions
+        for direction in directions:
+            self.dfs(board, x + direction[0], y + direction[1], directions)

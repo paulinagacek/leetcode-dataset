@@ -1,0 +1,62 @@
+class Solution:
+    def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
+        # Initilize three varaibles as we form line-by-line
+        current_line_length = 0
+        current_line_words = []
+        ans = []
+        for word in words: #-----> O(n)
+            word_length = len(word)
+            """For each word, we consider the space after that word also
+                We check if current line length exceeds the maxiWidth if this word is added or not"""
+            if current_line_length+word_length+1 <= maxWidth or (current_line_length+word_length == maxWidth):
+                """
+                Append the word to current line words
+                """
+                current_line_words.append(word)
+                current_line_length += word_length+1
+            else:
+                if len(current_line_words) == 1:
+                    """
+                    If there is only word for this line, that word should be left-justified
+                    """
+                    characters = len(current_line_words[0])
+                    spaces = maxWidth-characters
+                    ans.append("".join(current_line_words+([\' \']*spaces)))
+                else:
+                    """
+                    If there are multiple words for this line
+                    """
+                    characters = current_line_length-len(current_line_words)
+                    spaces = maxWidth-characters
+                    distribution_spaces = spaces//(len(current_line_words)-1)
+                    if not spaces%(len(current_line_words)-1):
+                        """
+                        If the spaces divide evenly between words
+                        """
+                        spaces = "".join([\' \']*distribution_spaces)
+                        ans.append(spaces.join(current_line_words))
+                    else:
+                        """
+                        If spaces does not divide evenly with words
+                        """
+                        extras = spaces%(len(current_line_words)-1)
+                        temp = ""
+                        for i in range(len(current_line_words)-1):
+                            temp += current_line_words[i]
+                            if extras:
+                                temp += "".join(([\' \']*distribution_spaces)+[\' \'])
+                                extras -= 1
+                            else:
+                                temp += "".join(([\' \'] * distribution_spaces))
+                        temp += current_line_words[-1]
+                        ans.append(temp)
+                """
+                This is the last line and should be justified evenly
+                """
+                current_line_length = len(word)+1
+                current_line_words.clear()
+                current_line_words.append(word)
+        temp = " ".join(current_line_words)
+        temp += "".join([\' \']*(maxWidth-len(temp)))
+        ans.append(temp)
+        return ans

@@ -1,0 +1,33 @@
+from typing import Optional, List
+
+
+class Node:
+    def __init__(self, val: int = 0, neighbors: Optional['List[Node]'] = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+
+
+class Solution:
+
+    def cloneGraph(self, node: Optional[Node]) -> Optional[Node]:
+        if not node:  # If the input node is None then return None
+            return None
+
+        # HashMap to store the original nodes as keys and their cloned counterparts as values
+        visited = {node: Node(node.val)}
+
+        # Queue to perform BFS
+        queue = [node]
+
+        while queue:
+            current_node = queue.pop(0)
+
+            for neighbor in current_node.neighbors:
+                if neighbor not in visited:
+                    visited[neighbor] = Node(neighbor.val)
+                    queue.append(neighbor)
+
+                # Add cloned neighbor to the cloned node's neighbors
+                visited[current_node].neighbors.append(visited[neighbor])
+
+        return visited[node]

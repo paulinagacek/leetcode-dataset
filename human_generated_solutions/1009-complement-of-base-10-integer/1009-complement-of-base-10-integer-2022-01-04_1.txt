@@ -1,8 +1,8 @@
-class Solution {
-public:
-    int bitwiseComplement(int n) {
-        return ((2 << int(log2(max(n, 1)))) - 1) - n;
-		// return ((2 << int(log2(max(n, 1)))) - 1) ^ n; // also work
-        // return ((2 << int(log2(max(n, 1)))) - 1) & (~n); // also work
-    }
-};
+def bitwiseComplement(self, n: int) -> int:
+        x=""
+        for i in bin(n)[2:]:
+            if i=="1":
+                x+="0"
+            else:
+                x+="1"
+        return int(x,2)

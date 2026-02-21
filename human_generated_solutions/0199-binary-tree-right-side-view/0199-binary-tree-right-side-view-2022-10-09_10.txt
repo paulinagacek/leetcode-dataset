@@ -1,0 +1,20 @@
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        
+        ans = []
+        if not root: return ans
+        
+        q = [root]
+        
+        while q:
+            lv = []
+            
+            ans.append(q[-1].val)
+            
+            for node in q:
+                if node.left: lv.append(node.left)
+                if node.right: lv.append(node.right)
+            
+            q = lv
+        
+        return ans

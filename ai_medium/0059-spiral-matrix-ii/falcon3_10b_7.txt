@@ -1,0 +1,20 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0]*n for _ in range(n)]
+        dir_moves = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        x, y = 0, 0
+        dx, dy = dir_moves[0]
+        num_moves = n*n
+        cur_num = 1
+        
+        while cur_num <= num_moves:
+            matrix[x][y] = cur_num
+            cur_x, cur_y = x + dx, y + dy
+            if 0 <= cur_x < n and 0 <= cur_y < n and matrix[cur_x][cur_y] == 0:
+                x, y = cur_x, cur_y
+            else:
+                dx, dy = dir_moves[(dir_moves.index((dx, dy)) + 1) % 4]
+                x, y = x + dx, y + dy
+            cur_num += 1
+        
+        return matrix

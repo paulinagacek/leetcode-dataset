@@ -1,15 +1,18 @@
-from collections import Counter
-class Solution:
-    def minSetSize(self, arr: List[int]) -> int:
-        dic=Counter(arr)
-        target=len(arr)//2
-        sum=0
-        c=1
-        values=sorted(list(dic.values()),reverse=True)
-        for value in values:
-            if sum+value >=target:
-                return c
+class Solution(object):
+    def minSetSize(self, arr):
+        d = {}
+        for x in arr:
+            if x not in d:
+                d[x] = 1
             else:
-                c+=1
-                sum+=value
-        return c
+                d[x] += 1
+                  
+        l = sorted(d.values())
+        N = len(arr) // 2
+        idx = 0
+        
+        while N > 0:
+            N -= l[-idx-1]
+            idx += 1
+            
+        return idx

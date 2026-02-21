@@ -1,0 +1,21 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        rows = set()
+        cols = set()
+        blocks = set()
+
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != ".":
+                    block_index = (i // 3) * 3 + j // 3
+                    if (
+                        (board[i][j] in rows)
+                        or (board[i][j] in cols)
+                        or (board[i][j] in blocks)
+                    ):
+                        return False
+                    rows.add(board[i][j])
+                    cols.add(board[j][i])
+                    blocks.add(board[i][j])
+
+        return True

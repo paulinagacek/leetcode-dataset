@@ -1,0 +1,22 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        if len(nums) < 4:
+            return []
+        quad = []
+        nums.sort()
+        for i in range(len(nums) - 3):
+            for j in range(i + 1, len(nums) - 2):
+                sumA = nums[i] + nums[j]
+                left = j + 1
+                right = len(nums) - 1
+                while left < right:
+                    sumB = sumA + nums[left] + nums[right]
+                    if sumB == target:
+                        quad.append((nums[i], nums[j], nums[left], nums[right]))
+                        left += 1
+                        right -= 1
+                    elif sumB < target:
+                         left += 1
+                    else:
+                         right -= 1
+        return (set(quad))

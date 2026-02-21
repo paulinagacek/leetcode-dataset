@@ -1,0 +1,12 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        def robRange(houses):
+            last2, last1 = 0, 0
+            for house in houses:
+                temp = max(last1, last2 + house)
+                last2, last1 = last1, temp
+            return last1
+        return max(robRange(nums[:-1]), robRange(nums[1:]))

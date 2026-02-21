@@ -1,0 +1,15 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        val = "1"
+        for _ in range(n-1):
+            temp = ""
+            count = 1
+            for i in range(1, len(val)):
+                if val[i] == val[i-1]:
+                    count += 1
+                else:
+                    temp += str(count) + val[i-1]
+                    count = 1
+            temp += str(count) + val[-1]
+            val = temp
+        return val

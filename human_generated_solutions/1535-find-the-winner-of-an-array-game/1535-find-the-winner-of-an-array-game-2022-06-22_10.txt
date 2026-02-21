@@ -1,0 +1,19 @@
+from collections import deque
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        if k >= len(arr):
+            return max(arr)
+        
+        queue = deque(arr)
+        win_count = 0
+        winner = None
+        while win_count != k:
+            if queue[0] > queue[1]:
+                winner, loser = queue.popleft(), queue.popleft()
+            else:
+                loser, winner = queue.popleft(), queue.popleft()
+                win_count = 0
+            queue.append(loser)
+            queue.appendleft(winner)
+            win_count += 1
+        return winner

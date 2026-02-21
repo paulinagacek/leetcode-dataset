@@ -1,0 +1,31 @@
+def pathSum(self, root, sum):
+	if not root:
+		return 0
+	stack = [root]
+	path_count = 0 
+	# visit every tree node in DFS order 
+	while stack:
+		curr = stack.pop()
+		# follow all paths starting from any source node
+		path_count = self.path_from_source(curr, path_count, sum)
+		if curr.left:
+			stack.append(curr.left)
+		if curr.right:
+			stack.append(curr.right)
+
+	return path_count
+
+def path_from_source(self, source, count, sum):
+	if not source:
+		return path_count
+	stack = [(source, source.val)]
+	while stack:
+		curr, path_sum = stack.pop()
+		if path_sum == sum:
+			count += 1
+		if curr.left:
+			#add nodes value to sum in DFS order
+			stack.append((curr.left, path_sum + curr.left.val))
+		if curr.right:
+			stack.append((curr.right, path_sum + curr.right.val))
+	return count

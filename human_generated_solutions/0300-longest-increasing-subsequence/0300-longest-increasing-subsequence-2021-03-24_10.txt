@@ -1,0 +1,14 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        # initilize the entire dp with 1 as the LIS of an element is 1
+        dp = [1]*len(nums)
+        # start from the 2nd element as the 1st element is already fgured out
+        for i in range(1, len(nums)):
+            # check j till i and update the max
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[j] + 1, dp[i])
+        return max(dp)
+    
+	Time complexity - O(n^2)
+	Space complexity - O(n) where n is the size of the list

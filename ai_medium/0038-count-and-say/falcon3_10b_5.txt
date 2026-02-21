@@ -1,0 +1,17 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        sequence = "1"
+        for _ in range(n - 1):
+            new_sequence = ""
+            count = 1
+            prev_char = sequence[0]
+            for char in sequence[1:]:
+                if char == prev_char:
+                    count += 1
+                else:
+                    new_sequence += str(count) + prev_char
+                    count = 1
+                    prev_char = char
+            new_sequence += str(count) + prev_char
+            sequence = new_sequence
+        return sequence

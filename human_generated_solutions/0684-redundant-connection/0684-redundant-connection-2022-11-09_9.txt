@@ -1,1 +1,0 @@
-indegree[a] == 2 and indegree[b] and return [a, b]

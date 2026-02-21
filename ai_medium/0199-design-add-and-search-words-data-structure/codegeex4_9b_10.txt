@@ -1,0 +1,31 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.words = set()
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        self.words.add(word)
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        from functools import partial
+        match = partial(self.match, word=word)
+        return any(map(match, self.words))
+
+    def match(self, candidate: str, word: str) -> bool:
+        if len(candidate) != len(word):
+            return False
+        for c1, c2 in zip(candidate, word):
+            if c1 == '.' or c2 == '.' or c1 == c2:
+                continue
+            else:
+                return False
+        return True

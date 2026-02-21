@@ -1,0 +1,32 @@
+import collections
+
+class WordDictionary:
+
+    def __init__(self):
+        self.trie = {}
+
+    def addWord(self, word: str) -> None:
+        node = self.trie
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['*'] = True
+
+    def search(self, word: str) -> bool:
+        return self._search(self.trie, word, 0)
+
+    def _search(self, node, word, index):
+        if index == len(word):
+            return '*' in node
+
+        char = word[index]
+        if char == '.':
+            for child in node:
+                if self._search(node[child], word, index + 1):
+                    return True
+            return False
+        else:
+            if char not in node:
+                return False
+            return self._search(node[char], word, index + 1)

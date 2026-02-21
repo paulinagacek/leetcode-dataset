@@ -1,0 +1,16 @@
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        dummy = ListNode(-5001)  # sentinel node
+        dummy.next = head
+        cur = head.next
+        while cur:
+            pre = dummy
+            while pre.next and pre.next.val < cur.val:
+                pre = pre.next
+            tmp = cur.next
+            cur.next = pre.next
+            pre.next = cur
+            cur = tmp
+        return dummy.next

@@ -1,17 +1,8 @@
-class Solution {
-public:
-    int countOrders(int n) {
-        long base = 1000000007;
-        if (n == 1)
-        {
-            return 1;
-        }
-        long res = 1;
-        for (int i = 2; i <= n; ++i)
-        {
-            res = ((((long)res*(2*i-1))%base)*i)%base;
-        }
-
-        return res;
-    }
-};
+class Solution:
+    def countOrders(self, n: int) -> int:
+		MOD = 1_000_000_007
+		answer = 1
+		for i in range(2, n+1):
+			answer = i*(2*i - 1)*answer
+			answer %= MOD
+		return answer

@@ -1,0 +1,16 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        if not triangle:
+            return 0
+        
+        # Initialize the bottom row as the starting point for path sums.
+        path_sums = triangle[-1]
+        
+        # Traverse the triangle from the second last row to the top.
+        for row in reversed(triangle[:-1]):
+            # Update the path sums for each element by comparing the possible paths from below.
+            for i in range(len(row)):
+                path_sums[i] = min(path_sums[i], path_sums[i + 1]) + row[i]
+        
+        # The first element of path_sums now contains the minimum path sum to the top.
+        return path_sums[0]

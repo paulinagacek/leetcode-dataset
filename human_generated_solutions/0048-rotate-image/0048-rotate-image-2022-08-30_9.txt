@@ -1,24 +1,19 @@
-class Solution:
-    def rotate(self, matrix: List[List[int]]) -> None:
-        n = len(matrix)
-        row = 0
-        col = 0
+class Solution(object):
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+        """
+        M=len(matrix) 
+        N=len(matrix[0]) 
+        for i in range(M):
+            for j in range(i):
+                matrix[i][j],matrix[j][i]=matrix[j][i],matrix[i][j]
         
-        for _ in range(n//2):
-            col_boundary = n - col - 1
-            while col < col_boundary:
-                # Swap 4 sides
-                
-                # Right side of the rotation
-                matrix[row][col], matrix[col][n-1-row] = matrix[col][n-1-row], matrix[row][col]
-                
-                # Bottom side of the rotation
-                matrix[row][col], matrix[n-1-row][n-1-col] = matrix[n-1-row][n-1-col], matrix[row][col]
-                
-                # Left side of the rotation
-                matrix[row][col], matrix[n-1-col][row]  = matrix[n-1-col][row], matrix[row][col]
-                
-                col += 1
-            
-            row += 1
-            col = row
+        for i in range(M):
+            l=0
+            r=N-1
+            while l<r:
+                matrix[i][l],matrix[i][r]=matrix[i][r],matrix[i][l]
+                l+=1
+                r-=1

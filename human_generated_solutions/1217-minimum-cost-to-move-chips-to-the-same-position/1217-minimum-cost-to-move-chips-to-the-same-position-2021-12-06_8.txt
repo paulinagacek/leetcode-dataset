@@ -1,3 +1,13 @@
-class Solution(object):
-    def minCostToMoveChips(self, position):
-		return min(collections.Counter([i % 2 for i in position] + [0, 1]).values()) - 1
+class Solution:
+    def minCostToMoveChips(self, position: List[int]) -> int:
+        ans = float(inf)
+        for i in position:
+            res = 0
+            for j in position:
+                x = abs(i-j)
+                if x%2!=0:
+                    res+=1
+            if res<ans:
+                ans = res
+                    
+        return ans

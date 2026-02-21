@@ -1,5 +1,0 @@
-public class Solution {
-    public int MinMovesToSeat(int[] seats, int[] students) {
-        return seats.OrderBy(p => p).Zip(students.OrderBy(p => p), (p1, p2) => Math.Abs(p1 - p2)).Sum();
-    }
-}

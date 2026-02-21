@@ -1,7 +1,0 @@
-def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
-    mini = maxi = i = 0
-    for d in differences:
-        i += d
-        mini = min(i, mini)
-        maxi = max(i, maxi)
-    return max(0, (upper - lower) - (maxi - mini) + 1)

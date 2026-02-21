@@ -1,26 +1,11 @@
-d = {
-    2: [8, 12, 23, 34, 45, 56, 67, 78, 89],
-    3: [7, 123, 234, 345, 456, 567, 678, 789],
-    4: [6, 1234, 2345, 3456, 4567, 5678, 6789],
-    5: [5, 12345, 23456, 34567, 45678, 56789],
-    6: [4, 123456, 234567, 345678, 456789],
-    7: [3, 1234567, 2345678, 3456789],
-    8: [2, 12345678, 23456789],
-    9: [1, 123456789]
-}
 class Solution:
     def sequentialDigits(self, low: int, high: int) -> List[int]:
-        res = []
-        l, h = str(low), str(high)
-        
-        k, lb = (len(l), int(l[0])) if d[len(l)][0] >= int(l[0]) else (len(l) + 1, 1)
-        
-        while True:
-            if k > 9: return res
-            for i in range(lb, len(d[k])):
-                if low <= d[k][i] <= high: res.append(d[k][i])
-                elif d[k][i] > high: break
-            else:
-                k, lb = k + 1, 1
-                continue
-            return res
+        ans=[]
+        for i in range(1,10):
+            temp=i
+            for j in range(i+1,10):
+                temp=10*temp+j
+                if temp in range(low,high+1):
+                    ans.append(temp)
+        ans.sort()
+        return ans

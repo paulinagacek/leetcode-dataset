@@ -1,7 +1,19 @@
-class Solution:
-    def sequentialDigits(self, low: int, high: int) -> List[int]:
-        
-        # https://oeis.org/A138141
-        nums = (12, 23, 34, 45, 56, 67, 78, 89, 123, 234, 345, 456, 567, 678, 789, 1234, 2345, 3456, 4567, 5678, 6789, 12345, 23456, 34567, 45678, 56789, 123456, 234567, 345678, 456789, 1234567, 2345678, 3456789, 12345678, 23456789, 123456789)
-        
-        return filter(lambda n: low <= n <= high, nums)
+class Solution(object):
+    def sequentialDigits(self, low, high):
+        """
+        :type low: int
+        :type high: int
+        :rtype: List[int]
+        """
+        reqdNumbers=[]
+        def generateNumbers(currentNum,currentDigit,low,high):
+            if currentNum>=low and currentNum<=high:
+                reqdNumbers.append(currentNum)
+            if currentNum>high or currentDigit>=9:
+                return
+            generateNumbers((currentNum*10+(currentDigit+1)),currentDigit+1,low,high)
+            
+        for i in range(1,10):
+            generateNumbers(i,i,low,high)
+        reqdNumbers.sort()
+        return reqdNumbers

@@ -1,43 +1,63 @@
 class Solution:
     def minimumScore(self, nums: List[int], edges: List[List[int]]) -> int:
         n = len(nums)
-        par = {i:i for i in range(n)}
-        val = {i:nums[i] for i in range(0,n)}
-      
-        def rec(i,path):
-            t = nums[i]
-            for j in d[i]:
-                if j not in path:
-                    t^=rec(j,path|{j})
-            val[i] = t
-            par[i] = path
-            return t
-        
-        d = defaultdict(list)
-        
+        subtreeXor = [0]*n
+        g = [[] for i in range(n)]
         for i,j in edges:
-            d[i].append(j)
-            d[j].append(i)
-        
-        rec(0,set([0]))
-        tot = val[0]
-        
-        ans = 10**10
-        for i in range(len(edges)):
-            for j in range(i+1,len(edges)):
-                a,b = edges[i]
-                par1 = (b if a in par[b] else a)                
-                a,b = edges[j]
-                par2 = (b if a in par[b] else a)
-
-                if par1 in par[par2]:
-                    x1,x2,x3 = tot^val[par1],val[par2]^val[par1],val[par2]
-
-                elif par2 in par[par1]:
-                    x1,x2,x3 = tot^val[par2],val[par2]^val[par1],val[par1]
-
-                else:
-                    x1,x2,x3 = tot^val[par1]^val[par2],val[par1],val[par2]
-                
-                ans = min(ans,max(x1,x2,x3)-min(x1,x2,x3))
+            g[i].append(j)
+            g[j].append(i)
+        def xorDFS(n,p):
+            xor = nums[n]
+            for c in g[n]:
+                if c!=p:
+                    xorDFS(c,n)
+                    xor^=subtreeXor[c]
+            subtreeXor[n] = xor
+        xorDFS(0,-1)
+        st = [0]
+        vis = [0]*n
+        vis[0] = 1
+        ans = 100000000000000
+        def dfs1(node,p,anc):
+            anc[node]=1
+            for c in g[node]:
+                if c!=p:
+                    def dfs(nn,pp,aa):
+                        nonlocal ans
+                        aa[nn]=1
+                        for cc in g[nn]:
+                            if cc!=pp:
+                                dfs(cc,nn,aa)
+                                if node==nn and c==cc:
+                                    continue
+                                if anc[cc]:
+                                    continue
+                                if (aa[c]):
+                                    xor1 = subtreeXor[c]^subtreeXor[cc]
+                                    xor2 = subtreeXor[cc]
+                                    xor3 = subtreeXor[0]^xor1^xor2
+                                    ans = min(ans , max(xor1,xor2,xor3) - min(xor1,xor2,xor3))
+                                    continue
+                                if n!=cc and c!=nn:
+                                    xor1 = subtreeXor[c]
+                                    xor2 = subtreeXor[cc]
+                                    xor3 = subtreeXor[0]^xor1^xor2
+                                    ans = min(ans , max(xor1,xor2,xor3) - min(xor1,xor2,xor3))
+                                elif c==nn:
+                                    xor1 = subtreeXor[c]^subtreeXor[cc]
+                                    xor2 = subtreeXor[cc]
+                                    xor3 = subtreeXor[0]^xor1^xor2
+                                    ans = min(ans , max(xor1,xor2,xor3) - min(xor1,xor2,xor3))
+                                else:
+                                    c1 = c
+                                    c1,cc=cc,c1
+                                    xor1 = subtreeXor[c1]^subtreeXor[cc]
+                                    xor2 = subtreeXor[cc]
+                                    xor3 = subtreeXor[0]^xor1^xor2
+                                    ans = min(ans , max(xor1,xor2,xor3) - min(xor1,xor2,xor3))
+                        aa[nn]=0
+                    dfs(0,-1,[0]*len(nums))
+                    dfs1(c,node,anc)
+            anc[node] = 0  
+        dfs1(0,-1,[0]*n)      
         return ans

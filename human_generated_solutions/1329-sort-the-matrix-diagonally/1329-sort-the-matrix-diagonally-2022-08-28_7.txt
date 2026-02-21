@@ -1,0 +1,19 @@
+from collections import defaultdict
+class Solution:
+    def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+        d1=defaultdict(lambda:[])
+        
+		#first for loop
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                d1[(i-j)].append(mat[i][j])
+		
+		#Second for loop
+        for x in d1:
+            d1[x].sort(reverse=True)
+        
+		#Third for loop
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                mat[i][j]=d1[(i-j)].pop()
+        return mat

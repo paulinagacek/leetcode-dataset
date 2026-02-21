@@ -1,0 +1,13 @@
+class Solution:
+    def arrayNesting(self, nums: List[int]) -> int:
+        S = [set() for _ in range(len(nums))]
+        vis = [False]*len(nums)
+        ans = float(\'-inf\')
+        for i in range(len(nums)):
+            j = i
+            while not vis[j]:
+                S[i].add(nums[j])
+                vis[j] = True
+                j = nums[j]
+            ans = max(ans, len(S[i]))
+        return ans

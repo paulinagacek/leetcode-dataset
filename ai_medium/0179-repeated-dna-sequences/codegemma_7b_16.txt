@@ -1,0 +1,16 @@
+from collections import Counter
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        
+        seen = Counter()
+        result = []
+        dna_len = 10
+        
+        for i in range(len(s) - dna_len + 1):
+            subsequence = s[i:i + dna_len]
+            seen[subsequence] += 1
+            if seen[subsequence] == 2:
+                result.append(subsequence)
+        
+        return result

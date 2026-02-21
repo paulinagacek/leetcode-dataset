@@ -1,0 +1,29 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+from typing import Optional, List
+from collections import defaultdict, deque
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        cloned = defaultdict(lambda: Node(0, []))
+        queue = deque([node])
+        cloned[node.val] = Node(node.val)
+
+        while queue:
+            curr = queue.popleft()
+            for neighbor in curr.neighbors:
+                if neighbor.val not in cloned:
+                    cloned[neighbor.val] = Node(neighbor.val)
+                    queue.append(neighbor)
+                cloned[curr.val].neighbors.append(cloned[neighbor.val])
+        
+        return cloned[node.val]

@@ -1,18 +1,23 @@
+# Simulating the problem statement using stack
 class Solution:
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
-        s = []
-        ipush = 0
-        ipop = 0
+        stk = []
+        push_index = 0
+        pop_index = 0
         
-        try:
-            while ipush < len(pushed) or ipop < len(popped):
-                if len(s) == 0 or (len(s) != 0 and s[-1] != popped[ipop]):
-                    s.append(pushed[ipush])
-                    ipush += 1
-                elif s[-1] == popped[ipop]:
-                    s.pop()
-                    ipop += 1
-        except IndexError:
-            return False
-        
+        # run the loop till we reach end of popped list
+        while pop_index<len(popped):
+            # push items to stack till the top of the stack becomes current popped value
+            while popped[pop_index] not in stk:
+                stk.append(pushed[push_index])
+                push_index+=1
+            
+            # if the number is already in stack but not in top, return False
+            # if the number in top of stack, just pop it
+            if stk[-1]==popped[pop_index]:
+                stk.pop()
+                pop_index+=1
+            else:
+                return False
+        # if we exit the loop, then it should be true as all the elements are unique
         return True

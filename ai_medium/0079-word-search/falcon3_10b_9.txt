@@ -1,0 +1,19 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        rows, cols = len(board), len(board[0])
+        
+        def backtrack(r, c, pos):
+            if pos == len(word):
+                return True
+            if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[pos]:
+                return False
+            temp, board[r][c] = board[r][c], '#'  # Mark as visited
+            found = any(backtrack(r+dr, c+dc, pos+1) for dr, dc in [(0,1), (0,-1), (1,0), (-1,0)]) # Explore neighbors
+            board[r][c] = temp  # Restore original cell
+            return found
+        
+        for r in range(rows):
+            for c in range(cols):
+                if backtrack(r, c, 0):
+                    return True
+        return False

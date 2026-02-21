@@ -1,0 +1,42 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # Step 1: Create a new node for each original node and insert it right after the original node
+        cur = head
+        while cur:
+            new_node = Node(cur.val)
+            new_node.next = cur.next
+            cur.next = new_node
+            cur = new_node.next
+        
+        # Step 2: Assign random pointers for the copied nodes
+        cur = head
+        while cur:
+            if cur.random:
+                cur.next.random = cur.random.next
+            cur = cur.next.next
+        
+        # Step 3: Separate the interleaved list into original and copied list
+        orig_cur = head
+        copy_cur = head.next
+        copy_head = copy_cur  # This is the head of the copied list
+
+        while orig_cur:
+            orig_cur.next = orig_cur.next.next
+            if copy_cur.next:
+                copy_cur.next = copy_cur.next.next
+            orig_cur = orig_cur.next
+            copy_cur = copy_cur.next
+
+        return copy_head

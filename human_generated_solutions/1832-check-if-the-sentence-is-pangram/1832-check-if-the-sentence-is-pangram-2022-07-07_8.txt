@@ -1,0 +1,12 @@
+class Solution:
+#     O(n) || O(1) because we are dealing with lower case english alphabets O(26)
+# Runtime: 40ms 71.99% || Memory: 13.9mb 54.83%
+    def checkIfPangram(self, sentence: str) -> bool:
+        allAlpha = [False] * 26
+
+        for char in sentence:
+            index = ord(char) - ord(\'a\')
+            allAlpha[index] = True
+
+
+        return all(allAlpha[i] for i in range(26))

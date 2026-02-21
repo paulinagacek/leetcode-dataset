@@ -1,0 +1,19 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        def cs(s):
+            out = ""
+            prev = s[0]
+            c = 1
+            for i in range(1, len(s)):
+                if s[i] == prev:
+                    c += 1
+                else:
+                    out += str(c) + prev
+                    c = 1
+                    prev = s[i]
+            out += str(c) + prev
+            return out
+        a = "1"
+        for i in range(n - 1):
+            a = cs(a)
+        return a

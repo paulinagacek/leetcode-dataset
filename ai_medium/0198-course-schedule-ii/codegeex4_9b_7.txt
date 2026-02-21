@@ -1,0 +1,41 @@
+from typing import List
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create adjacency list and in-degree array
+        adj = [[] for _ in range(numCourses)]
+        in_deg = [0] * numCourses
+        
+        # Fill adjacency list and in-degree array
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            in_deg[dest] += 1
+        
+        # Initialize the count of courses to take and output list
+        count = 0
+        order = []
+        
+        # Add all courses with no prerequisites to the order
+        for i in range(numCourses):
+            if in_deg[i] == 0:
+                order.append(i)
+                count += 1
+        
+        # Process courses with prerequisites
+        while order:
+            curr = order.pop(0)
+            
+            # Decrease in-degree of neighboring courses
+            for neigh in adj[curr]:
+                in_deg[neigh] -= 1
+                
+                # If in-degree becomes zero, add to order
+                if in_deg[neigh] == 0:
+                    order.append(neigh)
+                    count += 1
+        
+        # If count is equal to numCourses, return the order
+        if count == numCourses:
+            return order
+        else:
+            return []  # Return an empty array if it's impossible to finish all courses

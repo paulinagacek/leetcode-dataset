@@ -1,36 +1,11 @@
-func levelOrder(root *Node) [][]int {
-    var result [][]int
-    
-    if root == nil { 
-        return result 
-    }
-    
-    var queue []*Node
-    queue = append(queue, root)
-    
-    for len(queue) > 0 {
-        length := len(queue)
+class Solution:
+    def levelOrder(self, root: \'Node\') -> List[List[int]]:
+        self.d={}
+        self.trav(root, 0)
+        return self.d.values()
         
-        var levelNodes []int
-        
-        for i := 0; i < length; i++ {
-            levelNodes = append(levelNodes, queue[i].Val)
-            
-            for _, child := range queue[i].Children {
-                if child != nil {
-                    queue = append(queue, child)
-                }
-            }
-        }
-        
-        result = append(result, levelNodes)
-        
-        if len(queue) == length {
-            break
-        }
-        
-        queue = queue[length:]
-    }
-
-    return result
-}
+    def trav(self, root, l):
+        if root:
+            if self.d.get(l, False): self.d[l].append(root.val)
+            else: self.d[l] = [root.val]
+            for node in root.children: self.trav(node, l+1)

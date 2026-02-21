@@ -1,0 +1,19 @@
+from collections import defaultdict
+from typing import List
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        sequence_length = 10
+        if len(s) <= sequence_length:
+            return []
+        
+        count = defaultdict(int)
+        for i in range(len(s) - sequence_length + 1):
+            count[s[i:i+sequence_length]] += 1
+        
+        result = []
+        for seq, freq in count.items():
+            if freq > 1:
+                result.append(seq)
+        
+        return result

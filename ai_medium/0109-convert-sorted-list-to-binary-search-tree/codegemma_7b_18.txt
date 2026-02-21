@@ -1,0 +1,20 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        if not head:
+            return None
+        slow, fast = head, head
+        prev = None
+        size = 0
+        # find size and middle node
+        while fast:
+            size += 1
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next if fast else None
+        # make middle node root
+        root = TreeNode(slow.val)
+        prev.next = None
+        # build left and right subtrees
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(slow.next)
+        return root

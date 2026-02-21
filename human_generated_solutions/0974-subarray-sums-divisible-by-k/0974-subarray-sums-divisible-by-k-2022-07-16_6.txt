@@ -1,0 +1,28 @@
+class Solution:
+		def subarraysDivByK(self, nums: List[int], k: int) -> int:
+			d = {0:1}
+
+        # i take dictionary with 0 : 1 because 
+        # if i find a subarray sum = 0, which is ofc divisble by k,
+        # then i need to add freq. of remainder = 0 to the array;
+        # which should be 1 otherwise i wont be adding anything.
+        # example:
+        # arr = {0,3,-3,.....} k = 5
+        # when i find (3+(-3)) = 0 , 0 is divisible by 5 so i need to add
+        # it to my ans. so i would do something like : 
+        # if sum%k in hashmap: add freq of that, but sum is 0%5 = 0
+        # so 0 should have inital mapping to 1;
+        # Hope it clears it!
+
+        ans = cum_sum = 0
+        for i,num in enumerate(nums):
+            cum_sum += num
+            rem = cum_sum % k
+            if rem < 0:
+                rem += k
+            if rem in d:
+                ans += d[rem]
+                d[rem] += 1
+            else:
+                d[rem] = 1
+        return ans

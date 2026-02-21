@@ -1,0 +1,27 @@
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        Graph = defaultdict(list)
+        inDegree = [0] * numCourses
+
+        for dest, src in prerequisites:
+            Graph[src].append(dest)
+            inDegree[dest] += 1
+
+        queue = []
+        for i in range(numCourses):
+            if inDegree[i] == 0:
+                queue.append(i)
+
+        count = 0
+        while queue:
+            node = queue.pop(0)
+            count += 1
+
+            for neighbor in Graph[node]:
+                inDegree[neighbor] -= 1
+                if inDegree[neighbor] == 0:
+                    queue.append(neighbor)
+
+        return count == numCourses

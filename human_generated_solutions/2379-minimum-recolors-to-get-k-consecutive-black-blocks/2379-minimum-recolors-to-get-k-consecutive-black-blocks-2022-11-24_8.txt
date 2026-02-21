@@ -1,0 +1,13 @@
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        length = len(blocks)
+        w, ans = 0, float(\'inf\')
+        for j in range(length):
+            if j<k:
+                if blocks[j]==\'W\': w+=1
+                if j == k-1: ans = min(w, ans)
+            else:
+                if blocks[j-k]==\'W\': w-=1
+                if blocks[j]==\'W\': w+=1
+                ans = min(w, ans)
+        return 0 if ans == float(\'inf\') else ans

@@ -1,0 +1,24 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        # Two-pass. Time O(mn(n + m)). Space O(1)
+        # To distinguish original 0 and revised 0, I use None to represent the later one.
+		# First, change all 0 to None
+        # Second, change all None to 0
+        
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] == 0:
+                    for r in range(len(matrix)):
+                        if matrix[r][j] != 0:
+                            matrix[r][j] = None
+                    for c in range(len(matrix[0])):
+                        if matrix[i][c] != 0:
+                            matrix[i][c] = None
+                            
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] is None:
+                    matrix[i][j] = 0

@@ -1,0 +1,36 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+from typing import Optional
+from collections import deque
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None
+        
+        # Dictionary to keep track of cloned nodes
+        visited = {}
+        
+        # Helper function to clone graph using DFS
+        def dfs(node):
+            if node in visited:
+                return visited[node]
+            
+            # Create a new node with the same value
+            clone_node = Node(node.val)
+            visited[node] = clone_node
+            
+            # Recursively clone neighbors
+            for neighbor in node.neighbors:
+                clone_node.neighbors.append(dfs(neighbor))
+            
+            return clone_node
+        
+        # Start cloning from the given node
+        return dfs(node)

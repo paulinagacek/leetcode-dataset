@@ -1,3 +1,0 @@
-class Solution:
-    def leastBricks(self, wall: List[List[int]]) -> int:
-        return len(wall) - max(Counter(chain.from_iterable(map(lambda x: accumulate(x[:-1]), wall))).values(), default=0)

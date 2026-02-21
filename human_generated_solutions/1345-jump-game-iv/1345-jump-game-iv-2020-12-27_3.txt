@@ -1,23 +1,26 @@
-class Solution {
-public:
-    int minJumps(vector<int>& arr) {
-        queue<int> q{{0}};
-        const int n = arr.size();        
-        vector<int> visited(n, 0);
-        visited[0]=1;        
-        unordered_map<int, vector<int>> equals;
-        for(int i = 0; i < n; i++) equals[arr[i]].push_back(i);                
-        for(int step = 0;!q.empty(); step++){
-            for(int i = q.size(); i>0;i--){
-                auto cur = q.front(); q.pop();
-                if(cur == n - 1) return step;                
-                auto& nexts = equals[arr[cur]];nexts.push_back(cur-1); nexts.push_back(cur+1);
-                for(int next: nexts)
-                    if(next >=0 && next < n && !visited[next]) q.push(next), visited[next]=1;                     
-                
-                nexts.clear(); // Important. Avoid later lookup equals arr[i]                
-            }
-        }
-        return n - 1;
-    }
-};
+class Solution:
+    def minJumps(self, a: List[int]) -> int:
+        n = len(a)
+        val2id = {}
+        for i, x in enumerate(a):
+            val2id.setdefault(x, []).append(i)
+        d = [inf] * n
+        d[0] = 0
+        q = [0]
+        while len(q) and q[0] != n - 1:
+            i = q.pop(0)
+            ii = i - 1
+            if 0 <= ii and d[ii] is inf:
+                d[ii] = d[i] + 1
+                q.append(ii)
+            ii = i + 1
+            if ii < n and d[ii] is inf:
+                d[ii] = d[i] + 1
+                q.append(ii)
+            if a[i] in val2id:
+                for ii in val2id[a[i]]:
+                    if d[ii] is inf:
+                        d[ii] = d[i] + 1
+                        q.append(ii)
+                del val2id[a[i]]
+        return d[n - 1]

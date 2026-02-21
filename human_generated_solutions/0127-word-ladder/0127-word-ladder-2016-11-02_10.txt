@@ -1,0 +1,85 @@
+import operator
+import collections
+import heapq
+
+
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: Set[str]
+        :rtype: int
+        """        
+        # Check inputs
+        # Empty or identical
+        if len(beginWord)==0 or len(wordList)==0 or beginWord==endWord:
+            return 0
+        # Single char
+        if len(beginWord)==1:
+            return 2
+        
+        
+        # Funcs
+        # Evertything is definied here in order to avoid penalties for out of scope references
+        def make_p2w(words, w_idxs):  
+            """Creates a map of all combinations of words with missing letters mapped 
+            to all words in the list that match that pattern.
+            E.g. hot -> {'_ot': ['hot'], 'h_t': ['hot'], 'ho_': ['hot']}
+            """
+            # Patterns to words and words to patterns
+            p2w = collections.defaultdict(list)
+
+            for w in words:
+                for i,j in w_idxs:
+                    p = w[:i] + '_' + w[j:]
+                    p2w[p].append(w)
+            return p2w
+                
+        # The search function!!!
+        def a_star(start, goal, w_idxs, p2w):
+            # Node structure: (int d+h, int d, int h, str word)
+            # where d is the depth            
+            visited = set([start])
+            q = [(0, 1, 0, start)]
+
+            while q:
+                # Get the next node
+                score, depth, h, word = heapq.heappop(q)
+                child_depth = depth+1
+                                
+                # Get the node's children
+                for i,j in w_idxs:
+                    p = word[:i] + "_" + word[j:]
+                    neighbor_words = p2w[p]
+
+                    # Iterate through children
+                    for nw in neighbor_words:
+                        if nw not in visited:
+                            # Goal check (before adding to the queue)
+                            if nw == goal:
+                                return child_depth
+                            visited.add(nw)
+                            # Calculate the A* heurisitc
+                            # In order to be optimal for a search on a graph the heuristic must be both admissible and 
+                            # consistent.  In order to meet those criteria I'm using the number of different letters 
+                            # (hamming distance) between the given word and the goal word.  This should never 
+                            # overestimate the distance to the goal word and should also maintain the triangle 
+                            # inequality for the graph (consistency). 
+                            # See Chapter 3 of "Artificial Intelligence a Modern Approach" for details.
+                            # Compute the number of swaps between two words by doing a boolean comparision 
+                            # on each pair of letters and then using sum to caste the bools to ints.  
+                            # E.g. if two words are neighbors, the sum should be 1.         
+                            h = sum(map(operator.ne, nw, goal)) 
+                            # Add to the q
+                            heapq.heappush(q, (child_depth+h, child_depth, h, nw))
+            # No route to goal 
+            return 0
+        
+        # Get word length
+        wl = len(beginWord)
+        w_indexes = zip(range(wl), range(1, wl+1))
+        # Preprocess the wordlist to make finding neighbors easy
+        patterns2words = make_p2w(wordList, w_indexes)
+        # Do the search
+        return a_star(beginWord, endWord, w_indexes, patterns2words)

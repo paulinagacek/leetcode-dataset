@@ -1,0 +1,12 @@
+class Solution:
+    def isValidSudoku(self, board):
+        seen = set()
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != ".":
+                    if (board[i][j], i, "row") in seen or (board[i][j], j, "col") in seen or (board[i][j], (i // 3) * 3 + j // 3, "box") in seen:
+                        return False
+                    seen.add((board[i][j], i, "row"))
+                    seen.add((board[i][j], j, "col"))
+                    seen.add((board[i][j], (i // 3) * 3 + j // 3, "box"))
+        return True

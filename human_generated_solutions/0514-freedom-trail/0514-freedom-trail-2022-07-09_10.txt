@@ -1,0 +1,23 @@
+import numpy as np
+
+array_tuple = Tuple[np.ndarray, np.ndarray]
+
+class Solution:
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        L, indices = len(ring), defaultdict(list)
+        for i, c in enumerate(ring): indices[c].append(i)
+        indices = {c: np.array(idx) for c, idx in indices.items()}
+        
+        def reducer(pivot_cost: array_tuple, target) -> array_tuple:
+            pivot, cost = pivot_cost
+            right_pivot = pivot.searchsorted(target) % pivot.size
+            left_pivot = right_pivot - 1
+            return target, np.minimum((target - pivot[left_pivot]) % L + cost[left_pivot],
+                                      (pivot[right_pivot] - target) % L + cost[right_pivot])
+        # simplify
+        targets = (indices[c] for c, _ in groupby(key))
+        if ring[0] == key[0]: next(targets)
+        
+        pivot = cost = np.array([0])
+        _, cost = reduce(reducer, targets, (pivot, cost))
+        return cost.min() + len(key)

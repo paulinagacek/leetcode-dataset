@@ -1,0 +1,17 @@
+class Solution:
+
+    def longestZigZag(self, root: TreeNode) -> int:
+        return self.helper(root, 0, 0)
+
+    def helper(self, root: TreeNode, sum_from_left_parent: int, sum_from_right_parent: int) -> int:
+        if root.left:
+            next_sum_in_left_direction = self.helper(root.left, sum_from_right_parent + 1, 0)
+        else:
+            next_sum_in_left_direction = sum_from_right_parent
+
+        if root.right:
+            next_sum_in_right_direction = self.helper(root.right, 0, sum_from_left_parent + 1)
+        else:
+            next_sum_in_right_direction = sum_from_left_parent
+
+        return max(next_sum_in_right_direction, next_sum_in_left_direction)

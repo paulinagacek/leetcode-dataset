@@ -1,0 +1,5 @@
+def closeStrings(word1, word2):
+	a, b = Counter(word1), Counter(word2)        
+	if set(a.keys()) != set(b.keys()): return False
+	if sorted(a.values()) != sorted(b.values()): return False
+	return True

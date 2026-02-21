@@ -1,14 +1,11 @@
 class Solution:
     def findOriginalArray(self, changed: List[int]) -> List[int]:
-        if len(changed) % 2 == 1: return []
-        
         changed.sort()
-        res, queue = deque(), deque()
-        
-        for num in changed:
-            if queue and num == queue[0] * 2:
-                res.append(queue.popleft())
+        hq = []
+        ans = []
+        for i in range(len(changed)):
+            if hq and hq[0] * 2 == changed[i]:
+                ans.append(heapq.heappop(hq))
             else:
-                queue.append(num)
-                    
-        return [] if queue else res
+                heapq.heappush(hq, changed[i]) 
+        return ans if not hq else []

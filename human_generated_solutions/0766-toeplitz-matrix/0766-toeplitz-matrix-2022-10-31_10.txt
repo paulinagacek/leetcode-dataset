@@ -1,8 +1,13 @@
 class Solution:
-    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-        r= len(matrix)
-        for i in range(1,r):
-            for j in range(1,len(matrix[0])):
-                if matrix[i-1][j-1] != matrix[i][j]:
-                    return False
+    def isToeplitzMatrix(self, m: List[List[int]]) -> bool:
+	   #storing the last row elements of the matrix
+        a=m[0]
+        for i in range(1,len(m)):
+		   #first element of the i th row
+            z=m[i][0]
+			#inserting the element z in matrix a and poping out the last element 
+            a.insert(0,z)
+            a.pop()
+            if m[i]!=a:
+                return False
         return True

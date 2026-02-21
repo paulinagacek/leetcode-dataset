@@ -1,0 +1,20 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        res = [0] * (len(num1) + len(num2))
+        
+        for i in range(len(num1)-1, -1, -1):
+            carry = 0
+            n1 = int(num1[i])
+            
+            for j in range(len(num2)-1, -1, -1):
+                n2 = int(num2[j])
+                
+                mul = n1 * n2 + res[i + j + 1] + carry
+                carry = mul // 10
+                res[i + j + 1] = mul % 10
+            
+            if carry != 0:
+                res[i] += carry
+        
+        result = ''.join(map(str, res))
+        return result.lstrip('0') or '0'

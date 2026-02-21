@@ -1,0 +1,8 @@
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        count = 0
+        divider = 5
+        while n >= divider:
+            count += n // divider
+            divider *= 5
+        return count

@@ -1,0 +1,39 @@
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        # Begin Run as empty string
+        r = ""
+        l = len(chars)
+
+        # Check for length 0
+        if l == 0:
+            return ""
+
+        # Check for length 1
+        if l == 1:
+            return len(chars)
+
+        #Intialize Values
+        last = chars[0]
+        cnt = 1
+        i = 1
+    
+        while i < l:
+
+            # Check to see if it is the same letter
+            if chars[i] == chars[i - 1]: 
+                # Add a count if same as previous
+                cnt += 1
+            else:
+                # Otherwise store the previous data
+                r = r + chars[i - 1] if cnt == 1 else r + chars[i - 1] + str(cnt)
+                cnt = 1
+
+            # Add to index count to terminate while loop
+            i += 1
+        
+        # Put everything back into r, this for last character
+        r = r + chars[i - 1] if cnt == 1 else r + chars[i - 1] + str(cnt)
+        
+        chars[:] = list(r) 
+
+        return len(chars)

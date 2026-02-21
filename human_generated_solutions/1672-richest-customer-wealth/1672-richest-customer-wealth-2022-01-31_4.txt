@@ -1,25 +1,2 @@
-You are given an m x n integer grid accounts where accounts[i][j] is the amount of money [i] customer  customer has in their bank.
-    Example:
-    accounts = [[2,8,7],[7,1,3],[1,9,5]]
-        Here
-            \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB [2,8,7] --> person 1 amount in there respective banks
-           \uD83E\uDDD1\uD83C\uDFFB\u200D\uD83D\uDCBC [7,1,3] --> person 2 amount in there respective banks
-           \uD83D\uDD75\uD83C\uDFFB\u200D\u2642\uFE0F [1,9,5] --> person 3 amount in there respective banks
-        Now we need to find the total in the  [i] customer\'s bank.
-        The total money that the [1] customer has:
-            2 + 8 + 7 = 17
-        The total money that the [2] customer has:
-            7 + 1 + 3 = 11
-        The total money that the [3] customer has :
-            1 + 9 + 5 = 15
-    Now we need return the wealthy customer amount
-        From the given data person [1] \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB is the most rich \uD83E\uDD11.
-        so we need to return 17
-		
-    Big O :
-        m --> customer
-        n --> bank
-        Time:O(m*n) 
-        Space:O(1)
-
-Solution:
+def maximumWealth(self, accounts: List[List[int]]) -> int:
+	return max(sum(i) for i in accounts)

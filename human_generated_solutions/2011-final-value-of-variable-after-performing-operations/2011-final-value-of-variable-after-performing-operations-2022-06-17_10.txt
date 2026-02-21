@@ -1,0 +1,10 @@
+class Solution:
+    def finalValueAfterOperations(self, operations: List[str]) -> int:
+		# instead of matching "++X" or "X--" in every string of Operations,
+		# we just check if "+" / "-" is present in strings, we increment / decrement
+		# our X by 1. Finally we return X
+        X = 0
+        for op in operations:
+            if "+" in op: X+=1
+            elif "-" in op: X-=1
+        return X

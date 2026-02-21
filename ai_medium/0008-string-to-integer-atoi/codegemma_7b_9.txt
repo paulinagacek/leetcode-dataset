@@ -1,0 +1,23 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        l = len(s)
+        p = 0
+        sum = 0
+        while (p < l and s[p] == ' '):
+            p += 1
+        sign = 1
+        if (p < l and s[p] == '-'):
+            p += 1
+            sign = -1
+        elif (p < l and s[p] == '+'):
+            p += 1
+        while (p < l and s[p].isdigit()):
+            sum = sum * 10 + (ord(s[p]) - ord('0'))
+            p += 1
+        sum = sum * sign
+        if (sum < -2147483648):
+            return -2147483648
+        elif (sum > 2147483647):
+            return 2147483647
+        else:
+            return sum

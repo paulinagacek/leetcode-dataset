@@ -1,7 +1,0 @@
-def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
-	res = set()
-	for i, num in enumerate(nums):
-		for j, _ in enumerate(nums):
-			if abs(i - j) <= k and num == key:
-				res.add(j)
-	return sorted(list(res))

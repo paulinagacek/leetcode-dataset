@@ -1,0 +1,10 @@
+class Solution:
+    def addDigits(self, num: int) -> int:
+        
+        if num < 10:
+            # single digit
+            return num
+			
+        else:
+            # multiple digits, using the formula of digital root
+            return (num-1)%9 + 1

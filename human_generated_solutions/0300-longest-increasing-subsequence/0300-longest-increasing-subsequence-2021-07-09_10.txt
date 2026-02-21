@@ -1,7 +1,0 @@
-#Simpler version: O(N^2):Dynamic Programming         --> A1
-        dp = [1]*len(nums)    #base case
-        for i in range(1, len(nums)):
-            for j in range(i):
-                if nums[i]>nums[j]:
-                    dp[i]=max(dp[j]+1,dp[i])
-        return max(dp)

@@ -1,0 +1,10 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        if all(num == 0 for num in nums):
+            return "0"
+        
+        def custom_sort(x, y):
+            return y+x > x+y
+        
+        sorted_nums = sorted(map(str, nums), key=functools.cmp_to_key(custom_sort))
+        return ''.join(sorted_nums)

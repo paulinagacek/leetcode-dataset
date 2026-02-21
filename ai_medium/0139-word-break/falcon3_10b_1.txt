@@ -1,0 +1,17 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        mem = {}
+        
+        def helper(idx):
+            if idx == len(s):
+                return True
+            if idx in mem:
+                return mem[idx]
+            for end in range(idx + 1, len(s) + 1):
+                if s[idx:end] in wordDict and helper(end):
+                    mem[idx] = True
+                    return True
+            mem[idx] = False
+            return False
+        
+        return helper(0)

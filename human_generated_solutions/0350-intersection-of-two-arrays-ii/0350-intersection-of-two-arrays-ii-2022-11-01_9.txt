@@ -1,0 +1,13 @@
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        dc=defaultdict(lambda:0)
+        for a in nums1:
+            dc[a]+=1
+        dc2=defaultdict(lambda:0)
+        for b in nums2:
+            dc2[b]+=1
+        ans=[]
+        for a in dc:
+            if(dc2[a]>0):
+                ans+=[a]*min(dc[a],dc2[a])
+        return ans

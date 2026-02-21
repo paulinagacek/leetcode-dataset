@@ -1,26 +1,19 @@
-class Solution:
-    def isPossible(self, nums: List[int]) -> bool:
-        
-        if len(nums)<3:
-            return False
-        
-        heap=[]
-        
-        for x in nums:
-            
-            while heap and (x>(heap[0][0]+1)):
-                length= heapq.heappop(heap)
-                if length[1]<3:
-                    return False
-            
-            if heap and x==(heap[0][0]+1):
-                length=heapq.heappop(heap)
-                heapq.heappush(heap,(x,length[1]+1))
+class Solution(object):
+    def isPossible(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        ends_with = defaultdict(list)
+        for n in nums:
+            if ends_with[n-1]:
+                length = heapq.heappop(ends_with[n-1])
+                heapq.heappush(ends_with[n], length+1)
             else:
-                heapq.heappush(heap,(x,1))
-        
-        while heap:
-            if heapq.heappop(heap)[1]<3:
+                heapq.heappush(ends_with[n], 1)
+
+        for lengths in ends_with.values():
+            if lengths and lengths[0] < 3:
                 return False
         
         return True

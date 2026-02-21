@@ -1,0 +1,66 @@
+class Solution:
+    def __init__(self):
+        self.result = None
+        self.n = 0
+
+    def getNextBeautifulNumbersFromSet(self, digit_set):
+        digits = []
+        for digit in digit_set:
+            digits += [digit] * digit
+        
+        def backtrack(prefix, remaining_digits):
+            num_remaining_digits = len(remaining_digits)
+            if num_remaining_digits == 0:
+                if prefix > self.n and (self.result is None or prefix < self.result):
+                    self.result = prefix
+                return
+            
+            for next_digit in set(remaining_digits):
+                new_prefix = prefix + next_digit * 10 ** (num_remaining_digits - 1)
+                if self.result is None or new_prefix < self.result:
+                    remaining_digits.remove(next_digit)
+                    backtrack(new_prefix, remaining_digits)
+                    remaining_digits.append(next_digit)
+        
+        backtrack(0, digits)
+            
+    
+    def getDigitSets(self, num_digits):
+        valid_digit_sets = []
+
+        def backtrack(prior_digit_set, num_digits):
+            if num_digits < 1:
+                valid_digit_sets.append(set(prior_digit_set))
+                return 
+            for next_digit in range(num_digits, 0, -1):
+                if next_digit not in prior_digit_set:
+                    prior_digit_set.add(next_digit)
+                    backtrack(prior_digit_set, num_digits - next_digit)
+                    prior_digit_set.remove(next_digit)
+
+        backtrack(set(), num_digits)
+        return valid_digit_sets
+    
+    
+    def getNextBeautifulNumbers(self, num_digits):
+        valid_digit_sets = self.getDigitSets(num_digits)
+        
+        for digit_set in valid_digit_sets:
+            self.getNextBeautifulNumbersFromSet(digit_set)
+        
+                
+    def nextBeautifulNumber(self, n: int) -> int:        
+        num_digits = 1
+        k = n
+        while k >= 10:
+            num_digits += 1
+            k = k // 10
+        
+        self.n = n
+        
+        self.getNextBeautifulNumbers(num_digits)
+        
+        if self.result is None:
+            self.getNextBeautifulNumbers(num_digits + 1)            
+        
+        return self.result

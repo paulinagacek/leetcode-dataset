@@ -1,0 +1,11 @@
+class Solution:
+    def threeEqualParts(self, arr: List[int]) -> List[int]:
+        ones = [i for i, x in enumerate(arr) if x]
+        n, r = divmod(len(ones), 3)
+        if r: return -1, -1
+        if not n: return 0, 2
+        a, b, c = ones[0], ones[n], ones[2*n]
+        r = len(arr) - c
+        if r > max(b-a, c-b) or not arr[a+1:a+r] == arr[b+1:b+r] == arr[c+1:]:
+            return -1, -1
+        return a + r - 1, b + r

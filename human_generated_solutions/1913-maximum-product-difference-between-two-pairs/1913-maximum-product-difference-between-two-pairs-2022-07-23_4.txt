@@ -1,1 +1,0 @@
-return math.prod(heapq.nlargest(2,nums)) -math.prod(heapq.nsmallest(2,nums))

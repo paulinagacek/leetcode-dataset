@@ -1,0 +1,49 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return None
+        
+        # Initialize the current node to the root of the tree
+        curr = root
+        # Get a pointer to keep track of nodes in the next level which are to be traversed
+        next_level_start = None
+
+        while curr:
+            # If we are at the start of a level, if we have not processed nodes for the next level, do:
+            if not next_level_start and (curr.left or curr.right):
+                next_level_start = curr.left if curr.left else curr.right
+            
+            # If the current node has a left child, set its `next` pointer
+            if curr.left:
+                # If current node also has a right child, make 'left child's next point to 'right child'
+                if curr.right:
+                    curr.left.next = curr.right
+                # If left child doesn't have a next but there are still nodes in the same level,
+                # set its `next` pointer to next node at the same level
+                elif curr.next:
+                    curr.left.next = curr.next.left if curr.next.left else curr.next.right
+            
+            # Similarly handle the right child
+            if curr.right:
+                if curr.next:
+                    curr.right.next = curr.next.left if curr.next.left else curr.next.right
+
+            # Move to the next node at the same level
+            curr = curr.next
+            # If we've reached the end of the current level, update current to next_level_start
+            # and move next_level_start one level down.
+            if not curr:
+                curr = next_level_start
+                next_level_start = None
+
+        return root

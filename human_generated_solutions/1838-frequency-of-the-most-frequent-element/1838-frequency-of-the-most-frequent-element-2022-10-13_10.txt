@@ -1,13 +1,14 @@
-class Solution:
-    def maxFrequency(self, nums: List[int], k: int) -> int:
-        nums.sort()
-        l = 0
-        s = 0
-        ans = 1
-        for r in range(len(nums)):
-            while (r-l)*nums[r] > (s+k)  and l<r:
-                s-=nums[l]
-                l+=1
-            s+=nums[r]
-            ans = max(ans,r-l+1)
+def maxFrequency(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        nums = sorted(nums, reverse=True)
+        sums = list(accumulate(nums)) #you dont need prefix sum but its easier to read
+        
+        ans = 0; j = 0
+        for i in range(n):
+            while j+1 < n and nums[i]*(j + 1 - i) - (sums[j+1] - sums[i]) <= k:
+                j += 1
+            
+            ans = max(ans, j - i + 1)
+            j = max(i+1, j)
+        
         return ans

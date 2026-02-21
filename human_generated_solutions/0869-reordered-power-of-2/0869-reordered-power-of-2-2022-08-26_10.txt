@@ -1,4 +1,6 @@
-def reorderedPowerOf2(self, n: int) -> bool:
-	num = set("".join(sorted(str(2**i))) for i in range(0, 32))
-	n = \'\'.join(sorted(str(n)))
-	return n in num
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        list_of_powers_of_2=[]
+        for i in range(31):
+            list_of_powers_of_2.append(\'\'.join(sorted(str(1<<i))))   ## storing powers of 2 as sorted string to help checking reorder of number given matches or not. 
+        return \'\'.join(sorted(str(n))) in list_of_powers_of_2

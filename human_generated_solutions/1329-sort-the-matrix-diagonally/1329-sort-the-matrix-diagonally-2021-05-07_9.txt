@@ -1,0 +1,19 @@
+def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+        
+        def sort_diag(r, c):
+            d = []
+            r1, c1 = r, c
+            while r < len(mat) and c < len(mat[0]):
+                d.append(mat[r][c])
+                r += 1
+                c += 1
+            
+            for n in sorted(d):
+                mat[r1][c1] = n
+                r1 += 1
+                c1 += 1
+        
+        for i in range(len(mat[0])): sort_diag(0, i)
+        for i in range(1, len(mat)): sort_diag(i, 0)
+
+        return mat

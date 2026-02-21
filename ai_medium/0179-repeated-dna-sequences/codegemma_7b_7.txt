@@ -1,0 +1,12 @@
+from collections import Counter
+
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        
+        # Create a dictionary to store the count of each 10-letter subsequence
+        subsequence_counts = Counter([s[i:i+10] for i in range(len(s) - 9)])
+        
+        # Create a list to store the repeated 10-letter subsequences
+        repeated_subsequences = [subsequence for subsequence, count in subsequence_counts.items() if count > 1]
+        
+        return repeated_subsequences

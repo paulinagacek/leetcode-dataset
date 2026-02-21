@@ -1,0 +1,37 @@
+from typing import List
+from collections import defaultdict, deque
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # Create a graph and an in-degree array
+        graph = defaultdict(list)
+        in_degree = [0] * numCourses
+        
+        # Fill the graph and the in-degree array
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            in_degree[dest] += 1
+        
+        # Initialize a queue with all courses having no prerequisites
+        zero_in_degree_queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+        
+        topological_order = []
+        
+        # Process the courses in the queue
+        while zero_in_degree_queue:
+            node = zero_in_degree_queue.popleft()
+            topological_order.append(node)
+            
+            # Reduce the in-degree of neighboring nodes by 1
+            for neighbor in graph[node]:
+                in_degree[neighbor] -= 1
+                
+                # If in-degree becomes zero, add it to the queue
+                if in_degree[neighbor] == 0:
+                    zero_in_degree_queue.append(neighbor)
+        
+        # Check if topological ordering is possible or not 
+        if len(topological_order) == numCourses:
+            return topological_order
+        else:
+            return []

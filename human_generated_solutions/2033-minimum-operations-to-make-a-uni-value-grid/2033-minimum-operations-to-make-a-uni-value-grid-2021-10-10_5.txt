@@ -1,0 +1,20 @@
+class Solution:
+    def minOperations(self, grid: List[List[int]], x: int) -> int:
+        n = len(grid) * len(grid[0])
+        ops = 0
+        
+		# Find the median
+		#   Convert grid to a 1D list
+		#   Index the middle element (when it\'s even, it picks the second middle)
+		med = sorted([col for row in grid for col in row])[n // 2]
+        
+		# Go through the grid and calculate the number of additions/subtractions needed for each element
+		for row in grid:
+            for col in row:
+				# If the difference is not divisible, you can\'t add/subtract your way to the median
+                if abs(med - col) % x != 0: 
+                    return -1
+                ops += abs(med - col) // x
+        
+		# Profit
+        return ops

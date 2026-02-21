@@ -1,0 +1,26 @@
+from typing import List
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return max(nums[0], nums[1])
+        
+        rob1 = 0
+        rob2 = 0
+        
+        for i in range(len(nums)):
+            new_rob = max(rob1 + nums[i], rob2)
+            rob1 = rob2
+            rob2 = new_rob
+        
+        rob3 = 0
+        rob4 = 0
+        
+        for i in range(1, len(nums)):
+            new_rob = max(rob3 + nums[i], rob4)
+            rob3 = rob4
+            rob4 = new_rob
+        
+        return max(rob2, rob4)

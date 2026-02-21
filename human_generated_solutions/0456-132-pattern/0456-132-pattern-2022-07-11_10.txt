@@ -1,0 +1,10 @@
+def find132pattern(self, nums: List[int]) -> bool:
+	mid = -float(\'inf\')
+	s = []
+	for i in nums[::-1]:
+		if(i < mid):
+			return 1
+		while(s and s[-1] < i):
+			mid = s.pop()
+		s.append(i)
+	return 0

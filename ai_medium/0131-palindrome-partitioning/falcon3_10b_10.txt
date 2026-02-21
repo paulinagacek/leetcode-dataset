@@ -1,0 +1,23 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def dfs(s, start, path, res):
+            if start == len(s):
+                res.append(path[:])
+                return
+            for end in range(start + 1, len(s) + 1):
+                if is_palindrome(s, start, end - 1):
+                    path.append(s[start:end])
+                    dfs(s, end, path, res)
+                    path.pop()
+
+        def is_palindrome(s, l, r):
+            while l < r:
+                if s[l] != s[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True
+
+        res = []
+        dfs(s, 0, [], res)
+        return res

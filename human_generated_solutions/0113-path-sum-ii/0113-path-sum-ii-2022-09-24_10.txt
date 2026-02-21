@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        if not root: return None
+		#Final Result list
+        res = []
+		# Creating Stack for faster Insertion and Deletion
+        path = collections.deque() 
+        
+		#dfs is define inside the pathSum method so we don\'t have to pass the path and res list
+        def dfs(node, s):
+			#Adding value of node to stack as well as to sum (s)
+            path.append(node.val)
+            s += node.val
+			#Checking Whether it is a leaf node and also whether sum value is equal to targetSum
+            if  not node.left and not node.right and s == targetSum:
+                res.append(list(path))
+            # If not then we will continue with our dfs by recursively going to left node and right node if exist.
+			if node.left:
+                dfs(node.left, s)
+            if  node.right:
+                dfs(node.right, s)
+			# Lastly, remove the node value from path and sum before exiting from the dfs
+            s -= node.val
+            path.pop()
+        #Calling our dfs method and passing root as main node and sum(s) as 0
+		dfs(root, 0)
+        return res

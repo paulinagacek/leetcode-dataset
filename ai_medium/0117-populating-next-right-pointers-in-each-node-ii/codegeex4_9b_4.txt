@@ -1,0 +1,58 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        
+        # Initialize the current level starting with the root.
+        curr_level_start = root
+        
+        while curr_level_start:
+            # This pointer will be used to link all the nodes of next level.
+            prev_node = None
+            # Dummy node to help us connect the nodes of the next level.
+            next_level_start_dummy = Node(0)
+            next_level_curr = next_level_start_dummy
+            
+            # Iterate through each node on the current level.
+            while curr_level_start:
+                # Process left child.
+                if curr_level_start.left:
+                    # Connect it with prev_node or next_level_curr
+                    if prev_node:
+                        prev_node.next = curr_level_start.left
+                    else:
+                        next_level_start_dummy.next = curr_level_start.left
+                    # Move prev_node to the current node since we need to connect all nodes of the last level.
+                    prev_node = curr_level_start.left
+                    # Update next_level_curr to point to the next node in the next level.
+                    next_level_curr = next_level_curr.next
+            
+                # Process right child.
+                if curr_level_start.right:
+                    # Connect it with prev_node or next_level_curr
+                    if prev_node:
+                        prev_node.next = curr_level_start.right
+                    else:
+                        next_level_start_dummy.next = curr_level_start.right
+                    # Move prev_node to the current node since we need to connect all nodes of the last level.
+                    prev_node = curr_level_start.right
+                    # Update next_level_curr to point to the next node in the next level.
+                    next_level_curr = next_level_curr.next
+            
+                # Move to the next node on the current level.
+                curr_level_start = curr_level_start.next
+            
+            # Move start of the next level up for the next iteration.
+            curr_level_start = next_level_start_dummy.next
+        
+        return root

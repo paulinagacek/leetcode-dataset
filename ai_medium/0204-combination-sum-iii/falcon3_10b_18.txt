@@ -1,0 +1,17 @@
+from typing import List
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def backtrack(start=1, current=[]):
+            if len(current) == k:
+                if sum(current) == n:
+                    result.append(current[:])
+                return
+
+            for i in range(start, 10):
+                if i not in current:
+                    backtrack(i + 1, current + [i])
+        
+        result = []
+        backtrack()
+        return result

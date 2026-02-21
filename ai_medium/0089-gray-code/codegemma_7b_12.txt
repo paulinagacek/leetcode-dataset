@@ -1,0 +1,8 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        ans = [0]
+        cur = 1
+        for i in range(n):
+            ans.extend([cur, cur + ans[-1]])
+            cur <<=1
+        return ans

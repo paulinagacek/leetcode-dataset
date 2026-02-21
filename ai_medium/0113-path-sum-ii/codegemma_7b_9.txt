@@ -1,0 +1,19 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        paths = []
+        self.dfs(root, targetSum, paths, [])
+        return paths
+
+    def dfs(self, node: Optional[TreeNode], remainingSum: int, paths: List[List[int]], currentPath: List[int]):
+        if node is None:
+            return
+
+        currentPath.append(node.val)
+
+        if remainingSum == node.val and node.left is None and node.right is None:
+            paths.append(currentPath[:])
+
+        self.dfs(node.left, remainingSum - node.val, paths, currentPath)
+        self.dfs(node.right, remainingSum - node.val, paths, currentPath)
+
+        currentPath.pop()

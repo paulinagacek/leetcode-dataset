@@ -1,3 +1,0 @@
-class Solution:
-    def checkIfPangram(self, se: str) -> bool:
-        return(len(set(se))==26)

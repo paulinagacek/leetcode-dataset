@@ -1,0 +1,19 @@
+from heapq import heapify, heappop
+
+class Solution:
+    def minSetSize(self, arr: List[int]) -> int:
+        
+        # count the amount of occurences
+        cn = Counter(arr)
+        
+        # heapify the counter (minus for maxheap)
+        cn = [-value for value in cn.values()]
+        heapify(cn)
+        
+        # get the amount of numbers we need to forget
+        amount = len(arr)//2 + len(arr) % 2
+        counter = 0
+        while amount > 0:
+            amount += heappop(cn)
+            counter += 1
+        return counter

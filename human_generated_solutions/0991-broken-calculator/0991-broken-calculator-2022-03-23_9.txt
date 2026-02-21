@@ -1,0 +1,9 @@
+class Solution:
+    def brokenCalc(self, startValue: int, target: int) -> int:
+        #For this you can simply think for a situation where in start you are at peak and you have to come down from peak and there is only one possibility for that which move down and that\'s why we do this
+        if startValue >= target:
+            return startValue - target
+        if target % 2== 0:
+            return 1 + self.brokenCalc(startValue , target // 2)
+        else:
+            return 1 + self.brokenCalc(startValue , target + 1)

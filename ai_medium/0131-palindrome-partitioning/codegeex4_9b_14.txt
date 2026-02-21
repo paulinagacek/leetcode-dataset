@@ -1,0 +1,16 @@
+from typing import List
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        
+        def dfs(s, path):
+            if not s:
+                res.append(path)
+                return
+            for i in range(len(s)):
+                if s[:i+1] == s[:i+1][::-1]:
+                    dfs(s[i+1:], path + [s[:i+1]])
+        
+        dfs(s, [])
+        return res

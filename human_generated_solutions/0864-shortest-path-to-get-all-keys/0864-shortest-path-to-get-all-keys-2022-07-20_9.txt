@@ -1,0 +1,51 @@
+from string import ascii_lowercase
+class Solution:
+    def shortestPathAllKeys(self, A: List[str]) -> int:
+        N, M = len(A), len(A[0])
+        
+        ind = {} # letter to key index mapping (we need it to check if we have the key for the lock)
+        k = 0
+        for i in range(N):
+            for j in range(M):
+                if A[i][j] in ascii_lowercase:
+                    ind[A[i][j]] = k
+                    k += 1
+                
+                if A[i][j] == "@":
+                    sx = i
+                    sy = j
+        
+        
+        NK = len(ind) # number of of keys
+        T = (1 << NK) - 1 # target (if all keys are found)
+        
+        
+        
+        D = defaultdict(lambda : inf) # distance from start
+        D[(0,0,sx,sy)] = 0
+        
+        
+        h = [(0,0,sx,sy)]
+        while h:
+            d, mask, i, j = heappop(h)
+            if mask == T: return d
+            for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]:
+                x = i + dx
+                y = j + dy
+                if  0 <= x < N and 0 <= y < M and A[x][y] != "#" and D[(mask,x,y)] > d + 1:
+                    if A[x][y].isupper():
+                        k = ind[A[x][y].lower()]
+                        if mask & (1 <<k) == 0: continue
+                        D[(mask,x,y)] = d + 1
+                        heappush(h,(d + 1,mask ,x,y))
+                        
+                    if A[x][y].islower():
+                        k = ind[A[x][y]]
+                        D[(mask,x,y)] = d + 1
+                        heappush(h,(d + 1,mask | (1 <<k),x,y))
+                        
+                    if A[x][y] in {".","@"}:
+                        D[(mask,x,y)] = d + 1
+                        heappush(h,(d + 1,mask ,x,y))
+                    
+        return -1

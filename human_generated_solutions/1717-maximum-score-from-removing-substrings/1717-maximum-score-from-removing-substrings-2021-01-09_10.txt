@@ -1,37 +1,19 @@
 class Solution:
-    
     def maximumGain(self, s: str, x: int, y: int) -> int:
-            
-        res = 0
-        stack = []
-        trigger, points = (\'b\', x) if x >= y else (\'a\', y)
-        
-        def clean_stack():
-            nonlocal res, stack
-            
-            if len(stack) == 2:
-                res += (x if points==y else y) * min(stack[0][1], stack[1][1])
-                        
-            stack = []
-            
-            
-        for ch in s:
-            if ch in \'ab\':
-                if len(stack) == 0:
-                    stack.append([ch, 1])
-                elif stack[-1][0] == ch:
-                    stack[-1][1] += 1
-                elif ch == trigger:
-                    res += points
-
-                    stack[-1][1] -= 1
-                    if stack[-1][1] == 0:
-                        stack.pop()
+        def remove(s, tgt, score):
+            stk = []
+            total = 0
+            for c in s:
+                if stk and (stk[-1] + c) == tgt:
+                    stk.pop()
+                    total += score
                 else:
-                    stack.append([ch, 1])
-            else:
-                clean_stack()
-
-        clean_stack()
-
-        return res
+                    stk.append(c)
+            return (\'\'.join(stk), total)
+        tgt1 = \'ab\' if x > y else \'ba\'
+        score1 = x if x > y else y
+        newS, total1 = remove(s, tgt1, score1) # greedily remove more valuable substring
+        tgt2 = \'ba\' if x > y else \'ab\'
+        score2 = y if x > y else x
+        _, total2 = remove(newS, tgt2, score2) # remove the less valuable substring
+        return total1 + total2

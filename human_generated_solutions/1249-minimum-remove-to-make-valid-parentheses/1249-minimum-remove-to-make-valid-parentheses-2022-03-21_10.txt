@@ -1,0 +1,16 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        stack = []
+        ans = [""]*len(s)                    # Declare the ans array
+        for i in range(len(s)):
+            if s[i].isalpha():               # If alphabet : Insert it into ans array
+                ans[i] = s[i]
+            else:
+                if s[i]==\'(\':                # If \'(\' : Push it to the stack along with its index
+                    stack.append((s[i],i))
+                else:                        # If \')\' : Pop the top element of stack and insert into ans array at appropriate index
+                    if stack:
+                        ans[i] = s[i]
+                        a = stack.pop()
+                        ans[a[1]] = a[0]
+        return "".join(ans)                  # Return the ans array

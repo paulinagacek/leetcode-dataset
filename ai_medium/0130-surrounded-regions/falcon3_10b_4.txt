@@ -1,0 +1,35 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        rows, cols = len(board), len(board[0])
+        queue = collections.deque()
+
+        # Add all border O cells to the queue
+        for i in range(rows):
+            if board[i][0] == 'O':
+                queue.append((i, 0))
+            if board[i][cols - 1] == 'O':
+                queue.append((i, cols - 1))
+        for j in range(cols):
+            if board[0][j] == 'O':
+                queue.append((0, j))
+            if board[rows - 1][j] == 'O':
+                queue.append((rows - 1, j))
+
+        # Mark all reachable 'O' cells to 'T'
+        while queue:
+            r, c = queue.popleft()
+            if board[r][c] == 'O':
+                board[r][c] = 'T'
+                directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+                for dr, dc in directions:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < rows and 0 <= nc < cols and board[nr][nc] == 'O':
+                        queue.append((nr, nc))
+
+        # Replace remaining 'O' cells with 'X', all 'T' cells back to 'O'
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
+                if board[r][c] == 'T':
+                    board[r][c] = 'O'

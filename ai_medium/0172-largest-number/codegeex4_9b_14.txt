@@ -1,0 +1,12 @@
+class Solution:
+    def largestNumber(self, nums):
+        def cmp(x, y):
+            if x + y > y + x:
+                return -1
+            elif x + y == y + x:
+                return 0
+            else:
+                return 1
+
+        res = ''.join(map(str, sorted(nums, key=cmp_to_key(cmp))))
+        return '0' if res[0] == '0' else res

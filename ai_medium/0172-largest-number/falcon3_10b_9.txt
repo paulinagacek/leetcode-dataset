@@ -1,0 +1,8 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        nums = list(map(str, nums))
+        def compare(x, y):
+            return int(y+x) - int(x+y)
+        nums.sort(cmp=compare, reverse=True)
+        result = ''.join(nums)
+        return result.lstrip('0') or '0'

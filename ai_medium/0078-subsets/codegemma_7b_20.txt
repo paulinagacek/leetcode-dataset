@@ -1,0 +1,15 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        result = []
+
+        def backtrack(index, currentSubset):
+            result.append(currentSubset[:])
+
+            for i in range(index, n):
+                currentSubset.append(nums[i])
+                backtrack(i + 1, currentSubset)
+                currentSubset.pop()
+
+        backtrack(0, [])
+        return result

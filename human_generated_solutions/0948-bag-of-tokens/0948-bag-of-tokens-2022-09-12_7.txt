@@ -1,26 +1,14 @@
 class Solution:
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         tokens.sort()
-		#Edge cases:
-		#1. If there are no tokens
-		#2. If the lowest valued token has value more than power
-        if not tokens or tokens[0] > power:
-            return 0
-        
-		#Pointers to keep track of which token to play face up and face down
-        up, down = 0, len(tokens) - 1
-		
-        maxScore, curScore = 0, 0
-        
-        while up <= down:
-            if tokens[up] <= power:
-                power -= tokens[up]
-                curScore += 1
-                up += 1
-            else:
-                power += tokens[down]
-                curScore -= 1
-                down -= 1
-            maxScore = max(maxScore, curScore)
-        
-        return maxScore
+        n = len(tokens)
+        i, j = 0, n
+        while i < j:
+            if tokens[i] <= power:
+                power -= tokens[i]
+                i += 1
+            elif i - (n - j) and j > i + 1:
+                j -= 1
+                power += tokens[j]
+            else: break
+        return i - (n - j)

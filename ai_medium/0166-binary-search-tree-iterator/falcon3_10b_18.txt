@@ -1,0 +1,18 @@
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack = []
+        self._leftmost_inorder(root)
+        
+    def next(self) -> int:
+        topmost = self.stack.pop()
+        # Push right child and its leftmost children onto stack
+        self._leftmost_inorder(topmost.right)
+        return topmost.val
+        
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
+        
+    def _leftmost_inorder(self, root: Optional[TreeNode]):
+        while root:
+            self.stack.append(root)
+            root = root.left

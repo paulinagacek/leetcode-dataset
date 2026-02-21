@@ -1,0 +1,38 @@
+import heapq
+from typing import MutableMapping, MutableSequence, Set, List, Tuple
+
+class Solution:
+    def minCut(self, s: str) -> int:
+        graph: MutableMapping[int, MutableSequence[int]] = dict()
+        palindromes: Set[Tuple[int, int]] = set()
+        n = len(s)
+        for i in range(n):
+            graph[i] = [i + 1]
+            palindromes.add((i, i + 1))
+
+        for length in range(2, n + 1):
+            for start in range(n - length + 1):
+                end = start + length - 1
+
+                if s[start] == s[end] and (end - start == 1 or (start + 1, end) in palindromes):
+                    graph[start].append(end + 1)
+                    palindromes.add((start, end + 1))
+
+        del palindromes
+
+        queue: List[Tuple[int, int, int]] = [(0, graph[0][-1], 0)]
+        seen: Set[int] = set()
+
+        while queue:
+            x = heapq.heappop(queue)
+            depth, i = x[0], -x[2]
+            seen.add(i)
+            if i == n:
+                return depth - 1
+
+            unseen_neighbors = filter(lambda k: k not in seen, graph[i])
+            for j in unseen_neighbors:
+                k = graph[j][-1] if j in graph else j
+                heapq.heappush(queue, (depth + 1, -k, -j))
+
+        return -1

@@ -1,0 +1,30 @@
+class Solution:
+    def avoidFlood(self, rains: List[int]) -> List[int]:
+        ## RC ##
+        ## APPROACH : INSERTION INDEX IN A SORTED ARRAY using BINARY SEARCH ##
+        ## LOGIC ##
+        # 1. we keep hashmap(lakes) to store {rain value : index} and also we use zeros array to store occurance of zeros
+        # 2. When you see rains[i] with a duplicate value ( lets say first occurance of rains[i] == 2 is i and curr index is j, rains[j] == 2.)
+        # 3. Logic is if there is any \'0\' between i and j, we can use that \'0\' to dry our value at index i and prevent flooding.
+        # 4. To find out which zero to use, we use binary search to find the index of first zero between i and j. we replace that 0 with our rain value.
+        # 5. as we have used that 0, we will remove it from zeros. Also make sure to change the index of val in hashmap to j.
+        # 6. If we donot find any feasible position from our binary search, we return [].
+        # 7. Finally if there are any extra zeros left, we replace it with 1.
+        
+        ## TIME COMPLEXITY : O(NxN) ##
+        ## SPACE COMPLEXITY : O(N) ##
+        
+        zeros, lakes, res = [], {}, [-1] * len(rains)
+        for i,val in enumerate(rains):
+            if val in lakes:                                    # 2
+                idx = bisect.bisect_left(zeros, lakes[val])     # 4
+                if idx == len(zeros): return []                 # 6
+                res[zeros[idx]] = val                           # 4
+                zeros.pop(idx)                                  # 5
+                lakes[val] = i                                  # change to current index, so it can be used when the same value appears again
+            elif val == 0: zeros.append(i)                      # 1
+            else: lakes[val] = i                                # 1
+        for i in range(len(res)):
+            if rains[i] == 0 and res[i] == -1:
+                res[i] = 1                                      # 7
+        return res

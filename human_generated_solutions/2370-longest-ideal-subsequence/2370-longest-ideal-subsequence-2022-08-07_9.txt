@@ -1,0 +1,42 @@
+class Solution:
+    def longestIdealString(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: int
+        """
+        A = [ord(l) - ord(\'a\') for l in s]
+        N = len(A)
+        
+        # unique letter inxeses
+        s = set(A)
+        
+        # indexes of the letter index
+        hm = defaultdict(list)
+        for i,a in enumerate(A):
+            hm[a].append(i)
+        
+        # make graph with possible positions for the next move for each letter index
+        graph = defaultdict(set)
+        for x in s:
+            for y in s:
+                if abs((x - y)) <= k:
+                    graph[x].add(y)
+                    graph[y].add(x)
+        
+        @cache
+        def dp(i):
+            if i == N:
+                return 0    
+            
+            ans = 0
+            for j in graph[A[i]]:
+                next_ind = bisect_right(hm[j],i)
+                if next_ind < len(hm[j]):
+                    ans = max(ans, 1 + dp(hm[j][next_ind]))
+            return ans
+        
+        ans = 1
+        for i in range(N):
+            ans = max(ans, 1 + dp(i))
+        return ans

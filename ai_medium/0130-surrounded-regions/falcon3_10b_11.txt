@@ -1,0 +1,24 @@
+from collections import deque
+
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        if not board or not board[0]: return
+        m, n = len(board), len(board[0])
+        q = deque()
+        
+        for i in range(m):
+            for j in range(n):
+                if (i in [0, m-1] or j in [0, n-1]) and board[i][j] == 'O':
+                    q.append((i, j))
+        
+        while q:
+            x, y = q.popleft()
+            if 0 <= x < m and 0 <= y < n and board[x][y] == 'O':
+                board[x][y] = 'T'
+                for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    q.append((x+dx, y+dy))
+        
+        for i in range(m):
+            for j in range(n):
+                board[i][j] = 'X' if board[i][j] == 'O' else 'O'
+                board[i][j] = 'O' if board[i][j] == 'T' else board[i][j]

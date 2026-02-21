@@ -1,15 +1,11 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        dic={}
-        for a in(strs):
-            t=list(a)
-            t.sort()
-            t="".join(t)
-            if(t in dic):
-                dic[t].append(a)
-            else:
-                dic[t]=[a]
-        ans=[]
-        for a in dic:
-            ans.append(dic[a])
-        return(ans)
+        dct=defaultdict(list)
+        for i in range(len(strs)):
+            st=[0 for _ in range(26)]
+            for j in strs[i]:
+                xi=ord(j)-97
+                st[xi]+=1
+            st=tuple(st)
+            dct[st].append(strs[i])
+        return dct.values()

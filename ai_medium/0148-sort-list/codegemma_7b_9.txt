@@ -1,0 +1,13 @@
+def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        temp = {}
+        while head:
+            temp[head.val] = temp.get(head.val, 0) + 1
+            head = head.next
+        val = sorted(temp.keys())
+        dummy = ListNode()
+        curr = dummy
+        for i in val:
+            for _ in range(temp[i]):
+                curr.next = ListNode(i)
+                curr = curr.next
+        return dummy.next

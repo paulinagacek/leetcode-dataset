@@ -1,0 +1,34 @@
+import collections
+trie = lambda: collections.defaultdict(trie)
+class Trie:
+    def __init__(self):
+        self.trie = trie()
+        
+    def insert(self, word):
+        reduce(dict.__getitem__, word, self.trie)[\'$\'] = trie()
+
+    def find_neighbor(self, node, word, remain):
+        if not word:
+            return True if \'$\' in node and remain == 0 else False
+        for key in node.keys():
+            if key == word[0]:
+                if self.find_neighbor(node[key], word[1:], remain):
+                    return True
+            elif remain == 1:
+                if self.find_neighbor(node[key], word[1:], 0)
+                    return True
+        return False              
+        
+
+class MagicDictionary:
+
+    def __init__(self):
+        self.trie = Trie()
+        self.buckets = collections.defaultdict(list)      
+
+    def buildDict(self, dict):
+        for word in dict:
+            self.trie.insert(word)
+        
+    def search(self, word):
+        return self.trie.find_neighbor(self.trie.trie, word, 1)

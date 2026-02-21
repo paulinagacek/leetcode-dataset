@@ -1,6 +1,0 @@
-class Solution:
-    def largestOddNumber(self, num: str) -> str:
-        ii = -1
-        for i, x in enumerate(num): 
-            if int(x) & 1: ii = i 
-        return num[:ii+1]

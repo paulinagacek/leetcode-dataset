@@ -1,0 +1,13 @@
+class Solution:
+    def makeGood(self, s: str) -> str:
+        
+        stack = deque()                                         # <-- 1)
+        for ch in s:
+            
+            if stack and ord(stack[-1])^ord(ch) == 32:          # <-- 2)
+                                                           
+                stack.pop()                                     # <-- 3)
+
+            else: stack.append(ch)                              # <-- 4)
+                                                            
+        return \'\'.join(stack)                                   # <-- 5)

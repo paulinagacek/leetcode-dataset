@@ -1,0 +1,33 @@
+class Solution:
+    def minCost(self, nums: List[int], cost: List[int]) -> int:
+
+        @cache
+        def guess(x):
+            
+            return sum([abs(n-x) * c for n, c in zip(nums, cost)])
+        
+        n_min, n_max = min(nums), max(nums)
+
+        if guess(n_min) < guess(n_min+1):
+            return guess(n_min)
+
+        if guess(n_max) < guess(n_max-1):
+            return guess(n_max)
+        
+        left, right  = n_min + 1, n_max -1
+
+        while left <= right:
+            
+            mid = left + (right-left)//2
+                       
+            if guess(mid) <= guess(mid+1) and guess(mid) <= guess(mid-1):
+                
+                return guess(mid)
+            
+            if guess(mid) <= guess(mid+1) and guess(mid) >= guess(mid-1):
+                
+                right = mid - 1
+            else:
+                left = mid +1
+        
+        return 0

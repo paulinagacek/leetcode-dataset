@@ -1,0 +1,16 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+        
+        cycle_len = 2 * numRows - 2
+        zigzag = [""] * numRows
+        
+        for i, char in enumerate(s):
+            zigzag[i % cycle_len].append(char)
+        
+        result = ""
+        for row in zigzag:
+            result += "".join(row)
+        
+        return result

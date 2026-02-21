@@ -1,69 +1,30 @@
-from decimal import Decimal
-class Solution(object):
-    def isCloseNuff(self, location, receptor):
-        return abs(location[0] - receptor[0]) < 0.0001 and abs(location[1] - receptor[1]) < 0.0001
-    def movingDown(self, trajectory):
-        return trajectory[0] < 0
-    def movingUp(self, trajectory):
-        return trajectory[0] > 0
-    def bounce(self, currentLocation, trajectory, p):
-        # if right wall bounce up IE negative x
-        # if top wall bounce down IE negative x and y
-        # if left wall bounce right down negative y and pos x
-        # if bottom wall bounce up right IE positive x and y
-        currentTrajectory = trajectory
-        nextWall = None
-        #x direction should reverse on x walls
-        upperLeft = (p, 0)
-        lowerLeft = (0, 0)
-        lowerRight = (0, p)
-        upperRight = (p, p)
+class Solution:
+    def mirrorReflection(self, p: int, q: int) -> int:
+        \'\'\'
+          Using simple geometry and just by observing we can decide where
+          will the ray hit. for example:
+          p = 2, q = 1; the ray first meets 2nd receptor after it gets reflected
+          for 1 time
+          p = 3, q = 1; the ray first meets 1st receptor after it gets reflected
+          for 2 times.
+          From the given examples one can easly observe that
+          1:if p is even and q is odd, it\'ll surely hit 2nd receptor for the first
+          time
+          2:if both p and q is odd, it\'ll surely hit 1st receptor for the first time
+          
+        \'\'\'
+        # base case if both p and q are equal, it will always hit receptor 1,
+        # irrespective of their nature
+        if p == q: 
+            return 1
         
-        if currentLocation[1] == p or currentLocation[1] == 0:
-            currentTrajectory = (currentTrajectory[0], currentTrajectory[1]*-1)
-
-        if currentLocation[0] == p or currentLocation[0] == 0:
-            currentTrajectory = (currentTrajectory[0]*-1, currentTrajectory[1])
-
-        
-        if currentLocation[1] == p:    
-            if self.movingUp(currentTrajectory):
-                nextWall = upperLeft
-            else:
-                nextWall = lowerLeft
-        if currentLocation[1] == 0:
-            if self.movingDown(currentTrajectory):
-                nextWall = lowerRight
-            else:
-                nextWall = upperRight
-        #y direction reverses on y walls    
-        if currentLocation[0] == p:
-            if currentTrajectory[1] < 0:
-                nextWall = lowerLeft
-            else:
-                nextWall = lowerRight
-        if currentLocation[0] == 0:
-            if currentTrajectory[1] > 0:
-                nextWall = upperRight
-            else:
-                nextWall = upperLeft
-        distance = min((nextWall[0] - currentLocation[0])/currentTrajectory[0], (nextWall[1] - currentLocation[1])/currentTrajectory[1])
-        newY = currentLocation[0] + currentTrajectory[0] * distance
-        if (nextWall[0] - currentLocation[0])/currentTrajectory[0] < (nextWall[1] - currentLocation[1])/currentTrajectory[1]:
-            newY = Decimal(nextWall[0])
-        newX = currentLocation[1] + currentTrajectory[1] * distance
-        if (nextWall[0] - currentLocation[0])/currentTrajectory[0] > (nextWall[1] - currentLocation[1])/currentTrajectory[1]:
-            newX = Decimal(nextWall[1])
-        return currentTrajectory, (newY, newX)
-    def mirrorReflection(self, p, q):
-        """
-        :type p: int
-        :type q: int
-        :rtype: int
-        """
-        receptors = [(0,p), (p, p), (p, 0)]
-        currentLocation = (q, p)
-        trajectory = (q/(p*Decimal(1.0)), Decimal(1.0))
-        while not any([self.isCloseNuff(currentLocation, receptor) for receptor in receptors]):
-            trajectory, currentLocation = self.bounce(currentLocation, trajectory, p)
-        return [i for i,receptor in enumerate(receptors) if self.isCloseNuff(currentLocation, receptor)][0]
+        while p % 2 == 0 and q % 2 == 0:
+            p //= 2
+            q //= 2
+            
+        if p % 2 == 1 and q % 2 == 0:
+            return 0
+        elif p % 2 == 1 and q % 2 == 1:
+            return 1
+        elif p % 2 == 0 and q % 2 == 1:
+            return 2

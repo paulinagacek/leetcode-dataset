@@ -1,12 +1,35 @@
 class Solution:
+    
+    def recursive(self,i,edges,seen,count,ans,stack,dp):
+        if dp[i] != -1:
+            return dp[i]
+        if edges[i]== -1:
+            
+            return
+        if edges[i] in seen.keys() and edges[i] in stack.keys():
+            dp[i] = count+1-seen[edges[i]]
+            if ans[0]<count+1-seen[edges[i]]:
+                
+                ans[0] = count+1-seen[edges[i]]
+            return
+        
+        seen[i] = count
+        stack[i] = True
+        dp[i] = self.recursive(edges[i],edges,seen,count+1,ans,stack,dp)
+        stack.popitem()
+    
+    
     def longestCycle(self, edges: List[int]) -> int:
-        res, seenSet = -1, set()
-        for element in range(len(edges)): #traverses all possible nodes
-            count, currNode = 0, element
-            cycleMap = dict() #tabulates all distances
-            while currNode not in seenSet and currNode != -1:
-                count += 1
-                seenSet.add(currNode); cycleMap[currNode] = count #adds nodes to the hashmap and the hashset
-                currNode = edges[currNode] #moves on to the next node
-            res = max(res, count + 1 - cycleMap.get(currNode, 200000)) #gets the max distance 
-        return res
+        ans = [-1]
+        seen = {}
+        stack = {}
+        dp = [-1 for i in range(len(edges))]
+        for i in range(len(edges)):
+            if i not in seen.keys():
+                self.recursive(i,edges,seen,0,ans,stack,dp)
+        
+        
+        print(dp)
+        if ans[0]==0:
+            return -1
+        return ans[0]

@@ -1,0 +1,18 @@
+class Solution(object):
+    def deepestLeavesSum(self, root):
+        levels = {}
+        
+        def dfs(curr,prevVal,level):
+            if curr==None:
+                return
+            level+=1
+            if level in levels:
+                levels[level]+=curr.val
+            else:
+                levels[level]=curr.val
+                
+            dfs(curr.left,curr.val,level)
+            dfs(curr.right,curr.val,level)
+            
+        dfs(root,0,0)
+        return levels[max(levels)]

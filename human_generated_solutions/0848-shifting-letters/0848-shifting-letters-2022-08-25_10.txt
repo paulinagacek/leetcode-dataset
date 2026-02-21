@@ -1,0 +1,7 @@
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[int]) -> str:
+        total, res = sum(shifts), []
+        for i, c in enumerate(s):
+            res.append(chr((ord(c) - 97 + total) % 26 + 97))
+            total -= shifts[i]
+        return "".join(res)

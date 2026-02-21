@@ -1,0 +1,81 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        if not s:
+            return 0
+        
+        sanitized = self.sanitize_string(s)
+        
+        converted = self.convert_postfix(sanitized)
+        
+        return self.process_postfix(converted)
+    
+    def convert_postfix(self, tokens: List[str]) -> List[str]:
+        ans = []
+        stack = []
+        # both of the ones below can be extended to support many operation types (*/** etc)
+        ops = ["+", "-"]
+        precedence = { \'+\': 1, \'-\': 1 }
+        
+        for ch in tokens:
+            if ch.isdigit():
+                ans.append(ch)
+            elif ch in ops:
+                while stack and stack[-1] != "(" and precedence[stack[-1]] >= precedence[ch]:
+                    ans.append(stack.pop())
+                    
+                stack.append(ch)
+            elif ch == "(":
+                stack.append(ch)
+            elif ch == ")":
+                while stack and stack[-1] != "(":
+                    ans.append(stack.pop())
+                
+                if stack and stack[-1] == "(":
+                    stack.pop()
+        while stack:
+            ans.append(stack.pop())
+        
+        return ans
+        
+    
+    def process_postfix(self, tokens: List[str]) -> int:
+        stack = []
+        ops = ["+", "-"]
+        
+        for token in tokens:
+            if token not in ops:
+                # normal digit
+                stack.append(token)
+            else:
+                # operator
+                op1 = int(stack.pop())
+                op2 = int(stack.pop())
+                
+                if token == "+":
+                    stack.append(op2 + op1)
+                elif token == "-":
+                    stack.append(op2 - op1)     
+
+        return stack.pop()
+    
+    """
+        this is needed to create valid postfix expressions for shunting yard
+        eg: 1 - (-2) creates a postfix of 1 2 - - which is invalid
+        instead we convert to 1 0 2 - -
+    """
+    def sanitize_string(self, s: str) -> List[str]:
+        # trim whitespace around string
+        s = s.strip()
+        
+        # convert starting - to 0 - X
+        if s[0] == "-":
+            s = "0" + s
+        
+        # convert this to create a valid postfix express
+        s = s.replace("(-", "(0-")
+        
+        # create space around for splits
+        for op in "+-()":
+            s = s.replace(op, \' \' + op + \' \')
+        
+        return s.split()

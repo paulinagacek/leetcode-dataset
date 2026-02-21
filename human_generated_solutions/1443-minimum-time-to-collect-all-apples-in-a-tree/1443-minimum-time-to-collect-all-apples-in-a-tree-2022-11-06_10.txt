@@ -1,0 +1,25 @@
+class Solution:
+    def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
+        d = defaultdict(list)
+        for i, j in edges: # build a Adjacency Dictionary
+            d[i].append(j)
+            d[j].append(i)
+        visited = set() # track the nodes we already explored
+		# this dfs will return the max steps needed + 2 if there is apple, 0 otherwise
+        def dfs(i=0):
+            visited.add(i) # add to visited
+            ret = 0
+            for j in d[i]: # for all it\'s neighbors
+                if j in visited: # if it\'s already visited, skip it
+                    continue
+                ret += dfs(j) # explore all subtree
+            if ret > 0 or hasApple[i]: 
+				# if apple exists, then ret need to add 2
+				# Because Apple exisits in node-i or it\'s subtree
+				# We need to go to node-i from it\'s parent node, and a round trip need 2 additional steps
+                ret += 2
+            return ret
+        ret = dfs()
+        if ret:
+            return ret - 2 # root does not have a parent node
+        return ret

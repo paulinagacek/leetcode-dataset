@@ -1,0 +1,14 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # Create a 2D array to store the number of paths to each cell
+        dp = [[1] * n for _ in range(m)]
+        
+        # Iterate over the grid starting from the second row and column
+        for i in range(1, m):
+            for j in range(1, n):
+                # The number of paths to a cell is the sum of the paths to the cell above it
+                # and the cell to the left of it
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        
+        # Return the number of paths to the bottom-right corner
+        return dp[m - 1][n - 1]

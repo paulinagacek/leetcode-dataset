@@ -1,0 +1,39 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        i = 0
+        n = len(s)
+        
+        # Step 1: skip leading whitespaces
+        while i < n and s[i] == ' ':
+            i += 1
+            
+        # Step 2: check sign
+        if i < n and (s[i] == '-' or s[i] == '+'):
+            sign = -1 if s[i] == '-' else 1
+            i += 1
+        else:
+            sign = 1
+        
+        # Step 3: convert string to integer
+        result = 0
+        while i < n and s[i].isdigit():
+            digit = int(s[i])
+            
+            # Check for overflow and underflow
+            if sign == 1 and (result > INT_MAX // 10 or (result == INT_MAX // 10 and digit > INT_MAX % 10)):
+                return INT_MAX
+            
+            if sign == -1 and (result < INT_MIN // 10 or (result == INT_MIN // 10 and -digit < INT_MIN % 10)):
+                return INT_MIN
+            
+            result = result * 10 + sign * digit
+            i += 1
+        
+        # Step 4: handle no digits found
+        if i == 0:
+            return 0
+        
+        return result

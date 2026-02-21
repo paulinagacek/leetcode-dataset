@@ -1,0 +1,21 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        MAX_INT = 2**31 - 1
+        MIN_INT = -2**31
+        INT_MAX_CHAR = '2147483647'
+        INT_MAX = int(INT_MAX_CHAR)
+        s = s.strip()
+        if not s:
+            return 0
+        sign = 1
+        i = 0
+        if s[0] in ('-', '+'):
+            sign = -1 if s[0] == '-' else 1
+            i += 1
+        result = 0
+        while i < len(s) and s[i].isdigit():
+            if result > INT_MAX // 10 or (result == INT_MAX // 10 and int(s[i]) > INT_MAX % 10):
+                return INT_MAX if sign > 0 else MIN_INT
+            result = result * 10 + int(s[i])
+            i += 1
+        return result * sign

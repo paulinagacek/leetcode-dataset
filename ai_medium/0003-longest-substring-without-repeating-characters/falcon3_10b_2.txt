@@ -1,0 +1,11 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        length = 0
+        start = 0
+        char_dict = {}
+        for end in range(len(s)):
+            if s[end] in char_dict and char_dict[s[end]] >= start:
+                start = char_dict[s[end]] + 1
+            char_dict[s[end]] = end
+            length = max(length, end - start + 1)
+        return length

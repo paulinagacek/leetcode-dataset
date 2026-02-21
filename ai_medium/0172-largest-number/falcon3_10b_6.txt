@@ -1,0 +1,7 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        from functools import cmp_to_key
+        nums = list(map(str, nums))
+        nums.sort(key=cmp_to_key(lambda x, y: (y+x) > (x+y)))
+        result = ''.join(nums)
+        return str(int(result)) if result[0] != '0' else '0'

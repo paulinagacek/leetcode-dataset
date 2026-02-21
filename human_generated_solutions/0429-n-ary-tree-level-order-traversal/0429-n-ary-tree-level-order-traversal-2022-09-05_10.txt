@@ -1,15 +1,21 @@
 class Solution:
     def levelOrder(self, root: \'Node\') -> List[List[int]]:
-        if not root: return []
-        res = []
-        levels = set()
-        def dfs(node, level):
-            if level not in levels:
-                levels.add(level)
-                res.append([])
-            res[level].append(node.val)
-            for child in node.children:
-                dfs(child, level + 1)
-                    
-        dfs(root, 0)
-        return res
+        d={}        
+        
+        def trav(root, n):
+            if(not root):
+                return
+            
+            if(n not in d):
+                d[n]=[root.val]
+            else:
+                d[n]+=[root.val]
+            
+            for x in root.children:
+                trav(x, n+1)
+        
+        trav(root, 0)
+        
+        ans=list(d.values())
+        
+        return ans

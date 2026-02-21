@@ -1,19 +1,13 @@
-var longestObstacleCourseAtEachPosition = function (A) {
-  const piles = [A[0]];
-  const res = [1];
-  for (let i = 1; i < A.length; i++) {
-    // Find the first piles[m] >= A[i]
-    let [l, r] = [0, piles.length - 1];
-    while (l < r) {
-      const m = (l + r) >> 1;
-      if (piles[m] <= A[i]) l = m + 1;
-      else r = m; // It\'s valid, should include m
-    }
-
-    if (piles[l] <= A[i]) l++;
-    piles[l] = A[i];
-
-    res.push(l + 1);
-  }
-  return res;
-};
+class Solution:
+    def longestObstacleCourseAtEachPosition(self, obstacles: List[int]) -> List[int]:
+        # find the longest subsequencey of each i
+        res, lis = [], []
+        for i, o in enumerate(obstacles):
+            idx = bisect.bisect(lis, o)
+            if idx == len(lis):
+                lis.append(o)
+            else:
+                lis[idx] = o
+            res.append(idx + 1)
+            
+        return res

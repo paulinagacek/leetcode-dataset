@@ -1,0 +1,29 @@
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        n = len(customers)
+        prefix = [0]*(n + 1)
+        suffix = [0]*(n + 1)
+        suffix[n] = 0
+        close = 0
+        openn = 0
+
+        penalty = 1e6
+        ans_index = n + 1
+
+        for i in range(0 , n + 1):
+            prefix[i] = openn
+            if i < n and customers[i] == \'N\':
+                openn += 1
+        
+        for i in range(n - 1 , -1 , -1):
+            if customers[i] == \'Y\':
+                close += 1
+            suffix[i] = close
+        
+        for i in range(0 , n + 1):
+            curr_penalty = prefix[i] + suffix[i]
+            if curr_penalty < penalty:
+                penalty = curr_penalty
+                ans_index = i
+        
+        return ans_index

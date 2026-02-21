@@ -1,0 +1,32 @@
+from typing import List
+from collections import deque
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Create an adjacency list and a degree array to track the in-degree of each node
+        adj = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        
+        # Fill the adjacency list and degree array based on prerequisites
+        for dest, src in prerequisites:
+            adj[src].append(dest)
+            indegree[dest] += 1
+        
+        # Initialize the count of courses that can be completed and a queue with all courses having no prerequisites
+        count = 0
+        q = deque([i for i in range(numCourses) if indegree[i] == 0])
+        
+        # Process the queue until it's empty
+        while q:
+            # Get the next course to process
+            c = q.popleft()
+            count += 1
+            
+            # Decrease the in-degree of adjacent courses and add them to the queue if their in-degree becomes zero
+            for neighbor in adj[c]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    q.append(neighbor)
+        
+        # If the count of completed courses is equal to the number of total courses, return True
+       return count == numCourses

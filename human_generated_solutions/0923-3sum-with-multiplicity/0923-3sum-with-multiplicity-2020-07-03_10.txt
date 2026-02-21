@@ -1,0 +1,16 @@
+class Solution:
+    def threeSumMulti(self, A: List[int], target: int) -> int:
+        mod = 10**9 + 7
+        c = Counter(A)
+        A = sorted(c.keys())
+        ans = 0
+        for k in range(len(A)-1, -1, -1):
+            if A[k] * 3 < target:
+                break
+            for j in range(k, -1, -1):
+                if A[j] * 2 < target - A[k]:
+                    break
+                if (Ai := target - A[k] - A[j]) >= 0 and Ai in c and Ai <= A[j] <= A[k]:
+                    cc = Counter((Ai, A[j], A[k]))
+                    ans += reduce(operator.mul, (math.comb(c[n], v) for n, v in cc.items())) % mod
+        return ans % mod

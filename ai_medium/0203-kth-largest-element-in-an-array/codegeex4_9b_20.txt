@@ -1,0 +1,34 @@
+from typing import List
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def maxHeapify(nums, n, i):
+            largest = i 
+            l = 2 * i + 1
+            r = 2 * i + 2
+
+            if l < n and nums[largest] < nums[l]:
+                largest = l
+
+            if r < n and nums[largest] < nums[r]:
+                largest = r
+
+            if largest != i:
+                nums[i], nums[largest] = nums[largest], nums[i]
+                maxHeapify(nums, n, largest)
+        
+        def buildMaxHeap(nums):
+            n = len(nums)
+            for i in range(n // 2 - 1, -1, -1):
+                maxHeapify(nums, n, i)
+
+        if not nums:
+            return None
+
+        buildMaxHeap(nums)
+        n = len(nums)
+        for i in range(n - 1, n - k, -1):
+            nums[0], nums[i] = nums[i], nums[0]
+            maxHeapify(nums, i, 0)
+
+        return nums[0]

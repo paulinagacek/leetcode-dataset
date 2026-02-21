@@ -1,8 +1,0 @@
-/*
-we can approach this problem using trie. Problem is very similar to 
-Add and search word data structures.
-We can create a standard trie and search for words in that.
-if at all, we come across a character which is not present down the path,
-we still continue to see if word is still searchable. If we are able to find the 
-remaining word, we return True else we return False
-*/

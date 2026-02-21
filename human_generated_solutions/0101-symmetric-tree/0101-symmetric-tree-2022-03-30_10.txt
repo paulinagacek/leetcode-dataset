@@ -1,0 +1,11 @@
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def compareSub(p, q):
+            if p == None and q == None:
+                return True
+            if p == None or q == None:
+                return False
+            if p.val != q.val:
+                return False
+            return compareSub(p.left, q.right) and compareSub(p.right, q.left)
+        return compareSub(root, root)

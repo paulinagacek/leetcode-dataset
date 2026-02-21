@@ -1,35 +1,32 @@
 class Solution:
     def minimizeXor(self, num1: int, num2: int) -> int:
-        numBitsToSet = 0
-        while num2:
-            numBitsToSet += num2 & 1
-            num2 = num2 >> 1
+        bin2 = "{0:b}".format(num2)
+        bin1 = "{0:b}".format(num1)
         
-        num1Str = bin(num1)[2:]
-        num1Len = len(num1Str)
+        diff = len(bin2) - len(bin1)
+        zeros = "0" * diff
         
-        outLen = max(num1Len, numBitsToSet)
-        out = [\'0\' for i in range(outLen)]
+        bin1 = zeros + bin1
         
-        num1Str = \'0\'*(outLen-num1Len) + num1Str
+        ones = bin2.count(\'1\')
         
-        #print(\'numBitsToSet\', numBitsToSet, \'num1Len\', num1Len, \'num1Str\', num1Str, \'outLen\', outLen)
+        # Pass one
+        seen = [False] * len(bin1)
+        xor_char = [\'0\'] * len(bin1)
+        for index, letter in enumerate(bin1):
+            if letter == \'1\' and ones > 0:
+                seen[index] = True
+                xor_char[index] = \'1\'
+                ones -= 1
         
-        # Match the 1s of num1
-        for i in range(outLen):
-            if numBitsToSet == 0:
-                break
-            if num1Str[i] == \'1\':
-                out[i] = \'1\'
-                numBitsToSet -= 1
-        
-        # Set minimal bits that are 0
-        for i in range(outLen-1, -1, -1):
-            if numBitsToSet == 0:
-                break
-            if out[i] == \'0\':
-                out[i] = \'1\'
-                numBitsToSet -= 1
-        
-        #print(\'Modified out\', out)
-        return int(\'\'.join(out), 2)
+        # Pass two, convert zeros to ones
+        i = len(xor_char) - 1
+        while ones > 0 and i >= 0:
+            if bin1[i] == \'0\'and seen[i] == False:
+                xor_char[i] = \'1\'
+                ones -= 1
+            i -= 1
+
+        final_bin = "".join(xor_char)
+        final_int = int(final_bin, 2)
+        return final_int

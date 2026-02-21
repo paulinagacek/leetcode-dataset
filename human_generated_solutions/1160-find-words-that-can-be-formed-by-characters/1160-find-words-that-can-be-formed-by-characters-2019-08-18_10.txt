@@ -1,0 +1,18 @@
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+		# count chars character counts
+        chctr = collections.Counter(chars)
+		
+        goodln = 0
+        for word in words:
+            wctr = collections.Counter(word)
+            isgood = True
+            for key in wctr:
+				# chech if the character (or key) is available &
+				# we have enough of it
+                if key not in chctr or wctr[key] > chctr[key]:
+                    isgood = False
+                    break
+            if isgood:
+                goodln += len(word)
+        return goodln

@@ -1,12 +1,20 @@
-class Solution {
-    public int minCost(String colors, int[] neededTime) {
-        int min_time = 0;
-        for(int i=1; i<neededTime.length; i++){
-            if(colors.charAt(i) == colors.charAt(i-1)){
-                min_time += Math.min(neededTime[i], neededTime[i-1]);
-                neededTime[i] = Math.max(neededTime[i], neededTime[i-1]);
-            }
-        }
-        return min_time;
-    }
-}
+class Solution:
+    def minCost(self, colors: str, neededTime: List[int]) -> int:
+        st,ct,total=0,1,0
+        sm=neededTime[0]
+        mx=neededTime[0]
+        for i in range(1,len(colors)):
+            if colors[i]==colors[i-1]:
+                ct+=1
+                sm+=neededTime[i]
+                mx=max(mx,neededTime[i])
+            else:
+                if ct>1:
+                    total+=(sm-mx)
+                ct=1
+                st=i
+                sm=neededTime[i]
+                mx=neededTime[i]
+        if ct>1:
+            total+=(sm-mx)
+        return total

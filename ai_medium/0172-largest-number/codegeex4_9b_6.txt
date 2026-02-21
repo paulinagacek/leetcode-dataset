@@ -1,0 +1,15 @@
+from typing import List
+
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def quicksort(arr):
+            if len(arr) <= 1:
+                return arr
+            pivot = arr[len(arr) // 2]
+            left = [x for x in arr if x + pivot > pivot + x]
+            middle = [x for x in arr if x + pivot == pivot + x]
+            right = [x for x in arr if x + pivot < pivot + x]
+            return quicksort(left) + middle + quicksort(right)
+        
+        largest_num = ''.join(map(str, quicksort(nums)))
+        return '0' if largest_num[0] == '0' else largest_num

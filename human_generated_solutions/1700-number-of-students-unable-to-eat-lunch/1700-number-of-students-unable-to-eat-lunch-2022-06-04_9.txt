@@ -1,0 +1,11 @@
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        arr = [0,0]
+        for i in students:
+            arr[i] += 1
+        while sandwiches:
+            if arr[sandwiches[0]] == 0:
+                return sum(arr)
+            else:
+                arr[sandwiches.pop(0)] -= 1
+        return sum(arr)

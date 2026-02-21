@@ -1,0 +1,13 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        max_positive = nums[0]
+        max_negative = nums[0]
+        max_product = nums[0]
+
+        for i in range(1, len(nums)):
+            next_positive = max(max_positive * nums[i], max_negative * nums[i], nums[i])
+            next_negative = min(max_positive * nums[i], max_negative * nums[i], nums[i])
+            max_product = max(max_product, next_positive)
+            max_positive, max_negative = next_positive, next_negative
+
+        return max_product

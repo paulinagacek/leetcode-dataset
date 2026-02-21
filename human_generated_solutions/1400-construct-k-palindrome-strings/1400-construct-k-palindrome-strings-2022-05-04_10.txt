@@ -1,0 +1,13 @@
+from collections import Counter
+class Solution:
+    def canConstruct(self, s: str, k: int) -> bool:
+        if len(s) < k:
+            return False
+        c = Counter(s)
+        odds = 0
+        for i in c:
+            if c[i] % 2 == 1:
+                odds += 1
+        if odds > k:
+            return False
+        return True

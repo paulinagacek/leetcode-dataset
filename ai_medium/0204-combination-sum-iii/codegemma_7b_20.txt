@@ -1,0 +1,10 @@
+from itertools import combinations
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        nums = list(range(1, 10))
+        combinations_list = []
+        for combination in combinations(nums, k):
+            if sum(combination) == n:
+                combinations_list.append(sorted(combination))
+        return list(map(list,set(map(tuple,combinations_list))))

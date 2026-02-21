@@ -1,0 +1,9 @@
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        jumps, curr_end, curr_farthest = 0, 0, nums[0]
+        for i in range(1, len(nums) - 1):
+            curr_farthest = max(curr_farthest, i + nums[i])
+            if i == curr_end:
+                jumps += 1
+                curr_end = curr_farthest
+        return jumps + 1

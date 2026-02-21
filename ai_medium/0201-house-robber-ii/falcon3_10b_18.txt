@@ -1,0 +1,15 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        
+        def robHelper(houses):
+            prev_rob, curr_rob = 0, 0
+            for amount in houses:
+                temp = curr_rob
+                curr_rob = max(prev_rob + amount, curr_rob)
+                prev_rob = temp
+            return curr_rob
+        
+        return max(robHelper(nums[:-1]), robHelper(nums[1:]))

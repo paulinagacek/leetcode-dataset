@@ -1,0 +1,18 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        candidates.sort()
+
+        def backtrack(combination, remaining):
+            if remaining == 0:
+                result.append([...combination])
+                return
+
+            for candidate in candidates:
+                if candidate <= remaining:
+                    combination.append(candidate)
+                    backtrack(combination, remaining - candidate)
+                    combination.pop()
+
+        backtrack([], target)
+        return result

@@ -1,0 +1,19 @@
+class Solution:
+    def maximumBags(self, capacity: List[int], rocks: List[int], additional_rocks: int) -> int:
+        rocks_needed = [c - r for c, r in zip(capacity, rocks)]
+        heapq.heapify(rocks_needed)
+        bags = 0
+
+        while rocks_needed:
+            r = heapq.heappop(rocks_needed)
+            if additional_rocks >= r:
+                bags += 1
+                additional_rocks -= r
+                if additional_rocks == 0:
+                    break
+            else:
+                # We cannot cover even the minimum number of rocks
+                # required!
+                break
+
+        return bags

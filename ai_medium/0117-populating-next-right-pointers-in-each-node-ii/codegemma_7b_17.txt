@@ -1,0 +1,18 @@
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root or not root.left:
+            return root
+
+        level_start = root
+        while level_start:
+            node = level_start
+            while node:
+                if node.left:
+                    node.left.next = node.right
+                if node.right and node.next:
+                    node.right.next = node.next.left
+                node = node.next
+
+            level_start = level_start.left
+
+        return root

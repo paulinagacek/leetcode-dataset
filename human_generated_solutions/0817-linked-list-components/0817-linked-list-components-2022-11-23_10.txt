@@ -1,0 +1,18 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def numComponents(self, head: Optional[ListNode], nums: List[int]) -> int:
+        count=0
+        cur=dove=head
+        prev=ListNode(None,next=head)
+        nums=set(nums)
+        while cur  :
+            if cur.val in nums and prev.val not in nums :
+                count+=1
+            prev=prev.next
+            cur=cur.next    
+               
+        return count

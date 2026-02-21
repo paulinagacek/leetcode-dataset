@@ -1,3 +1,0 @@
-s= (set(nums1+nums2))-set(nums2)
-            t= (set(nums1+nums2))-set(nums1)
-            return ([list(s),list(t)])

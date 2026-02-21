@@ -1,7 +1,0 @@
-costs.sort() //sorting cost array
-count = 0  //tracker of candy bars count
-for i in costs: //iterating through array
-    if(coins-i>=0):  // count is increased only if deduction of cost from coin is more than 0 or 0.
-          coins -= i 
-          count +=1
-return count

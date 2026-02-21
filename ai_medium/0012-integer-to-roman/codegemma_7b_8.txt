@@ -1,0 +1,24 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        symbol_values = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        roman_numerals = []
+        for decimal_place in reversed(range(4)):
+            current_value = num // (10 ** decimal_place)
+            num %= (10 ** decimal_place)
+            if current_value <= 3:
+                roman_numerals.extend([list(symbol_values.keys())[decimal_place]] * current_value)
+            elif current_value == 4:
+                roman_numerals.extend([list(symbol_values.keys())[decimal_place], list(symbol_values.keys())[decimal_place + 1]])
+            elif current_value <= 8:
+                roman_numerals.extend([list(symbol_values.keys())[decimal_place + 1]] + [list(symbol_values.keys())[decimal_place]] * (current_value - 5))
+            elif current_value == 9:
+                roman_numerals.extend([list(symbol_values.keys())[decimal_place], list(symbol_values.keys())[decimal_place + 2]])
+        return ''.join(roman_numerals)

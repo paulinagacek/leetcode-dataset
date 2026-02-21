@@ -1,0 +1,15 @@
+python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        result = []
+        self.dfs(0, 0, n, "", result)
+        return result
+
+    def dfs(self, open, close, n, current, result):
+        if open == close == n:
+            result.append(current)
+            return
+        if open < n:
+            self.dfs(open + 1, close, n, current + "(", result)
+        if close < open:
+            self.dfs(open, close + 1, n, current + ")", result)

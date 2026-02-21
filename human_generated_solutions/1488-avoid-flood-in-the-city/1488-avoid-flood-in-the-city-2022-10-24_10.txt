@@ -1,0 +1,33 @@
+class Solution:
+    def avoidFlood(self, rains: List[int]) -> List[int]:
+        hm = {}
+        output = []
+        
+        can_remove_queue = []
+        for i,r in enumerate(rains):
+            if r == 0:
+                can_remove_queue.append(i)
+                output.append(None) # temporary placeholder
+            else:
+                # fill the lake with water
+                if r not in hm:
+                    hm[r] = i
+                    output.append(-1)
+
+                # the lake is full but can we can empty it?
+                elif r in hm:
+                    can_remove = False
+                    for j,idx in enumerate(can_remove_queue):
+                        if idx > hm[r]: 
+                            output[idx] = r
+                            output.append(-1)
+                            hm[r] = i
+                            can_remove = True
+                            break
+
+                    if not can_remove:
+                        return []
+                    else:
+                        del can_remove_queue[j]
+                
+        return [1 if x is None else x for x in output]

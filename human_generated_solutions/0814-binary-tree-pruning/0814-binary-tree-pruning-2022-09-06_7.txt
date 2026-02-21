@@ -1,1 +1,17 @@
-return root && (!!(root->left = pruneTree(root->left)) | !!(root->right = pruneTree(root->right)) | root->val) ? root : nullptr;
+class Solution:
+    def explore_node(self, node):
+        if node is None:
+            return None
+        
+        node.left = self.explore_node(node.left)
+        node.right = self.explore_node(node.right)
+        
+        if node.left is None and node.right is None and node.val != 1:
+            node = None
+        
+        return node
+        
+    def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        root = self.explore_node(root)
+        
+        return root

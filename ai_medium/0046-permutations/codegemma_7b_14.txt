@@ -1,0 +1,11 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        if len(nums) == 1:
+            return [[nums[0]]]
+        result = []
+        for i in range(len(nums)):
+            num = nums[i]
+            remaining_nums = nums[:i] + nums[i + 1:]
+            for sublist in self.permute(remaining_nums):
+                result.append([num] + sublist)
+        return result

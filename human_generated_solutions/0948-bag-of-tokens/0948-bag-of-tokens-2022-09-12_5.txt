@@ -1,21 +1,26 @@
-n = len(tokens)
-        i = 0
-        j = n
-        score = 0
-        ans = 0
+class Solution:
+    def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         tokens.sort()
+		#Edge cases:
+		#1. If there are no tokens
+		#2. If the lowest valued token has value more than power
+        if not tokens or tokens[0] > power:
+            return 0
         
-        while i < j:
-            if power >= tokens[i]:
-                power -= tokens[i]
-                score+=1
-                i+=1
-                ans = max(ans, score)
-            elif score >= 1 and j > i + 1:
-                j-=1
-                power += tokens[j]
-                score-=1
-            else: 
-                return ans
-            
-        return ans
+		#Pointers to keep track of which token to play face up and face down
+        up, down = 0, len(tokens) - 1
+		
+        maxScore, curScore = 0, 0
+        
+        while up <= down:
+            if tokens[up] <= power:
+                power -= tokens[up]
+                curScore += 1
+                up += 1
+            else:
+                power += tokens[down]
+                curScore -= 1
+                down -= 1
+            maxScore = max(maxScore, curScore)
+        
+        return maxScore

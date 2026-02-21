@@ -1,0 +1,8 @@
+def can_make(speed: int) -> bool:
+    """Return whether we can reach the final station by \'hour\' traveling at \'speed\' """
+    tot_time = 0
+    for x in dist[:-1]:
+        tot_time += (x + speed - 1) // speed
+
+    tot_time += dist[-1] / speed
+    return tot_time <= hour

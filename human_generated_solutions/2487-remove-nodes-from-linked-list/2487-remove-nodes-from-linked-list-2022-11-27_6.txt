@@ -5,15 +5,17 @@
 #         self.next = next
 class Solution:
     def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        def dfs(pre):
-            cur = pre.next
-            if not cur.next:
-                return cur.val
-            cur_max = dfs(cur) 
-            if cur_max > cur.val:
-                pre.next = cur.next
-            return max(cur_max, cur.val)
-        new_head = ListNode()
-        new_head.next = head
-        dfs(new_head)
-        return new_head.next
+        stack = []
+        dummy = headNew = ListNode(None, head)
+        curr = head
+        while curr:
+            while stack and stack[-1].val < curr.val:
+                stack.pop()
+            stack.append(curr)
+            curr = curr.next
+            
+        for node in stack:
+            headNew.next = node
+            headNew = headNew.next
+            
+        return dummy.next

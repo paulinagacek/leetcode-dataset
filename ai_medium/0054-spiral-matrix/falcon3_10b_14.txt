@@ -1,0 +1,23 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        result = []
+        if not matrix:
+            return []
+        rows, cols = len(matrix), len(matrix[0])
+        top, bottom, left, right = 0, rows - 1, 0, cols - 1
+        
+        while True:
+            for i in range(left, right + 1):
+                result.append(matrix[top][i])
+            for i in range(top + 1, bottom + 1):
+                result.append(matrix[i][right])
+            if top == bottom:
+                break
+            for i in range(right - 1, left - 1, -1):
+                result.append(matrix[bottom][i])
+            if left == right:
+                break
+            for i in range(bottom - 1, top, -1):
+                result.append(matrix[i][left])
+            top, bottom, left, right = top + 1, bottom - 1, left + 1, right - 1
+        return result

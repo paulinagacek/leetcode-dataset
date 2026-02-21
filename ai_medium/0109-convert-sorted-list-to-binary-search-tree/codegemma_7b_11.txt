@@ -1,0 +1,23 @@
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        if not head:
+            return None
+        
+        def convert(left, right):
+            if left > right:
+                return None
+            
+            mid = (left + right) // 2
+            root = TreeNode(head.val)
+            head = head.next
+            root.left = convert(left, mid - 1)
+            root.right = convert(mid + 1, right)
+            return root
+        
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+        
+        return convert(0, length - 1)

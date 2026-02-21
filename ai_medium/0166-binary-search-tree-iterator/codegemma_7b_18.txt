@@ -1,0 +1,18 @@
+class BSTIterator:
+
+    def __init__(self, root):
+        self.stack = []
+        self.push_left(root)
+
+    def push_left(self, node):
+        while node:
+            self.stack.append(node)
+            node = node.left
+
+    def next(self):
+        top = self.stack.pop()
+        self.push_left(top.right)
+        return top.val
+
+    def hasNext(self):
+        return len(self.stack) > 0

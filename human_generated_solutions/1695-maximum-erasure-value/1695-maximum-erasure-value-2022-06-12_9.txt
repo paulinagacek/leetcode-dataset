@@ -1,0 +1,22 @@
+class Solution:
+    def maximumUniqueSubarray(self, nums: List[int]) -> int:
+        window = set() # a hash set to track the numbers in the current window
+        res = 0
+        curSum = 0 # track the sum of the numbers in the current window
+        l = 0 # initialize the left pointer of the sliding window
+        
+        for r in range(len(nums)): # move the right pointer of the sliding window
+            
+            # move the left pointer until the current window has no duplicate numbers
+            while nums[r] in window and l < r:
+                window.remove(nums[l]) # remove the left-most number
+                curSum -= nums[l] # subtract the removed number from curSum 
+                l += 1
+            
+            # if no duplicate numbers in the window   
+            window.add(nums[r]) # add the current number
+            curSum += nums[r] # add the number to curSum
+            
+            res = max(res, curSum) # update the result
+            
+        return res

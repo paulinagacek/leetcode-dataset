@@ -1,0 +1,20 @@
+def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
+	ans = 0
+	m, n = len(matrix), len(matrix[0])
+	for i in range(m):
+		for j in range(1, n):
+			matrix[i][j] += matrix[i][j-1]
+
+	for start in range(n):
+		for end in range(start, n):
+			prefixSum = {0:1}
+			curSum = 0
+
+			for i in range(m):
+				curSum += matrix[i][end] - (matrix[i][start-1] if start > 0 else 0)
+				diff = curSum - target
+
+				ans += prefixSum.get(diff, 0)
+				prefixSum[curSum] = prefixSum.get(curSum, 0) + 1
+
+	return ans

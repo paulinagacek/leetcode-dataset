@@ -1,0 +1,33 @@
+class Solution:
+    def largestMagicSquare(self, grid: List[List[int]]) -> int:
+        M = len(grid)
+        N = len(grid[0])
+        RCS = []
+        for row in grid:
+            RCS.append(list(accumulate(row,initial=0)))
+        CCS = []
+        for j in range(N):
+            CCS.append(list(accumulate((grid[i][j] for i in range(M)), initial=0)))
+        def allequal(g):
+            v = next(g)
+            if all(x==v for x in g):
+                return v
+            return None
+        def g_sums(r,c,k):
+            # rows
+            for i in range(r,r+k):
+                yield RCS[i][c+k]-RCS[i][c]
+            # columns
+            for j in range(c,c+k):
+                yield CCS[j][r+k]-CCS[j][r]
+            # diagonals
+            yield sum(grid[r+i][c+i] for i in range(k))
+            yield sum(grid[r+i][c+k-1-i] for i in range(k))
+        
+        for k in range(min(M,N),0,-1):
+            for r in range(M-k+1):
+                for c in range(N-k+1):
+                    
+                    if allequal(g_sums(r,c,k)) is not None:
+                        return k
+        assert(0)

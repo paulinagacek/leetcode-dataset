@@ -1,6 +1,0 @@
-const minAddToMakeValid = (s) => {
-    let t = s.replace("()","");
-    console.log(t);
-    if(t.length === s.length) return s.length;
-    else return minAddToMakeValid(t);
-};

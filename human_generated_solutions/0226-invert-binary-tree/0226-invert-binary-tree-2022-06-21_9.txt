@@ -1,0 +1,12 @@
+class Solution:
+    
+    def get_result(self,root):
+        if (root==None) or (root.left==None and root.right==None):
+            return root
+        temp = root.right
+        root.right = self.get_result(root.left)
+        root.left = self.get_result(temp)
+        return root
+
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        return self.get_result(root)

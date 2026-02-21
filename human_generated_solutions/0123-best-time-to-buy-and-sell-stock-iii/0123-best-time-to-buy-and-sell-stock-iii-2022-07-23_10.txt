@@ -1,0 +1,78 @@
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        
+        """
+        The solution to this problem is based on several observations
+            - We can make a maximum of 2 transactions. 
+            - Since we can make a maximum of 2 transactions, there will always
+            be 2 windows for it. If we make the first transaction in [0 -> k], the second 
+            transaction can only happen in [k+1 -> n).
+            
+            Thus our problem statement gets resolved to finding those two windows.
+            
+            With the above, the solution to this problem can be expressed as follows:
+            For example, if the prices denoted are:
+            prices =   [3,3,5,0,0,3,1,4]
+            
+            Then the maximum profit in window 0->k will be:
+            profit_k = [0,0,2,2,2,3,3,4]
+            
+            e.g., if k = 1, then the maximum profit can be 2
+                  if k = 3, the maximum profit remains the same as 2
+                  if k = n-1, the maximum profit becomes 4, (4-0 = 4), where 0 is the minimum price 
+                  encountered
+                  
+                  
+            Now that we know the MAX profit from 0->k, if we iterate backwards, we can
+            at any point in time, know the profit from k+1 -> n
+            
+            For example, for k = 7, max profit from k+1 will be 0
+                         for k = 6, max profit from k+1 will be 3 (since we buy at 1 and sell at 4)
+                         
+            Here is how the profit_kn looks like when filled backwards
+            profit_kn = [4,4,4,4,4,3,3,0]
+            
+            Now we profit_k and profit_kn as :
+            [0,0,2,2,2,3,3,4]
+            [4,4,4,4,4,3,3,0]
+            
+            Here profit[i] represents MAX profit made in 1 transaction until ith day and profit_kn[i]
+            represents the MAX profit made in 1 transaction when starting from i and moving till n-1
+            
+            Thus MAX = MAX(profit_k[i]+profit_kn[i])
+        """
+        if len(prices) == 1:
+            return 0
+        
+        min_price_k = float("+inf")
+        profit_k = []
+        max_profit_k = 0
+        for p in prices:
+            if min_price_k > p:
+                min_price_k = p
+            else:
+                max_profit_k = max(max_profit_k, p - min_price_k)
+            
+            profit_k.append(max_profit_k)
+            
+        max_price_kn = float("-inf")
+        profit_kn = [0]*len(prices)
+        max_profit_kn = 0
+        for i in range(len(prices)-1,-1,-1):
+            p = prices[i]
+            if p > max_price_kn:
+                max_price_kn = p
+            else:
+                max_profit_kn = max(max_profit_kn, max_price_kn - p)
+            
+            profit_kn[i] = max_profit_kn
+            
+        max_profit = 0
+        for i in range(len(prices)):
+            max_profit = max(max_profit, profit_k[i] + profit_kn[i])
+            
+        return max_profit

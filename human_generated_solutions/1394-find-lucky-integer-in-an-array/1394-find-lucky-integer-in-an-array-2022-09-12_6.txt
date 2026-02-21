@@ -1,7 +1,0 @@
-lucky_list = []
-        for i in set(arr):
-            if arr.count(i) == i:
-                lucky_list.append(i)
-        if len(lucky_list)>0:
-            return max(lucky_list)
-        return -1

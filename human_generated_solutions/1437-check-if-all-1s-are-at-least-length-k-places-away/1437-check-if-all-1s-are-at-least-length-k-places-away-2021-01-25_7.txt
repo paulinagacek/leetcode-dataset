@@ -1,0 +1,9 @@
+class Solution:
+    def kLengthApart(self, nums: List[int], k: int) -> bool:
+        try:
+            p, d = -inf, nums.index(1)
+            while d - p > k: 
+                p, d = d, nums.index(1, d+1)
+            return False
+        except ValueError:
+            return True

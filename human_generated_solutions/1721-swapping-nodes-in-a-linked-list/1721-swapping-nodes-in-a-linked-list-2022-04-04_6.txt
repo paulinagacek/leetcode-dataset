@@ -1,15 +1,17 @@
-//please upvote, if you like my solution :)
-ListNode* swapNodes(ListNode* head, int k) {
-        ListNode*ptr1 = head,*ptr2 = head , *kth = NULL;
-        while(--k){
-            ptr1 = ptr1->next;
-        }
-        kth = ptr1;
-        ptr1 = ptr1->next;
-        while(ptr1){
-            ptr1 = ptr1->next;
-            ptr2 = ptr2->next;
-        }
-        swap(kth->val,ptr2->val);
-        return head;
-    }
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        front, last = head,head
+        while k>1:
+            front = front.next
+            k-=1
+        left = front
+        while left.next!=None:
+            left = left.next
+            last = last.next
+        front.val, last.val = last.val, front.val
+        return head

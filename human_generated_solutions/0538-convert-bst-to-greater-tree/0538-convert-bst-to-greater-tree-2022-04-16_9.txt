@@ -1,13 +1,10 @@
 class Solution:
-    def newBST(self, root, sumSoFar):
-        if root == None:
-            return sumSoFar
-        
-        newSum = self.newBST(root.right, sumSoFar)
-        root.val = root.val + newSum
-        return self.newBST(root.left, root.val)
-        
-    
     def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        self.newBST(root,0)
+        def traverse(root, sm):
+            if root is None: return sm
+            right = traverse(root.right, sm)
+            root.val += right
+            left = traverse(root.left, root.val)
+            return left
+        traverse(root, 0)
         return root

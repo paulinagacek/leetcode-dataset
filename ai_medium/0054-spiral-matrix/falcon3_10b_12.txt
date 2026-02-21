@@ -1,0 +1,31 @@
+from typing import List
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix or not matrix[0]:
+            return []
+
+        result = []
+        rows, cols = len(matrix), len(matrix[0])
+        r1, r2, c1, c2 = 0, rows - 1, 0, cols - 1
+
+        while r1 <= r2 and c1 <= c2:
+            for col in range(c1, c2 + 1):
+                result.append(matrix[r1][col])
+            r1 += 1
+
+            for row in range(r1, r2 + 1):
+                result.append(matrix[row][c2])
+            c2 -= 1
+
+            if r1 <= r2:
+                for col in range(c2, c1 - 1, -1):
+                    result.append(matrix[r2][col])
+                r2 -= 1
+
+            if c1 <= c2:
+                for row in range(r2, r1 - 1, -1):
+                    result.append(matrix[row][c1])
+                c1 += 1
+
+        return result

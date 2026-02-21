@@ -1,0 +1,23 @@
+class Solution:
+    def applyOperations(self, nums: List[int]) -> List[int]:
+        # Apply operations as told in the question
+        for i in range(len(nums)):
+            if nums[i] == nums[i-1]:
+                nums[i-1] = nums[i-1] * 2
+                nums[i] = 0
+        
+        # Code to move all zeroes to end of array
+
+        first_ptr = 0
+        n = len(nums)
+
+        # If number is non-zero, keep saving it at successive index
+        for i in range(n):
+            if nums[i] != 0:
+                nums[first_ptr] = nums[i]
+                first_ptr += 1
+
+        # Add zero to remaining indexes of the array
+        for i in range(first_ptr, n):
+            nums[i] = 0
+        return nums

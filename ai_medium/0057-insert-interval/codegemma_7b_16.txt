@@ -1,0 +1,15 @@
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        i = 0
+        merged = []
+        while i < len(intervals) and intervals[i][0] <= newInterval[0]:
+            merged.append(intervals[i])
+            i += 1
+        merged.append(newInterval)
+        while i < len(intervals):
+            if merged[-1][1] >= intervals[i][0]:
+                merged[-1][1] = max(merged[-1][1], intervals[i][1])
+            else:
+                merged.append(intervals[i])
+            i += 1
+        return merged

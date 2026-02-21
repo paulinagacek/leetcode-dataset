@@ -1,0 +1,23 @@
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        self.max_l = 0
+        
+        self.dfs(arr, \'\', set(), 0)
+        
+        return self.max_l
+    
+    def dfs(self, arr, cur_s, visited, idx):
+        if idx == len(arr):
+            return 
+        
+        for i in range(idx, len(arr)):
+            if i in visited:
+                continue
+            if len(cur_s) + len(arr[i]) != len(set(cur_s + arr[i])):
+                continue
+            
+            self.max_l = max(self.max_l, len(cur_s) + len(arr[i]))
+            
+            visited.add(i)
+            self.dfs(arr, cur_s + arr[i], visited, i + 1)
+            visited.remove(i)

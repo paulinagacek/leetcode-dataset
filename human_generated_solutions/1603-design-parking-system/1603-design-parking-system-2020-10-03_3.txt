@@ -1,5 +1,9 @@
-def __init__(self, big: int, medium: int, small: int):
-        self.count = [0, big, medium, small]
+class ParkingSystem:
+
+    def __init__(self, big: int, medium: int, small: int):
+        self.arr  =[big,medium,small]
     def addCar(self, carType: int) -> bool:
-        self.count[carType] -= 1
-        return self.count[carType] >= 0
+        if(self.arr[carType-1]):
+            self.arr[carType-1]-=1
+            return True
+        return False

@@ -1,0 +1,22 @@
+from typing import List
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if not intervals:
+            return []
+        
+        # Sort the intervals based on the start time
+        intervals.sort(key=lambda x: x[0])
+        
+        merged_intervals = [intervals[0]]
+        
+        for interval in intervals[1:]:
+            # Check if the current interval overlaps with the last added interval
+            if merged_intervals[-1][1] >= interval[0]:
+                # Merge the current interval with the last added interval
+                merged_intervals[-1][1] = max(merged_intervals[-1][1], interval[1])
+            else:
+                # Add the current interval as a new interval
+                merged_intervals.append(interval)
+        
+        return merged_intervals

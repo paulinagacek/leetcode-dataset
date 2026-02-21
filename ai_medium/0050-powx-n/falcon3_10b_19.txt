@@ -1,0 +1,14 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0: return 1
+        neg = False
+        if n < 0: 
+            neg = True
+            n = -n
+        res = 1.0
+        while n > 0:
+            if n % 2 == 1: res *= x
+            x *= x
+            n //= 2
+        if neg: return 1 / res
+        return res

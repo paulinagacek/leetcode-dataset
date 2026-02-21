@@ -1,0 +1,23 @@
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def dfs(start, end):
+            result = []
+
+            if start > end:
+                result.append(None)
+                return result
+
+            for i in range(start, end + 1):
+                left_trees = dfs(start, i - 1)
+                right_trees = dfs(i + 1, end)
+
+                for left in left_trees:
+                    for right in right_trees:
+                        root = TreeNode(i)
+                        root.left = left
+                        root.right = right
+                        result.append(root)
+
+            return result
+
+        return dfs(1, n) if n else []

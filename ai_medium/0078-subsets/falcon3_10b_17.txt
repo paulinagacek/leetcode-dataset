@@ -1,0 +1,14 @@
+from typing import List
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        self.backtrack(result, [], sorted(nums))
+        return result
+
+    def backtrack(self, result, temp, nums):
+        result.append(list(temp))
+        for i in range(len(nums)):
+            temp.append(nums[i])
+            self.backtrack(result, temp, nums[i+1:])
+            temp.pop()

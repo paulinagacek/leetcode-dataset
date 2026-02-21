@@ -1,0 +1,27 @@
+from collections import deque
+
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        queue, result = deque([(root, 0)]), []
+        level = 0
+
+        while queue:
+            node, curr_level = queue.popleft()
+
+            if len(result) < curr_level + 1:
+                result.append([])
+
+            if curr_level % 2 == 0:
+                result[curr_level].append(node.val)
+            else:
+                result[curr_level].insert(0, node.val)
+
+            if node.left:
+                queue.append((node.left, curr_level + 1))
+            if node.right:
+                queue.append((node.right, curr_level + 1))
+
+        return result

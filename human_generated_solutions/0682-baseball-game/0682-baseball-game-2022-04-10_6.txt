@@ -1,15 +1,21 @@
+from collections import deque
+from typing import List
+
+
 class Solution:
     def calPoints(self, ops: List[str]) -> int:
-        i = j = 0
-        while j < len(ops):
-            if ops[j] == "C":
-                i -= 2
-            elif ops[j] == "D":
-                ops[i] = int(ops[i-1])*2
-            elif ops[j] == "+":
-                ops[i] = int(ops[i-1]) + int(ops[i-2])
+        stk = deque()
+
+        push, pop = stk.append, stk.pop
+
+        for e in ops:
+            if e == \'+\':
+                push(stk[-1] + stk[-2])
+            elif e == \'D\':
+                push(2 * stk[-1])
+            elif e == \'C\':
+                pop()
             else:
-                ops[i] = int(ops[j])
-            i += 1
-            j += 1
-        return sum(ops[:i])
+                push(int(e))
+
+        return sum(stk)

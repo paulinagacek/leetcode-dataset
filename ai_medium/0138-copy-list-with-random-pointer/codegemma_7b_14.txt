@@ -1,0 +1,20 @@
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # Create a dictionary to map original nodes to their copies
+        node_map = {node: Node(node.val) for node in self.dfs(head)}
+        
+        # Set the next and random pointers for the copied nodes
+        for node in node_map:
+            node_map[node].next = node_map.get(node.next)
+            node_map[node].random = node_map.get(node.random)
+        
+        return node_map[head]
+    
+    def dfs(self, node: 'Optional[Node]') -> set:
+        if not node:
+            return set()
+        
+        return {node} | self.dfs(node.next) | self.dfs(node.random)

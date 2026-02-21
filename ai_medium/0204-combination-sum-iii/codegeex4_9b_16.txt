@@ -1,0 +1,16 @@
+from typing import List
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def backtrack(k: int, n: int, start: int, path: List[int]):
+            if k == 0 and n == 0:
+                result.append(path)
+                return
+            for i in range(start, 10):
+                if i > n:
+                    break
+                backtrack(k - 1, n - i, i + 1, path + [i])
+
+        result = []
+        backtrack(k, n, 1, [])
+        return result

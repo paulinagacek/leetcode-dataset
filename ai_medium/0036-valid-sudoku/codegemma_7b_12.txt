@@ -1,0 +1,21 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        seen = set()
+
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+
+                if num != '.':
+                    row = f"row {i}"
+                    col = f"col {j}"
+                    subgrid = f"subgrid {i // 3} {j // 3}"
+
+                    if (row, num) in seen or (col, num) in seen or (subgrid, num) in seen:
+                        return False
+
+                    seen.add((row, num))
+                    seen.add((col, num))
+                    seen.add((subgrid, num))
+
+        return True

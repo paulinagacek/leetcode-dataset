@@ -1,0 +1,31 @@
+def numSubseq(self, nums: List[int], target: int) -> int:
+        
+        # sort the original nums list
+        nums.sort()
+        
+        # mod to return ans as mod of 10 ** 9 + 7
+        mod = (10 ** 9) + 7
+        
+        # two pointer approch i = 0 and j < len(nums) - 1
+        i = 0
+        j = len(nums) - 1
+        
+        # to keep count of sequence
+        ans = 0
+        
+        # keep the while i < = j:
+        while i <= j:
+            
+            # if nums[i] + nums[j] <= target then 
+            # just take 2 ** diff(j and i) mod it with 10 ** 9 + 7 and add to ans count
+            # increment the i
+            if nums[i] + nums[j] <= target:
+                ans += pow(2, (j - i), mod)
+                i += 1
+                
+            # if condition is not fulfilled then jth element is bigger so j -= 1
+            else:
+                j -= 1
+        
+        # return ans as mod of 10 ** 9 + 7
+        return ans % mod

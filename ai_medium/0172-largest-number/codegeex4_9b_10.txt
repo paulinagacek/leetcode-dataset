@@ -1,0 +1,12 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            else:
+                return 1
+        
+        strs = [str(num) for num in nums]
+        strs.sort(key=lambda x: functools.cmp_to_key(compare)(x, '{}'))
+        largest_num = ''.join(strs)
+        return '0' if largest_num[0] == '0' else largest_num

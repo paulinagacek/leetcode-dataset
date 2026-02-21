@@ -1,25 +1,32 @@
 class Solution:
-    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
-        properties.sort(key=itemgetter(0), reverse=True)
-
-        cur_attack = properties[0][0]
-        prev_best_defense = 0  # best defense among characters with strictly greater attack
-        cur_best_defense = 0  # best defense among all characters observed so far
-
-        res = 0
+    def numberOfWeakCharacters(self, A: List[List[int]]) -> int:
+        A.sort(key=lambda x: (x[0], x[1]))
+        n = len(A)
+        heap = []
+        weak = 0
+        i = 0
         
-        for attack, defense in properties:
-            if attack != cur_attack:
-                # this means that all characters observed so far have attack strictly greater.
-				# so we merge latest best defense update into the value we use for comparison.
-				# best defense can really only go up, so prev_best_defense is guaranteed to be
-				# less or equal than cur_best_defense
-				prev_best_defense = cur_best_defense
-                cur_attack = attack
-            
-            cur_best_defense = max(cur_best_defense, defense)
+        while i < n:
+            attack, defense = A[i]
+            level_defense = [defense]
 			
-			if defense < prev_best_defense:
-                res += 1
+			# find the largest defense for the same attack level
+            while i+1 < n and A[i+1][0] == attack:
+                level_defense.append(A[i+1][1])
+                i += 1
+            
+			# the maximum defense for the attack level
+            max_defense_on_level = level_defense[-1]
+			
+			# find how many elements have smaller defense
+            while heap and heap[0] < max_defense_on_level:
+                heapq.heappop(heap)
+                weak += 1
+            
+			# add the current defense layer to our heap. We do it here to not interfere with the check above
+            for ldefense in level_defense:
+                heapq.heappush(heap, ldefense)
+            
+            i += 1
         
-        return res
+        return weak

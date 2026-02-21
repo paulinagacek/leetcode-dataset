@@ -1,0 +1,39 @@
+class State:
+    def __init__(self):
+        self.best = self.up = self.down = 0
+        self.process_value = self.process_first
+        self.process_up = self.process_just_up
+        self.process_down = self.process_just_down
+    def process_eq(self):
+        self.up = self.down = 0
+        self.process_up = self.process_just_up
+        self.process_down = self.process_just_down
+    def process_down_then_up(self):
+        self.up = 1
+        self.down = 0        
+        self.process_down = self.process_up_then_down
+        self.process_up = self.process_just_up
+    def process_just_up(self):
+        self.up += 1
+        self.process_down = self.process_up_then_down
+    def process_up_then_down(self):
+        self.down += 1
+        self.best = max(self.best, self.up+self.down+1)
+        self.process_up = self.process_down_then_up
+    def process_just_down(self):
+        pass
+    def process_first(self, v):
+        self.prev = v
+        self.process_value = self.process_next
+    def process_next(self, v):
+        p =  self.prev
+        self.prev = v
+        [self.process_down,self.process_eq,self.process_up][int(v>p)+1-int(v<p)]()
+    def get_result(self):
+        return self.best
+        
+class Solution:
+    def longestMountain(self, arr: List[int]) -> int:
+        S = State()
+        for v in arr: S.process_value(v)
+        return S.get_result()

@@ -1,0 +1,29 @@
+class Solution:
+    def countPaths(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        MODULUS = 10**9 + 7
+        
+        no_paths = [[-1 for j in range(n)] for i in range (m)]
+        
+        def dfs(i, j, prev):
+            if i < 0 or i == m or j < 0 or j == n or grid[i][j] <= prev:
+                return 0
+            if no_paths[i][j] != -1:
+                return no_paths[i][j]
+            
+            np = 1
+            np = (np + dfs(i + 1, j, grid[i][j])) % MODULUS
+            np = (np + dfs(i - 1, j, grid[i][j])) % MODULUS
+            np = (np + dfs(i, j + 1, grid[i][j])) % MODULUS
+            np = (np + dfs(i, j - 1, grid[i][j])) % MODULUS
+            
+            no_paths [i][j] = np
+            return np
+        
+        np = 0
+        for i in range(m):
+            for j in range(n):
+                np = (np + dfs (i, j, -2**31)) % MODULUS
+                
+        return np

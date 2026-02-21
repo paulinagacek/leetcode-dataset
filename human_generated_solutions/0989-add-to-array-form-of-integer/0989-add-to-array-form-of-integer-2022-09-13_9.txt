@@ -1,0 +1,8 @@
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        nums = 0
+        for i in num:
+		    # This math trick is use to convert single integer
+            nums = nums * 10 + i
+        ans = str(nums + k)
+        return list(ans)

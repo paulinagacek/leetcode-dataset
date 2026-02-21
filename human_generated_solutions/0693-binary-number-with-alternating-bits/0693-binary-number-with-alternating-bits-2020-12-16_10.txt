@@ -1,0 +1,6 @@
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+	    # To check whether it has alternating bits i.e if alternating then all bits becomes 1.		
+        n = n ^ (n >> 1)
+		# To check if all bits are 1
+        return True if (n+1) & n == 0 else False

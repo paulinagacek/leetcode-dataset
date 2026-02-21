@@ -1,0 +1,26 @@
+class Trie:
+
+    def __init__(self):
+        self.root = {}
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node['#'] = True
+
+    def search(self, word: str) -> bool:
+        return self._search_helper(word, False)
+
+    def startsWith(self, prefix: str) -> bool:
+        return self._search_helper(prefix, True)
+
+    def _search_helper(self, word: str, require_end: bool) -> bool:
+        node = self.root
+        for char in word:
+            if char not in node:
+                return False
+            node = node[char]
+        return require_end is False or '#' in node

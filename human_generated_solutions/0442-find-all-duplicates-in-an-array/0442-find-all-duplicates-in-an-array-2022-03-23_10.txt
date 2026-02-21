@@ -1,0 +1,38 @@
+class Solution(object):
+    def findDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        \'\'\'
+        idea : marking the index location to see if it has been visited or not
+        
+        for each num in nums --> you go and mark the index location of that num in the nums 
+           --> index location of num --> nums[num-1]
+        
+        for example in nums = [4,4,2,7,8,2,3,1]
+        --> when you get 4 --> you go and mark the index location of 4 in nums --> [4,3,2,->7<-,8,2,3,1]
+            --> how do you mark the index location ?
+                --> just convert the number at that index location to negetive 
+                   -->  nums --> [4,3,2,-7,8,2,3,1]
+            --> if you encouter 4 again --> when you go and want to change the index location of 4 to negetive 
+                --> and if you found out that it has already been converted to negetive 
+                   --> then that means the number of 4 has a duplicate
+                   --> so you store 4
+        \'\'\'
+        out = []
+        for num in nums:
+            indx = abs(num)-1 # abs value because if incase that index has been converted to negetive
+            if nums[indx] > 0: 
+                """
+                - if the repsective index location of the current value is greater than zero--
+                   --> that means we haven\'t encouter num before 
+                - we just need to mark the index location and move on                
+                """
+                nums[indx] *=-1
+            else:
+                \'\'\'
+                however --> if the index location of num is negetive then it has a duplicate--> so we store that value
+                \'\'\'
+                out.append(abs(num)) # abs value because if incase that index has been converted to negetive
+        return out

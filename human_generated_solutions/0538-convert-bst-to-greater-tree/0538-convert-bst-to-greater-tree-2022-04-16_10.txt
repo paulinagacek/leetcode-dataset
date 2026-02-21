@@ -1,10 +1,37 @@
+import bisect
+
 class Solution:
     def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def traverse(root, sm):
-            if root is None: return sm
-            right = traverse(root.right, sm)
-            root.val += right
-            left = traverse(root.left, root.val)
-            return left
-        traverse(root, 0)
+        
+        if not root :
+            return 
+        
+        arr = []
+        stack = [root]
+        while stack :
+            top = stack.pop()
+            arr.append(top.val)
+            if top.left :
+                stack.append(top.left)
+            if top.right :
+                stack.append(top.right)
+        
+        arr.sort()
+        new = []
+        curr = 0
+        
+        for num in arr :
+            curr += num
+            new.append(curr)
+        
+        stack = [root]
+        while stack :
+            top = stack.pop()
+            idx = bisect.bisect_left(arr, top.val)
+            top.val += new[-1] - new[idx]
+            if top.left :
+                stack.append(top.left)
+            if top.right :
+                stack.append(top.right)
+        
         return root

@@ -1,31 +1,8 @@
-import heapq
-
 class Solution:
     def minimumTime(self, time: List[int], totalTrips: int) -> int:
-        # Return the smallest multiple of b strictly greater than a.
-        def ceiling(a, b):
-            return a // b * b + b
-        
-		# Step 1: Find est, an initial lower bound
-        speed = sum(1/t for t in time)
-        est = int(totalTrips/speed)
-        
-		# Step 2: Construct the heap
-        trips = 0
-        hp = []
-        for t in time:
-		    # ceiling(est, t) is the next returning time for the truck t
-            heappush(hp, (ceiling(est, t), t))
-			# Compute trips, the number of trips actually finished at time est
-            trips += est // t
-            
-	    # Step 3: Heap update
-        answer = est
-        while trips < totalTrips:
-		    # Update the returning time as answer for every incoming trip
-            answer, t = heappop(hp)
-			# Push back the next returning time for the same truck which just returned.
-            heappush(hp, (ceiling(answer, t), t))
-            trips += 1
-            
-        return answer
+        lo, hi = 0, max(time) * totalTrips
+        while lo < hi: 
+            mid = lo + hi >> 1
+            if sum(mid//x for x in time) < totalTrips: lo = mid + 1
+            else: hi = mid 
+        return lo

@@ -1,0 +1,23 @@
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        n = len(customers)
+        count_y = customers.count("Y")
+        count_n = n - count_y
+        min_penalty = count_y
+        res = 0
+        
+        curr_y = curr_n = 0
+
+        for i, ch in enumerate(customers):
+            if ch == "Y":
+                curr_y += 1
+            else:
+                curr_n += 1
+
+            temp = count_y - curr_y + curr_n
+            
+            if temp < min_penalty:
+                min_penalty = temp
+                res = i + 1
+
+        return res

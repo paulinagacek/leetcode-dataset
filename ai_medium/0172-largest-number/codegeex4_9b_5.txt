@@ -1,0 +1,16 @@
+class Solution:
+    def largestNumber(self, nums):
+        def compare(x, y):
+            if x + y > y + x:
+                return -1
+            else:
+                return 1
+        
+        nums = [str(num) for num in nums]
+        nums.sort(key=cmp_to_key(compare))
+        result = ''.join(nums)
+        
+        # Remove leading zeros
+        result = result.lstrip('0')
+        
+        return result if result != '' else '0'

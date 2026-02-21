@@ -1,0 +1,26 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        longest_palindrome = ""
+
+        # Base case: single character is a palindrome
+        for i in range(n):
+            dp[i][i] = True
+            longest_palindrome = s[i]
+
+        # Expand palindromes around center
+        for i in range(n - 1):
+            if s[i] == s[i + 1]:
+                dp[i][i + 1] = True
+                longest_palindrome = s[i: i + 2]
+
+        # Expand palindromes with odd and even lengths
+        for k in range(3, n + 1):
+            for i in range(n - k + 1):
+                j = i + k - 1
+                if dp[i + 1][j - 1] and s[i] == s[j]:
+                    dp[i][j] = True
+                    longest_palindrome = s[i: j + 1]
+
+        return longest_palindrome

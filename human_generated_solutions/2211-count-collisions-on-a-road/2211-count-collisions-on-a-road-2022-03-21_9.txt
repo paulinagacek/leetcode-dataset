@@ -1,4 +1,0 @@
-class Solution:
-    def countCollisions(self, directions: str) -> int:
-        x = directions.lstrip("L").rstrip("R")
-        return len(x) - x.count("S")

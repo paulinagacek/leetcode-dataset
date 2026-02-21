@@ -1,7 +1,0 @@
-class Solution {
-public:
-    int pivotInteger(int n) {
-        int sm = n * (n+1)/2, val = sqrt(sm); 
-        return val*val == sm ? val : -1; 
-    }
-};

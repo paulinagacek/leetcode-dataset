@@ -1,0 +1,30 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        m, n = len(board), len(board[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        
+        def dfs(x, y):
+            queue = [(x, y)]
+            while queue:
+                cx, cy = queue.pop()
+                board[cx][cy] = 'V'
+                for dx, dy in directions:
+                    nx, ny = cx + dx, cy + dy
+                    if 0 <= nx < m and 0 <= ny < n and board[nx][ny] == 'O':
+                        queue.append((nx, ny))
+        
+        # Mark all 'O' cells connected to the borders with 'V'
+        for i in range(m):
+            dfs(i, 0)
+            dfs(i, n-1)
+        for j in range(n):
+            dfs(0, j)
+            dfs(m-1, j)
+        
+        # Change all 'V' cells back to 'O' and all remaining 'O' cells to 'X'
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'V':
+                    board[i][j] = 'O'
+                elif board[i][j] == 'O':
+                    board[i][j] = 'X'

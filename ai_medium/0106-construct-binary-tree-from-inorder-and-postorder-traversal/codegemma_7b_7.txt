@@ -1,0 +1,13 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        hashmap = {val:idx for idx,val in enumerate(inorder)}
+        def helper(inorderStart, inorderEnd, postorderStart, postorderEnd):
+            if inorderStart > inorderEnd or postorderStart > postorderEnd:
+                return None
+            rootVal = postorder[postorderEnd]
+            rootIndex = hashmap[rootVal]
+            leftSubtreeSize = rootIndex - inorderStart
+            leftSubtree = helper(inorderStart, rootIndex-1, postorderStart, postorderStart+leftSubtreeSize-1)
+            rightSubtree = helper(rootIndex+1, inorderEnd, postorderStart+leftSubtreeSize, postorderEnd-1)
+            return TreeNode(rootVal, leftSubtree, rightSubtree)
+        return helper(0, len(inorder)-1, 0, len(postorder)-1)

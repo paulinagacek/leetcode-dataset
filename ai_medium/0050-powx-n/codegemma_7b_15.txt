@@ -1,0 +1,11 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1
+        result = x
+        abs_n = abs(n)
+        if n < 0:
+            x = 1 / x
+        for i in range(abs_n - 1):
+            result *= x
+        return result

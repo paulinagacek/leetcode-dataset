@@ -1,11 +1,5 @@
-class Solution:
-    def largestOddNumber(self, num: str) -> str:
-        indx = -1
-        n = len(num)
-        for i in range(n):
-            if int(num[i])%2 == 1:
-                indx = i
-        
-        if indx == -1:
-            return ""
-        return num[:indx+1]
+def largestOddNumber(self, num: str) -> str:
+	for i in range(len(num) - 1, -1, -1):
+	  if int(num[i]) & 1: # can also be written as int(num[i]) % 2 != 0
+		return num[:i+1]
+	return \'\'

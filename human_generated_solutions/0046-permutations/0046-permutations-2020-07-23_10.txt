@@ -1,0 +1,22 @@
+class Solution:
+    def backtrack(self, nums, vis = set(), r = []):
+        if len(r) == len(nums):
+            self.res.append([*r])
+            return
+        
+        for n in nums:
+            if n not in vis:
+                # Place
+                vis.add(n)
+                r.append(n)
+                # Explore
+                self.backtrack(nums, vis, r)
+                # Backtrack
+                vis.remove(n)
+                r.pop()
+                
+        
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.res = []
+        self.backtrack(nums)
+        return self.res
